@@ -1,0 +1,34 @@
+n, k = map(int, input().strip().split())
+
+
+
+res = 0
+
+
+
+if k == 1 or k == n:
+
+       res += 6 + 3*(n - 2)
+
+else:
+
+       mid = int(n/2)
+
+       if k <= mid:
+
+              res += 6 + (k-2)*3
+
+              res += k - 1  + 3*(n-k)
+
+       else:
+
+              k = 1 + n-k
+
+              res += 6 + (k-2)*3
+
+              res += k - 1  + 3*(n-k)
+
+
+
+print(res)
+

@@ -1,0 +1,71 @@
+n,m=map(int,input().split())
+
+c=[0]*(n+1)
+
+pupil=list(map(int,input().split()))
+
+for i in range(n):
+
+    c[pupil[i]]=i+1
+
+b=[0]*(n+1)
+
+a=[[0 for x in range(n+1)] for y in range(n+1)]
+
+for i in range(m):
+
+    u,v=map(int,input().split())
+
+    if c[v]>c[u]:
+
+        a[v][u]=1
+
+d=[]
+
+for i in range(len(pupil)):
+
+    k=n-1-i
+
+    if(a[pupil[n-1]][pupil[k]]==1):
+
+        d.append(pupil[k])
+
+e=[0]*len(d)
+
+t=0
+
+for i in range(1,n):
+
+    k=n-1-i
+
+    if(a[pupil[n-1]][pupil[k]]!=1):
+
+        for j in range(t,len(d)):
+
+            if(a[pupil[k]][d[j]]==1):
+
+                e[j]+=1
+
+        f=t
+
+        while(f<len(d)):
+
+            if(c[d[f]]-1<k):
+
+                break
+
+            else:
+
+                f+=1
+
+        t=f-1
+
+total=0
+
+for i in range(len(d)):
+
+    if e[i]+i==n-1-c[d[i]]:
+
+        total+=1
+
+print(total)

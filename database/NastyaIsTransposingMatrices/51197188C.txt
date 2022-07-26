@@ -1,0 +1,140 @@
+#include <bits/stdc++.h>
+
+#define ll long long
+
+#define pb push_back
+
+#define fr first
+
+#define se second
+
+#define fin(s) freopen( s, "r", stdin )
+
+#define fout(s) freopen( s, "w", stdout )
+
+using namespace std;
+
+
+
+const ll N = 520;
+
+const ll INF = 1e18;
+
+const ll mod = 1e9 + 7;
+
+
+
+    int a[N][N], b[N][N], u[N][N];
+
+    vector< int > v;
+
+int main()
+
+{
+
+    ios_base::sync_with_stdio(false);
+
+    cin.tie(0);
+
+    cout.tie(0);
+
+    int n, m;
+
+    cin >> n >> m;
+
+    for ( int i = 1; i <= n; i ++ ){
+
+        for ( int j = 1; j <= m; j ++ ){
+
+            cin >> a[i][j];
+
+        }
+
+    }
+
+    for ( int i = 1; i <= n; i ++ ){
+
+        for ( int j = 1; j <= m; j ++ ){
+
+            cin >> b[i][j];
+
+        }
+
+    }
+
+    for ( int i = 1; i <= n; i ++ ){
+
+        for ( int j = 1; j <= m; j ++ ){
+
+            if ( a[i][j] != b[i][j] ){
+
+                v.pb( i );
+
+                v.pb( j );
+
+            }
+
+        }
+
+        int mn = 0, mx = 0;
+
+        if ( v.size() != 0 ){
+
+            mx = *max_element( v.begin(), v.end() );
+
+            mn = *min_element( v.begin(), v.end() );
+
+        }
+
+        for ( int i = mn; i <= mx; i ++ ){
+
+            for ( int j = mn; j <= mx; j ++ ){
+
+                if ( !u[i][j] ){
+
+                    swap( a[j][i], a[i][j] );
+
+                    u[j][i] = 1;
+
+                }
+
+            }
+
+        }
+
+        v.clear();
+
+        for ( int i = 1; i <= n; i ++ ){
+
+            for( int j = 1; j <= m; j ++ ){
+
+                u[i][j] = 0;
+
+            }
+
+        }
+
+    }
+
+    for ( int i = 1; i <= n; i ++ ){
+
+        for ( int j = 1; j <= m; j ++ ){
+
+            if ( a[i][j] != b[i][j] ){
+
+                cout << "NO";
+
+                return 0;
+
+            }
+
+        }
+
+    }
+
+    cout << "YES";
+
+}
+
+
+

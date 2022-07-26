@@ -1,0 +1,113 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+typedef long long ll;
+
+int n;
+int a[100005];
+int k[100005];
+int q;
+
+ll psk[100005];
+ll cpsk[100005];
+
+ll sumK(int from, int to) {
+    return psk[to]-psk[from-1];
+}
+
+ll cumsumK(int from, int to) {
+    if(from>to) return 0;
+    ll len=to-from+1;
+    return cpsk[to]-cpsk[from-1]+(len-(n-from))*sumK(from, to);
+}
+
+int propagate[1<<18];
+ll init[1<<18];
+ll tree[1<<18];
+
+void setPropagate(int from, int to, int new_init, int l=1, int r=1<<17, int pos=1) {
+    if(from<=l && r<=to) {
+        propagate[pos]=1;
+        init[pos]=new_init+sumK(from, l-1);
+        tree[pos]=(r-l+1)*init[pos]+cumsumK(l, r-1);
+        return;
+    } else if(to<l || r<from) {
+        return;
+    }
+    int mi=l+(r-l)/2+1;
+    assert(l<mi && mi<=r);
+    assert(mi-l==r-mi+1);
+    if(propagate[pos]) {
+        propagate[pos]=0;
+        init[2*pos]=init[pos];
+        tree[2*pos]=(mi-l)*init[2*pos]+cumsumK(l, mi-2);
+        init[2*pos+1]=init[pos]+sumK(l, mi-1);
+        tree[2*pos+1]=(mi-l)*init[2*pos+1]+cumsumK(mi, r-1);
+        propagate[2*pos]=propagate[2*pos+1]=1;
+    }
+    setPropagate(from, to, new_init, l, mi-1, 2*pos);
+    setPropagate(from, to, new_init, mi, r, 2*pos+1);
+    tree[pos]=tree[2*pos]+tree[2*pos+1];
+}
+
+ll getSum(int from, int to, int l=1, int r=1<<17, int pos=1) {
+    if(from<=l && r<=to) {
+        return tree[pos];
+    } else if(to<l || r<from) {
+        return 0;
+    }
+    int mi=l+(r-l)/2+1;
+    assert(l<mi && mi<=r);
+    assert(mi-l==r-mi+1);
+    if(propagate[pos]) {
+        propagate[pos]=0;
+        init[2*pos]=init[pos];
+        tree[2*pos]=(mi-l)*init[2*pos]+cumsumK(l, mi-2);
+        init[2*pos+1]=init[pos]+sumK(l, mi-1);
+        tree[2*pos+1]=(mi-l)*init[2*pos+1]+cumsumK(mi, r-1);
+        propagate[2*pos]=propagate[2*pos+1]=1;
+    }
+    return getSum(from, to, l, mi-1, 2*pos)+getSum(from, to, mi, r, 2*pos+1);
+}
+
+int main() {
+    scanf("%d ", &n);
+    for(int i=1; i<=n; i++) scanf("%d ", &a[i]);
+    for(int i=1; i<=n-1; i++) scanf("%d ", &k[i]);
+
+    for(int i=0; i<n; i++) tree[(1<<17)+i]=a[i+1];
+    for(int i=(1<<17)-1; i; i--) {
+        tree[i]=tree[2*i]+tree[2*i+1];
+    }
+
+    for(int i=1; i<=n-1; i++) psk[i]=psk[i-1]+k[i];
+    for(int i=1; i<=n-1; i++) cpsk[i]=cpsk[i-1]+(n-i)*((ll)k[i]);
+
+    scanf("%d ", &q);
+    for(int test=0; test<q; test++) {
+        char c;
+        scanf("%c", &c);
+        if(c=='+') {
+            int i, x;
+            scanf(" %d %d ", &i, &x);
+            ll ai=getSum(i, i);
+            int l=i, r=n;
+            while(l<r) {
+                int mi=(l+r+1)/2;
+                if(getSum(mi, mi)<ai+x+sumK(i, mi-1)) {
+                    l=mi;
+                } else {
+                    r=mi-1;
+                }
+            }
+            setPropagate(i, l, ai+x);
+        } else {
+            assert(c=='s');
+            int from, to;
+            scanf(" %d %d ", &from, &to);
+            printf("%I64d\n", getSum(from, to));
+        }
+    }
+
+    return 0;
+}

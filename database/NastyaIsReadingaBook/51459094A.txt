@@ -1,0 +1,58 @@
+#include <bits/stdc++.h>
+
+
+
+using namespace std;
+
+
+
+int main()
+
+{
+
+    int n; cin>>n;
+
+    int arr[1000];
+
+    for(int i=0; i<n; i++)
+
+    {
+
+        int a, b; cin>>a>>b;
+
+       arr[i]=max(a,b);
+
+    }
+
+
+
+    int num; cin>>num;
+
+    int con=0;
+
+    for(int i=0; i<n; i++)
+
+    {
+
+        if(num<=arr[i])
+
+        {
+
+            con++;
+
+        }
+
+    }
+
+
+
+    cout<<con<<endl;
+
+
+
+
+
+    return 0;
+
+}
+

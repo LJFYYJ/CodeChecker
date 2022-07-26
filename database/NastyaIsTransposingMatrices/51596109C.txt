@@ -1,0 +1,110 @@
+#include <bits/stdc++.h>
+
+#define ll long long
+
+
+
+using namespace std;
+
+
+
+int main()
+
+{
+
+    ios_base::sync_with_stdio(0);
+
+    cin.tie(0);
+
+    cout.tie(0);
+
+
+
+    int n, m;
+
+
+
+    cin >> n >> m;
+
+
+
+    vector<ll> A[n * m];
+
+    vector<ll> B[n * m];
+
+
+
+
+
+    for (int i = 0; i < n; i++)
+
+    {
+
+        for (int j = 0; j < m; j++)
+
+        {
+
+            ll reiksme;
+
+            cin >> reiksme;
+
+            A[i + j].push_back(reiksme);
+
+
+
+        }
+
+    }
+
+
+
+    for (int i = 0; i < n; i++)
+
+    {
+
+        for (int j = 0; j < m; j++)
+
+        {
+
+            ll reiksme;
+
+            cin >> reiksme;
+
+            B[i + j].push_back(reiksme);
+
+        }
+
+    }
+
+
+
+    for (int i = 0; i < n * m; i++)
+
+    {
+
+        sort(A[i].begin(), A[i].end());
+
+        sort(B[i].begin(), B[i].end());
+
+
+
+        if (A[i] != B[i])
+
+        {
+
+            cout << "NO";
+
+            return 0;
+
+        }
+
+    }
+
+
+
+    cout << "YES " << '\n';
+
+    return 0;
+
+}
+

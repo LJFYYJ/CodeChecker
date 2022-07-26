@@ -1,0 +1,42 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+#define pb push_back
+
+#define ll long long
+
+#define pf push_front
+
+#define PI 3.14159265
+
+ll n,k,resenje;
+
+
+
+
+
+int main()
+
+{
+
+	ios::sync_with_stdio(0);
+
+	cin.tie(0);
+
+
+
+    cin >> n >> k;
+
+
+
+    resenje= 2*n + min(k-1,n-k)*2  + max(k-1,n-k)+ 1;
+
+    cout << resenje;
+
+
+
+	return 0;
+
+}
+

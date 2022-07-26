@@ -1,0 +1,12 @@
+#include<stdio.h>
+int main(){
+    int n;
+    scanf("%d", &n);
+    int k;
+    scanf("%d",&k);
+    k--;
+    int count_step=0;
+    if(k>=n/2)count_step+=4*n-k-1;
+    else count_step+=3*n+k;
+    printf("%d",count_step);
+}

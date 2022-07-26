@@ -1,0 +1,136 @@
+#include<bits/stdc++.h>
+
+#define mp make_pair
+
+#define pb push_back
+
+#define pf push_front
+
+#define ff first
+
+#define ss second
+
+#define inf INT_MAX
+
+#define MOD 1000000007
+
+#define forn(i,j,k) for(int i=(int)j;i<=(int)k;i++)
+
+#define nrof(i,j,k) for(int i=(int)j;i>=(int)k;i--)
+
+#define MEM(a,b) memset(a,(b),sizeof(a))
+
+#define LEN(x) (int)x.size()
+
+#define all(x) x.begin(),x.end()
+
+#define ll long long
+
+#define ld long double
+
+#define pll pair<long long,long long>
+
+#define pii pair<int,int>
+
+using namespace std;
+
+
+
+int main(){
+
+    ios_base::sync_with_stdio(0);
+
+    cin.tie(0);
+
+    cout.tie(0);
+
+
+
+    int n, m;
+
+	cin >> n >> m;
+
+	int arr[n][m], brr[n][m];
+
+	for(int i = 0; i < n; i++){
+
+		for(int j = 0; j < m; j++){
+
+			cin >> arr[i][j];
+
+		}
+
+	}
+
+	for(int i = 0; i < n; i++){
+
+		for(int j = 0; j < m; j++){
+
+			cin >> brr[i][j];
+
+		}
+
+	}
+
+	for(int i = 0; i < n; i++){
+
+		multiset<int> s1, s2;
+
+		int k = 0;
+
+		for(int j = 0; j <= min(i, m - 1); j++){
+
+			s1.insert(arr[i - k][j]);
+
+			s2.insert(brr[i - k][j]);
+
+			k++;
+
+		}
+
+		if(s1 != s2){
+
+			cout << "NO\n";
+
+			return 0;
+
+		}
+
+	}
+
+	for(int j = 0; j < m; j++){
+
+		multiset<int> s1, s2;
+
+		int k = 0;
+
+		for(int i = n - 1; i >= max(n - m + j, (int)0); i--){
+
+			s1.insert(arr[i][j + k]);
+
+			s2.insert(brr[i][j + k]);
+
+			k++;
+
+		}
+
+		if(s1 != s2){
+
+			cout << "NO\n";
+
+			return 0;
+
+		}
+
+	}
+
+	cout << "YES\n";
+
+
+
+
+
+    return 0;
+
+}
+

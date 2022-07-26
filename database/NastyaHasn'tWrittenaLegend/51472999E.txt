@@ -1,0 +1,279 @@
+#include <bits/stdc++.h>
+
+
+
+using namespace std;
+
+
+
+typedef long long ll;
+
+
+
+const int MAX = 112345;
+
+
+
+ll A[MAX], B[MAX];
+
+ll pre[MAX], pre_pre[MAX];
+
+ll F[MAX];
+
+int n;
+
+
+
+void init() {
+
+    for (int i = 1; i <= n; i++) {
+
+        pre[i] = pre[i - 1] + B[i - 1];
+
+        pre_pre[i] = pre_pre[i - 1] + pre[i];
+
+    }
+
+    for (int i = 1; i <= n; i++) {
+
+        F[i] = A[i] - pre[i];
+
+    }
+
+}
+
+
+
+#define lson o << 1
+
+#define rson o << 1 | 1
+
+#define MID int m = (l + r) >> 1
+
+
+
+struct Node {
+
+    ll lazy, sum, maxn, sz;
+
+    bool has_lazy;
+
+
+
+    Node() : sum(0), maxn(0), lazy(-1), sz(1), has_lazy(false) {}
+
+
+
+    Node operator+(Node &t) {
+
+        Node rst;
+
+        rst.sum = sum + t.sum;
+
+        rst.maxn = max(maxn, t.maxn);
+
+        rst.sz = sz + t.sz;
+
+        return rst;
+
+    }
+
+
+
+    void set(ll x) {
+
+        lazy = x;
+
+        maxn = x;
+
+        sum = x * sz;
+
+        has_lazy = true;
+
+    }
+
+} tree[MAX << 2];
+
+
+
+void build(int o, int l, int r) {
+
+    if (l == r) {
+
+        tree[o].maxn = tree[o].sum = F[l];
+
+        return;
+
+    }
+
+    MID;
+
+    build(lson, l, m);
+
+    build(rson, m + 1, r);
+
+    tree[o] = tree[lson] + tree[rson];
+
+}
+
+
+
+void push_down(int o) {
+
+    if (!tree[o].has_lazy) return;
+
+    tree[lson].set(tree[o].lazy);
+
+    tree[rson].set(tree[o].lazy);
+
+    tree[o].has_lazy = false;
+
+}
+
+
+
+void update(int o, int l, int r, int ql, int qr, ll x) {
+
+    if (qr < l || r < ql) return;
+
+    if (ql <= l && r <= qr) {
+
+        tree[o].set(x);
+
+        return;
+
+    }
+
+    MID;
+
+    push_down(o);
+
+    update(lson, l, m, ql, qr, x);
+
+    update(rson, m + 1, r, ql, qr, x);
+
+    tree[o] = tree[lson] + tree[rson];
+
+}
+
+
+
+int get(int o, int l, int r, ll x) {
+
+    if (l == r) {
+
+        return l;
+
+    }
+
+    MID;
+
+    push_down(o);
+
+    if (tree[lson].maxn >= x) return get(lson, l, m, x);
+
+    return get(rson, m + 1, r, x);
+
+}
+
+
+
+int query(int o, int l, int r, int ql, int qr, ll x) {
+
+    if (qr < l || r < ql) return 0;
+
+    if (ql <= l && r <= qr) {
+
+        return tree[o].maxn >= x ? get(o, l, r, x) : 0;
+
+    }
+
+    MID;
+
+    push_down(o);
+
+    int ans = query(lson, l, m, ql, qr, x);
+
+    return ans > 0 ? ans : query(rson, m + 1, r, ql, qr, x);
+
+}
+
+
+
+ll get_sum(int o, int l, int r, int ql, int qr) {
+
+    if (qr < l || r < ql) return 0;
+
+    if (ql <= l && r <= qr) {
+
+        return tree[o].sum;
+
+    }
+
+    MID;
+
+    push_down(o);
+
+    return get_sum(lson, l, m, ql, qr) + get_sum(rson, m + 1, r, ql, qr);
+
+}
+
+
+
+int main() {
+
+    cin >> n;
+
+    for (int i = 1; i <= n; i++) {
+
+        cin >> A[i];
+
+    }
+
+    for (int i = 1; i < n; i++) {
+
+        cin >> B[i];
+
+    }
+
+    init();
+
+    build(1, 1, n);
+
+    int q;
+
+    cin >> q;
+
+    while (q--) {
+
+        char op;
+
+        int l, r;
+
+        cin >> op >> l >> r;
+
+        if (op == '+') {
+
+            ll x = get_sum(1, 1, n, l, l);
+
+            x += r;
+
+            int pos = query(1, 1, n, l + 1, n, x);
+
+            pos = (pos == 0) ? n : pos - 1;
+
+            update(1, 1, n, l, pos, x);
+
+        } else {
+
+            ll ans = get_sum(1, 1, n, l, r);
+
+            ans += pre_pre[r] - pre_pre[l - 1];
+
+            cout << ans << endl;
+
+        }
+
+    }
+
+}

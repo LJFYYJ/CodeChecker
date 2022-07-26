@@ -1,0 +1,78 @@
+#include <iostream>
+
+using namespace std;
+
+void schimbare(int&a,int&b) {
+
+    int c=a;
+
+    a=b;
+
+    b=c;
+
+}
+
+int a[300001],b[500001],c[500001],i,j,n,m,k,nas,ok;
+
+int main()
+
+{
+
+    cin>>n>>m;
+
+    for (i=1;i<=n;i++) cin>>a[i];
+
+    nas=a[n];
+
+    for (k=1;k<=m;k++) {
+
+        cin>>i>>j;
+
+        b[k]=i;
+
+        c[k]=j;
+
+    }
+
+    ok=m;
+
+    while (ok>0) {
+
+        for (i=1;i<=m;i++) {
+
+            for (j=1;j<=n;j++) {
+
+                if (a[j]==b[i]&&a[j+1]==c[i]) {
+
+                    schimbare(a[j],a[j+1]);
+
+                    b[i]=-1;
+
+                    c[i]=-1;
+
+                }
+
+            }
+
+            if (b[i]==-1&&c[i]==-1) ok--;
+
+        }
+
+    }
+
+    for (i=1;i<=n;i++) if (a[i]==nas) cout<<n-i;
+
+   /* for (i=1;i<=n;i++) fout<<a[i]<<" ";
+
+    fout<<"\n";
+
+    for (i=1;i<=m;i++) fout<<b[i]<<" ";
+
+    fout<<"\n";
+
+    for (i=1;i<=m;i++) fout<<c[i]<<" ";  */
+
+    return 0;
+
+}
+

@@ -1,0 +1,54 @@
+#include<bits/stdc++.h>
+
+using namespace std;
+
+#define mod 1000000007
+
+#define sz  200009
+
+#define pf      printf
+
+#define pi(a)   printf("%d\n",a)
+
+#define pl(a)   printf("%I64d\n",a)
+
+#define sf      scanf
+
+#define si(a)   scanf("%d",&a)
+
+#define sl(a)   scanf("%I64d",&a)
+
+#define pb      push_back
+
+#define mp      make_pair
+
+#define ll      long long
+
+
+
+vector<int>v;
+
+string s;
+
+int arr[sz];
+
+
+
+int main()
+
+{
+
+    int i,j,a,b,n,m,k,ans=0;
+
+    si(n);
+
+    si(a);
+
+    a=(n*3)+min(a-1,n-a);
+
+    pi(a);
+
+    return 0;
+
+}
+

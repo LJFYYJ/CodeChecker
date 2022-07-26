@@ -1,0 +1,28 @@
+#include <bits/stdc++.h>
+using namespace std;
+int a[505][505],b[505][505];
+multiset<int> vala[1005],valb[1005];
+int main(){
+	int n,m,i,flag=1;
+	cin>>n>>m;
+	for(int i=0;i<n;i++){
+		for(int j=0;j<n;j++){
+			cin>>a[i][j];
+			vala[i+j].insert(a[i][j]);
+		}
+	}
+	for(int i=0;i<n;i++){
+		for(int j=0;j<n;j++){
+			cin>>b[i][j];
+			valb[i+j].insert(b[i][j]);
+		}
+	}
+	for(i=0;i<n+m;i++){
+		if(vala[i]!=valb[i]){
+			flag=0;
+			break;
+		}
+	}
+	if(!flag) cout<<"YES"<<endl;
+	else cout<<"NO"<<endl;
+}

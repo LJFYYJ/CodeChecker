@@ -1,0 +1,98 @@
+#include <cstdio>
+
+#include <set>
+
+#include <queue>
+
+
+
+using namespace std;
+
+
+
+int arr[303030];
+
+
+
+set <int> s[303030];
+
+queue <int> h;
+
+
+
+int main()
+
+{
+
+    int n, m;
+
+    scanf("%d %d", &n, &m);
+
+    for(int i = 1; i <= n; i++)
+
+        scanf("%d", &arr[i]);
+
+
+
+    for(int i = 0; i < m; i++)
+
+    {
+
+        int u, v;
+
+        scanf("%d %d", &u, &v);
+
+        s[u].insert(v);
+
+    }
+
+
+
+    int x = arr[n];
+
+    for(int i = n - 1; i >= 1; i--)
+
+    {
+
+        if(s[x].find(arr[i]) != s[x].end())
+
+        {
+
+            h.push(i);
+
+        }
+
+    }
+
+    int ans = 0, t = h.front();
+
+    for(int i = n - 1; i >= 1; i--)
+
+    {
+
+        if(t == i)
+
+        {
+
+            ans++;
+
+            h.pop();
+
+            if(h.empty()) break;
+
+            t = h.front();
+
+            continue;
+
+        }
+
+        if(s[arr[t]].find(arr[i]) == s[arr[t]].end()) break;
+
+    }
+
+
+
+    printf("%d", ans);
+
+}
+

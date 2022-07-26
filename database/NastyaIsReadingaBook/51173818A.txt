@@ -1,0 +1,31 @@
+#include <bits/stdc++.h>
+
+int main()
+{
+	int n;
+	std::cin >> n;
+
+	std::vector<std::pair<int, int>> vec;
+	vec.reserve(n);
+
+	for (int i = 0; i < n; ++i)
+	{
+		int start, finish;
+		std::cin >> start >> finish;
+		vec.emplace_back(start, finish);
+	}
+
+	int k;
+	std::cin >> k;
+
+	for (int i = 0; i < n; ++i)
+	{
+		if (vec[i].first <= k && vec[i].second >= k)
+		{
+			std::cout << n - i;
+			return 0;
+		}
+	}
+
+	return 0;
+}

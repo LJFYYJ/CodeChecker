@@ -1,0 +1,13 @@
+#include <bits/stdc++.h>
+using namespace std;
+int main(){
+	int n,k,ans=0;
+	cin>>n>>k;
+	if(k<=n/2){
+		ans=3*n+k-1;
+	}
+	else{
+		ans=3*n+n-k;
+	}
+	cout<<ans<<endl;
+}

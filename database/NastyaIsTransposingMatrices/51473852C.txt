@@ -1,0 +1,46 @@
+#include <bits/stdc++.h>
+
+#define pb push_back
+
+using namespace std;
+
+typedef long long ll;
+
+const ll N = 503;
+
+ll n, m;
+vector<ll> a[N*2], b[N*2];
+
+int main() {
+	ios_base::sync_with_stdio(false); cin.tie(0); cout.tie(0);
+	
+	cin >> n >> m;
+	for (ll i = 1; i <= n; ++i) {
+		for (ll j = 1; j <= m; ++j) {
+			ll x; cin >> x;
+			a[i+j].pb(x);
+		}
+	}
+
+	for (ll i = 1; i <= n; ++i) {
+		for (ll j = 1; j <= m; ++j) {
+			ll x; cin >> x;
+			b[i+j].pb(x);
+		}
+	}
+	
+	for (ll i = 1; i <= n+m; ++i) {
+		sort(a[i].begin(), a[i].end());
+		sort(b[i].begin(), b[i].end());
+	}
+	
+	for (ll i = 1; i <= n+m; ++i) {
+		if (a[i] != b[i]) {
+			cout << "NO\n";
+			return 0;
+		}
+	}
+	cout << "YES\n";
+	
+	return 0;
+}

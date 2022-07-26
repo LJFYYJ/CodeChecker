@@ -1,0 +1,79 @@
+#include <bits/stdc++.h>
+
+#include <iostream>
+
+using namespace std;
+
+
+
+// Typedef
+
+typedef long long ll;
+
+
+
+#define sc1(a) scanf("%lld",&a)
+
+#define sc2(a,b) scanf("%lld %lld",&a,&b)
+
+
+
+#define pf1(a) printf("%lld\n", a)
+
+#define pf2(a,b) printf("%lld %lld\n",a,b)
+
+
+
+vector<pair<ll, ll> >vcp;
+
+
+
+int main()
+
+{
+
+
+
+    ll tc, num, t = 1, printprime;
+
+
+
+    sc1(tc);
+
+
+
+    ll ans = tc;
+
+
+
+    while (tc--){
+
+        ll x, y;
+
+        cin >> x >> y;
+
+        vcp.push_back(make_pair(x,y));
+
+    }
+
+    sc1(num);
+
+
+
+    ll cnt = 0;
+
+    for(ll i = 0; i < vcp.size(); i++){
+
+        if(num > vcp[i].second) cnt++;
+
+    }
+
+
+
+    cout << ans - cnt << endl;
+
+
+
+    return 0;
+
+}

@@ -1,0 +1,69 @@
+#include <bits/stdc++.h>
+
+
+
+using namespace std;
+
+
+
+int main()
+
+{
+
+    ios_base::sync_with_stdio(0);
+
+    cin.tie(0);
+
+    cout.tie(0);
+
+
+
+    int N, K;
+
+
+
+    cin >> N >> K;
+
+
+
+    if (K == 1 || K == N)
+
+         cout << N * 3 << '\n';
+
+    else
+
+    {
+
+        int r = N - K;
+
+        int l = K - 1;
+
+        if (r < l)
+
+        {
+
+            cout << N * 3 + r << '\n';
+
+            return 0;
+
+        }
+
+        else
+
+        {
+
+            cout << N * 3 + l << '\n';
+
+            return 0;
+
+        }
+
+
+
+    }
+
+
+
+    return 0;
+
+}

@@ -1,0 +1,643 @@
+#include <stdio.h>
+
+#include <stdlib.h>
+
+
+
+#include <iostream>
+
+#include <iomanip>
+
+#include <sstream>
+
+#include <stdint.h>
+
+#include <string.h>
+
+
+
+#include <unordered_set>
+
+
+
+#define _USE_MATH_DEFINES
+
+#include <math.h>
+
+
+
+
+
+#include <vector>
+
+#include <list>
+
+
+
+#include <set>
+
+#include <map>
+
+
+
+#include <unordered_map>
+
+
+
+#include <queue>
+
+
+
+#include <string>
+
+
+
+#include <vector>
+
+
+
+#define sqr(x) (x) * (x)
+
+
+
+#include <algorithm>
+
+#include <functional>
+
+
+
+#include <bitset>
+
+
+
+#include <functional>
+
+
+
+#include <chrono>
+
+
+
+typedef unsigned int u32;
+
+typedef int i32;
+
+
+
+typedef unsigned long long int u64;
+
+typedef long long int i64;
+
+
+
+typedef uint16_t u16;
+
+typedef int16_t i16;
+
+
+
+typedef uint8_t u8;
+
+typedef int8_t i8;
+
+
+
+
+
+using namespace std;
+
+using namespace std::chrono;
+
+
+
+struct less_key
+
+{
+
+    bool operator() (pair<i64, i64> p1, pair<i64, i64> p2)
+
+    {
+
+        return p1.first < p2.first || (p1.first == p2.first && p1.second < p2.second);
+
+    }
+
+};
+
+
+
+struct pair_hash {
+
+public:
+
+    std::size_t operator()(const std::pair<u64, u64> &x) const
+
+    {
+
+        return std::hash<u64>()(x.first) ^ std::hash<u64>()(x.second);
+
+    }
+
+};
+
+#include <random>
+
+
+
+const i64 mod = 1000000007ll;
+
+const i64 smod = 999983;
+
+const i64 inf = mod;
+
+
+
+// segtree
+
+template <typename T = i64, T D = 0>
+
+class MaxOp {
+
+public:
+
+    static T op(const T& a, const T&b) {
+
+        return max(a, b);
+
+    }
+
+
+
+    static T def() {
+
+        return (T)D;
+
+    }
+
+};
+
+
+
+template <typename T = i64, T D = inf>
+
+class MinOp {
+
+public:
+
+    static T op(const T& a, const T&b) {
+
+        return min(a, b);
+
+    }
+
+
+
+    static T def() {
+
+        return (T)D;
+
+    }
+
+};
+
+
+
+template <typename T = i64, T D = 0>
+
+class SumOp {
+
+public:
+
+    static T op(const T& a, const T&b) {
+
+        return a + b;
+
+    }
+
+
+
+    static T def() {
+
+        return (T)D;
+
+    }
+
+};
+
+
+
+template <typename D, typename T = i64>
+
+class SegTree {
+
+public:
+
+    i64 n;
+
+    vector<T> t;
+
+    vector<T> e;
+
+
+
+private:
+
+    void build(const i64* a, int v, int tl, int tr) {
+
+        if (tl == tr)
+
+            t[v] = a[tl];
+
+        else {
+
+            int tm = (tl + tr) / 2;
+
+            build(a, v * 2, tl, tm);
+
+            build(a, v * 2 + 1, tm + 1, tr);
+
+            t[v] = D().op(t[v * 2], t[v * 2 + 1]);
+
+        }
+
+    }
+
+
+
+    void push(int v) {
+
+        if (e[v] != 0) {
+
+            e[v * 2] += e[v];
+
+            e[v * 2 + 1] += e[v];
+
+            e[v] = 0;
+
+        }
+
+    }
+
+
+
+    i64 get(int v, int tl, int tr, int l, int r) {
+
+        if (tl > tr) {
+
+            return D().def();
+
+        }
+
+        if (l > r) {
+
+            return D().def();
+
+        }
+
+        if (l == tl && r == tr) {
+
+            return t[v] + (e[v] * (r - l + 1));
+
+        }
+
+
+
+        push(v);
+
+
+
+        int tm = (tl + tr) / 2;
+
+        T ans = D().op(get(v * 2, tl, tm, l, min(r, tm)), get(v * 2 + 1, tm + 1, tr, max(l, tm + 1), r));
+
+
+
+        t[v] = D().op(get(v * 2, tl, tm, tl, tm), get(v * 2 + 1, tm + 1, tr, tm + 1, tr));
+
+        return ans;
+
+    }
+
+
+
+    void update(int v, int tl, int tr, int l, int r, int add) {
+
+        if (l > r) {
+
+            return;
+
+        }
+
+        if (tl > tr) {
+
+            return;
+
+        }
+
+        if (l == tl && tr == r) {
+
+            e[v] += add;
+
+            return;
+
+        }
+
+
+
+        push(v);
+
+
+
+        int tm = (tl + tr) / 2;
+
+        update(v * 2, tl, tm, l, min(r, tm), add);
+
+        update(v * 2 + 1, tm + 1, tr, max(l, tm + 1), r, add);
+
+
+
+        t[v] = D().op(get(v * 2, tl, tm, tl, tm), get(v * 2 + 1, tm + 1, tr, tm + 1, tr));
+
+    }
+
+
+
+public:
+
+    void build(const vector<i64 >& a) {
+
+        n = a.size();
+
+        t.resize(n * 4);
+
+        e.resize(n * 4);
+
+        build(a.data(), 1, 0, n - 1);
+
+    }
+
+
+
+    void build(i64* a, i64 n) {
+
+        this->n = n;
+
+        t.resize(n * 4);
+
+        e.resize(n * 4);
+
+        build(a, 1, 0, n - 1);
+
+    }
+
+
+
+    i64 get(i64 l, i64 r) {
+
+        return get(1, 0, n - 1, l, r);
+
+    }
+
+
+
+    void update(i64 l, i64 r, i64 add) {
+
+        update(1, 0, n - 1, l, r, add);
+
+    }
+
+};
+
+
+
+// del
+
+
+
+const i64 MAXN = 100005;
+
+
+
+i64 n, m;
+
+
+
+i64 a[MAXN];
+
+i64 k[MAXN];
+
+
+
+struct Query{
+
+    char t;
+
+    i64 l;
+
+    i64 r;
+
+};
+
+
+
+Query q[MAXN];
+
+
+
+set<pair<i64, i64>> segs;
+
+
+
+SegTree<SumOp<i64>, i64> segtree;
+
+
+
+int main() {
+
+    ios::sync_with_stdio(0); cin.tie(0); cout.tie(0); cout.precision(15); cout.setf(ios::fixed);
+
+
+
+    //vector<i64> df = { 1, 2, 3, 4, 5 };
+
+    //segtree.build(df);
+
+
+
+    //cerr << "lrv" << endl;
+
+    //for (i64 l = 0; l < df.size(); l++) {
+
+    //    for (i64 r = l; r < df.size(); r++) {
+
+    //        cerr << l << "->" << r << "=" << segtree.get(l, r) << endl;
+
+    //    }
+
+    //}
+
+
+
+    //segtree.update(0, df.size() - 1, 1);
+
+
+
+    //cerr << "---" << endl;
+
+    //for (i64 l = 0; l < df.size(); l++) {
+
+    //    for (i64 r = l; r < df.size(); r++) {
+
+    //        cerr << l << "->" << r << "=" << segtree.get(l, r) << endl;
+
+    //    }
+
+    //}
+
+
+
+    cin >> n;
+
+
+
+    for (i64 i = 0; i < n; i++) {
+
+        cin >> a[i];
+
+    }
+
+
+
+    for (i64 i = 0; i < n - 1; i++) {
+
+        cin >> k[i];
+
+    }
+
+
+
+    cin >> m;
+
+
+
+    for (i64 i = 0; i < m; i++) {
+
+        cin >> q[i].t >> q[i].l >> q[i].r;
+
+        q[i].l--;
+
+        if (q[i].t != '+') {
+
+            q[i].r--;
+
+        }
+
+    }
+
+
+
+    for (i64 i = 0; i < n; i++) {
+
+        segs.insert({i, i});
+
+    }
+
+
+
+    segtree.build(a, n);
+
+
+
+    for (i64 i = 0; i < m; i++) {
+
+        if (q[i].t == '+') {
+
+            if (q[i].r == 0) {
+
+                continue;
+
+            }
+
+
+
+            auto it = segs.upper_bound({ q[i].l, n + 1 });
+
+            it--;
+
+
+
+            if (it->first != q[i].l) {
+
+                pair<i64, i64> p1 = { it->first, q[i].l - 1};
+
+                pair<i64, i64> p2 = { q[i].l, it->second };
+
+                segs.erase(it);
+
+                segs.insert(p1);
+
+                it = segs.insert(p2).first;
+
+            }
+
+
+
+            auto qit = it;
+
+            for (;;) {
+
+                segtree.update(it->first, it->second, q[i].r);
+
+                i64 z = segtree.get(it->second, it->second) + k[it->second];
+
+                it++;
+
+                if (it == segs.end()) {
+
+                    break;
+
+                }
+
+                if (z <= segtree.get(it->first, it->first)) {
+
+                    break;
+
+                }
+
+                q[i].r = z - segtree.get(it->first, it->first);
+
+            }
+
+
+
+            auto z = *qit;
+
+            while (qit != it) {
+
+                z.second = qit->second;
+
+                segs.erase(qit++);
+
+            }
+
+            segs.insert(z);
+
+
+
+
+
+
+
+        } else {
+
+            cout << segtree.get(q[i].l, q[i].r) << endl;
+
+        }
+
+    }
+
+
+
+    return 0;
+
+}

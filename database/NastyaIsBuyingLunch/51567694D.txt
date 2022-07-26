@@ -1,0 +1,77 @@
+#include<bits/stdc++.h>
+
+using namespace std;
+
+const int maxn = 3e5+10;
+
+int a[maxn];
+
+map<pair<int,int>,int> mp;
+
+int main(void)
+
+{
+
+	int n,m;
+
+	cin>>n>>m;
+
+	for(int i = 1; i <= n; i++)
+
+	{
+
+		cin>>a[i];
+
+	}
+
+	for(int i = 1; i <= m; i++)
+
+	{
+
+		int u,v;
+
+		cin>>u>>v;
+
+		mp[make_pair(u,v)] = 1;
+
+	}
+
+	int last = n;
+
+	for(int i = n-1; i >= 1; i--)
+
+	{
+
+		if(mp[make_pair(a[i],a[last])])
+
+		{
+
+			int j;
+
+			for(j = i; j < last; j++)
+
+			{
+
+				if(mp[make_pair(a[j],a[j+1])])
+
+					swap(a[j],a[j+1]);
+
+				else
+
+					break;
+
+			}
+
+			if(j==last)
+
+				last--; 
+
+		}
+
+	}
+
+	cout<<n-last<<endl; 
+
+	return 0;
+
+} 

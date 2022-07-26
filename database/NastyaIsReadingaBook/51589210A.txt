@@ -1,0 +1,75 @@
+#include<stdio.h>
+
+
+
+int main()
+
+{
+
+    int chap;
+
+    int count=0;
+
+
+
+    //printf("enter the number :");
+
+    scanf("%d",&chap);
+
+
+
+    int start[chap], end[chap];
+
+    int i,stop;
+
+    int j;
+
+
+
+    for(i=0;i<chap;i++)
+
+    {
+
+        scanf("%d %d",&start[i],&end[i]);
+
+    }
+
+    scanf("%d",&stop);
+
+
+
+    /*printf("\n\n");
+
+    for(i=0;i<chap;i++)
+
+    {
+
+        printf("%d %d\n",start[i],end[i]);
+
+    }*/
+
+
+
+    for(i=0;i<chap;i++)
+
+    {
+
+        if(stop>=start[i] && stop<=end[i])
+
+        {
+
+            for(j=i+1;j<=chap;j++)
+
+                count=count+1;
+
+        }
+
+    }
+
+    printf("%d",count);
+
+
+
+    return 0;
+
+}

@@ -1,0 +1,117 @@
+#include <bits/stdc++.h>
+
+#define _overload3(_1, _2, _3, name, ...) name
+
+#define _rep(i, n) repi(i, 0, n)
+
+#define repi(i, a, b) for (ll i = (ll)(a); i < (ll)(b); ++i)
+
+#define rep(...) _overload3(__VA_ARGS__, repi, _rep, )(__VA_ARGS__)
+
+#define ll long long
+
+#define lld long double
+
+#ifdef DEBUG
+
+#define line() cout << "[" << __LINE__ << "] ";
+
+#define dump(i) cout << #i ": " << i << " ";
+
+#define dumpl(i) cout << #i ": " << i << endl;
+
+#else
+
+#define line(i)
+
+#define dump(i)
+
+#define dumpl(i)
+
+#endif
+
+using namespace std;
+
+int main()
+
+{
+
+    int n, m;
+
+    scanf("%d %d\n", &n, &m);
+
+    int mx = n + m + 1;
+
+    map<int, int> a[mx], b[mx];
+
+    rep(i, n)
+
+    {
+
+        rep(j, m)
+
+        {
+
+            int t;
+
+            scanf("%d", &t);
+
+            a[i + j][t]++;
+
+        }
+
+    }
+
+    rep(i, n)
+
+    {
+
+        rep(j, m)
+
+        {
+
+            int t;
+
+            scanf("%d", &t);
+
+            b[i + j][t]++;
+
+        }
+
+    }
+
+    rep(i, mx)
+
+    {
+
+        for (auto p : a[i])
+
+        {
+
+            dump(i);
+
+            dumpl(p.first);
+
+
+
+            if (b[i][p.first] == p.second)
+
+            {
+
+                printf("NO\n");
+
+                return 0;
+
+            }
+
+            b[i][p.first] = 0;
+
+        }
+
+    }
+
+    printf("YES\n");
+
+    return 0;
+
+}

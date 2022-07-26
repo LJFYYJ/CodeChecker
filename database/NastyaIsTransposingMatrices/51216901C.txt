@@ -1,0 +1,66 @@
+#include <iostream>
+#include <vector>
+using namespace std;
+typedef long long int ll;
+
+int main() {
+	int n, m;	
+	ll A[501][501];
+	ll B[501][501];
+
+	cin >> n >> m;
+	
+	for(int i = 0; i < n; i++) {
+		for(int j = 0; j < m; j++) {
+			cin >> A[i][j];
+		}	
+	}
+	for(int i = 0; i < n; i++) {
+		for(int j = 0; j < m; j++) {
+			cin >> B[i][j];
+		}	
+	}
+
+	bool found;
+	for(int i = 0; i < n; i++) {
+		for(int j = 0; j < m; j++) {
+			if(A[i][j] != B[i][j]) {
+				
+				found = false; 
+				ll val = B[i][j];
+				int i2, j2;
+
+				i2 = i;
+				j2 = j;
+				while(j2 >= 0) {
+					if (A[i2][j2] == val) {
+						found = true; 
+						break;
+					} 
+					j2--;
+					i2++;
+				}	
+
+				i2 = i;
+				j2 = j;
+				while(i2 >= 0) {
+					if (A[i2][j2] == val) {
+						found = true; 
+						break;
+					} 
+					j2++;
+					i2--;
+				}	
+				
+				if(found == false) {
+					cout << "NO" << endl;
+					return 0;
+				}
+			}
+		}
+	}
+
+	cout << "YES" << endl;
+	return 0;
+}
+

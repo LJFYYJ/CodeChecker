@@ -1,0 +1,50 @@
+#include <bits/stdc++.h>
+
+
+
+using namespace std;
+
+pair <int,int> P[1000];
+
+int main()
+
+{
+
+long long int n,l,r,k,i,j,m;
+
+cin>>n;
+
+for(i=0;i<n;i++)
+
+    {
+
+        cin>>P[i].first>>P[i].second;
+
+
+
+    }
+
+cin>>m;
+
+for(j=0;j<n;j++)
+
+    {
+
+        if(P[j].second>=m)
+
+        {
+
+        cout<<n-j;
+
+        return 0;
+
+        }
+
+    }
+
+    cout<<0;
+
+
+
+}
+

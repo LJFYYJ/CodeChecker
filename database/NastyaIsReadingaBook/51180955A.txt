@@ -1,0 +1,50 @@
+import java.util.Scanner;
+
+import java.util.SortedSet;
+
+import java.util.TreeSet;
+
+
+
+public class Task11103 {
+
+    public static void main(String[] args) {
+
+        Scanner scanner = new Scanner(System.in);
+
+        int n = scanner.nextInt();
+
+        SortedSet<Integer> chapters = new TreeSet<>() ;
+
+        for(int i = 0; i< n; i++)
+
+        {
+
+            int l = scanner.nextInt();
+
+            int r = scanner.nextInt();
+
+            
+
+            chapters.add(r);
+
+        }
+
+
+
+        int k = scanner.nextInt();
+
+        int higher = ((TreeSet<Integer>) chapters).ceiling(k);
+
+        int notRead = ((TreeSet<Integer>) chapters).tailSet(higher,true).size();
+
+        System.out.println(notRead);
+
+     
+
+
+
+    }
+
+}
+

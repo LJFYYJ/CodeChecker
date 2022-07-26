@@ -1,0 +1,45 @@
+import java.util.Scanner;
+
+public class Prog1136A{
+
+   public static void main(String[] args){
+
+   Scanner sc=new Scanner(System.in);
+
+   byte n=sc.nextByte();
+
+   short[] l=new short[n];
+
+   short[] r=new short[n];
+
+   for(short i=0;i<n;i++){
+
+      l[i]=sc.nextShort();
+
+      r[i]=sc.nextShort();
+
+    }
+
+    short b=sc.nextShort();
+
+    short i=0;
+
+    while (i<n){
+
+      if(b<=r[i]){
+
+        break;
+
+        }
+
+        i++;
+
+     }
+
+     int left=(n-i);
+
+     System.out.println(left);
+
+     }
+
+}

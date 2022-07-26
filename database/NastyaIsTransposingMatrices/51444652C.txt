@@ -1,0 +1,150 @@
+
+
+#include <bits/stdc++.h>
+
+
+
+using namespace std;
+
+int a[550][550];
+
+int b[550][550];
+
+int x[550],y[550];
+
+
+
+int main()
+
+{
+
+    int n,m;
+
+    scanf("%d%d",&n,&m);
+
+    for(int i = 1;i <= n;i++)
+
+    {
+
+        for(int j = 1;j <= m;j++)
+
+        {
+
+            scanf("%d", &a[i][j]);
+
+        }
+
+    }
+
+    for(int i = 1;i <= n;i++)
+
+    {
+
+        for(int j = 1;j <= m;j++)
+
+        {
+
+            scanf("%d", &b[i][j]);
+
+        }
+
+    }
+
+    int flag = 0;
+
+    for(int i = 1;i <= n;i++)
+
+    {
+
+        int p = 0;
+
+        for(int j = i,k = 1;j >= 1&&k ;j--,k++)
+
+        {
+
+            x[p++] = a[j][k];
+
+        }
+
+        p = 0;
+
+        for(int j = i,k = 1;j >= 1;j--,k++)
+
+        {
+
+            y[p++] = b[j][k];
+
+        }
+
+        sort(x,x+p);
+
+        sort(y,y+p);
+
+        for(int j = 0;j < p;j++)
+
+        {
+
+            if(x[j] != y[j])
+
+            {
+
+                flag = 1;
+
+            }
+
+        }
+
+    }
+
+    for(int i = 1;i <= n;i++)
+
+    {
+
+        int p = 0;
+
+        for(int j = i,k = n;j <= n;j++,k--)
+
+        {
+
+            x[p++] = a[j][k];
+
+        }
+
+        p = 0;
+
+        for(int j = i,k = n;j <= n;j++,k--)
+
+        {
+
+            y[p++] = b[j][k];
+
+        }
+
+        sort(x,x+p);
+
+        sort(y,y+p);
+
+        for(int j = 0;j < p;j++)
+
+        {
+
+            if(x[j] != y[j])
+
+            {
+
+                flag = 1;
+
+            }
+
+        }
+
+    }
+
+    if(flag) printf("NO\n");
+
+    else printf("YES\n");
+
+    return 0;
+
+}
+

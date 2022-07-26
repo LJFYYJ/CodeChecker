@@ -1,0 +1,85 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+
+
+int main() {
+
+  int n, m;
+
+  while(cin >> n >> m) {
+
+    int A[n][m], B[n][m];
+
+    vector<vector<int> > id(1000005);
+
+    for(int i = 0; i < n; ++i) {
+
+      for(int j = 0; j < m; ++j) {
+
+        cin >> A[i][j];
+
+        id[i+j].push_back(A[i][j]);
+
+      }
+
+    }
+
+    for(int i = 0; i < n; ++i) {
+
+      for(int j = 0; j < m; ++j) cin >> B[i][j];
+
+    }
+
+    bool vis[n][m];
+
+    memset(vis, 0, sizeof(vis));
+
+    for(int i = 0; i < n; ++i) {
+
+      for(int j = 0; j < m; ++j) {
+
+        for(int k = 0; k < id[i + j].size(); ++k) {
+
+          if(B[i][j] == id[i + j][k]) {
+
+            id[i + j].erase(id[i + j].begin() + k);
+
+            vis[i][j] = 1;
+
+          }
+
+        }
+
+      } 
+
+    }
+
+    bool res = true;
+
+    for(int i = 0; i < n; ++i) {
+
+      for(int j = 0; j < m; ++j) {
+
+        if(!vis[i][j]) {
+
+          res = false;
+
+          break;
+
+        }
+
+      }
+
+    }
+
+    if(res) cout << "YES\n";
+
+    else cout << "NO\n";
+
+  }
+
+  return 0;
+
+}

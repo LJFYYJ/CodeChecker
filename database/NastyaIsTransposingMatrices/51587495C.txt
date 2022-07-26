@@ -1,0 +1,57 @@
+n,m=map(int,input().split())
+
+lst=[];lst2=[]
+
+for c in range(n):
+
+    lst.append(list(map(int,input().split())))
+
+for c in range(n):
+
+    lst2.append(list(map(int,input().split())))
+
+#print(lst,lst2)
+
+for c in range(n):
+
+    for r in range(len(lst[c])):
+
+        p=0
+
+        if lst[c][r]!=lst2[c][r]:
+
+            a=c;b=r
+
+            while(a!=n and b!=-1 ):#or lst2[c][r]!=lst[c][r]
+
+                #a+=1;b-=1
+
+                #print("fgdj ",c,r,a,b)
+
+                if lst2[a][b]==lst[c][r]:
+
+                    p=1
+
+                    break
+
+                a+=1;b-=1
+
+            if p==1:
+
+                if True:
+
+                    #print(c,r,a,b)
+
+                    #swap(lst2[a][b],lst2[a+1][b-1])
+
+                    lst2[a][b],lst2[c][r]=lst2[c][r],lst2[a][b]
+
+            else:
+
+                print("NO")
+
+                exit(0)
+
+            #print(lst2)
+
+print("YES")

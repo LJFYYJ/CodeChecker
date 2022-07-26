@@ -1,0 +1,71 @@
+//package march19;
+
+import java.util.*;
+
+public class A136 {
+
+
+
+	public static void main(String[] args) {
+
+		// TODO Auto-generated method stub
+
+		Scanner scn=new Scanner(System.in);
+
+		int chapters=scn.nextInt();
+
+		int chapters1=chapters;
+
+		int[] arrl=new int[chapters];
+
+		int[] arrr=new int[chapters];
+
+		int i=0;
+
+		while(chapters-->0)
+
+		{
+
+			int left=scn.nextInt();
+
+			arrl[i]=left;
+
+			int right=scn.nextInt();
+
+			arrr[i]=right;
+
+			i++;
+
+		}
+
+		int k=scn.nextInt();
+
+		int ans=0;
+
+		for(i=0; i<chapters1; i++)
+
+		{
+
+			if(arrl[i]<=k && arrr[i]>=k)
+
+			{
+
+				ans=i;
+
+				break;
+
+			}
+
+		}
+
+		//System.out.println(ans);
+
+		System.out.println(chapters1-ans);
+
+	}
+
+
+
+}
+
+*

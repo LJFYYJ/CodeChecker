@@ -1,0 +1,107 @@
+#include <bits/stdc++.h>
+
+
+
+using namespace std;
+
+
+
+
+
+const int N = 100100;
+
+#define ll long long
+
+#define fr(i,a,n) for (int i=a;i<n;i++)
+
+#define mp make_pair
+
+#define fi first
+
+#define se second
+
+#define pb push_back
+
+#define pii pair<int,int>
+
+#define pll pair<ll,ll>
+
+#define vipb(v) int x;cin>>x;v.pb(x);
+
+#define vllpb(v) ll x;cin>>x;v.pb(x);
+
+#define in(x) cin>>x;
+
+#define in2(x,y) cin >> x >> y;
+
+#define in3(x,y,z) cin>>x>>y>>z;
+
+#define in4(a,x,y,z) cin>>a>>x>>y>>z;
+
+#define in5(a,b,x,y,z) cin>>a>>b>>x>>y>>z;
+
+
+
+
+
+typedef vector<int> VI;
+
+typedef vector<ll> VL;
+
+
+
+
+
+string s;
+
+ll n, m, k;
+
+
+
+int main() {
+
+	//	freopen("in.in", "r", stdin);
+
+	//	freopen("out.out", "w", stdout);
+
+	ios_base::sync_with_stdio(false);
+
+	cin.tie(NULL);
+
+	cout.tie(NULL);
+
+	cin >> n;
+
+	vector <pii> v;
+
+	fr(i, 0, n) {
+
+		int x,y;
+
+		cin >> x >> y;
+
+		v.pb({ x,y });
+
+	}
+
+	int x;
+
+	cin >> x;
+
+	int cnt = 0;
+
+	fr(i, 0, n) {
+
+		if (v[i].first < x && v[i].second < x) {
+
+			cnt++;
+
+		}
+
+	}
+
+	cout << n - cnt << endl;
+
+	return 0;
+
+}

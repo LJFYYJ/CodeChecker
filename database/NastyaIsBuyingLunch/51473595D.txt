@@ -1,0 +1,190 @@
+#include <iostream>
+
+#include <cstdio>
+
+#include <cstdlib>
+
+#include <algorithm>
+
+#include <cstring>
+
+#include <string>
+
+#include <cmath>
+
+#include <vector>
+
+#include <stack>
+
+#include <queue>
+
+#include <sstream>
+
+#include <map>
+
+
+
+#define rep2(i,s,n) for(int i=s;i<=n;i++)
+
+#define rep(i,n) rep2(i,1,n)
+
+#define rrep(i,n) rrep2(i,1,n)
+
+#define rrep2(i,s,n) for(int i=n;i>=s;i--)
+
+#define lop(i,f) lop2(i,1,f)
+
+#define lop2(i,s,f) for(int i=s;(f);i++)
+
+#define _zero(a) memset(a,0,sizeof(a))
+
+#define _neg(a) memset(a,-1,sizeof(a))
+
+#define _inf(a) memset(a,0x3f,sizeof(a))
+
+#define _enter(x) cout<<(x)<<endl
+
+#define _enter2(x,y) cout<<(x)<<" "<<(y)<<endl;
+
+typedef long long ll;
+
+typedef long long LL;
+
+#define INF 0x3f3f3f3f
+
+#define LLINF 9223372036854775800
+
+#define septer(i,n) (i<n?' ':'\n')
+
+
+
+#define lson l,m,rt<<1
+
+#define rson m+1,r,rt<<1|1
+
+#define node int l,int r,int rt
+
+
+
+using namespace std;
+
+
+
+const int N=500005;
+
+int n,m,a[N],idx[N],cnt[N];
+
+vector<int> v[N];
+
+
+
+int main(){
+
+    ios::sync_with_stdio(false);
+
+    std::cin.tie(0);
+
+    cin>>n>>m;
+
+    rep(i,n) {cin>>a[i];idx[a[i]]=i;}
+
+    rep(i,m){
+
+        int x,y;cin>>x>>y;
+
+        v[y].push_back(x);
+
+    }
+
+    int nx=a[n],tmpns=v[nx].size();
+
+    rep2(i,0,tmpns-1) cnt[v[nx][i]]++;
+
+    int last=n,ans=0;
+
+    rrep(i,n-1){
+
+        if(last-i<=cnt[a[i]]) ans++,last--;
+
+        else{
+
+            int ts=v[a[i]].size();
+
+            rep2(j,0,ts-1) cnt[v[a[i]][j]]++;
+
+        }
+
+    }
+
+    cout<<ans<<endl;
+
+
+
+    return 0;
+
+}
+
+/*
+
+5 10
+
+1 4 2 5 3
+
+3 5
+
+5 1
+
+2 3
+
+4 2
+
+4 3
+
+4 5
+
+5 4
+
+1 5
+
+1 2
+
+1 4
+
+
+
+4 6
+
+3 1 2 4
+
+3 2
+
+4 1
+
+1 4
+
+2 4
+
+3 1
+
+3 4
+
+
+
+4 6
+
+3 1 2 4
+
+3 2
+
+4 1
+
+1 2
+
+2 4
+
+3 1
+
+3 4
+
+*/
+

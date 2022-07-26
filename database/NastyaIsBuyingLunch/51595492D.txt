@@ -1,0 +1,53 @@
+n, m = map(int, input().split())
+
+
+
+q = list(map(int, input().split()))
+
+
+
+G = {}
+
+vn = []
+
+for i in range(m):
+
+  u, v = map(int, input().split())
+
+  if u in G:
+
+    G[u].add(v)
+
+  else:
+
+    G[u] = set([v])
+
+
+
+res = 0
+
+P = [q[-1]]
+
+for i in range(n - 2, -1, -1):
+
+  p = q[i]
+
+  s = set(P)
+
+  try:
+
+    if len(G[p]) >= len(s) and s.issubset(G[p]):
+
+      res += 1
+
+    else:
+
+      P.append(p)
+
+  except:
+
+    P.append(p)
+
+
+
+print(res)

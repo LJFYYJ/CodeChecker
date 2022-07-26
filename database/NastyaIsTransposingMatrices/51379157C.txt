@@ -1,0 +1,90 @@
+/// awoooooo
+
+
+
+# include <bits/stdc++.h>
+
+
+
+# define sz(x) (int)((x).size())
+
+
+
+using namespace std;
+
+
+
+typedef long long ll;
+
+typedef long double ld;
+
+typedef pair < int, int > pii;
+
+
+
+const int N = (int)1e6 + 5;
+
+const int inf = (int)1e9 + 7;
+
+
+
+int n, m;
+
+vector < int > valf[1001], vals[1001];
+
+
+
+int main(){
+
+  scanf("%d %d", &n, &m);
+
+  for(int i = 1; i <= n; ++i){
+
+    for(int j = 1; j <= m; ++j){
+
+      int x;
+
+      scanf("%d", &x);
+
+      valf[i + j].push_back(x);
+
+    }
+
+  }
+
+  for(int i = 1; i <= n; ++i){
+
+    for(int j = 1; j <= m; ++j){
+
+      int x;
+
+      scanf("%d", &x);
+
+      vals[i + j].push_back(x);
+
+    }
+
+  }
+
+  for(int i = 1; i <= n + m; ++i){
+
+    sort(valf[i].begin(), valf[i].end());
+
+    sort(vals[i].begin(), vals[i].end());
+
+    if(valf[i] != vals[i]){
+
+      printf("NO\n");
+
+      return 0;
+
+    }
+
+  }
+
+  printf("YES\n");
+
+  return 0;
+
+}
+

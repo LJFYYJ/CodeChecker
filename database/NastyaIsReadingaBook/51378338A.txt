@@ -1,0 +1,76 @@
+#include<bits/stdc++.h>
+
+using namespace std;
+
+int main()
+
+{
+
+    int n;
+
+    cin>>n;
+
+
+
+    vector < int > page ( 2*n,0  );
+
+    int indx = 0;
+
+    for ( int i=0 ; i<n ; i++ )
+
+    {
+
+        int l,r;
+
+        cin>>l>>r;
+
+
+
+        page[indx]=l;
+
+        page[indx+1]=r;
+
+        indx+=2;
+
+    }
+
+
+
+    int k;
+
+    cin>>k;
+
+
+
+    for ( int i=0 ; i<page.size()-1 ; i++ )
+
+    {
+
+        if ( k<page[i] || k>page[i+1] ) { i++; }
+
+        else if ( k>=page[i]&& k<=page[i+1] )
+
+        {
+
+            //cout<<"owje\n";
+
+            //cout<<n<<" "<<i/2<<"\n";
+
+            cout<<n-(i/2);
+
+            return 0;
+
+        }
+
+    }
+
+
+
+    cout<<0;
+
+    return 0;
+
+
+
+}
+

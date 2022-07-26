@@ -1,0 +1,41 @@
+#include<bits/stdc++.h>
+
+using namespace std;
+
+int main(){
+
+    long long int n,m,tmp,i,j;
+
+    cin>>n>>m;
+
+    vector<long long int> v[m+n],u[m+n];
+
+    for(i=0;i<n;i++)for(j=0;j<m;j++)cin>>tmp,v[i+j].push_back(tmp);
+
+    for(i=0;i<n;i++)for(j=0;j<m;j++)cin>>tmp,u[i+j].push_back(tmp);
+
+    for(i=0;i<n;i++){
+
+        sort(u[i].begin(),u[i].end());
+
+        sort(v[i].begin(),v[i].end());
+
+    }
+
+    for(i=0;i<n;i++){
+
+        if(u[i]!=v[i]){
+
+            cout<<"NO";
+
+            return 0;
+
+        }
+
+    }
+
+    cout<<"YES";
+
+    return 0;
+
+}

@@ -1,0 +1,24 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+int main()
+
+{	int n,k;
+
+cin>>n>>k;
+
+	if (k==1 || k==n)
+
+	cout<<(n*3)<<endl;
+
+	else
+
+	{	int v=min(k-1,n-k);
+
+		cout<<(n*3)+v<<endl;
+
+	}
+
+}
+

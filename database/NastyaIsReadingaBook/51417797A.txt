@@ -1,0 +1,26 @@
+#include<iostream>
+#include<algorithm>
+const int Max = 1005;
+using namespace std;
+struct node
+{
+	int l;
+	int i;
+}a[Max];
+int main()
+{
+	int n,k,answer,j,m;
+	cin >> n;
+	for (j = 0; j < n; j++) {
+		cin >> a[j].l >> a[j].i;
+	}
+	cin >> k;
+	answer = 0;
+	for (m = 0; m < j; m++) {
+		if (a[m].i >= k) {
+			answer++;
+		}
+	}
+	cout << answer << endl;
+	return 0;
+}

@@ -1,0 +1,63 @@
+#include <bits/stdc++.h>
+
+#define ll long long
+
+using namespace std;
+
+int main ()
+
+{
+
+    int n, m;
+
+    cin>>n>>m;
+
+    ll a[n][m], b[n][m];
+
+    vector<int> r[n+m+1], s[n+m+1];
+
+    for (int i=0; i<n; i++) {
+
+        for (int j=0; j<m; j++) {
+
+            cin>>a[i][j];
+
+            r[i+j].push_back(a[i][j]);
+
+        }
+
+    }
+
+    for (int i=0; i<n; i++) {
+
+        for (int j=0; j<m; j++) {
+
+            cin>>b[i][j];
+
+            s[i+j].push_back(b[i][j]);
+
+        }
+
+    }
+
+    string ans="YES";
+
+    for (int i=0; i<n+m+1; i++) {
+
+        sort(r[i].begin(), r[i].end());
+
+        sort(s[i].begin(), s[i].end());
+
+        if (r[i]!=s[i]) {
+
+            ans="NO";
+
+        }
+
+    }
+
+    cout<<ans<<endl;
+
+    return 0;
+
+}

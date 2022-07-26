@@ -1,0 +1,36 @@
+#include <bits/stdc++.h>
+#define fst first
+#define snd second
+#define fore(i,a,b) for(int i=a,ThxDem=b;i<ThxDem;++i)
+#define pb push_back
+#define ALL(s) s.begin(),s.end()
+#define FIN ios_base::sync_with_stdio(0);cin.tie(0);cout.tie(0)
+#define SZ(n) ((int)(n).size())
+using namespace std;
+typedef long long ll;
+typedef pair<int,int> ii;
+
+int am[5001],has[5001],n;
+
+int main(){FIN;
+  int now; cin >> n >> now; now--;
+  ll ans2=1,ans=1;
+  fore(i,now,n) ans+=2+(i+1<n);
+  if(now){
+    for(int i=n-1;i>=0;i--){
+      if(i<now)ans+=2;
+      ans+=(i>0);
+    }
+  }
+  
+  for(int i=now;i>=0;i--){
+    ans2+=2+(i>0);
+  }
+  if(now<n){
+    fore(i,0,n){
+      if(i>now) ans2+=2;
+      ans2+=(i+1<n);
+    }
+  }
+  cout << min(ans,ans2) << endl;
+}

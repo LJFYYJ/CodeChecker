@@ -1,0 +1,222 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+struct two
+
+{
+
+    long long sum , mx;
+
+};
+
+two a[700001];
+
+long long x,cd,q,found,lazy[700001],val[100001],sumk[100001],mass[100001],base = -102938462;
+
+void prop(long long lab , long long l , long long r , long long x)
+
+{
+
+    a[lab].mx = x;
+
+    a[lab].sum = (r - l + 1) * x;
+
+    lazy[lab] = x;
+
+}
+
+void update(long long l , long long r , long long l1 , long long r1 , long long x , long long lab)
+
+{
+
+    if (l1 > r || r1 < l || l > r || l1 > r1) return;
+
+    if (l1 <= l && r1 >= r)
+
+    {
+
+        prop(lab * 2 , l , (l + r) / 2 , x);
+
+        prop(lab * 2 + 1, (l + r) / 2 + 1 , r , x);
+
+        a[lab].sum = (r - l + 1) * x;
+
+        a[lab].mx = x;
+
+        lazy[lab] = base;
+
+        return;
+
+    }
+
+    if (lazy[lab] != base)
+
+    {
+
+        prop(lab * 2 , l , (l + r) / 2 , lazy[lab]);
+
+        prop(lab * 2 + 1, (l + r) / 2 + 1 , r , lazy[lab]);
+
+        lazy[lab] = base;
+
+    }
+
+    update(l , (l + r) / 2 , l1 , r1 , x , lab * 2);
+
+    update((l + r) / 2 + 1 , r , l1 , r1 , x , lab * 2 + 1);
+
+    a[lab].mx = max(a[lab * 2].mx , a[lab * 2 + 1].mx);
+
+    a[lab].sum = a[lab * 2].sum + a[lab * 2 + 1].sum;
+
+}
+
+long long getsum(long long l , long long r , long long l1 , long long r1 , long long lab)
+
+{
+
+    if (l1 > r || r1 < l || l1 > r1 || r < l) return 0;
+
+    if (lazy[lab] != base)
+
+    {
+
+        prop(lab * 2 , l , (l + r) / 2 , lazy[lab]);
+
+        prop(lab * 2 + 1, (l + r) / 2 + 1 , r , lazy[lab]);
+
+        lazy[lab] = base;
+
+    }
+
+    a[lab].mx = max(a[lab * 2].mx , a[lab * 2 + 1].mx);
+
+    a[lab].sum = a[lab * 2].sum + a[lab * 2 + 1].sum;
+
+    if (l1 <= l && r1 >= r) return a[lab].sum;
+
+    return getsum(l , (l + r) / 2 , l1 , r1 , lab * 2) + getsum((l + r) / 2 + 1 , r , l1 , r1 , lab * 2 + 1);
+
+}
+
+void walk(long long l , long long r , long long pos , long long x , long long lab)
+
+{
+
+    //cout <<"we need to find a value "<<x<<" after the position "<<pos<<endl;
+
+    if (pos > r || r < l) return;
+
+    if (l == r) {found = l ; return;}
+
+    if (lazy[lab] != base)
+
+    {
+
+        prop(lab * 2 , l , (l + r) / 2 , lazy[lab]);
+
+        prop(lab * 2 + 1, (l + r) / 2 + 1 , r , lazy[lab]);
+
+        lazy[lab] = base;
+
+    }
+
+    a[lab].mx = max(a[lab * 2].mx , a[lab * 2 + 1].mx);
+
+    a[lab].sum = a[lab * 2].sum + a[lab * 2 + 1].sum;
+
+    if (a[lab * 2].mx >= x) walk(l , (l + r) / 2 , pos , x , lab * 2);
+
+    if (a[lab * 2 + 1].mx >= x && found == -1) walk((l + r) / 2 + 1 , r , pos , x , lab * 2 + 1);
+
+}
+
+void inp()
+
+{
+
+    cin >> cd;
+
+    for (long long i = 1 ; i < 5 * cd ; i++) a[i].sum = 0 , a[i].mx = -1e18 , lazy[i] = base;
+
+    for (long long i = 1 ; i <= cd ; i++) cin >> val[i];
+
+    for (long long i = 2 ; i <= cd ; i++) cin >> x , sumk[i] = sumk[i-1] + x , mass[i] = mass[i-1] + sumk[i];
+
+    for (long long i = 1 ; i <= cd ; i++) update(1 , cd , i , i , val[i] - sumk[i], 1);
+
+    cin >> q;
+
+}
+
+void do_it()
+
+{
+
+   // cout <<"done"<<endl;
+
+    char t ; long long a , b;
+
+    for (long long i = 1 ; i <= q ; i++)
+
+    {
+
+        cin >> t >> a >> b;
+
+        if (t == '+')
+
+        {
+
+            int val = getsum(1 , cd , a , a , 1) + mass[a] - mass[a-1] + b;
+
+            found = -1;
+
+            //cout <<"befor the update "<<t<<" "<<a<<" "<<b<<" , the array becomes : "<<endl;
+
+            //for (int e = 1 ; e <= cd ; e++) cout <<getsum(1 , cd , e , e , 1) <<" ";
+
+            //cout <<'\n';
+
+            walk(1 , cd , a + 1 , val - sumk[a] , 1);
+
+            if (found == -1) found = cd + 1;
+
+            //cout <<"found : "<<found<<" "<<val - sumk[a]<<endl;
+
+            update(1 , cd , a + 1 , found - 1 , val - sumk[a] , 1);
+
+            update(1 , cd , a , a , val - sumk[a] , 1);
+
+            //cout <<"after this update : "<<t<<" "<<a<<" "<<b<<" , the array becomes : "<<endl;
+
+            //for (int e = 1 ; e <= cd ; e++) cout <<getsum(1 , cd , e , e , 1) + mass[e] - mass[e-1]<<" ";
+
+            //cout <<'\n';
+
+            continue;
+
+        }
+
+        cout <<getsum(1 , cd , a , b , 1) + mass[b] - mass[a-1]<<'\n';
+
+    }
+
+}
+
+main()
+
+{
+
+    ios_base::sync_with_stdio(false);
+
+    cin.tie(0);
+
+    //freopen("INP.INP","r",stdin);
+
+    inp();
+
+    do_it();
+
+}
+

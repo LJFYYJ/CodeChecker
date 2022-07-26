@@ -1,0 +1,109 @@
+#include<iostream>
+
+#include<vector>
+
+#include<algorithm>
+
+#include<math.h>
+
+using namespace std;
+
+int main (){
+
+    int n,m;cin>>n>>m;
+
+    long long L[n][m],R[n][m];
+
+    std::vector<long long> a,b;
+
+    for(int i=0;i<n;i++)
+
+    for(int j=0;j<m;j++){
+
+        cin>>L[i][j]; a.push_back(L[i][j]);
+
+    }
+
+    for(int i=0;i<n;i++)
+
+    for(int j=0;j<m;j++){
+
+        cin>>R[i][j];b.push_back(R[i][j]);
+
+    }
+
+   sort(a.begin(),a.end());sort(b.begin(),b.end());
+
+   if(equal(a.begin(),a.end(),b.begin(),b.end())){
+
+  if ((L[0][0]==R[0][0]) && (L[n-1][m-1]==R[n-1][m-1])) {
+
+      
+
+      for(int i=0;i<m;i++)
+
+      {
+
+          vector<long long> c,d;
+
+         
+
+          for(int j=0;j<=i;j++){
+
+         c.push_back(L[i-j][j]);d.push_back(R[i-j][j]);}
+
+          sort(c.begin(),c.end());sort(d.begin(),d.end());
+
+          if(!equal(c.begin(),c.end(),d.begin(),d.end())) {cout<<"NO";return 0;}
+
+      }
+
+      for(int i=m;i<n;i++)
+
+      { 
+
+          vector<long long> c,d;
+
+          for(int j=0;j<m;j++){
+
+         c.push_back(L[i-j][j]);d.push_back(R[i-j][j]);}
+
+          sort(c.begin(),c.end());sort(d.begin(),d.end());
+
+          if(!equal(c.begin(),c.end(),d.begin(),d.end())) {cout<<"NO";return 0;}
+
+      }
+
+      //if(n>m){
+
+      for(int i=n;i>m;i--)
+
+      { 
+
+          vector<long long> c,d;
+
+          for(int j=1;j<m;j++){
+
+         c.push_back(L[i-j][j]);d.push_back(R[i-j][j]);}
+
+          sort(c.begin(),c.end());sort(d.begin(),d.end());
+
+          if(!equal(b.begin(),b.end(),d.begin(),d.end())) {cout<<"NO";return 0;}
+
+      //}
+
+      
+
+  
+
+  }cout<<"YES";return 0;}
+
+  else {cout<<"NO";return 0;}
+
+   }
+
+ 
+
+  else cout<<"NO";return 0;
+
+}

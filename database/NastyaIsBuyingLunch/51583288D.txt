@@ -1,0 +1,73 @@
+#include <iostream>
+#include <cmath>
+#include <limits.h>
+#include <vector>
+#include <string>
+#include <cstring>
+#include <algorithm>
+#include <set>
+#include <iomanip>
+#include <map>
+
+using namespace std;
+typedef long long ll;
+const int mod = 1e9 + 7;
+
+ll inf = 1ll<<61;
+
+int main()
+{
+    
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+
+	int n,m;
+	cin >> n >> m;
+
+	vector<int>arr(n);
+
+	for(int i=0; i<n; i++){
+		cin >> arr[i];
+	}
+
+	map<pair<int,int>,bool>poss;
+
+	int u,v;
+
+	for(int i=0; i<m; i++){
+		cin >> u >> v;
+		poss[make_pair(u,v)] = true;
+	}
+	   
+	int ans = 0;
+	int curr = n-1;
+
+	for(int i=n-2; i>=0; i--){
+
+		int temp = i;
+
+		for(int j=i+1; j<=curr; j++){
+
+			if(poss[make_pair(arr[temp],arr[j])]){
+				int tem = arr[temp];
+				arr[temp] = arr[j];
+				arr[j] = tem;
+				temp++;
+				if(j==curr){
+					curr--;
+					ans++;
+					break;
+				}
+			}
+			else{
+				break;
+			}
+
+		}
+
+	}
+
+	cout << ans;
+	
+
+} 

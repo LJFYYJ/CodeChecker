@@ -1,0 +1,128 @@
+#include<bits/stdc++.h>
+
+using namespace std;
+
+typedef long long int IL;
+
+void fun(IL n ,IL* a,IL* k,IL x,IL i){
+
+    i = i -1;
+
+    a[i] = a[i] + x;
+
+    for(IL j = 1;j<=n;j++){
+
+        if(a[i+j]<a[i+j-1]+k[i+j-1]){
+
+            a[i+j] = a[i+j-1]+k[i+j-1];
+
+        }
+
+
+
+    }
+
+}
+
+IL sum(IL* a,IL l,IL r){
+
+    IL N(0);
+
+    for(IL i = l-1;i<=r-1;i++){
+
+        N = N + a[i];
+
+    }
+
+    return N;
+
+}
+
+int main(){
+
+vector<IL> c(0);
+
+IL n,t,x,i,o;
+
+IL v(0);
+
+cin>>n;
+
+IL a[n];
+
+IL k[n-1];
+
+t = n;
+
+while(n--){
+
+    cin>>x;
+
+    a[v] = x;
+
+    v++ ;
+
+}
+
+v = 0;
+
+n = t-1;
+
+while(n--){
+
+    cin>>x;
+
+    k[v] = x;
+
+    v++ ;
+
+}
+
+IL q,l,r;
+
+char ch;
+
+cin>>q;
+
+IL N;
+
+while(q--){
+
+    cin>>ch;
+
+    if(ch == '+'){
+
+        cin>>i>>o;
+
+        fun(t,a,k,o,i);
+
+    }
+
+    if(ch == 's'){
+
+        cin>>l>>r;
+
+        N = sum(a,l,r);
+
+        c.push_back(N);
+
+    }
+
+
+
+}
+
+for(IL i = 0;i<c.size();i++){
+
+    cout<<c[i]<<endl;
+
+}
+
+return 0;
+
+}
+
+
+
+
+

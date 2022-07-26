@@ -1,0 +1,294 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+
+
+typedef long long int ll;
+
+
+
+const int N = 300300;
+
+
+
+int n, q;
+
+ll tree[4 * N], mn[4 * N], lazy[4 * N];
+
+ll a[N], k[N];
+
+
+
+void build(int x, int l, int r) {
+
+  if (l == r) {
+
+    tree[x] = a[l];
+
+    mn[x] = a[l];
+
+  } else {
+
+    int mid = (l + r) >> 1;
+
+    build(x + x, l, mid);
+
+    build(x + x + 1, mid + 1, r);
+
+    tree[x] = tree[x + x] + tree[x + x + 1];
+
+    mn[x] = max(mn[x + x], mn[x + x + 1]);
+
+  }
+
+}
+
+
+
+void propagate(int x, int l, int r) {
+
+  if (lazy[x] == 0) {
+
+    return;
+
+  }
+
+  tree[x] = 1ll * (r - l + 1) * lazy[x];
+
+  mn[x] = lazy[x];
+
+  if (l != r) {
+
+    lazy[x + x] = lazy[x];
+
+    lazy[x + x + 1] = lazy[x];
+
+  }
+
+  lazy[x] = 0;
+
+}
+
+
+
+void up(int x, int l, int r, int a, int b, ll val) {
+
+  propagate(x, l, r);
+
+  if (l > b || r < a) {
+
+    return;
+
+  }
+
+  if (l >= a && r <= b) {
+
+    lazy[x] = val;
+
+    propagate(x, l, r);
+
+    return;
+
+  }
+
+  int mid = (l + r) >> 1;
+
+  up(x + x, l, mid, a, b, val);
+
+  up(x + x + 1, mid + 1, r, a, b, val);
+
+  tree[x] = tree[x + x] + tree[x + x + 1];
+
+  mn[x] = max(mn[x + x], mn[x + x + 1]);
+
+}
+
+
+
+int get_id(int x, int l, int r, int a, ll val) {
+
+  propagate(x, l, r);
+
+  if (r < a || mn[x] <= val) {
+
+    return -1;
+
+  }
+
+  if (l == r) {
+
+    return l;
+
+  }
+
+  int mid = (l + r) >> 1;
+
+  int y = get_id(x + x, l, mid, a, val);
+
+  if (y == -1) {
+
+    y = get_id(x + x + 1, mid + 1, r, a, val);
+
+  }
+
+  return y;
+
+}
+
+
+
+ll get_sum(int x, int l, int r, int a, int b) {
+
+  propagate(x, l, r);
+
+  if (r < a || l > b) {
+
+    return 0;
+
+  }
+
+  if (l >= a && r <= b) {
+
+    return tree[x];
+
+  }
+
+  int mid = (l + r) >> 1;
+
+  return get_sum(x + x, l, mid, a, b) + get_sum(x + x + 1, mid + 1, r, a, b);
+
+}
+
+
+
+ll magic(int l, int r) {
+
+  ll ans = k[r - 1];
+
+  if (l > 1) {
+
+    ans -= k[l - 2];
+
+  }
+
+  return ans;
+
+}
+
+
+
+int main() {
+
+  ios::sync_with_stdio(false);
+
+  cin.tie(nullptr);
+
+  cin >> n;
+
+  for (int i = 1; i <= n; i++) {
+
+    cin >> a[i];
+
+  }
+
+  for (int i = 1; i <= n - 1; i++) {
+
+    cin >> k[i];
+
+    k[i] += k[i - 1];
+
+  }
+
+  for (int i = 1; i <= n; i++) {
+
+    a[i] -= k[i - 1];
+
+  }
+
+  for (int i = 1; i <= n - 1; i++) {
+
+    k[i] += k[i - 1];
+
+  }
+
+  for (int i = 1; i <= n - 1; i++) {
+
+    while (!(a[i] <= a[i + 1]));
+
+  }
+
+  build(1, 1, n);
+
+  /*cout << "vamo:\n";
+
+  for (int i = 1; i <= n; i++) {
+
+    cout << i << " = " << get_sum(1, 1, n, i, i) + magic(i, i) << endl;
+
+  }*/
+
+  cin >> q;
+
+  while (q--) {
+
+    char c;
+
+    int l, r;
+
+    cin >> c >> l >> r;
+
+    if (c == '+') {
+
+      if (r == 0) continue;
+
+      ll cur = get_sum(1, 1, n, l, l);
+
+      int pos = -1, L = l, R = r;
+
+      while (L <= R) {
+
+        int mid = (L + R) >> 1;
+
+        if (get_sum(1, 1, n, mid, mid) >= cur + r) {
+
+          pos = mid;
+
+          R = mid - 1;
+
+        } else {
+
+          L = mid + 1;
+
+        }
+
+      }
+
+      if (pos == -1) {
+
+        pos = n + 1;
+
+      }
+
+      up(1, 1, n, l, pos - 1, cur + r);
+
+    } else {
+
+      cout << get_sum(1, 1, n, l, r) + magic(l, r) << endl;
+
+    }
+
+    /*cout << "vamo:\n";
+
+    for (int i = 1; i <= n; i++) {
+
+      cout << i << " = " << get_sum(1, 1, n, i, i) + magic(i, i) << endl;
+
+    }*/
+
+  }
+
+  return 0;
+
+}
+

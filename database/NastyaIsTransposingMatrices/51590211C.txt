@@ -1,0 +1,59 @@
+#include <iostream>
+
+#include <set>//multi
+
+using namespace std;
+
+int main (){
+
+  int n,m;cin>>n>>m;
+
+  int arr1[501][501]={},arr2[501][501]={};
+
+set <int >s,sc;
+
+for (int y=1;y<=n;y++)
+
+  for (int x=1;x<=m;x++)
+
+       cin>>arr1[y][x];
+
+for (int y=1;y<=n;y++)
+
+  for (int x=1;x<=m;x++)
+
+       cin>>arr2[y][x];
+
+
+
+for(int y=1;y<=n;y++){
+
+  int yc=0;int x=1;int s1=0,s2=0;
+
+ while (y+yc<=n &&y+yc>0&&x>0&&x<=m){
+
+   s1+=arr1[y+yc][x];s2+=arr2[y+yc][x];
+
+   x++;yc--;
+
+ }if (s1!=s2){cout<<"NO";return 0;}
+
+}for(int x=2,y=n;x<=m;x++){
+
+  int xc=0,yc=0;int s1=0,s2=0;
+
+  while(y+yc<=n &&y+yc>0&&x+xc>0&&x+xc<=m){
+
+    s1+=arr1[y+yc][x+xc];s2+=arr2[y+yc][x+xc];
+
+    yc--;xc++;
+
+  }if (s1!=s2){cout<<"NO";return 0;}
+
+}
+
+cout <<"YES";
+
+
+
+}

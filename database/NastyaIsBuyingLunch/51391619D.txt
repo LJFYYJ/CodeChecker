@@ -1,0 +1,106 @@
+#include <bits/stdc++.h>
+
+
+
+using namespace std;
+
+
+
+typedef long long ll;
+
+typedef pair<int, int> pii;
+
+typedef vector<int> vi;
+
+typedef vector<pii> vii;
+
+typedef pair<double, double> pt;
+
+
+
+const int N = 3e5;
+
+
+
+int p[N];
+
+set<int> adj[N];
+
+
+
+int main() {
+
+
+
+#ifndef ONLINE_JUDGE
+
+    freopen("testcase.in", "r", stdin);
+
+#endif
+
+
+
+    ios_base::sync_with_stdio(false);
+
+    cin.tie(NULL);
+
+
+
+    int n, m;
+
+    cin >> n >> m;
+
+    for(int i = 0; i < n; i++) {
+
+        cin >> p[i];
+
+        p[i]--;
+
+    }
+
+    while(m--) {
+
+        int u, v;
+
+        cin >> u >> v;
+
+        u--; v--;
+
+        adj[v].insert(u);
+
+    }
+
+    int lim = n - 1;
+
+    for(int i = n - 2; i >= 0; i--) {
+
+        if (!adj[p[n - 1]].count(p[i])) continue;
+
+        int j;
+
+        for(j = i; j < lim - 1 && adj[p[j + 1]].count(p[j]); j++) {
+
+            swap(p[j], p[j + 1]);
+
+        }
+
+        if (j == lim - 1) lim = j;
+
+    }
+
+    int ans = 0;
+
+    for(int i = n - 2; i >= 0 && adj[p[n - 1]].count(p[i]); i--) {
+
+        ans++;
+
+    }
+
+    cout << ans << endl;
+
+
+
+    return 0;
+
+}
+

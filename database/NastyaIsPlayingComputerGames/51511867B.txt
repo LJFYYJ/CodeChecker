@@ -1,0 +1,14 @@
+#include <iostream>
+using namespace std;
+#include <algorithm>
+
+int main()
+    {
+        int n,p;
+        scanf("%d",&n);
+        scanf("%d",&p);
+
+        int result;
+        result = (3*n) + min(n-p,p-1);
+        printf("%d",result);
+    }

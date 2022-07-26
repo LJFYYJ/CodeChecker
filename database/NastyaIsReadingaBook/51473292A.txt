@@ -1,0 +1,28 @@
+#include <bits/stdc++.h>
+
+#define f first
+#define s second
+
+using namespace std;
+
+typedef long long ll;
+typedef pair<ll, ll> pll;
+const ll N = 103;
+
+ll n, k;
+pll a[N];
+
+int main() {
+	ios_base::sync_with_stdio(false); cin.tie(0); cout.tie(0);
+	
+	cin >> n;
+	for (ll i = 1; i <= n; ++i) cin >> a[i].f >> a[i].s;
+	
+	cin >> k;
+	for (ll i = 1; i <= n; ++i) {
+		if (k >= a[i].f && k <= a[i].s) {
+			cout << n-i + 1 << endl;
+			return 0;
+		}
+	}
+}

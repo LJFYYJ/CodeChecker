@@ -1,0 +1,74 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+{% load staticfiles %}
+<head>
+    <meta charset="utf-8" />
+    <title>用户名注册</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/register.css' %}">
+    <script src="{% static 'js/jquery.js' %}"></script>
+</head>
+<body>
+	<div class="nav">
+		<a href="{% url 'main' %}" style="font-size: 18px;">首页</a>
+		<h2 class="logo" style="margin-left:610px">CodeChecker</h2>
+	</div>
+	<div class="register" style="margin-top:45px; margin-bottom:80px">
+			<div class="interface"  style="height:424px">
+				<div id="title">
+					<p>账 号 注 册</p>
+				</div>
+				<div id="info" style="height:300px">
+					<form name="reg", method="post", action="{% url 'register' %}">
+                        {% csrf_token %}
+						<input type="text" name="username" placeholder="请输入账号，必须为数字和字母" class="input"
+                               value="{{ register_form.username.value }}">
+                        <input type="text" name="email" placeholder="请输入邮箱账号" class="input"
+                               value="{{ register_form.email.value }}">
+						<input type="password" name="password" placeholder="请输入密码，长度必须大于8位" class="input"
+                               value="{{ register_form.password.value }}">
+						<input type="password" name="repassword" placeholder="请确认密码" class="input"
+                               value="{{ register_form.repassword.value }}">
+                        <!--验证码的样式-->
+                        <div class="input">
+
+                            {{ register_form.captcha }}
+                        </div>
+                        <!--注册按钮的样式-->
+                        </br></br>
+                        <input type="submit" name="register" value="注册" class="button" style="position:absolute;bottom:235px;right:730px;font-weight: 650;font-size: 18px;color:black;background-color:#99CCFF;line-height: 35px;width:80px;border:2px solid #5a98de;border-radius:5px;">
+                        </br></br>
+					</form>
+                    <!--显示错误的样式-->
+                    <div style="color:red;position: absolute; left:635px;bottom:257px;">
+                        {{ msg }}
+                    </div>
+				</div>
+                </br></br></br>
+                <!--登录按钮的样式-->
+                <div id="login">
+                    <button class="button" style="width:60px;position: absolute;bottom:237px;left:847px;border:2px solid #669900;border-radius:5px;"><a  href="{% url 'login' %} " style="text-decoration: none;font-weight: 650;font-size: 17px;color:#fff;line-height: 35px;margin-left:4px;margin-bottom:6px;">登录</a></button>
+                </div>
+                <script>
+                    $('.captcha').click(function () {
+                        $.getJSON("/captcha/refresh/", function (result) {
+                            $('.captcha').attr('src', result['image_url']);
+                            $('#id_captcha_0').val(result['key'])
+                        });
+                    });
+
+                </script>
+			</div>
+	</div>
+	<div class="service" style="background-color: #f5f9fa">
+		<div class="bottom" style="background-color: #f5f9fa">
+			<ul>
+				<li ><a href="#" class="help">联系我们</a></li>
+				<li ><a href="#" class="help">用户帮助</a></li>
+				<li ><a href="#" class="help">隐私政策</a></li>
+				<li ><a href="#" class="help">关于网站</a></li>
+			</ul>
+		</div>
+	</div>
+</body>
+</html>

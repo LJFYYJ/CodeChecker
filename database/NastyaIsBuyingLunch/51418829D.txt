@@ -1,0 +1,159 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+#define INF 2000000000
+
+#define clr(arr) memset((arr),0,(sizeof(arr)))
+
+typedef pair<int,int> ii;
+
+typedef vector<int> vi;
+
+typedef vector<ii> vii;
+
+typedef long long int ll;
+
+#define getbit(n,i) (((n)&(1<<(i)))!=0)
+
+#define setbit0(n,i) ((n)&(~(1<<(i))))
+
+#define setbit1(n,i) ((n)|(1<<(i)))
+
+#define togglebit(n,i) ((n)^(1<<(i)))
+
+#define read freopen("debug\\in.txt","r",stdin)
+
+#define write freopen("debug\\out.txt","w",stdout)
+
+#define REP(qqq,n) for(int (qqq)=0;(qqq)<(n);(qqq)++)
+
+#define fi first
+
+#define se second
+
+#define PCASE(a) printf("Case %d: ",a)
+
+#define PNCASE(a) printf("Case %d:\n",a)
+
+#define getI(a) scanf("%d",&a)
+
+#define getII(a,b) scanf("%d%d",&a,&b)
+
+#define PI (acos(-1))
+
+#define fastread ios_base::sync_with_stdio(false);cin.tie(NULL)
+
+# define mod (1000000)
+
+#define asz 500005
+
+#define eps (1e-9)
+
+int num[asz],pos[asz],cnt[asz];
+
+vector<int> mov[asz];
+
+bool ls(int i,int j)
+
+{
+
+    return pos[i]>pos[j];
+
+}
+
+int main()
+
+{
+
+    vector<int> v;
+
+    clr(num);clr(pos);
+
+    int n,m,x,y,ans=0,z;
+
+    bool t=false;
+
+    cin>>n>>m;
+
+    for(int i=0;i<n;i++)
+
+    {
+
+        getI(x);
+
+        pos[x]=i+1;
+
+        num[i+1]=x;
+
+    }
+
+    for(int i=0;i<m;i++)
+
+    {
+
+        getII(y,z);
+
+        mov[y].push_back(z);
+
+        if(z==x)v.push_back(y);
+
+
+
+    }
+
+    sort(v.begin(),v.end(),ls);
+
+    for(int k=0;k<v.size();k++)
+
+    {
+
+        int i=pos[v[k]];
+
+        t=false;clr(cnt);
+
+        for(int j=0;j<mov[num[i]].size();j++)
+
+        {
+
+            y=mov[num[i]][j];
+
+            if(y==x)t=true;
+
+            cnt[pos[y]]++;
+
+        }
+
+        for(z=i+1;z<n-ans;z++)
+
+        {
+
+            if(cnt[z]==0)break;
+
+        }
+
+        if(z==n-ans&&t)
+
+        {
+
+            ans++;
+
+            pos[num[i]]=n;
+
+            for(int j=i;j<=n-ans;j++)
+
+            {
+
+                num[j]=num[j+1];
+
+                pos[num[j]]--;
+
+            }
+
+        }
+
+    }
+
+    cout<<ans<<endl;
+
+}

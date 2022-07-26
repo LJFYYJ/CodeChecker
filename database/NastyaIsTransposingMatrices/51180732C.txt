@@ -1,0 +1,39 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+int n,m;
+int arr[505][505],brr[505][505];
+vector<int>satu[1005],dua[1005];
+
+int main(){
+    cin >> n >> m;
+
+    for(int x = 1; x <= n; x++){
+        for(int y = 1; y <= m; y++){
+            cin >> arr[x][y];
+            satu[x + y].push_back(arr[x][y]);
+        }
+    }
+    for(int x = 1; x <= n; x++){
+        for(int y = 1; y <= m; y++){
+            cin >> brr[x][y];
+            dua[x + y].push_back(brr[x][y]);
+        }
+    }
+
+    for(int x = 2; x <= n + m; x++){
+        sort(satu[x].begin(),satu[x].end());
+        sort(dua[x].begin(),dua[x].end());
+        int p = satu[x].size();
+        for(int y = 0; y < p; y++){
+            int kiri = satu[x][y];
+            int kanan = dua[x][y];
+
+            if(kiri != kanan){
+                printf("NO\n");
+                return 0;
+            }
+        }
+    }
+    printf("YES\n");
+}

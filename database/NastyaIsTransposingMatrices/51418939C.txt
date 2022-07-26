@@ -1,0 +1,73 @@
+#include <iostream>
+
+using namespace std ;
+
+void main () {
+
+	int n , m , r ; int a[200][200] ; int b[200][200] ;
+
+	cin >> n >> m ;
+
+	for ( int i = 0 ; i < n ; i++ ) {
+
+		for ( int j = 0 ; j < m ; j++ ) {
+
+			cin >> a[i][j] ;
+
+		}
+
+	}
+
+	for ( int i = 0 ; i < n ; i++ ) {
+
+		for ( int j = 0 ; j < m ; j++ ) {
+
+			cin >> b[i][j] ;
+
+		}
+
+	}
+
+	
+
+	for ( int i = 0 ; i < n ; i++ ) {
+
+		for ( int j = 0 ; j < m ; j++ ) {
+
+			if ( a[i][i] != b[i][i] ) { cout << "NO" << endl ;  return; }
+
+		}
+
+	}
+
+
+
+	for ( int i = 0 ; i < n ; i++ ) {
+
+		for ( int j = 0 ; j < m ; j++ ) {
+
+			if ( a[i][j] == b[j][i] ) { r = a[i][j] ; a[i][j] = a[j][i] ; a[j][i] = r ; }
+
+		}
+
+	}
+
+	
+
+	for ( int i = 0 ; i < n ; i++ ) {
+
+		for ( int j = 0 ; j < m ; j++ ) {
+
+			if ( a[i][j] != b[i][j] ) { cout << "NO" << endl ;  }
+
+			
+
+		}
+
+	}
+
+	 cout << "YES" << endl; 
+
+	
+
+}

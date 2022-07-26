@@ -1,0 +1,328 @@
+#include <bits/stdc++.h>
+
+#include <ext/pb_ds/assoc_container.hpp>
+
+#include <ext/pb_ds/tree_policy.hpp>
+
+//#pragma GCC optimize("Ofast")
+
+//#pragma GCC target("sse,sse2,sse3,ssse3,sse4,popcnt,abm,mmx,avx,tune=native")
+
+//#pragma comment(linker, "/STACK:25600000000000000000000000000000000")
+
+#define qq cout << "!!" << endl;
+
+#define ww cout << "??" << endl;
+
+#define rr return 0;
+
+#define nl cout << endl;
+
+#define pb push_back
+
+#define mk make_pair
+
+#define sqr(a) ((a) * (a))
+
+#define imp(a) fixed << setprecision(a)
+
+#define x first
+
+#define y second
+
+#define endl "\n"
+
+#define lcm(a, b) (a * b / gcd(a, b))
+
+#define int long long
+
+
+
+using namespace std;
+
+using namespace __gnu_pbds;
+
+using namespace __gnu_cxx;
+
+
+
+typedef long long ll;
+
+typedef unsigned long long ull;
+
+typedef long double ld;
+
+typedef pair<int, int> pp;
+
+typedef pair<double, double> point;
+
+
+
+typedef tree<
+
+    pair<int, pp>,
+
+    null_type,
+
+    less<pair<int, pp> >,
+
+    rb_tree_tag,
+
+    tree_order_statistics_node_update>
+
+set_t;
+
+
+
+const int N = 200000, inf = 1e15;
+
+
+
+int pr[N], t[4 * N], prom[4 * N], a[N], b[N], mx[4 * N], pr2[N];
+
+
+
+void build(int v, int tl, int tr) {
+
+    prom[v] = inf;
+
+    if(tl == tr) {
+
+        t[v] = b[tl];
+
+        mx[v] = b[tl];
+
+    }
+
+    else {
+
+        int c = (tl + tr) >> 1;
+
+        build(v * 2, tl, c);
+
+        build(v * 2 + 1, c + 1, tr);
+
+        t[v] = t[v * 2] + t[v * 2 + 1];
+
+        mx[v] = max(mx[v * 2], mx[v * 2 + 1]);
+
+    }
+
+}
+
+
+
+void push(int v, int tl, int tr) {
+
+    if(tl == tr || prom[v] == inf) return;
+
+    int c = (tl + tr) >> 1;
+
+    t[v * 2] = prom[v] * (c - tl + 1);
+
+    t[v * 2 + 1] = prom[v] * (tr - c);
+
+
+
+    mx[v * 2] = prom[v];
+
+    mx[v * 2 + 1] = prom[v];
+
+
+
+    prom[v * 2] = prom[v];
+
+    prom[v * 2 + 1] = prom[v];
+
+
+
+    prom[v] = inf;
+
+}
+
+
+
+void upd(int v, int tl, int tr, int l, int r, int val) {
+
+    push(v, tl, tr);
+
+    if(l > r) return;
+
+    if(tl == l && tr == r) {
+
+        t[v] = (tr - tl + 1) * val;
+
+        mx[v] = val;
+
+        prom[v] = val;
+
+    }
+
+    else {
+
+        int c = (tl + tr) >> 1;
+
+        upd(v * 2, tl, c, l, min(c, r), val);
+
+        upd(v * 2 + 1, c + 1, tr, max(l, c + 1), r, val);
+
+        t[v] = t[v * 2] + t[v * 2 + 1];
+
+        mx[v] = max(mx[v * 2], mx[v * 2 + 1]);
+
+    }
+
+}
+
+
+
+int query(int v, int tl, int tr, int l, int r) {
+
+    push(v, tl, tr);
+
+    if(l > r) return 0;
+
+    if(tl == l && tr == r) {
+
+        return t[v];
+
+    }
+
+    int c = (tl + tr) >> 1;
+
+    return query(v * 2, tl, c, l, min(c, r)) + query(v * 2 + 1, c + 1, tr, max(l, c + 1), r);
+
+}
+
+
+
+
+
+int get_sum2(int l, int r) {
+
+    if(l > r) return 0;
+
+    return pr2[r] - pr2[l - 1];
+
+}
+
+
+
+int f(int v, int tl, int tr, int val) {
+
+    push(v, tl, tr);
+
+    if(tl == tr) return tl;
+
+    int c = (tl + tr) >> 1;
+
+    if(mx[v * 2] >= val) return f(v * 2, tl, c, val);
+
+    return f(v * 2 + 1, c + 1, tr, val);
+
+}
+
+
+
+main()
+
+{
+
+    cin.tie(0);
+
+    cout.tie(0);
+
+    ios_base::sync_with_stdio(0);
+
+//    freopen("input.txt", "r", stdin);
+
+//    freopen("output.txt", "w", stdout);
+
+    int n, q, l, r, k;
+
+    char t;
+
+    cin >> n;
+
+    for(int i = 1; i <= n; ++i) {
+
+        cin >> a[i];
+
+    }
+
+    pr[0] = 0;
+
+    for(int i = 1; i <= n - 1; ++i) {
+
+        cin >> k;
+
+        pr[i] = pr[i - 1] + k;
+
+    }
+
+    pr2[0] = 0;
+
+    pr2[1] = 0;
+
+    for(int i = 2; i <= n; ++i) {
+
+        pr2[i] = pr2[i - 1] + pr[i - 1];
+
+    }
+
+    for(int i = 1; i <= n; ++i) {
+
+        b[i] = a[i] - pr[i - 1];
+
+    }
+
+    build(1, 1, n);
+
+    cin >> q;
+
+    int x, pos;
+
+    while(q--) {
+
+        cin >> t >> l >> r;
+
+        if(t == '+') {
+
+            x = query(1, 1, n, l, l);
+
+//            cout << x << " ";
+
+            if(query(1, 1, n, n, n) >= x + r) {
+
+                pos = f(1, 1, n, x + r);
+
+//                cout << max(l - 1, pos - 1);qq
+
+                upd(1, 1, n, l, max(l, pos - 1), x + r);
+
+            }
+
+            else {
+
+//                cout << n - 1;qq;
+
+                upd(1, 1, n, l, n, x + r);
+
+            }
+
+
+
+        }
+
+        else {
+
+            cout << query(1, 1, n, l, r) + get_sum2(l, r) << endl;
+
+        }
+
+    }
+
+//    cin >> x;
+
+}
+

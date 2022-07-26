@@ -1,0 +1,81 @@
+#include<bits/stdc++.h>
+
+using namespace std;
+
+int main() {
+
+  int n,m;
+
+  cin>>n>>m;
+
+  int A[n][m], B[n][m];
+
+  unordered_map<int, pair< vector<int>, vector<int> > > maps;
+
+
+
+  for(int i=0; i<n; i++){
+
+    for(int j=0; j<m; j++){
+
+      cin>>A[i][j];
+
+      maps[i+j].first.push_back(A[i][j]);
+
+    }
+
+  }
+
+
+
+  for(int i=0; i<n; i++){
+
+    for(int j=0; j<m; j++){
+
+      cin>>B[i][j]; 
+
+      maps[i+j].second.push_back(B[i][j]);
+
+    }
+
+  }
+
+
+
+  bool ans = true;
+
+
+
+  for(auto x: maps){
+
+    vector<int> A = x.second.first;
+
+    vector<int> B = x.second.second;
+
+    sort(A.begin(), A.end());
+
+    sort(B.begin(), B.end());
+
+    if(A!=B) {
+
+      ans = false;
+
+      break;
+
+    }
+
+  }
+
+  
+
+  if(ans)
+
+    cout<<"YES";
+
+  else
+
+    cout<<"NO";
+
+
+
+}

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+{% load staticfiles %}
+<head>
+    <meta charset="utf-8" />
+    <title>忘记密码</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/register.css' %}">
+    <script src="{% static 'js/jquery.js' %}"></script>
+</head>
+<body>
+	<div class="nav">
+		<a href="{% url 'main' %}" style="font-size: 18px;">首页</a>
+		<h2 class="logo" style="margin-left:610px">CodeChecker</h2>
+	</div>
+	<div class="register" style="margin-top:60px; margin-bottom:40px">
+			<div class="interface"  style="height:324px">
+				<div id="title">
+					<p>忘 记 密 码</p>
+				</div>
+				<div id="info" style="height:200px">
+					<form method="post", action="{% url 'forget' %}">
+                        {% csrf_token %}
+                        <input type="text" name="username" placeholder="请输入账号，必须为数字和字母" class="input"
+                               value="{{ forget_form.username.value }}">
+                        </br>
+                        <input type="text" name="email" placeholder="请输入邮箱" class="input"
+                               value="{{ forget_form.email.value }}">
+                        <!--验证码的样式-->
+                        <div class="input">
+                            {{ forget_form.captcha }}
+                        </div>
+                        <!--注册按钮的样式-->
+                        </br></br>
+                        <input type="submit" name="send_email" value="发送重置邮件" class="button" style="position:absolute;bottom:320px;right:700px;font-weight: 650;font-size: 18px;color:black;background-color:#99CCFF;line-height: 35px;width:140px;border:2px solid #5a98de;border-radius:5px;">
+                        </br></br>
+					</form>
+                    <!--显示错误的样式-->
+                    <div style="color:red;position: absolute; left:635px;bottom:348px;">
+                        {{ msg }}
+                    </div>
+                    <div id="login">
+                    <button class="button" style="width:60px;position: absolute;bottom:322px;left:847px;border:2px solid #669900;border-radius:5px;"><a  href="{% url 'login' %} " style="text-decoration: none;font-weight: 650;font-size: 17px;color:#fff;line-height: 35px;margin-left:4px;margin-bottom:6px;">登录</a></button>
+                    </div>
+				</div>
+                </br></br></br>
+                <!--登录按钮的样式-->
+                <script>
+                    $('.captcha').click(function () {
+                        $.getJSON("/captcha/refresh/", function (result) {
+                            $('.captcha').attr('src', result['image_url']);
+                            $('#id_captcha_0').val(result['key'])
+                        });
+                    });
+
+                </script>
+			</div>
+	</div>
+	<div class="service" style="background-color: #f5f9fa">
+		<div class="bottom" style="background-color: #f5f9fa">
+			<ul>
+				<li ><a href="#" class="help">联系我们</a></li>
+				<li ><a href="#" class="help">用户帮助</a></li>
+				<li ><a href="#" class="help">隐私政策</a></li>
+				<li ><a href="#" class="help">关于网站</a></li>
+			</ul>
+		</div>
+	</div>
+</body>
+</html>

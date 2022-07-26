@@ -1,0 +1,68 @@
+#include<cstdio>
+#include<algorithm>
+#include<iostream>
+#define ls (x<<1)
+#define rs (ls|1)
+#define lson ls,L,mid
+#define rson rs,mid+1,R
+#define rep(i,l,r) for (int i=(l); i<=(r); i++)
+typedef long long ll;
+using namespace std;
+
+const int N=100010;
+const ll inf=1e17;
+char op;
+ll res,y,a[N],k[N],b[N],t[N],tag[N<<2],sm[N<<2];
+int n,Q,x;
+
+void push(int x,int L,int R){
+	int mid=(L+R)>>1;
+	if (tag[x]!=inf){
+		sm[ls]=tag[x]*(mid-L+1); sm[rs]=tag[x]*(R-mid);
+		tag[ls]=tag[rs]=tag[x]; tag[x]=inf;
+	}
+}
+
+void build(int x,int L,int R){
+	int mid=(L+R)>>1; tag[x]=inf;
+	if (L==R){ sm[x]=b[L]; return; }
+	build(lson); build(rson); sm[x]=sm[ls]+sm[rs];
+}
+
+void mdf(int x,int L,int R,int l,int r,ll k){
+	if (L==l && r==R){ tag[x]=k; sm[x]=k*(R-L+1); return; }
+	int mid=(L+R)>>1; push(x,L,R);
+	if (r<=mid) mdf(lson,l,r,k);
+	else if (l>mid) mdf(rson,l,r,k);
+		else mdf(lson,l,mid,k),mdf(rson,mid+1,r,k);
+	sm[x]=sm[ls]+sm[rs];
+}
+
+ll que(int x,int L,int R,int l,int r){
+	if (L==l && r==R) return sm[x];
+	int mid=(L+R)>>1; push(x,L,R);
+	if (r<=mid) return que(lson,l,r);
+	else if (l>mid) return que(rson,l,r);
+		else return que(lson,l,mid)+que(rson,mid+1,r);
+}
+
+int main(){
+	scanf("%d",&n);
+	rep(i,1,n) cin>>a[i];
+	rep(i,1,n-1) cin>>k[i],k[i]+=k[i-1],t[i]=t[i-1]+k[i],b[i]=a[i]-k[i-1];
+	b[n]=a[n]-k[n-1]; build(1,1,n);
+	for (scanf("%d",&Q); Q--; ){
+		scanf(" %c",&op); cin>>x>>y;
+		if (op=='s') cout<<que(1,1,n,x,y)+t[y-1]-(x>=2 ? t[x-2]: 0)<<endl;
+		else{
+			int l=x,r=n; res=l; int tp=que(1,1,n,x,x)+y;
+			while (l<=r){
+				int mid=(l+r)>>1;
+				if (que(1,1,n,mid,mid)>=tp) r=mid-1;
+				else res=mid,l=mid+1;
+			}
+			mdf(1,1,n,x,res,tp);
+		}
+	}
+	return 0;
+}

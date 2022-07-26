@@ -1,0 +1,26 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+#define ll long long
+
+int main() {
+
+    ll n,k;
+
+    cin>>n>>k;
+
+   if(n==2)
+
+   cout<<6;
+
+   else
+
+   cout<<n*3+min(k-1,n-k);
+
+	// your code goes here
+
+	return 0;
+
+}
+

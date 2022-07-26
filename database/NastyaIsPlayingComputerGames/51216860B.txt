@@ -1,0 +1,139 @@
+#include <iostream>
+
+#include <algorithm>
+
+#include <vector>
+
+#include <string.h>
+
+#include <string>
+
+#include <iomanip>
+
+#include <map>
+
+#include <fstream>
+
+#include <iterator>
+
+#include <math.h>
+
+#include <queue>
+
+#define N 100008
+
+#define REP(i,a,b) for(int i=a;i<b;i++)
+
+using namespace std;
+
+typedef long long ll;
+
+struct myp
+
+{
+
+	int ver;
+
+	int cost;
+
+};
+
+int dx[4] = { -1,0,0,1 };
+
+int dy[4] = { 0,1,-1,0 };
+
+int final[1000008];
+
+bool checkvisited[2007][2007];
+
+bool visited[500];
+
+queue<myp> save;
+
+ll gcd(ll a, ll b)
+
+{
+
+	if (b == 0)
+
+		return a;
+
+	else
+
+		return gcd(b, a%b);
+
+}
+
+ll myans(ll &a, ll divisor)
+
+{
+
+	ll ans = 0;
+
+	while (a%divisor == 0)
+
+	{
+
+		ans += 1;
+
+		a /= divisor;
+
+	}
+
+	return ans;
+
+}
+
+bool check[100];
+
+void godfs(vector<int> *edges, int n, int m, int &cost, int start)
+
+{
+
+	for (auto v : edges[start])
+
+	{
+
+		if (!check[v])
+
+		{
+
+			cost++;
+
+			check[v] = true;
+
+			godfs(edges, n, m, cost, v);
+
+		}
+
+	}
+
+}
+
+struct pii
+
+{
+
+	int f;
+
+	int s;
+
+};
+
+int main() {
+
+	int n, k;
+
+	cin >> n >> k;
+
+	if (k - 1 < n - k)
+
+		cout << 3 * n + k - 1;
+
+	else
+
+		cout << 2 * n + 1 + n + n - k-1;
+
+	//system("pause");
+
+}

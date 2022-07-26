@@ -1,0 +1,135 @@
+#include<iostream>
+
+#include<cstdio>
+
+#include<iomanip>
+
+#include<sstream>
+
+#include<stack>
+
+#include<queue>
+
+#include<map>
+
+#include<deque>
+
+#include<bitset>
+
+#include<string>
+
+#include<cstring>
+
+#include<cmath>
+
+#include<cctype>
+
+#include<climits>
+
+#include<algorithm>
+
+#include<utility>
+
+#include<cstdlib>
+
+
+
+using namespace std;
+
+
+
+#define fi first
+
+#define se second
+
+#define pb push_back
+
+#define mp make_pair
+
+#define fr front()
+
+#define tp top()
+
+
+
+typedef long long int ll;
+
+typedef long double ld;
+
+typedef unsigned int ui;
+
+typedef pair<int, int> pii;
+
+typedef pair<ll, ll> pll;
+
+typedef pair<pii, int> ppi;
+
+typedef pair<int, pii> pip;
+
+
+
+#define iofast ios_base::sync_with_stdio(0),cin.tie(0),cout.tie(0)
+
+#define iofile freopen("input.txt","r",stdin),freopen("output.txt","w",stdout)
+
+const int adj[8][2]={{-1,0},{0,-1},{1,0},{0,1},{-1,-1},{-1,1},{1,1},{1,-1}};
+
+const ll LLINF=9e18;
+
+const int INF=2e9;
+
+const int MOD=1e9+7;
+
+const double EPS=1e-10;
+
+const double PI=acos(-1);
+
+const int SIZE=100005;
+
+
+
+int N;
+
+pii C[SIZE];
+
+
+
+int main (){
+
+	
+
+	int K;
+
+	
+
+	scanf("%d", &N);
+
+	for(int i=N;i>=1;i--){
+
+		scanf("%d %d", &C[i].fi, &C[i].se);
+
+	}
+
+	scanf("%d", &K);
+
+	int ans=0;
+
+	for(int i=N;i>=1;i--){
+
+		if(K>=C[i].fi && K<=C[i].se){
+
+			ans=i;
+
+			break;
+
+		}
+
+	}
+
+	printf("%d\n", ans);
+
+	
+
+	return 0;
+
+}

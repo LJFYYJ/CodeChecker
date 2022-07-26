@@ -1,0 +1,42 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+#define ll long long int
+
+#define pb push_back
+
+const ll M = 1000000007;
+
+
+
+int main()
+
+{
+
+	#ifdef JUDGE
+
+    freopen("input.txt", "rt", stdin);
+
+    freopen("output.txt", "wt", stdout);
+
+    #endif
+
+	ios_base::sync_with_stdio(false);
+
+	cin.tie(NULL);
+
+	cout.tie(NULL);
+
+	ll n,k; cin>>n>>k;
+
+	ll ans = 3*n;
+
+	ans += min(n-k,k-1);
+
+	cout<<ans<<endl;
+
+	return 0;
+
+}
+

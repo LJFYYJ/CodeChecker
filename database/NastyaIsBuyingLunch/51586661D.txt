@@ -1,0 +1,35 @@
+#include<bits/stdc++.h>
+
+#define ll long long
+
+#define N int(1e5+10)
+
+#define MOD int(1e9+7)
+
+#define test cout<<"hi"<<endl;
+
+using namespace std;
+
+int main(){
+
+	//Parparosa
+
+	#ifndef ONLINE_JUDGE  
+
+    freopen("input.txt","r",stdin);
+
+    freopen("output.txt","w",stdout);
+
+    #endif
+
+    int n,m,ar[5*N],ans=0;cin>>n>>m;
+
+    for(int i=0;i<n;i++)cin>>ar[i];
+
+    for(int i=0,a,b;i<m;i++){cin>>a>>b;if(b==ar[n-1])ans++;}
+
+    cout<<ans<<endl;
+
+    
+
+}

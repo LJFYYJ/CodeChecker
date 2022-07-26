@@ -1,0 +1,13 @@
+n,k=(int(i) for i in input().split())
+
+s=2*n+1
+
+if n-k<k-1:
+
+    s+=2*(n-k-1)+k
+
+else:
+
+    s+=2*(k-1)+n-k
+
+print(s+1 if n==k else s)

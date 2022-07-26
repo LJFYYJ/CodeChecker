@@ -1,0 +1,66 @@
+#include<cstdio>
+
+#include<iostream>
+
+#include<cstdlib>
+
+#include<cstring>
+
+#include<algorithm>
+
+#include<cmath>
+
+#define maxn 505
+
+using namespace std;
+
+int n,m,a[maxn][maxn],b[maxn][maxn];
+
+int za[maxn],zb[maxn],tp; 
+
+int main(){
+
+	cin>>n>>m;
+
+	for(int i=1;i<=n;i++)
+
+	for(int j=1;j<=m;j++)scanf("%d",&a[i][j]); 
+
+	for(int i=1;i<=n;i++)
+
+	for(int j=1;j<=m;j++)scanf("%d",&b[i][j]); 
+
+	for(int x=2;x<=n+m;x++){
+
+		tp=0;
+
+		for(int i=1;i<=n;i++){
+
+			int j=x-i;if(j<1||j>m)continue;
+
+			za[++tp]=a[i][j];zb[tp]=b[i][j];
+
+		}
+
+		sort(za+1,za+tp+1);
+
+		sort(zb+1,zb+tp+1);
+
+		for(int i=1;i<=tp;i++){
+
+			if(za[i]!=zb[i]){
+
+			puts("NO");return 0;}
+
+		}
+
+	}
+
+	puts("YES");
+
+    return 0;
+
+}
+
+
+

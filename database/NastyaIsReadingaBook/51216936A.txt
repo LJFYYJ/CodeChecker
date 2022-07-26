@@ -1,0 +1,50 @@
+#include <iostream>
+
+
+
+using namespace std;
+
+long long n,a[100],b[100],i,p,k,sol,ok;
+
+int main(){
+
+    cin>>n;
+
+    for(i=1;i<=n;i++){
+
+        cin>>a[i]>>b[i];
+
+    }
+
+    cin>>k;
+
+    k=k-1;
+
+    for(i=1;i<=n and ok==0;i++){
+
+        if(k<=b[i] and k>=a[i]){
+
+            if(k==b[i]){
+
+                sol=i;
+
+            }
+
+            else{
+
+                sol=i-1;
+
+            }
+
+            ok=1;
+
+        }
+
+    }
+
+    cout<<n-sol;
+
+    return 0;
+
+}
+

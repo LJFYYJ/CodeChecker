@@ -1,0 +1,108 @@
+#include <iostream>
+
+
+
+using namespace std;
+
+
+
+long long n,k,p[50000],c[50000],cs,jn,i,nrc,nrm,at1,atn;
+
+
+
+int main()
+
+{
+
+    cin >> n >> k;
+
+    for (i=1;i<=n;i++){
+
+        p[i]=1;
+
+        c[i]=1;
+
+    }
+
+    jn=n/2;
+
+    if (k<=jn){
+
+        cs=1;
+
+    }
+
+    else{
+
+        cs=2;
+
+    }
+
+    while (nrc<k){
+
+        if (p[k]==1){
+
+            if (cs==1){
+
+                p[k]=0;
+
+                p[k+1]=p[k+1]+1;
+
+            }
+
+            else{
+
+                p[k]=0;
+
+                p[k-1]=p[k-1]+1;
+
+            }
+
+            nrm=nrm+1;
+
+        }
+
+        if (c[k]==1 && p[k]==0){
+
+            nrm=nrm+1;
+
+            c[k]=0;
+
+            nrc=nrc+1;
+
+        }
+
+        if (cs==1 && k!=1 && at1==0){
+
+            k=k-1;
+
+            at1=1;
+
+        }
+
+        else if (cs==2 && k!=n && atn==0){
+
+            k=k+1;
+
+            atn=1;
+
+        }
+
+        else if (at1==1){
+
+            k=k+1;
+
+        }
+
+        else if (atn==1){
+
+            k=k-1;
+
+        }
+
+    }
+
+    cout << nrm;
+
+}
+

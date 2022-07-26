@@ -1,0 +1,74 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+
+
+int arr[300010];
+
+vector<int> G[300010];
+
+int P[300010];
+
+int psz = 0;
+
+
+
+void add(int i) {
+
+  int cnt = 0;
+
+  for(int y: G[arr[i]]) {
+
+    if(P[y]) cnt++;
+
+  }
+
+  if(cnt != psz) {
+
+    psz += !P[arr[i]];
+
+    P[arr[i]] = 1;
+
+  }
+
+}
+
+
+
+int main() {
+
+  int n, m; scanf("%d%d", &n, &m);
+
+  for(int i = 0; i < n; i++) {
+
+    scanf("%d", &arr[i]);
+
+  }
+
+  for(int i = 0; i < m; i++) {
+
+    int x, y;
+
+    scanf("%d%d", &x, &y);
+
+    G[x].push_back(y);
+
+  }
+
+  psz += !P[arr[n - 1]];
+
+  P[arr[n - 1]] = 1;
+
+  for(int i = n - 2; i >= 0; i--) {
+
+    add(i);
+
+  }
+
+  printf("%d\n", n - psz);
+
+  return 0;
+
+}
+

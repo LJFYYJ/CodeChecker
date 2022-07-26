@@ -1,0 +1,89 @@
+//
+
+//  NatsyaIsReadingABook.cpp
+
+//  NatsyaBook
+
+//  Codeforces: 1136A
+
+//  Created by Valentina Chacón Buitrago on 2019-03-17.
+
+//  Copyright © 2019 Valentina Chacón Buitrago. All rights reserved.
+
+//
+
+
+
+#include <iostream>
+
+#include <vector>
+
+#include <algorithm>
+
+using namespace std;
+
+typedef pair<int, int> pii;
+
+typedef vector<pii> vii;
+
+
+
+int main(){
+
+    int n;
+
+    cin >> n;
+
+    vii chapters;
+
+    while(n--){
+
+        int a, b;
+
+        cin >> a >> b;
+
+        pii pages = make_pair(a, b);
+
+        chapters.push_back(pages);
+
+    }
+
+    int p;
+
+    cin >> p;
+
+    
+
+    int num = 0;
+
+    for(int i = 0; i < chapters.size();++i){
+
+        int first = chapters[i].first;
+
+        //cout << "Esta es la primera pagina del capitulo " << first << "\n" ;
+
+        int last = chapters[i].second;
+
+        if(first < p && p <= last ){
+
+            //cout << "sumo 1 en el primer if" << "\n";
+
+            num++;
+
+        }
+
+        if(p < first){
+
+            //cout << "sumo 1 en el segundo if" << "\n";
+
+            num++;
+
+        }
+
+    }
+
+    cout << num << "\n";
+
+    return 0;
+
+}

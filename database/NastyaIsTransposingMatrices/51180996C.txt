@@ -1,0 +1,76 @@
+#include <bits/stdc++.h>
+
+
+
+using namespace std;
+
+
+
+int n,m,k;
+
+int i,j;
+
+int a[510][510],b[510][510];
+
+
+
+int main()
+
+{
+
+    ios_base::sync_with_stdio(0);
+
+    cin>>n>>m;
+
+    for(i=1;i<=n;i++)
+
+        for(j=1;j<=m;j++)
+
+            cin>>a[i][j];
+
+    for(i=1;i<=n;i++)
+
+        for(j=1;j<=m;j++)
+
+            cin>>b[i][j];
+
+    for(i=1;i<=n;i++)
+
+    {
+
+        for(j=1;j<=m;j++)
+
+        {
+
+            int fl=0;
+
+            for(int ii=1;ii<=n;ii++)
+
+            {
+
+                int jj=(i+j)-ii;
+
+                if(jj>m)continue;
+
+                if(a[i][j]==b[ii][jj])fl=1;
+
+            }
+
+            if(fl==0)
+
+            {
+
+                cout<<"NO";
+
+                return 0;
+
+            }
+
+        }
+
+    }
+
+    cout<<"YES";
+
+}
+

@@ -1,0 +1,64 @@
+n, m = map(int, input().split())
+
+
+
+A = dict()
+
+B = dict()
+
+
+
+for i in range(n):
+
+  a = list(map(int, input().split()))
+
+  for j in range(m):
+
+    if (i + j) in A:
+
+      if a[j] in A[i + j]:
+
+        A[i + j][a[j]] += 1
+
+      else:
+
+        A[i + j][a[j]] = 1
+
+    else:
+
+      A[i + j] = {a[j]: 1}
+
+
+
+for i in range(n):
+
+  b = list(map(int, input().split()))
+
+  for j in range(m):
+
+    if (i + j) in B:
+
+      if b[j] in B[i + j]:
+
+        B[i + j][b[j]] += 1
+
+      else:
+
+        B[i + j][b[j]] = 1
+
+    else:
+
+      B[i + j] = {b[j]: 1}
+
+yes = True
+
+for d in A:
+
+  if A[d] != B[d]:
+
+    yes = False
+
+    break
+
+print('YES') if yes else print('NO')
+

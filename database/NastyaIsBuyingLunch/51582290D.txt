@@ -1,0 +1,80 @@
+#include <iostream>
+
+#include <cmath>
+
+#include <cstdio>
+
+#include <cstring>
+
+#include <vector>
+
+#include <algorithm>
+
+#include <queue>
+
+#include <set>
+
+#include <map>
+
+#include <stack>
+
+#include <iomanip>
+
+#include <string>
+
+
+
+using namespace std;
+
+
+
+const int maxn=300000+5;
+
+int n,m,u,v;
+
+vector<int> edge[maxn];
+
+int arr[maxn],num[maxn];
+
+
+
+int main(){
+
+    scanf("%d%d",&n,&m);
+
+    memset(num,0,sizeof(num));
+
+    for(int i=1;i<=n;i++) scanf("%d",&arr[i]);
+
+    for(int i=1;i<=m;i++){
+
+        scanf("%d%d",&u,&v);
+
+        edge[v].push_back(u);
+
+        num[u]++;
+
+    }
+
+    int pos=n;
+
+    for(int i=n-1;i>=1;i--){
+
+        if(pos-i==num[arr[i]]){
+
+            pos--;
+
+            for(int j=0;j<edge[arr[i]].size();j++)
+
+                num[edge[arr[i]][j]]--;
+
+        }
+
+    }
+
+    printf("%d\n",n-pos);
+
+    return 0;
+
+}
+

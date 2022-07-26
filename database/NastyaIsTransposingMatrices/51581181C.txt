@@ -1,0 +1,61 @@
+#include<bits/stdc++.h>
+
+using namespace std;
+
+#define N 505
+
+int a[N][N],b[N][N];
+
+vector<int> v1[2005],v2[2005];
+
+int main() {
+
+	ios_base::sync_with_stdio(false);cout.tie(0);cin.tie(0);
+
+	int i,j,k,l,m,n,t;
+
+	cin >> n >> m;
+
+	for(i = 0;i < n;i++) {
+
+		for(j = 0;j < m;j++) {
+
+			cin >> a[i][j];
+
+			v1[i+j].push_back(a[i][j]);
+
+		}
+
+	}
+
+	for(i = 0;i < n;i++) {
+
+		for(j = 0;j < m;j++) {
+
+			cin >> b[i][j];
+
+			v2[i+j].push_back(b[i][j]);
+
+		}
+
+	}
+
+	for(i = 0;i < n+m;i++) {
+
+		sort(v1[i].begin(),v1[i].end());
+
+		sort(v2[i].begin(),v2[i].end());
+
+		if(v1[i] != v2[i]) {
+
+			cout << "NO" << endl;
+
+			return 0;
+
+		}
+
+	}
+
+	cout << "YES" << endl;
+
+}

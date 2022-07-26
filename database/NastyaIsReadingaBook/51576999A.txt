@@ -1,0 +1,138 @@
+#include<bits/stdc++.h>
+
+using namespace std;
+
+#define ll long long int
+
+#define vi vector<int>
+
+#define vl vector<ll>
+
+#define vd vector<double>
+
+#define vb vector<bool>
+
+#define vc vector<char>
+
+#define vs vector<string>
+
+#define pii pair<int ,int>
+
+#define pll pair<ll ,ll>
+
+#define pdd pair<double,double>
+
+#define pcc pair<char,char>
+
+#define pss pair<string,string>
+
+#define pci pair<char,int>
+
+#define pic pair<int,char>
+
+#define pis pair<int ,string>
+
+#define psi pair<string,int>
+
+
+
+#define vii vector<pii>
+
+#define vll vector<pll>
+
+#define vss vector<pss>
+
+#define vcc vector<pcc>
+
+#define vic vector<pic>
+
+#define vis vector<pis>
+
+#define vci vector<pci>
+
+#define vsi vector<psi>
+
+
+
+#define fio ios_base::sync_with_stdio(false),cin.tie(NULL)
+
+#define ull unsigned long long int
+
+#define ld long double
+
+#define F first
+
+#define S second
+
+#define pb push_back
+
+#define mp make_pair
+
+#define FOR(i,a,b) for(int i=a;i<=b;i++)
+
+#define RFOR(i,b,a) for(int i=b;i<=a;i--)
+
+const ll MOD=1e9+7;
+
+const ll INF=1e18;
+
+const double E=1e-6;
+
+
+
+int main()
+
+{
+
+    fio;
+
+    ll n;
+
+    cin>>n;
+
+    vl v1;
+
+    vl v2;
+
+    FOR(i,1,n)
+
+    {
+
+        ll x,y;
+
+        cin>>x>>y;
+
+        v1.pb(x);
+
+        v2.pb(y);
+
+    }
+
+    ll k;
+
+    cin>>k;
+
+    FOR(i,1,n)
+
+    {
+
+        if(k>=v1[i-1] && k<=v2[i-1])
+
+        {
+
+            cout<<n-i+1;
+
+            break;
+
+        }
+
+    }
+
+    return 0;
+
+        
+
+        
+
+    }
+

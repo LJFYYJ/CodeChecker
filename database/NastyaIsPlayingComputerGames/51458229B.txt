@@ -1,0 +1,68 @@
+#include<bits/stdc++.h>
+
+
+
+using namespace std;
+
+
+
+int main()
+
+{
+
+    int n,k;
+
+
+
+    cin>>n>>k;
+
+
+
+    int left=0,right=0;
+
+
+
+    left=k-1;
+
+    right=n-k;
+
+
+
+    //int mn=min(left,right);
+
+    int ans;
+
+
+
+    if(left<right)
+
+    {
+
+        ans=left*2;
+
+        ans+=right;
+
+        ans+=(n-1)*2;
+
+        ans+=3;
+
+    }
+
+    else
+
+    {
+
+        ans=right*2;
+
+        ans+=left;
+
+        ans+=(n-1)*2;
+
+        ans+=3;
+
+    }
+
+  cout<<ans;
+
+}
+

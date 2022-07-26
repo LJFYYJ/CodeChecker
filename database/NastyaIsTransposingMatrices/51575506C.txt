@@ -1,0 +1,104 @@
+#include <stdio.h>
+
+#include <string>
+
+#include <iostream>
+
+#include <vector>
+
+#include <algorithm>
+
+using namespace std;
+
+#define N 505
+
+int A[N][N],B[N][N];
+
+int n,m;
+
+bool Judge(int x,int y)
+
+{
+
+    vector<int> xx,yy;
+
+    int i=x;
+
+    int j=y;
+
+    for(; i>=1&&j<=m; i--,j++)
+
+    {
+
+        xx.push_back(A[i][j]);
+
+        yy.push_back(B[i][j]);
+
+    }
+
+    sort(xx.begin(), xx.end());
+
+    sort(yy.begin(), yy.end());
+
+    if(xx != yy) return 0;
+
+    return 1;
+
+}
+
+int main()
+
+{
+
+    cin>>n>>m;
+
+    for(int i=1; i<=n; i++)
+
+        for(int j=1; j<=m; j++)
+
+            cin>>A[i][j];
+
+    for(int i=1; i<=n; i++)
+
+        for(int j=1; j<=m; j++)
+
+            cin>>B[i][j];
+
+    for(int i=1; i<=n; i++)
+
+    {
+
+        if( !Judge(i, 1) )
+
+        {
+
+            puts("NO");
+
+            return 0;
+
+        }
+
+    }
+
+    for(int i=1; i<=m; i++)
+
+    {
+
+        if( !Judge(n, i) )
+
+        {
+
+            puts("NO");
+
+            return 0;
+
+        }
+
+    }
+
+    puts("YES");
+
+    return 0;
+
+}
+

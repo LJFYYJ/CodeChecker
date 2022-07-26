@@ -1,0 +1,23 @@
+#include <bits/stdc++.h>
+using namespace std;
+#define ll long long int
+#define pb push_back
+int main()
+{
+	ll n,i,j,k,x,y,t,m;
+	cin >> n;
+	ll a[n+5],b[n+5];
+	for(i=1;i<=n;i++)
+	{
+		cin >> a[i];
+		cin >> b[i];
+	}	
+	cin >> k;
+	x=n;
+	for(i=1;i<=n;i++)
+	{
+		if(b[i]<k)
+			x--;
+	}
+	printf("%lld\n",x);
+}

@@ -1,0 +1,15 @@
+#include <bits/stdc++.h>
+using namespace std;
+#define ll long long int
+#define pb push_back
+int main()
+{
+	ll n,i,j,k,x,y,t,m;
+	cin >> n >> k;
+
+	x=min(k-1,n-k);
+	y=max(k-1,n-k);
+
+	printf("%lld\n",2*x+y+2*n+1);
+	
+}

@@ -1,0 +1,277 @@
+#include <iostream>
+
+#include <vector>
+
+
+
+#define all(a) a.begin(), a.end()
+
+#define sz(a) (int) a.size()
+
+
+
+#define int long long
+
+
+
+using namespace std;
+
+
+
+typedef long long ll;
+
+
+
+struct sgmTr {
+
+    struct node {
+
+        ll s, p, mx;
+
+        bool pflag;
+
+        node() : s(0), p(0), mx(0), pflag(false) {}
+
+        node(int s) : s(s), p(s), mx(s), pflag(false) {}
+
+    };
+
+    int n;
+
+    vector<node> t;
+
+    sgmTr(vector<ll> &a) : n(sz(a)) {
+
+        t.resize(n * 4);
+
+        build(0, 0, n - 1, a);
+
+    }
+
+    void push(int v, int tl, int tr) {
+
+        if (!t[v].pflag) return;
+
+        if (tl != tr) {
+
+            t[v * 2 + 1].pflag = t[v * 2 + 2].pflag = true;
+
+            t[v * 2 + 1].p = t[v * 2 + 2].p = t[v].p;
+
+        }
+
+        t[v].s = (tr - tl + 1) * t[v].p;
+
+        t[v].mx = t[v].p;
+
+        t[v].pflag = false;
+
+    }
+
+    node merge(node &a, node &b) {
+
+        node res;
+
+        res.s = a.s + b.s;
+
+        res.mx = max(a.mx, b.mx);
+
+        return res;
+
+    }
+
+    void build(int v, int tl, int tr, vector<ll> &a) {
+
+        if (tl == tr) {
+
+            t[v] = node(a[tl]);
+
+            return;
+
+        }
+
+        int tm = (tl + tr) / 2;
+
+        build(v * 2 + 1, tl, tm, a);
+
+        build(v * 2 + 2, tm + 1, tr, a);
+
+        t[v] = merge(t[v * 2 + 1], t[v * 2 + 2]);
+
+    }
+
+    void upd(int v, int tl, int tr, int l, int r, ll x) {
+
+        push(v, tl, tr);
+
+        if (l > r) return;
+
+        if (tl == l && tr == r) {
+
+            t[v].p = x;
+
+            t[v].pflag = true;
+
+            push(v, tl, tr);
+
+            return;
+
+        }
+
+        int tm = (tl + tr) / 2;
+
+        upd(v * 2 + 1, tl    , tm, l             , min(tm, r), x);
+
+        upd(v * 2 + 2, tm + 1, tr, max(l, tm + 1), r         , x);
+
+        t[v] = merge(t[v * 2 + 1], t[v * 2 + 2]);
+
+        push(v, tl, tr);
+
+    }
+
+    void upd(int l, int r, ll x) {
+
+        upd(0, 0, n - 1, l, r, x);
+
+    }
+
+    node get(int v, int tl, int tr, int l, int r) {
+
+        push(v, tl, tr);
+
+        if (l > r) return node();
+
+        if (tl == l && tr == r) return t[v];
+
+        int tm = (tl + tr) / 2;
+
+        auto lx = get(v * 2 + 1, tl, tm, l, min(tm, r));
+
+        auto rx = get(v * 2 + 2, tm + 1, tr, max(tm + 1, l), r);
+
+        return merge(lx, rx);
+
+    }
+
+    ll get(int l, int r) {
+
+        return get(0, 0, n - 1, l, r).s;
+
+    }
+
+    int lower_bound(int v, int tl, int tr, ll x) {
+
+        push(v, tl, tr);
+
+        if (tl == tr) {
+
+            return tl;
+
+        }
+
+        int tm = (tl + tr) / 2;
+
+        if (t[v * 2 + 1].mx >= x) {
+
+            return lower_bound(v * 2 + 1, tl, tm, x);
+
+        }
+
+        else {
+
+            return lower_bound(v * 2 + 2, tm + 1, tr, x);
+
+        }
+
+    }
+
+    int lower_bound(ll x) {
+
+        push(0, 0, n - 1);
+
+        if (t[0].mx < x)
+
+            return n;
+
+        return lower_bound(0, 0, n - 1, x);
+
+    }
+
+};
+
+
+
+signed main() {
+
+    ios_base::sync_with_stdio(false);
+
+    cin.tie(nullptr);
+
+    cout.tie(nullptr);
+
+
+
+    int n, q;
+
+    cin >> n;
+
+    vector<ll> b(n), t(n);
+
+    for (auto &i : b)
+
+        cin >> i;
+
+    t[0] = 0;
+
+    for (int i = 1, k; i < n; ++i) {
+
+        cin >> k;
+
+        t[i] = t[i - 1] + k;
+
+        b[i] = b[i] - t[i];
+
+    }
+
+
+
+    sgmTr tb(b), tt(t);
+
+    cin >> q;
+
+    char c;
+
+    int v, u;
+
+    for ( ; q > 0; --q) {
+
+        cin >> c >> v >> u;
+
+        if (c == '+') {
+
+            --v;
+
+            u += tb.get(v, v);
+
+            int rPos = tb.lower_bound(u);
+
+            tb.upd(v, rPos - 1, u);
+
+        }
+
+        else {
+
+            --v, --u;
+
+            cout << tt.get(v, u) + tb.get(v, u) << endl;
+
+        }
+
+    }
+
+
+
+    return 0;
+
+}

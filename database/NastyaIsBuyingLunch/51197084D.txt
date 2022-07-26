@@ -1,0 +1,223 @@
+/*-------------------------------"ANJAN AGARWALA"-----------------------------
+
+         _/_/_/_/    _/_/    _/   _/_/_/_/   _/_/_/_/    _/_/    _/   
+
+        _/    _/    _/ _/   _/         _/   _/    _/    _/ _/   _/        
+
+       _/_/_/_/    _/   _/ _/         _/   _/_/_/_/    _/  _/  _/         
+
+      _/    _/    _/    _/_/   _/    _/   _/    _/    _/    _/_/  
+
+     _/    _/    _/      _/   _/_/_/_/   _/    _/    _/      _/   
+
+-------------------------------------@anjn98---------------------------------*/
+
+ 
+
+//#define opti
+
+#ifdef opti
+
+#pragma comment(linker, "/stack:200000000")
+
+#pragma GCC optimize("Ofast,unroll-loops,fast-math")
+
+#pragma GCC target("sse,sse2,sse3,ssse3,sse4,popcnt,abm,mmx,avx,avx2,tune=native")
+
+#endif
+
+ 
+
+#include <bits/stdc++.h>
+
+using namespace std;
+
+ 
+
+typedef long long int ll;
+
+typedef long long int LL;
+
+typedef unsigned long long int ull;
+
+ll power(ll x,ll y,ll p){ll r=1; x=x%p; while(y){ if(y&1) r= r*x%p; y=y>>1; x=x*x%p; } return r; }
+
+/*
+
+#include <ext/pb_ds/assoc_container.hpp>
+
+#include <ext/pb_ds/tree_policy.hpp>
+
+using namespace __gnu_pbds;
+
+typedef tree<int, null_type, less<int>, rb_tree_tag, tree_order_statistics_node_update> ordered_set;*/
+
+ 
+
+ 
+
+#define IO              ios_base::sync_with_stdio(false);cin.tie(0);cout.tie(0);
+
+#define FILEIO          freopen("input.txt", "r", stdin);freopen("out.txt", "w", stdout);
+
+#define all(v)          v.begin(),v.end()
+
+#define PR(a)           cout<<"("<<a<<")";
+
+#define ED              cout<<'\n';
+
+#define endl            '\n'
+
+#define loop(j,a,n)     for(int j=a;j<=n;j++)
+
+#define loop1(j,a,n)    for(int j=a;j>=n;j--)
+
+#define fr1(j,n)        for(int j=0;j<n;j++)
+
+#define fr(n)           for(int i=0;i<n;i++)
+
+#define trav(x,s)       for(auto x:s)
+
+#define PB              push_back
+
+#define MP              make_pair
+
+#define pii             pair<int,int>
+
+#define pll             pair<long long int,long long int>
+
+#define F               first
+
+#define S               second 
+
+#define binf            2000000000000000001
+
+#define mod             1000000007
+
+ 
+
+const int N=3e5+99;
+
+
+
+vector<int> g[N];
+
+int pos[N],a[N];
+
+
+
+bool comp(int x,int y)
+
+{
+
+    return pos[x]<pos[y];
+
+}
+
+int main() 
+
+{
+
+    IO
+
+    #ifndef ONLINE_JUDGE
+
+    FILEIO
+
+    #endif
+
+
+
+    int n,m,x;
+
+    cin>>n>>m;
+
+
+
+    for(int i=1;i<=n;i++)
+
+    {
+
+        cin>>a[i];
+
+        pos[a[i]]=i;
+
+    }
+
+
+
+    x=a[n];
+
+    
+
+
+
+    fr(m)
+
+    {
+
+        int x1,y1;
+
+        cin>>x1>>y1;
+
+
+
+        if(x1!=x)
+
+            g[x1].PB(y1);
+
+        if(y1==x) g[x].PB(x1);
+
+    }
+
+    sort(all(g[x]),comp);
+
+
+
+
+
+    
+
+    for(int j=g[x].size()-1;j>=0;j--)
+
+    {
+
+       
+
+        int xx=g[x][j];
+
+        sort(all(g[xx]),comp);
+
+        for(int i=0; i<g[xx].size(); i++)
+
+        {
+
+
+
+            if(pos[xx]+1==pos[g[xx][i]] ) { swap(pos[xx],pos[g[xx][i]]);} 
+
+        }
+
+        
+
+    }
+
+    
+
+    cout<<n-pos[x]<<endl;
+
+
+
+    
+
+    
+
+ 
+
+    return 0;
+
+}
+
+ 
+
+ 

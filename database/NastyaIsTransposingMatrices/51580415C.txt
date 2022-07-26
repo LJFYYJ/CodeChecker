@@ -1,0 +1,114 @@
+#include <bits/stdc++.h>
+
+#define ll          long long
+
+#define pb          push_back
+
+#define pii         pair<ll,ll>
+
+#define vi          vector<ll>
+
+#define vii         vector<pii>
+
+#define mi          map<int,int>
+
+#define mii         map<pii,int>
+
+#define all(a)      (a).begin(),(a).end()
+
+#define x           first
+
+#define y           second
+
+#define hell        1000000007
+
+#define rep(i,a,b)  for(int i=a;i<b;i++)
+
+using namespace std;
+
+ll N,K,a,b,c,d,i,j,M,e,f,g,P,k=i;
+
+void solve(){
+
+cin>> N>> M;
+
+ll A[N][M],B[N][M];
+
+rep(i,0,N)
+
+rep(j,0,M)
+
+cin>> A[i][j];
+
+rep(i,0,N)
+
+rep(j,0,M)
+
+cin>> B[i][j];
+
+vi U;
+
+vi V;
+
+rep(i,0,N){
+
+	j=0,k=i;
+
+	while(j<M && k>=0){
+
+	  V.pb(A[k][j]);
+
+	  U.pb(B[k][j]);	
+
+	  j++;
+
+	  k--;
+
+	}
+
+	sort(V.begin(),V.end());
+
+	sort(U.begin(),U.end());
+
+	K=V.size();
+
+	rep(j,0,K){
+
+		if(V[j]!=U[j]){
+
+			cout << "NO" << endl;
+
+			exit(0);
+
+		}
+
+	}
+
+}
+
+cout << "YES" << endl;
+
+}
+
+signed main(){
+
+    ios::sync_with_stdio(false);
+
+    cin.tie(0);
+
+    cout.tie(0);
+
+    int t=1;
+
+    //cin>>t;
+
+    while(t--){
+
+        solve();
+
+    }
+
+    return 0;
+
+}
+

@@ -1,0 +1,195 @@
+#include<bits/stdc++.h>
+
+using namespace std;
+
+long long drzewo[1000005];
+
+long long lazy[1000005];
+
+long long inf=1e18;
+
+int pot=1;
+
+set<int>::iterator it;
+
+void przepchnij(int w,int l,int r)
+
+{
+
+    if(l!=r)
+
+    {
+
+        lazy[2*w]+=lazy[w];
+
+        lazy[2*w+1]+=lazy[w];
+
+    }
+
+    drzewo[w]+=lazy[w]*(r-l+1);
+
+    lazy[w]=0;
+
+}
+
+void upd(int a,int b,int l,int r,int w,long long war)
+
+{
+
+    if(lazy[w]!=0)
+
+        przepchnij(w,l,r);
+
+    if(b<l||a>r)
+
+        return;
+
+    if(l>=a&&r<=b)
+
+    {
+
+        drzewo[w]+=war*(r-l+1);
+
+        if(l!=r)
+
+        {
+
+            lazy[2*w+1]+=war;
+
+            lazy[2*w]+=war;
+
+        }
+
+        return;
+
+    }
+
+    upd(a,b,l,(l+r)/2,2*w,war);
+
+    upd(a,b,(l+r)/2+1,r,2*w+1,war);
+
+    drzewo[w]=drzewo[2*w]+drzewo[2*w+1];
+
+}
+
+long long check(int a,int b,int l,int r,int w)
+
+{
+
+    if(lazy[w]!=0)
+
+        przepchnij(w,l,r);
+
+    if(b<l||a>r)
+
+        return 0;
+
+    if(l>=a&&r<=b)
+
+        return drzewo[w];
+
+   return check(a,b,l,(l+r)/2,2*w)+check(a,b,(l+r)/2+1,r,2*w+1);
+
+}
+
+long long k[1000005];
+
+int xdxd;
+
+set<int> s;
+
+int main()
+
+{
+
+	ios_base::sync_with_stdio(0);
+
+	cin.tie(0);
+
+    while(pot<1e5)
+
+        pot*=2;
+
+    int a,b;
+
+    cin>>a;
+
+    for(int x=1;x<=a;x++)
+
+    {
+
+        cin>>b;
+
+        upd(x,x,1,pot,1,b);
+
+    }
+
+    upd(a+1,a+1,1,pot,1,inf);
+
+    for(int x=1;x<a;x++)
+
+    {
+
+        cin>>k[x];
+
+        if(check(x+1,x+1,1,pot,1)>check(x,x,1,pot,1)+k[x])
+
+            s.insert(x);
+
+    }
+
+    s.insert(a);
+
+    int t,c,d,pom;
+
+    cin>>t;
+
+    char znak;
+
+    while(t--)
+
+    {
+
+        cin>>znak>>c>>d;
+
+        if(znak=='s')
+
+            cout<<check(c,d,1,pot,1)<<'\n';
+
+        else
+
+        {
+
+            it=s.lower_bound(c);
+
+            s.insert(c-1);
+
+            pom=(*it);
+
+            upd(c,pom,1,pot,1,d);
+
+            while(check(pom+1,pom+1,1,pot,1)<=check(pom,pom,1,pot,1)+k[pom])
+
+            {
+
+                s.erase(pom);
+
+                xdxd=pom+1;
+
+                pom=*s.lower_bound(pom);
+
+                upd(xdxd,pom,1,pot,1,-check(xdxd,pom,1,pot,1)+check(xdxd-1,xdxd-1,1,pot,1)+k[xdxd-1]);
+
+
+
+            }
+
+            s.insert(pom);
+
+        }
+
+    }
+
+	return 0;
+
+}

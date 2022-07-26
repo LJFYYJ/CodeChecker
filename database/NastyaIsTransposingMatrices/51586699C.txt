@@ -1,0 +1,15 @@
+n, m = list(map(int, input().split()))
+
+A, B = [list(map(int, input().split())) for _ in range(n)], \
+
+       [list(map(int, input().split())) for _ in range(n)]
+
+
+
+_A = [sorted([A[j][i-j] for j in range(i+1) if 0 <= j < n and i-j < m]) for i in range(n+m-1)]
+
+_B = [sorted([B[j][i-j] for j in range(i+1) if 0 <= j < n and i-j < m]) for i in range(n+m-1)]
+
+
+
+print(["NO", "YES"][_A == _B])

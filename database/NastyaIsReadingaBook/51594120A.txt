@@ -1,0 +1,64 @@
+#include <iostream>
+
+#include <string>
+
+using namespace std;
+
+
+
+int main()
+
+{
+
+	int n , k , *l , *r , count=0;
+
+	cin>>n;
+
+	l=new int [n];
+
+	r=new int [n];	
+
+	for(int i=0 ; i<n ;i++)
+
+	{
+
+		cin>>l[i]>>r[i];
+
+	}
+
+	cin>> k;
+
+	for(int i=0 ; i<n ;i++)
+
+	{
+
+		if(k<=r[i])
+
+			count++;
+
+	}
+
+	cout<<count;
+
+	return 0;
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

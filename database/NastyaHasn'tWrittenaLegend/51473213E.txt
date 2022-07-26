@@ -1,0 +1,260 @@
+#include <bits/stdc++.h>
+
+
+
+using namespace std;
+
+int fl;
+
+struct P
+
+{
+
+ int mi,ma,sumb,sumt;
+
+};
+
+P d[100000*4*2+10];
+
+int nad[100000*4*2+10];
+
+int a[100000+10];
+
+int t[100000+10];
+
+int k[100000+10];
+
+int b[100000+10];
+
+
+
+void build(int v,int l,int r)
+
+{nad[v]=-1e9;
+
+ if (l==r) {
+
+        d[v]={b[l],b[l],b[l],t[l]};
+
+
+
+        //cout<<v<<' '<<l<<' '<<r<<' '<<d[v].mi<<' '<<d[v].ma<<' '<<d[v].sumb<<' '<<d[v].sumt<<endl;
+
+    return;
+
+ }
+
+ int t=(r+l)/2;
+
+ build(v*2,l,t);
+
+ build(v*2+1,t+1,r);
+
+ d[v]={min(d[v*2].mi,d[v*2+1].mi),max(d[v*2].ma,d[v*2+1].ma),d[v*2].sumb+d[v*2+1].sumb,d[v*2].sumt+d[v*2+1].sumt};
+
+ //cout<<v<<' '<<l<<' '<<r<<' '<<d[v].mi<<' '<<d[v].ma<<' '<<d[v].sumb<<' '<<d[v].sumt<<endl;
+
+}
+
+void push(int v,int l,int r)
+
+{
+
+ if (nad[v]==-1e9) return;
+
+ //cout<<"debil"<<endl;
+
+ nad[v*2]=nad[v];
+
+ nad[v*2+1]=nad[v];
+
+
+
+ d[v].ma=nad[v];
+
+ d[v].mi=nad[v];
+
+ d[v].sumb=nad[v]*(r-l+1);
+
+ nad[v]=-1e9;
+
+}
+
+int sum(int v,int l,int r,int x,int y)
+
+{
+
+ push(v,l,r);
+
+ if (l>y||r<x) return 0;
+
+ if (l>=x&&r<=y) {return d[v].sumb+d[v].sumt;}
+
+ int t=(r+l)/2;
+
+ return sum(v*2,l,t,x,y)+sum(v*2+1,t+1,r,x,y);
+
+}
+
+void upd2(int v,int l,int r,int value)
+
+{
+
+ //cout<<v<<' '<<l<<' '<<r<<' '<<value<<' '<<d[v].ma<<endl;
+
+ push(v,l,r);
+
+ //cout<<l<<' '<<r<<endl;
+
+ if (l==r) {
+
+    if (d[v].ma<value) d[v]={value,value,value,d[v].sumt};
+
+    return;
+
+ }
+
+ int t=(r+l)/2;
+
+ if (d[v*2].ma<value) {
+
+   nad[v*2]=value; //cout<<l<<' '<<r<<endl;
+
+ }else
+
+  if (d[v*2].mi<value) {
+
+  upd2(v*2,l,t,value);
+
+ }
+
+
+
+ if (d[v*2+1].ma<value) {
+
+   nad[v*2+1]=value;//cout<<l<<' '<<r<<endl;
+
+ }else
+
+  if (d[v*2+1].mi<value) {
+
+  upd2(v*2+1,t+1,r,value);
+
+ }
+
+ push(v,l,r);
+
+ push(v*2,l,t);
+
+ push(v*2+1,t+1,r);
+
+ d[v]={min(d[v*2].mi,d[v*2+1].mi),max(d[v*2].ma,d[v*2+1].ma),d[v*2].sumb+d[v*2+1].sumb,d[v*2].sumt+d[v*2+1].sumt};
+
+ //cout<<v<<' '<<' '<<l<<' '<<r<<' '<<d[v*2].mi<<' '<<d[v*2+1].mi<<endl;
+
+}
+
+void upd(int v,int l,int r,int nom,int value)
+
+{
+
+ push(v,l,r);
+
+ if (l==r) {//cout<<l<<' '<<r<<' '<<value+d[v].mi<<endl;
+
+    fl=value+d[v].mi;
+
+    d[v]={value+d[v].mi,value+d[v].mi,value+d[v].mi,d[v].sumt};
+
+    return;
+
+ }
+
+ int t=(r+l)/2;
+
+ if (nom<=t) {
+
+     upd(v*2,l,t,nom,value);
+
+     upd2(v*2+1,t+1,r,fl);
+
+ }else {
+
+    upd(v*2+1,t+1,r,nom,value);
+
+ }
+
+ push(v,l,r);
+
+ push(v*2,l,t);
+
+ push(v*2+1,t+1,r);
+
+ d[v]={min(d[v*2].mi,d[v*2+1].mi),max(d[v*2].ma,d[v*2+1].ma),d[v*2].sumb+d[v*2+1].sumb,d[v*2].sumt+d[v*2+1].sumt};
+
+}
+
+int main()
+
+{
+
+
+
+ int n;
+
+ cin>>n;
+
+ for (int i=1;i<=n;i++)
+
+  {
+
+   cin>>a[i];
+
+  }
+
+ for (int i=1;i<n;i++)
+
+  {
+
+   cin>>k[i];
+
+   t[i+1]=t[i]+k[i];
+
+  }
+
+ for (int i=1;i<=n;i++)
+
+   {b[i]=a[i]-t[i];
+
+    //cout<<b[i]<<' '<<t[i]<<endl;
+
+   }
+
+ build(1,1,n);
+
+ int q;
+
+ cin>>q;
+
+ for (int qq=0;qq<q;qq++)
+
+  {
+
+   char c;int l,r;
+
+   cin>>c>>l>>r;
+
+   if (c=='s') {
+
+    cout<<sum(1,1,n,l,r)<<endl;
+
+   }  else {upd(1,1,n,l,r);//cout<<endl;
+
+   }
+
+ }
+
+}
+
+
+

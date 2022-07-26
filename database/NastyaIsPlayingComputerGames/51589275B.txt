@@ -1,0 +1,27 @@
+#include<iostream>
+
+using namespace std;
+
+int main()
+{
+   
+   int n,k;
+   
+   cin>>n>>k;
+   
+   if(k==n || k==1)
+    cout<<3*n<<endl;
+   
+   else if(n>2*k-1)
+    cout<<3*n+k-1<<endl;
+    
+   else 
+    cout<<4*n-k;
+    
+    
+    return 0;   
+    
+    
+    
+     
+} 

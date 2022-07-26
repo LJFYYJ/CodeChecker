@@ -1,0 +1,94 @@
+/*
+
+
+
+BISMILLAH - HIR - RAHMANIR - RAHIM
+
+
+
+*/
+
+#include<bits/stdc++.h>
+
+using namespace std;
+
+
+
+#define ll long long int
+
+int const N = 3e5 + 10;
+
+int const MOD = 1e9 + 7;
+
+#define bug cout <<"-----------"<<endl
+
+#define MAX 2268312229760322080
+
+
+
+
+
+
+
+int main()
+
+{
+
+    ios_base::sync_with_stdio(false);
+
+    cin.tie(NULL);
+
+
+
+    int n ;
+
+
+
+    cin >> n ;
+
+    vector < int > arr ;
+
+    int a, b ;
+
+    for(int i = 0 ; i<n ; i++)
+
+    {
+
+        cin >> a >> b ;
+
+        arr.push_back(a);
+
+        arr.push_back(b);
+
+
+
+    }
+
+    int k ;
+
+    cin >> k ;
+
+    int cnt = 0 ;
+
+    for(int i = 0 ;i<arr.size();++i)
+
+    {
+
+        if(arr[i]<k)
+
+            ++cnt;
+
+    }
+
+
+
+    cout << n - (cnt/2) <<endl;
+
+    return 0;
+
+}
+
+
+
+
+

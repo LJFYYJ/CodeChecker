@@ -1,0 +1,51 @@
+#include <iostream>
+#include <set>
+using namespace std;
+#define M 505
+int           a[M][M], b[M][M];
+bool          f;
+multiset<int> x, y;
+
+main() {
+  ios::sync_with_stdio(0);
+  cin.tie();
+  int n, m;
+  cin >> n >> m;
+  for (int i = 0; i < n; i++)
+    for (int j = 0; j < m; j++) cin >> a[i][j];
+  for (int i = 0; i < n; i++)
+    for (int j = 0; j < m; j++) cin >> b[i][j];
+
+  for (int i = 0; i < m; i++) {
+    x.clear();
+    y.clear();
+    for (int j = 0; j <= i; j++) {
+      x.insert(a[i - j][j]);
+      y.insert(b[i - j][j]);
+    }
+    for (auto it = x.begin(), jt = y.begin(); it != x.end(); it++, jt++) {
+      if (*it != *jt) {
+        f = 1;
+        break;
+      }
+    }
+    if (f) break;
+  }
+  for (int i = 1; i < n; i++) {
+    x.clear();
+    y.clear();
+    for (int j = 0; j < min(m, n - i); j++) {
+      x.insert(a[m - j - 1][i + j]);
+      y.insert(b[m - j - 1][i + j]);
+    }
+    for (auto it = x.begin(), jt = y.begin(); it != x.end(); it++, jt++) {
+      if (*it != *jt) {
+        f = 1;
+        break;
+      }
+    }
+    if (f) break;
+  }
+
+  cout << (f ? "NO" : "YES");
+}

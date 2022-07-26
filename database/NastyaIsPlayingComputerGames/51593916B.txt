@@ -1,0 +1,36 @@
+/**
+
+ *
+
+ * author: Hamkor
+
+ *
+
+ **/
+
+
+
+#include <bits/stdc++.h>
+
+
+
+using namespace std;
+
+
+
+int main() {
+
+
+
+    int n, k; cin>>n>>k;
+
+
+
+    if (k <= n/2 ) cout<<2 + (k-1) + 3 + (2*(n-1)-2) + (n-1);
+
+    else   cout<<2 + (n-k) + 3 + (2*(n-1)-2) + (n-1);
+
+    return 0;
+
+}
+

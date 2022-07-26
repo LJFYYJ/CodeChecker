@@ -1,0 +1,45 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+
+
+int main() {
+
+	// your code goes here
+
+	int n,i;
+
+	cin>>n;
+
+	int l,r;
+
+	vector< pair<int,int> > v1;
+
+	for(i=0;i<n;i++){
+
+		cin>>l>>r;
+
+		v1.push_back(make_pair(l,r));
+
+	}
+
+	int k;
+
+	cin>>k;
+
+	for(i=0;i<v1.size();i++){
+
+		if(k<=v1[i].second){
+
+			cout<<(v1.size()-i)<<endl;
+
+			break;
+
+		}
+
+	}
+
+	return 0;
+
+}

@@ -1,0 +1,56 @@
+#include<bits/stdc++.h>
+
+using namespace std;
+
+typedef long long ll;
+typedef long double ld;
+typedef complex<ld> cd;
+typedef pair<int,int> pi;
+typedef pair<ll,ll> pl;
+typedef pair<ld,ld> pd;
+
+typedef vector<int> vi;
+typedef vector<double> vd;
+typedef vector<bool> vb;
+typedef vector<ld> vld;
+typedef vector<ll> vll;
+typedef vector<pi> vpi;
+typedef vector<pl> vpl;
+typedef vector<cd> vcd;
+
+#define For(i,a,b) for(int i=a;i<=b;i++)
+#define iFor(i,a,b) for(int i=a;i>=b;i--)
+#define sz(x) (int)(x).size()
+#define mp make_pair
+#define pb push_back
+#define all(x) x.begin(),x.end()
+#define tr(container,it) \
+  for(typeof(container.begin()) it = container.begin();it!=container.end();it++)
+const int MOD = 1000000007;
+
+
+
+int main(void){
+  ios_base::sync_with_stdio(false);   //synchronization off
+  cin.tie(NULL);                     //flushing off 
+
+  int n,k;
+  cin>>n;
+  vi l(n),r(n);
+
+  For(i,0,n-1)
+    cin>>l[i]>>r[i];
+  cin>>k;
+  For(i,0,n-1){
+    if(l[i]==k){
+      cout<<n-i;
+      break;
+    }
+    else if(l[i]<k && r[i]>=k){
+      cout<<n-i;
+      break;
+    }
+  }
+   
+  return 0;
+}

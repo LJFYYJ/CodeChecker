@@ -1,0 +1,78 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+int arr[300005];
+
+set<int>lst[300005];
+
+set<int>st;
+
+int main()
+
+{
+
+    int n,m;
+
+    scanf("%d %d",&n,&m);
+
+    for(int i = 1;i <= n;i++){
+
+        scanf("%d",&arr[i]);
+
+    }
+
+    for(int i=1;i<=m;i++){
+
+        int u,v;
+
+        scanf("%d %d",&u,&v);
+
+        lst[v].insert(u);
+
+        if(v==arr[n])st.insert(u);
+
+    }
+
+    int cnt=0;
+
+    for(int i = n-1;i >= 1;i--){
+
+        if(st.find(arr[i])!=st.end()){
+
+            cnt++;
+
+            st.erase(arr[i]);
+
+            continue;
+
+        }
+
+        int now=arr[i];
+
+        set<int>tmp;
+
+        if(!st.empty()){
+
+            for(auto it: st){
+
+                if(lst[now].find((it))==lst[now].end())continue;
+
+                tmp.insert((it));
+
+            }
+
+        }
+
+        st.clear();
+
+        st=tmp;
+
+    }
+
+    printf("%d\n",cnt);
+
+    return 0;
+
+}
+

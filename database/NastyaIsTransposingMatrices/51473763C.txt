@@ -1,0 +1,40 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+typedef long long ll;
+
+const ll N = 503;
+
+ll n, m, a[N][N], b[N][N];
+multiset<ll> s[N*2];
+
+int main() {
+	ios_base::sync_with_stdio(false); cin.tie(0); cout.tie(0);
+	
+	cin >> n >> m;
+	for (ll i = 1; i <= n; ++i) {
+		for (ll j = 1; j <= m; ++j) {
+			ll x; cin >> x;
+			s[i+j].insert(x);
+		}
+	}
+
+	for (ll i = 1; i <= n; ++i) {
+		for (ll j = 1; j <= m; ++j) {
+			ll x; cin >> x;
+			if (s[i+j].count(x)) s[i+j].erase(x);
+			else s[i+j].insert(x);
+		}
+	}
+	
+	for (ll i = 1; i <= n+m; ++i) {
+		if (s[i].size() > 0) {
+			cout << "NO\n";
+			return 0;
+		}
+	}
+	cout << "YES\n";
+	
+	return 0;
+}

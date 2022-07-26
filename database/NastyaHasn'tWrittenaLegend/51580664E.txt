@@ -1,0 +1,90 @@
+#include<bits/stdc++.h>
+
+#include<vector>
+
+using namespace std;
+
+int main()
+
+{
+
+	int i,n,w;
+
+	cin>>n;
+
+	int a[n],k[n-1];
+
+	for(i=0;i<n;i++)
+
+		cin>>a[i];
+
+	for(i=0;i<n-1;i++)
+
+		cin>>k[i];
+
+	cin>>w;
+
+	char s[w];
+
+	int q[w][2];
+
+	for(i=0;i<w;i++)
+
+	{
+
+		cin>>s[i];
+
+		for(int j=0;j<2;j++)
+
+		{
+
+			cin>>q[i][j];
+
+		}
+
+	}
+
+	for(i=0;i<w;i++)
+
+	{
+
+		if(s[i]=='+')
+
+		{
+
+			a[q[i][0]-1]+=q[i][1];
+
+			for(int j=0;j<n;j++)
+
+			{
+
+				if(a[j+1]<a[j]+k[j])
+
+					a[j+1]=a[j]+k[j];
+
+			}
+
+		}
+
+		else
+
+		{
+
+			int sum=0,start=(q[i][0]-1),end=q[i][1];
+
+			for(int l=start;l<end;l++)
+
+			{
+
+				sum=sum+a[l];
+
+			}
+
+			cout<<sum<<"\n";
+
+		}
+
+	}
+
+}
+

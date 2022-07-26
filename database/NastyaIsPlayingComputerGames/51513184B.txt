@@ -1,0 +1,88 @@
+#include<stdio.h>
+
+#include<iostream>
+
+using namespace std;
+
+int main()
+
+{
+
+	long long n, a[200010], i, max = 0, sum = 0;
+
+	scanf("%lld",&n);
+
+	for (i = 0; i < n; i++)
+
+	{
+
+		scanf("%lld",&a[i]);
+
+		if (a[i] == 1)
+
+		{
+
+			sum++;
+
+		}
+
+		else
+
+		{
+
+			if (sum > max)
+
+			{
+
+				max = sum;
+
+			}
+
+			sum = 0;
+
+		}
+
+	}
+
+	if (a[n-1] == 1)
+
+	{
+
+		for (i = 0; i < n; i++)
+
+		{
+
+			if (a[i] == 1)
+
+			{
+
+				sum++;
+
+			}
+
+			else
+
+			{
+
+				if (sum > max)
+
+				{
+
+					max =sum;
+
+				}
+
+				break;
+
+			}
+
+		}
+
+	}
+
+	printf("%lld\n",max);
+
+	return 0;
+
+}
+

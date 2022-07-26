@@ -1,0 +1,54 @@
+#include <iostream>
+
+using namespace std;
+
+short int v[101][2],n,x,w;
+
+void citire()
+
+{int y;
+
+    cin>>n;
+
+    for(int i=1;i<=n;i++)cin>>v[i][0]>>v[i][1];
+
+    cin>>x;
+
+}
+
+
+
+void cautare(short int y,short int z)
+
+{w=(z+y)/2;
+
+  if(x>v[w][1]) cautare(w,z);
+
+  else if(x<v[w][0])cautare(y,w);
+
+  else cout<<(n-w+1);
+
+}
+
+
+
+int main()
+
+{
+
+    citire();
+
+    if(x==n)cout<<0;
+
+    else
+
+    if(x>=v[n][0])cout<<1;
+
+    else
+
+    cautare(1,n);
+
+    return 0;
+
+}
+

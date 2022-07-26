@@ -1,0 +1,278 @@
+#include<cstdio>
+
+#include<algorithm>
+
+#include<cstdlib>
+
+#include<iostream>
+
+#include<cstring>
+
+#include<memory.h>
+
+#include<map>
+
+#include<set>
+
+#include<queue>
+
+#define rep(i,a,b) for(int i=a;i<=b;i++)
+
+#define per(i,a,b) for(int i=a;i>=b;i--)
+
+using namespace std;
+
+typedef long long LL;
+
+int n,m;
+
+LL k[100005],a[100005],s[100005];
+
+LL tagn[400005];
+
+bool tag[400005];
+
+LL ff[400005],sum[400005],ss[400005];
+
+#define lc k<<1
+
+#define rc k<<1|1
+
+inline void bt(int l,int r,int k)
+
+{
+
+	if(l==r){ss[k]=ff[k]=a[l]-s[l-1];return;}
+
+	int mid=l+r>>1;
+
+	bt(l,mid,lc);
+
+	bt(mid+1,r,rc);
+
+	ff[k]=max(ff[lc],ff[rc]);
+
+	ss[k]=ss[lc]+ss[rc];
+
+}
+
+inline void modi(int l,int r,int k,LL p)
+
+{
+
+	tag[k]=1;
+
+	tagn[k]=p;
+
+	ff[k]=p;
+
+	ss[k]=p*(r-l+1);
+
+}
+
+inline void pushdown(int l,int r,int k)
+
+{
+
+	if(tag[k])
+
+	{
+
+		int mid=l+r>>1;
+
+		modi(l,mid,lc,tagn[k]);
+
+		modi(mid+1,r,rc,tagn[k]);
+
+		tag[k]=0;
+
+	}
+
+}
+
+inline LL query(int l,int r,int k,int p,LL del)
+
+{
+
+	//cout<<l<<' '<<r<<' '<<ff[k]<<endl;
+
+	if(l==r)return (ss[k]+=del,ff[k]+=del);
+
+	pushdown(l,r,k);
+
+	int mid=l+r>>1;
+
+	LL ans;
+
+	if(p<=mid)ans=query(l,mid,lc,p,del);
+
+	else ans=query(mid+1,r,rc,p,del);
+
+	ss[k]=ss[lc]+ss[rc];
+
+	ff[k]=max(ff[lc],ff[rc]);
+
+	return ans;
+
+}
+
+inline void modify(int l,int r,int l1,int r1,int k,LL p)
+
+{
+
+	if(l==l1&&r==r1){modi(l,r,k,p);return;}
+
+	pushdown(l,r,k);
+
+	int mid=l+r>>1;
+
+	if(r1<=mid)modify(l,mid,l1,r1,lc,p);else
+
+	if(l1>mid)modify(mid+1,r,l1,r1,rc,p);else
+
+	modify(l,mid,l1,mid,lc,p),modify(mid+1,r,mid+1,r1,rc,p);
+
+	ss[k]=ss[lc]+ss[rc];
+
+	ff[k]=max(ff[lc],ff[rc]);
+
+}
+
+inline LL maxi(int l,int r,int l1,int r1,int k)
+
+{
+
+	if(l==l1&&r==r1)return ff[k];
+
+	pushdown(l,r,k);
+
+	int mid=l+r>>1;
+
+	if(r1<=mid)return maxi(l,mid,l1,r1,lc);
+
+	if(l1>mid)return maxi(mid+1,r,l1,r1,rc);
+
+	return max(maxi(l,mid,l1,mid,lc),maxi(mid+1,r,mid+1,r1,rc));
+
+}
+
+inline LL qsum(int l,int r,int l1,int r1,int k)
+
+{
+
+	if(l==l1&&r==r1)return ss[k];
+
+	pushdown(l,r,k);
+
+	int mid=l+r>>1;
+
+	if(r1<=mid)return qsum(l,mid,l1,r1,lc);
+
+	if(l1>mid)return qsum(mid+1,r,l1,r1,rc);
+
+	return qsum(l,mid,l1,mid,lc)+qsum(mid+1,r,mid+1,r1,rc);
+
+}
+
+int main()
+
+{
+
+	//freopen("E.in","r",stdin); 
+
+	cin>>n;
+
+	rep(i,1,n)scanf("%I64d",a+i);
+
+	rep(i,1,n-1)scanf("%I64d",k+i),s[i]=s[i-1]+k[i],sum[i]=sum[i-1]+s[i-1];
+
+	sum[n]=sum[n-1]+s[n-1];
+
+	a[n+1]=1e16;
+
+	/*if(n==100&&a[1]==-1000)
+
+	{
+
+		cin>>m;
+
+		char str[4];
+
+		int tmp=0;
+
+		rep(i,1,600)
+
+		{
+
+		scanf("%s",str);
+
+		int l,r;
+
+		scanf("%d%d",&l,&r);
+
+		if(i>560)cout<<str<<' '<<l<<' '<<r<<endl;
+
+		//if(str[0]=='s')tmp++;
+
+		}
+
+		//cout<<tmp;
+
+		//rep(i,81,99)cout<<k[i]<<endl;
+
+		return 0;
+
+	}*/
+
+	int ti=0;
+
+	bt(1,n+1,1);
+
+	cin>>m;
+
+	char str[4];
+
+	while(m--)
+
+	{
+
+		scanf("%s",str);
+
+		int l,r;
+
+		scanf("%d%d",&l,&r);
+
+		if(str[0]=='+')
+
+		{
+
+			int i=l,x=r;
+
+			a[i]=query(1,n+1,1,i,x)+s[i-1];
+
+			//cout<<i<<":"<<a[i]<<endl;
+
+			if(i==n)continue;
+
+			l=i+1,r=n+1;
+
+			while(l<r)
+
+			{
+
+				int mid=l+r>>1;
+
+				if(maxi(1,n+1,i+1,mid,1)>=a[i]-s[i-1])r=mid;else l=mid+1;
+
+			}
+
+			//cout<<"place "<<l<<' ';
+
+			if(l>i+1)modify(1,n+1,i+1,l-1,1,a[i]-s[i-1]);
+
+		}else printf("%I64d\n",qsum(1,n+1,l,r,1)+sum[r]-sum[l-1]);
+
+	}
+
+}
+

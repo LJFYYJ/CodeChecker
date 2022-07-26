@@ -1,0 +1,21 @@
+#include<bits/stdc++.h>
+
+using namespace std;
+
+int main()
+
+{
+
+	int n,k;
+
+	cin>>n>>k;
+
+	int maxIndex = n-1;k--;
+
+	int aux = min(k,maxIndex-k)+(3*n);
+
+	cout<<aux;
+
+	return 0;
+
+}

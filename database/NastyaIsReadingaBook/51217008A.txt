@@ -1,0 +1,38 @@
+#include <iostream>
+
+
+
+using namespace std;
+
+int n, l[105], r[105], pg, capc, i;
+
+int main()
+
+{
+
+    cin >> n;
+
+    for (i=1; i<=n; i++){
+
+        cin >> l[i] >> r[i];
+
+    }
+
+    cin >> pg;
+
+    i=1;
+
+    while (pg>=l[i] && i<=n){
+
+        capc++;
+
+        i++;
+
+    }
+
+    cout << n-capc+1;
+
+    return 0;
+
+}
+

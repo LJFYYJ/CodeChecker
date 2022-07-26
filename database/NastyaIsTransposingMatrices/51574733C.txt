@@ -1,0 +1,178 @@
+#include <iostream>
+
+#include <cmath>
+
+#include <cstdio>
+
+#include <cstring>
+
+#include <vector>
+
+#include <algorithm>
+
+#include <queue>
+
+#include <set>
+
+#include <map>
+
+#include <stack>
+
+#include <iomanip>
+
+#include <string>
+
+
+
+using namespace std;
+
+
+
+const int maxn=505;
+
+int A[maxn][maxn];
+
+int B[maxn][maxn];
+
+//int vis[maxn][maxn];
+
+int n,m;
+
+
+
+bool FJ(int l){
+
+    for(int i=1;i<=l;i++)
+
+        if(A[i][i]!=B[i][i])
+
+            {
+
+                //cout << A[i][i] << ":" << B[i][i] <<endl;
+
+                return false ;
+
+            }
+
+    //cout << "???" << endl;
+
+    return true ;
+
+}
+
+
+
+void change(int x,int y){
+
+    for(int i=x;i<=y;i++){
+
+        for(int j=i+1;j<=y;j++){
+
+            swap(A[i][j],A[j][i]);
+
+        }
+
+    }
+
+}
+
+
+
+bool Judge(int l){
+
+    for(int i=1;i<=l;i++){
+
+        int a=i,b=i;
+
+        for(int j=i+1;j<=l;j++){
+
+            if(A[i][j]!=B[i][j]){
+
+                if(A[i][j]==B[j][i] && A[j][i]==B[i][j]){
+
+                    a=i;
+
+                    b=j;
+
+                }
+
+                else return false ;
+
+            }else{
+
+                if(A[i][j]==B[j][i] && A[j][i]==B[i][j]){
+
+                    if(b!=a){
+
+                        change(a,b);
+
+                    }else a=b=j;
+
+                }
+
+                else return false ;
+
+            }
+
+        }
+
+        if(b!=a) change(a,b);
+
+    }
+
+    for(int i=1;i<=n;i++)
+
+        for(int j=1;j<=m;j++)
+
+            if(A[i][j]!=B[i][j])
+
+                return false ;
+
+    return true ;
+
+}
+
+
+
+int main(){
+
+    while(scanf("%d%d",&n,&m)!=EOF){
+
+        //memset(vis,0,sizeof(vis));
+
+        for(int i=1;i<=n;i++)
+
+            for(int j=1;j<=m;j++)
+
+                scanf("%d",&A[i][j]);
+
+        for(int i=1;i<=n;i++)
+
+            for(int j=1;j<=m;j++)
+
+                scanf("%d",&B[i][j]);
+
+        int l=min(n,m);
+
+        //cout << "---" << l <<endl;
+
+        if(FJ(l)){
+
+            if(Judge(l)) printf("YES\n");
+
+            else printf("NO\n");
+
+        }else {
+
+            //cout << "***" << endl;
+
+            printf("NO\n");
+
+        }
+
+    }
+
+    return 0;
+
+}
+

@@ -1,0 +1,47 @@
+#include<iostream>
+
+#include<cstdio>
+
+#include<cstring>
+
+#include<algorithm>
+
+using namespace std;
+
+int ans,n,k;
+
+struct node
+
+{
+
+	int x,y;
+
+}a[1010111];
+
+int main()
+
+{
+
+	scanf("%d",&n);
+
+	for(int i=1;i<=n;i++)
+
+		scanf("%d%d",&a[i].x,&a[i].y);
+
+	scanf("%d",&k);
+
+	for(int i=n;i>=1;i--)
+
+		if(k>a[i].y)
+
+		{	
+
+			ans=i;
+
+			break;
+
+		}
+
+	printf("%d",n-ans);
+
+}

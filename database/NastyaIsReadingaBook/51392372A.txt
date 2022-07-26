@@ -1,0 +1,16 @@
+var n = parseInt(readline());
+
+var segs = Array();
+
+for(var i = 0; i < n; i++){
+
+	segs.push(readline().split(' ').map(x => parseInt(x)));
+
+}
+
+var k = parseInt(readline());
+
+var index = segs.findIndex(seg => (k >= seg[0] && k <= seg[1]));
+
+print(n - index);
+

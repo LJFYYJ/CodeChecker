@@ -1,0 +1,108 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+const int maxn=505;
+
+int a[maxn][maxn],b[maxn][maxn];
+
+int main()
+
+{
+
+        int n,m;
+
+        cin>>n>>m;
+
+        int flag=0;
+
+        memset(a,0,sizeof(a));
+
+        memset(b,0,sizeof(b));
+
+        for(int i=1;i<=n;i++)
+
+        {
+
+            for(int j=1;j<=m;j++)
+
+            cin>>a[i][j];
+
+        }
+
+        for(int i=1;i<=n;i++)
+
+        {
+
+            for(int j=1;j<=m;j++)
+
+            cin>>b[i][j];
+
+        }
+
+        int flag1;
+
+        for(int i=1;i<=n;i++)
+
+        {
+
+            flag1=0;
+
+            for(int j=1;j<=m;j++)
+
+            {
+
+                for(int k=0;k<=max(i,j)-1;k++)
+
+                {
+
+                    if(a[i][j]==b[i-k][j+k]||a[i][j]==b[i+k][j-k])
+
+                    {
+
+                        flag1=1;
+
+                    }
+
+                }
+
+
+
+            if(flag1==0)
+
+            {
+
+                flag=1;
+
+            }
+
+            }
+
+        }
+
+
+
+        if(flag) cout<<"NO"<<endl;
+
+        else cout<<"YES"<<endl;
+
+}
+
+/*
+
+3 4
+
+3 4 3 3
+
+3 7 5 5
+
+1 1 5 3
+
+3 3 7 3
+
+4 1 5 5
+
+3 1 5 3
+
+*/
+

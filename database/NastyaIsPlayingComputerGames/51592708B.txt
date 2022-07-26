@@ -1,0 +1,11 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main(){
+    int n,s;
+    cin>>n>>s;
+    int cost=0;
+    //can first move to right  or left based on index
+    cost=3*n+min(n-k,k-1);
+    cout<<cost;
+    return 0;
+}

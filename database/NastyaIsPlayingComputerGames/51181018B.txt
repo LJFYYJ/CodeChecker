@@ -1,0 +1,36 @@
+#include <iostream>
+
+
+
+using namespace std;
+
+
+
+int n,k;
+
+
+
+int main()
+
+{
+
+    cin>>n>>k;
+
+    if(k-1<=n-k)
+
+    {
+
+        cout<<3*n+k-1;
+
+    }
+
+    else {
+
+        cout<<4*n-k;
+
+    }
+
+    return 0;
+
+}
+

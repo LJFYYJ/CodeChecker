@@ -1,0 +1,53 @@
+type capitole=record
+
+    primc,doic:integer;
+
+            end;
+
+    vec=array[1..100] of capitole;
+
+procedure citeste(var n:integer; var v:vec; var k:integer);
+
+var i:integer;
+
+begin
+
+    readln(n);
+
+    for i:=1 to n do
+
+    begin
+
+        read(v[i].primc);
+
+        read(v[i].doic);
+
+    end;
+
+    readln(k);
+
+end;
+
+var v:vec;
+
+    n,k,i:integer;
+
+begin
+
+    citeste(n,v,k);
+
+    i:=n div 2;
+
+    k:=k-1;
+
+    repeat
+
+        if k>v[i].doic then i:=i+1
+
+        else i:=i-1;
+
+    until k<v[i].doic;
+
+    write(n-i+1);
+
+end.

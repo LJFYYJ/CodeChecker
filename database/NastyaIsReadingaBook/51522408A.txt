@@ -1,0 +1,51 @@
+#include "bits/stdc++.h"
+#define FILE_IN freopen("in", "r", stdin);
+#define FILE_OUT freopen("out", "w", stdout);
+#define fr(i,a,b) for(int i =a;i<b;i++)
+bool debug = 1;
+#define prin(a) if(debug) cout << #a << " = " << (a) << endl
+#define rang(a,b) if(debug) printf("%d -> %d\n", (a), (b))
+#define separa() if(debug) cout << endl
+#define mk make_pair
+#define pb push_back
+#define fi first
+#define se second
+#define ll long long
+#define pii pair<int,int>
+#define pll pair<ll, ll>
+const ll MOD = 1000000007;
+const double PI = acos(-1.0);
+const double eps = 1e-9;
+using namespace std;
+#define N 100100
+
+pii v[N];
+
+int main () {
+
+	int n;
+	int k;
+
+	cin >> n;
+
+	for(int i=0;i<n;i++) {
+		cin >> v[i].fi >> v[i].se;
+	}
+
+	cin >> k;
+	int last = 0;
+	for(int i=0;i<n;i++) {
+		if(v[i].fi <= k && k <= v[i].se) {
+			last = i;
+			break;
+		}
+	}
+
+	cout << n - last << endl;
+
+	return 0;
+
+}
+
+
+

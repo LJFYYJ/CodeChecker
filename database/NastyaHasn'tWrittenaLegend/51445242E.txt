@@ -1,0 +1,286 @@
+// God, There is always someone who loves me ...
+
+// I have not failed. I have just found 10000 ways that will not work. << Thomas Edison >>
+
+// A.H.Ghaznavi  I even can do something that I cannot
+
+#include<bits/stdc++.h>
+
+#include<fstream>
+
+using namespace std;
+
+typedef long long ll;
+
+typedef long double ld;
+
+typedef const int ci;
+
+typedef const ll cll;
+
+ci maxn=1e5+10;
+
+ll a[maxn],k[maxn],sumk[maxn],q,l,r,n,tree[4*maxn],save[4*maxn],last;
+
+char type;
+
+ll maxi(ll num1,ll num2)
+
+{
+
+    if (num1>num2)
+
+        return num1;
+
+    return num2;
+
+}
+
+bool check (int asli, int fare)
+
+{
+
+    if (a[fare]<a[asli]+sumk[fare-1]-sumk[asli-1])
+
+        return true;
+
+    return false;
+
+}
+
+void build (int node,int start,int en)
+
+{
+
+    if (start==en)
+
+        tree[node]=a[start];
+
+    else
+
+    {
+
+        int mid=(start+en)/2;
+
+        build (2*node,start,mid);
+
+        build (2*node+1,mid+1,en);
+
+        tree[node]=tree[2*node]+tree[2*node+1];
+
+    }
+
+    return;
+
+}
+
+void shift(int start,int en,int node)
+
+{
+
+    if (save[node]==0)
+
+        return;
+
+    tree[node]=sumk[en-1]-sumk[save[node]-1]+a[save[node]];
+
+    if (start==en)
+
+        a[start]=tree[node];
+
+    if (start!=en)
+
+    {
+
+        save[2*node]=save[node];
+
+        save[2*node+1]=save[node];
+
+    }
+
+    save[node]=0;
+
+    return;
+
+}
+
+void update(int node,int start,int en,int id,ll val)
+
+{
+
+    shift(start,en,node);
+
+    if (id<start || en<id)
+
+        return;
+
+    if (start==en)
+
+    {
+
+        a[id]+=val;
+
+        tree[node]+=val;
+
+        return;
+
+    }
+
+    int mid=(start+en)/2;
+
+    update(2*node,start,mid,id,val);
+
+    update(2*node+1,mid+1,en,id,val);
+
+    tree[node]=tree[2*node]+tree[2*node+1];
+
+    return;
+
+}
+
+void for_shift(int node,int start,int en,int vl,int vr,ll val)
+
+{
+
+    if (vr<start || en<vl)
+
+        return;
+
+    if (vl<=start && en<=vr)
+
+    {
+
+        save[node]=val;
+
+        shift(start,en,node);
+
+        return;
+
+    }
+
+    int mid=(start+en)/2;
+
+    for_shift(2*node,start,mid,vl,vr,val);
+
+    for_shift(2*node+1,mid+1,en,vl,vr,val);
+
+    tree[node]=tree[2*node]+tree[2*node+1];
+
+    return;
+
+}
+
+ll query(int node,int start,int en,int vl,int vr)
+
+{
+
+    shift(start,en,node);
+
+    if (vr<start || en<vl)
+
+        return 0;
+
+    if (vl<=start && en<=vr)
+
+        return tree[node];
+
+    int mid=(start+en)/2;
+
+    ll q1=query(2*node,start,mid,vl,vr);
+
+    ll q2=query(2*node+1,mid+1,en,vl,vr);
+
+    return (q1+q2);
+
+}
+
+int main()
+
+{
+
+    ios_base::sync_with_stdio(false);cin.tie(0);cout.tie(0);
+
+    cin>>n;
+
+    for (int i=1;i<=n;i++)
+
+        cin>>a[i];
+
+    build(1,1,n);
+
+    for (int i=1;i<n;i++)
+
+    {
+
+        cin>>k[i];
+
+        sumk[i]=sumk[i-1]+k[i];
+
+    }
+
+    cin>>q;
+
+    for (int i=0;i<q;i++)
+
+    {
+
+        cin>>type>>l>>r;
+
+        if (type=='+')
+
+        {
+
+            update(1,1,n,l,r);
+
+            last=l;
+
+            int fl=l;
+
+            int fr=n;
+
+            while (fr-fl>1)
+
+            {
+
+                int mid=(fr+fl)/2;
+
+                if (check(l,mid))
+
+                {
+
+                    fl=mid;
+
+                    last=maxi(last,mid);
+
+                }
+
+                else
+
+                    fr=mid;
+
+            }
+
+            if (check(l,fl))
+
+                last=maxi(last,fl);
+
+            if (check(l,fr))
+
+                last=maxi(last,fr);
+
+            if (last>l)
+
+                for_shift(1,1,n,l+1,last,l);
+
+        }
+
+        else
+
+            cout<<query(1,1,n,l,r)<<endl;
+
+    }
+
+    return 0;
+
+}
+

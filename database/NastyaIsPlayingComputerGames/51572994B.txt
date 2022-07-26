@@ -1,0 +1,22 @@
+#include <iostream> 
+
+using namespace std;
+
+int main()
+
+{
+
+  int n;
+
+  int m;
+
+  cin>>n;
+
+  cin>>m;
+
+  cout<<3*n+min(n-m,m-1);
+
+  return 0;
+
+}
+

@@ -1,0 +1,126 @@
+#include<bits/stdc++.h>
+
+using namespace std;
+
+void fun(int n ,int* a,int* k,int x,int i){
+
+    i = i -1;
+
+    a[i] = a[i] + x;
+
+    for(int j = 1;j<=n;j++){
+
+        if(a[i+j]<a[i+j-1]+k[i+j-1]){
+
+            a[i+j] = a[i+j-1]+k[i+j-1];
+
+        }
+
+
+
+    }
+
+}
+
+int sum(int* a,int l,int r){
+
+    int N(0);
+
+    for(int i = l-1;i<=r-1;i++){
+
+        N = N + a[i];
+
+    }
+
+    return N;
+
+}
+
+int main(){
+
+vector<int> c(0);
+
+int n,t,x,i,o;
+
+int v(0);
+
+cin>>n;
+
+int a[n];
+
+int k[n-1];
+
+t = n;
+
+while(n--){
+
+    cin>>x;
+
+    a[v] = x;
+
+    v++ ;
+
+}
+
+v = 0;
+
+n = t-1;
+
+while(n--){
+
+    cin>>x;
+
+    k[v] = x;
+
+    v++ ;
+
+}
+
+int q,l,r;
+
+char ch;
+
+cin>>q;
+
+int N;
+
+while(q--){
+
+    cin>>ch;
+
+    if(ch == '+'){
+
+        cin>>i>>o;
+
+        fun(t,a,k,o,i);
+
+    }
+
+    if(ch == 's'){
+
+        cin>>l>>r;
+
+        N = sum(a,l,r);
+
+        c.push_back(N);
+
+    }
+
+
+
+}
+
+for(int i = 0;i<c.size();i++){
+
+    cout<<c[i]<<endl;
+
+}
+
+return 0;
+
+}
+
+
+
+
+

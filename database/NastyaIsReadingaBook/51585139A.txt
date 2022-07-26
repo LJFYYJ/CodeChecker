@@ -1,0 +1,48 @@
+#include<bits/stdc++.h>
+
+using namespace std;
+
+int main()
+
+{
+
+    int n,m,i,cnt=0;
+
+    cin>>n;
+
+
+
+    int a[n*2+1];
+
+    for(i=1;i<=n*2;i++)
+
+        cin>>a[i];
+
+
+
+        cin>>m;
+
+        for(i=1;i<=n*2;i++)
+
+        {
+
+            if(m>a[i])
+
+                cnt=i/2;
+
+
+
+        }
+
+
+
+        cout<<n-cnt;
+
+
+
+
+
+
+
+    }
+

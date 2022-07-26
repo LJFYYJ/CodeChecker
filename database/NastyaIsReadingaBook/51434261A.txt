@@ -1,0 +1,28 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+  ios::sync_with_stdio(false);
+    cin.tie(0);
+	int b,n,k,i,j,cnt=0,ans,l,r;
+	vector< pair< int,int > >arr;
+	  cin >> n;
+    for(i=1;i<=n;i++)
+    {
+      cin >> l >> r;
+      arr.push_back(make_pair(l,r));
+    }
+    ans=n;
+    cin >> k;
+    for(i=0;i<n;i++)
+    {
+      if(k>arr[i].second)
+        ans--;
+      else
+      {
+        break;
+      }
+    }
+    cout << ans << endl;
+    return 0;
+}

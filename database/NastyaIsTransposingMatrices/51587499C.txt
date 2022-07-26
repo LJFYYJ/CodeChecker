@@ -1,0 +1,88 @@
+#include<bits/stdc++.h>
+
+using namespace std;
+
+vector<vector<int> >dA(10001),dB(10001);
+
+int main(){
+
+	
+
+	ios_base::sync_with_stdio(false);
+
+	cin.tie(0);
+
+	
+
+	int n,m;
+
+	cin>>n>>m;
+
+	int a[n+1][m+1],b[n+1][m+1];
+
+	
+
+	for(int i=1;i<=n;i++)
+
+	for(int j=1;j<=m;j++)
+
+	cin>>a[i][j];
+
+	
+
+	for(int i=1;i<=n;i++)
+
+	for(int j=1;j<=m;j++)
+
+	cin>>b[i][j];
+
+	
+
+   
+
+	
+
+	for(int i=1;i<=n;i++)
+
+	for(int j=1;j<=m;j++){
+
+		dA[i+j].push_back(a[i][j]);
+
+		dB[i+j].push_back(b[i][j]);
+
+	} 	
+
+
+
+	for(int i=2;i<=n+m;i++){
+
+		int k=dA[i].size();
+
+		sort(dA[i].begin(),dA[i].end());
+
+		sort(dB[i].begin(),dB[i].end());
+
+		for(int j=0;j<k;j++){
+
+			if(dA[i][j]!=dB[i][j]){
+
+				cout<<"NO";
+
+				return 0;
+
+			}
+
+			
+
+		}
+
+	}
+
+	cout<<"YES";
+
+	return 0;
+
+	
+
+}
+

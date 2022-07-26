@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+{% load staticfiles %}
+<head>
+    <meta charset="utf-8" />
+    <title>重置密码</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/register.css' %}">
+    <script src="{% static 'js/jquery.js' %}"></script>
+</head>
+<body>
+	<div class="nav">
+		<a href="{% url 'main' %}" style="font-size: 18px;">首页</a>
+		<h2 class="logo" style="margin-left:610px">CodeChecker</h2>
+	</div>
+	<div class="register" style="margin-top:45px; margin-bottom:80px">
+			<div class="interface"  style="height:424px">
+				<div id="title">
+					<p>重 置 密 码</p>
+				</div>
+				<div id="info" style="height:300px">
+					<form method="post", action="{% url 'modify' %}">
+                        {% csrf_token %}
+						<input type="text" name="username" readonly="true" class="input"
+                               value="{{ username }}">
+                        </br>
+                        <input type="text" name="email" readonly="true" class="input"
+                               value="{{ email }}">
+                        </br>
+                        <input type="password" name="password" placeholder="请输入新密码" class="input"
+                               value="{{ reset_form.password.value }}">
+                        </br>
+                        <input type="password" name="repassword" placeholder="请再次输入密码" class="input"
+                               value="{{ reset_form.repassword.value }}">
+                        <!--验证码的样式-->
+                        <div class="input">
+                            {{ reset_form.captcha }}
+                        </div>
+                        <!--注册按钮的样式-->
+                        </br></br>
+                        <input type="submit" value="修改密码" class="button" style="position:absolute;bottom:235px;right:730px;font-weight: 650;font-size: 18px;color:black;background-color:#99CCFF;line-height: 35px;width:80px;border:2px solid #5a98de;border-radius:5px;">
+
+					</form>
+                    <!--显示错误的样式-->
+                    <div style="color:red;position: absolute; left:635px;bottom:257px;">
+                        {{ msg }}
+                    </div>
+				</div>
+                <script>
+                    $('.captcha').click(function () {
+                        $.getJSON("/captcha/refresh/", function (result) {
+                            $('.captcha').attr('src', result['image_url']);
+                            $('#id_captcha_0').val(result['key'])
+                        });
+                    });
+
+                </script>
+			</div>
+	</div>
+	<div class="service" style="background-color: #f5f9fa">
+		<div class="bottom" style="background-color: #f5f9fa">
+			<ul>
+				<li ><a href="#" class="help">联系我们</a></li>
+				<li ><a href="#" class="help">用户帮助</a></li>
+				<li ><a href="#" class="help">隐私政策</a></li>
+				<li ><a href="#" class="help">关于网站</a></li>
+			</ul>
+		</div>
+	</div>
+</body>
+</html>

@@ -1,0 +1,48 @@
+#include<stdio.h>
+
+int main()
+
+{
+
+    int t;
+
+    scanf("%d",&t);
+
+    int s[t];
+
+    int e[t];
+
+    int n,k;
+
+    for(int i=0;i<t;i++)
+
+    {
+
+        scanf("%d %d",&s[i],&e[i]);
+
+    }
+
+    scanf("%d",&n);
+
+    for(int i=0;i<t;i++)
+
+    {
+
+        if(n>=s[i] && n<=e[i])
+
+            k=i;
+
+    }
+
+    printf("%d",t-k);
+
+
+
+return 0;
+
+
+
+}
+
+
+

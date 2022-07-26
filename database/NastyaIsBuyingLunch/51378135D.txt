@@ -1,0 +1,164 @@
+#include<bits/stdc++.h>
+
+#include <tr1/unordered_map>
+
+using namespace std;
+
+int main()
+
+{
+
+	int n,m;
+
+	cin>>n>>m;
+
+	vector <int> v(n,0);
+
+	for(int i=0;i<n;i++)
+
+	{
+
+		cin>>v[i];
+
+	}
+
+	vector <pair <int,int> > p;
+
+	int u,u1;
+
+	for(int i=0;i<m;i++)
+
+	{
+
+		cin>>u>>u1;
+
+		p.push_back(make_pair(u,u1));
+
+	}
+
+	vector <pair <int,int> > q;
+
+	for(int i=0;i<m;i++)
+
+	{
+
+		if(p[i].second==v[n-1])
+
+		{
+
+			q.push_back(make_pair(p[i].first,p[i].second));
+
+		}
+
+		//cin>>u>>u1;
+
+		//p.push_back(make_pair(u,u1));
+
+	}
+
+	std::tr1::unordered_map <int,int> map;
+
+	for(int i=0;i<n;i++)
+
+	{
+
+		map[v[i]]=i;
+
+	}
+
+	int pos=n-1;
+
+	int ans=0;
+
+	int f,s;
+
+	int swap=0;
+
+	int k=0;
+
+
+
+		for(k=0;k<m;k++)
+
+		{
+
+			if(p[k].second==v[n-1]&&((map[p[k].second]-map[p[k].first])==1))
+
+			{
+
+				ans++;
+
+				swap=map[p[k].second];
+
+				map[p[k].second]=map[p[k].first];
+
+				pos=map[p[k].first];
+
+				if(pos==0)
+
+				{
+
+					cout<<ans;
+
+					return 0;
+
+				}
+
+				map[p[k].first]=swap;
+
+			}
+
+			else if(((map[p[k].second]-map[p[k].first])==1))
+
+			{
+
+				swap=map[p[k].second];
+
+				map[p[k].second]=map[p[k].first];
+
+				map[p[k].first]=swap;
+
+				for(int i=0;i<q.size();i++)
+
+				{
+
+			       if((map[q[i].second]-map[q[i].first])==1)
+
+				   {
+
+				   	ans++;
+
+				   	swap=map[q[i].second];
+
+				   	map[q[i].second]=map[q[i].first];
+
+				   	pos=map[q[i].first];
+
+				   	if(pos==0)
+
+				   	{
+
+				   		cout<<ans;
+
+				   		return 0;
+
+					   }
+
+					   map[q[i].first]=swap;
+
+						   }		
+
+				}	
+
+			}	
+
+			
+
+		}
+
+		cout<<ans;
+
+	
+
+}
+

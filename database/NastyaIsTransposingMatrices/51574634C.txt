@@ -1,0 +1,82 @@
+#include<bits/stdc++.h>
+
+using namespace std;
+
+const int maxn = 500+10;
+
+int a[maxn][maxn];
+
+int b[maxn][maxn];
+
+vector<int> aa[2*maxn];
+
+vector<int> bb[2*maxn];
+
+int main(void)
+
+{
+
+	int n,m;
+
+	cin>>n>>m;
+
+	for(int i = 1; i <= n; i++)
+
+	{
+
+		for(int j = 1; j <= m; j++)
+
+		{
+
+			cin>>a[i][j];
+
+			aa[i+j].push_back(a[i][j]);
+
+		}
+
+	}
+
+	for(int i = 1; i <= n; i++)
+
+	{
+
+		for(int j = 1; j <= m; j++)
+
+		{
+
+			cin>>b[i][j];
+
+			bb[i+j].push_back(b[i][j]);
+
+		}
+
+	}
+
+	bool flag = 1;
+
+	for(int i = 1; i < 2*maxn; i++)
+
+	{
+
+		sort(aa[i].begin(), aa[i].end());
+
+		sort(bb[i].begin(), bb[i].end());
+
+		if (aa[i] != bb[i])
+
+ 			flag = 0;
+
+	}
+
+	if(flag)
+
+		cout<<"YES"<<endl;
+
+	else
+
+		cout<<"NO"<<endl;
+
+	return 0;
+
+}
+

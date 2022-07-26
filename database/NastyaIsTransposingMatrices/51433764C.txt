@@ -1,0 +1,140 @@
+#include<bits/stdc++.h>
+
+
+
+using namespace std;
+
+#define REPP(i,a,b,c) for(int i=a; i<=b; i+=c)
+
+#define REP(i,a,b) REPP(i,a,b,1)
+
+#define REVV(i,a,b,c) for(int i=a; i>=b; i-=c)
+
+#define REV(i,a,b) REVV(i,a,b,1)
+
+#define FOR(i,a) REP(i,0,(int)a-1)
+
+#define FORD(i,a) REV(i,(int)a-1,0)
+
+#define pb push_back
+
+#define pob pop_back
+
+#define fi first
+
+#define se second
+
+#define mp make_pair
+
+typedef long long ll;
+
+typedef pair < int , int > ii;
+
+typedef pair < int, ii> iii;
+
+typedef vector < int > vi;
+
+
+
+const int INF = 1e9;
+
+const int N = 1e5;
+
+
+
+int a[500][500], b[500][500];
+
+
+
+int main(){
+
+	int n,m;
+
+	scanf("%d %d",&n,&m);
+
+	bool flag=true;
+
+	FOR(i,n){
+
+		FOR(j,m){
+
+			scanf("%d",&a[i][j]);
+
+		}
+
+	}
+
+	FOR(i,n){
+
+		FOR(j,m){
+
+			scanf("%d",&b[i][j]);
+
+		}
+
+	}
+
+	vi lstA, lstB;
+
+	FOR(i,n){
+
+		int x = i, y = 0;
+
+		lstA.clear();
+
+		lstB.clear();
+
+		while(x>=0 && y<m){
+
+			lstA.pb(a[x][y]);
+
+			lstB.pb(b[x][y]);
+
+			x--; y++;
+
+		}
+
+		sort(lstA.begin(), lstA.end());
+
+		sort(lstB.begin(), lstB.end());
+
+		FOR(j, lstA.size()){
+
+			if(lstA[j]!=lstB[j]){
+
+//				cout<<i<<" "<<lstA[j]<<" "<<lstB[j]<<endl;
+
+				flag=false;
+
+//				break;
+
+			}
+
+		}
+
+	}
+
+	if(flag) printf("YES\n");
+
+	else printf("NO\n");
+
+    return 0;
+
+}
+
+
+
+/* Caution:
+
+    - start from 0 or 1 ?
+
+    - n=1 or other special case!!
+
+    - array out of bound
+
+    - do something instead of nothing and stay organized (ref: Benq)
+
+    - can you simplify the problem ?
+
+*/
+

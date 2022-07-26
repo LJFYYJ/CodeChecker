@@ -1,0 +1,58 @@
+
+
+package codeforces;
+
+
+
+import java.util.Scanner;
+
+
+
+public class CodeForces {
+
+
+
+    public static void main(String[] args) {
+
+        // TODO code application logic here
+
+        Scanner teclado = new Scanner(System.in);
+
+        
+
+        int n=teclado.nextInt();
+
+        int vet[][]=new int[n][2];
+
+        for(int x=0;x<n;x++){
+
+            for(int y=0;y<2;y++){
+
+                vet[x][y]=teclado.nextInt();
+
+            }
+
+        }
+
+        
+
+        int m=teclado.nextInt();
+
+        for(int x=0;x<n;x++){
+
+            if(m>=vet[x][0] && m<=vet[x][1]){
+
+                System.out.println(n-x);
+
+                break;
+
+            }
+
+        }
+
+    }
+
+    
+
+}
+

@@ -1,0 +1,57 @@
+#include <bits/stdc++.h>
+
+
+
+using namespace std;
+
+
+
+int n, m, a[550][550], b[550][550];
+
+
+
+void check(int i, int j){
+
+	vector<int> v1, v2;
+
+	while(i <= n && j >= 1)
+
+		v1.push_back(a[i][j]), v2.push_back(b[i][j]), i++, j--;
+
+	sort(v1.begin(), v1.end()), sort(v2.begin(), v2.end());
+
+	for(int i = 0;i < v1.size();i++)
+
+		if(v1[i] != v2[i])
+
+			cout << "NO",exit(0);
+
+}
+
+
+
+int main(){
+
+	cin >> n >> m;
+
+
+
+	for(int i = 1;i <= n;i++)
+
+		for(int j = 1;j <= m;j++)
+
+			cin >> a[i][j];
+
+	for(int i = 1;i <= n;i++)
+
+		for(int j = 1;j <= m;j++)
+
+			cin >> b[i][j];
+
+	for(int i = 1;i <= m;i++)
+
+		check(1, i);
+
+	cout << "YES";
+
+}

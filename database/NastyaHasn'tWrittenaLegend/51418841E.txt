@@ -1,0 +1,238 @@
+//TD
+
+#include<bits/stdc++.h>
+
+using namespace std;
+
+using LL = long long;
+
+using PLL = pair <  LL , bool >;
+
+const int N = 1e5 +20;
+
+LL a[N],k[N],s[N],ss[N];
+
+class SegmentTree
+
+{
+
+    int sz;
+
+    vector < LL > tree;
+
+    vector < PLL >lazy;
+
+    void split(int node ,int x,int y)
+
+    {
+
+        if(lazy[node].second) //have any value
+
+        {
+
+            int z =(x+y) /2;
+
+            tree[2*node] = (z-x) *lazy[node].first;
+
+            tree[2*node+1] = (y-z) *lazy[node].first;
+
+            lazy[2*node] =lazy[node];
+
+            lazy[2*node+1] =lazy[node];
+
+            lazy[node].second=false;
+
+
+
+        }
+
+    }
+
+    void Merge(int node,int x,int y)
+
+    {
+
+        tree[node]=tree[2 * node] +tree[2*node+1];
+
+    }
+
+public :
+
+    SegmentTree(int n)
+
+    {
+
+        for(sz=1;sz<n;sz<<=1);
+
+        tree.resize(2*sz );
+
+        lazy.resize(2*sz );
+
+    }
+
+    void update(int l,int r,LL v , int node=1,int x=0,int y =-1)
+
+    {
+
+        if(y==-1) y=sz;
+
+        if(r<=x || l>=y) return;
+
+        if(l<=x && y<=r)
+
+        {
+
+            tree[node] =(y-x)*v;
+
+            lazy[node] ={v,true};
+
+            return;
+
+        }
+
+        split(node,x,y);
+
+        update(l,r,v,2*node,x,(x+y)/2);
+
+        update(l,r,v,2*node+1,(x+y)/2,y);
+
+        Merge(node,x,y);
+
+    }
+
+    LL query(int l,int r,int node=1,int x=0,int y=-1)
+
+    {
+
+        if(y==-1) y=sz;
+
+        if(r<=x  || l>=y)  return 0;
+
+        if(l<=x && y<=r)   return tree[node];
+
+        split(node,x,y);
+
+        LL res =query(l,r,2*node,x,(x+y)/2) + query(l,r,2*node+1,(x+y)/2,y);
+
+        Merge(node,x,y);
+
+        return res;
+
+    }
+
+
+
+};
+
+
+
+int main()
+
+{
+
+    int n;
+
+    cin >>n;
+
+    for(int i=1;i<=n;i++ ) cin >>a[i];
+
+    for(int i=1;i<n-1;i++ ) cin >>k[i];
+
+
+
+    for(int i=1;i<=n-1;i++)
+
+    {
+
+         s[i]   = k[i] + s[i-1];
+
+        ss[i+1] = s[i] + ss[i];
+
+    }
+
+    SegmentTree tree(n+1);
+
+    for(int i=1;i<=n;i++) tree.update(i,i+1,a[i]-s[i-1]);
+
+    int q;
+
+    cin >>q;
+
+    while(q--)
+
+    {
+
+        char ty;
+
+        cin >>ty;
+
+        if(ty=='+')
+
+        {
+
+            int i;
+
+            LL x;
+
+            cin >>i>>x;
+
+             LL val =tree.query(i,i+1);
+
+             int lo= i,hi = n + 1 ;
+
+             while(lo + 1 <hi)
+
+             {
+
+                 int mid =( lo + hi )/2;
+
+                 LL cur =tree.query(mid,mid+1);
+
+                 if(cur<val +x)
+
+                 {
+
+                     lo = mid;
+
+                 }
+
+                 else
+
+                 {
+
+                     hi = mid;
+
+                 }
+
+             }
+
+             tree.update(i,lo+1,val+x);
+
+
+
+        }
+
+        else if(ty=='s')
+
+        {
+
+            int l,r;
+
+            cin >>l>>r;
+
+            LL res = tree.query(l,r,+1) + ss[r] -ss[l-1];
+
+            cout <<res<<endl;
+
+        }
+
+    }
+
+return 0;
+
+
+
+
+
+}
+

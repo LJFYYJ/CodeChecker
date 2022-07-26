@@ -1,0 +1,166 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+//typedefs
+
+typedef long long LL;
+typedef vector<int> VI;
+typedef vector<LL> VL;
+typedef vector<VI> VVI;
+typedef vector<VL> VVL;
+typedef pair<int,int> PII;
+typedef pair<double, double> PDD;
+typedef pair<LL, LL> PLL;
+typedef vector<PII> VII;
+typedef vector<PLL> VLL;
+
+//#Defines
+#define rep(i,a,b)	for(i=a;i<=b;i++)
+#define repR(i,a,b)	for(i=a;i>=b;i--)
+#define pb push_back
+// #define pb emplace_back
+#define F first
+#define S second
+#define mp make_pair
+#define all(c)		c.begin(),c.end()
+#define endl '\n'
+#define pf printf
+#define sf scanf
+//#define left __left
+//#define right __right
+//#define tree __tree
+#define MOD 1000000007
+//#define harmonic(n) 0.57721566490153286l+log(n)
+
+#define RESET(a,b)	memset(a,b,sizeof(a))
+#define sqr(a) ((a) * (a))
+
+#define optimize() ios_base::sync_with_stdio(0);cin.tie(0);cout.tie(0);
+#define fraction() cout.unsetf(ios::floatfield); cout.precision(10); cout.setf(ios::fixed,ios::floatfield);
+
+const double PI = acos(-1);
+const double eps = 1e-9;
+const int inf = 2000000000;
+const LL infLL = 9000000000000000000;
+
+
+//Bit Operations
+inline bool checkBit(LL n, int i) { return n&(1LL<<i); }
+inline LL setBit(LL n, int i) { return n|(1LL<<i);; }
+inline LL resetBit(LL n, int i) { return n&(~(1LL<<i)); }
+
+//Rotation: S -> E -> N -> W
+int fx[] = {0, +1, 0, -1};
+int fy[] = {-1, 0, +1, 0}; 
+//int dx[] = {0, +1, +1, +1, 0, -1, -1, -1};
+//int dy[] = {-1, -1, 0, +1, +1, +1, 0, -1};
+
+//Inline functions
+
+inline bool EQ(double a, double b) { return fabs(a-b) < 1e-9; }
+inline bool isLeapYear(LL year) { return (year%400==0) || (year%4==0 && year%100!=0); }
+inline void normal(LL &a) { a %= MOD; (a < 0) && (a += MOD); }
+inline LL modMul(LL a, LL b) { a %= MOD, b %= MOD; normal(a), normal(b); return (a*b)%MOD; }
+inline LL modAdd(LL a, LL b) { a %= MOD, b %= MOD; normal(a), normal(b); return (a+b)%MOD; }
+inline LL modSub(LL a, LL b) { a %= MOD, b %= MOD; normal(a), normal(b); a -= b; normal(a); return a; }
+inline LL modPow(LL b, LL p) { LL r = 1; while(p) { if(p&1) r = modMul(r, b); b = modMul(b, b); p >>= 1; } return r; }
+inline LL modInverse(LL a) { return modPow(a, MOD-2); }
+inline LL modDiv(LL a, LL b) { return modMul(a, modInverse(b)); }
+inline bool isInside(PII p,LL n,LL m)	{ return (p.first>=0&&p.first<n&&p.second>=0&&p.second<m); }
+inline bool isInside(PII p,LL n)		{ return (p.first>=0&&p.first<n&&p.second>=0&&p.second<n); }
+inline bool isSquare(LL x) 				{ LL s = sqrt(x);	return (s*s==x); }
+inline bool isFib(LL x) 				{ return isSquare(5*x*x+4)|| isSquare(5*x*x-4); }
+inline bool isPowerOfTwo(LL x)			{ return ((1LL<<(LL)log2(x))==x); }
+inline LL gcd(LL a, LL b) {if (b > a) swap(a, b); if (b == 0) return a; return gcd(b, a % b);}
+inline LL lcm(LL a, LL b) {return (a / (b * gcd(a, b))); }
+
+//Prime Number Generator
+/*
+#define mx 1000006
+bitset <mx> mark;
+vector <int> primes;
+
+void sieve() {
+    mark[0] = mark[1] = 1;
+    primes.push_back(2);
+    int lim = sqrt(mx * 1.0) + 2;
+    for (int i = 4; i < mx; i += 2) mark[i] = 1;
+    for (int i = 3; i < mx; i += 2) {
+        if (!mark[i]) {
+            primes.push_back(i);
+            if (i <= lim)
+                for (int j = i * i; j < mx; j += i)
+                    mark[j] = 1;
+        }
+    }
+}
+*/
+int main() {
+    #ifndef ONLINE_JUDGE
+        freopen("in", "r", stdin);
+        freopen("out", "w", stdout);
+    #endif
+    optimize();
+    int n, m; cin >> n >> m;
+    map <int, set <PII>> pos1;
+    map <int, set <PII>> pos2;
+
+    PII parent[502][502];
+    
+    for (int i = 0; i < min(m, n); i++) {
+        int i1 = i, j1 = i;
+        while (i1 >= 0) {
+            parent[i1][j1] = PII(i, i);
+            i1--;
+            j1++;
+        }
+        i1 = i + 1, j1 = i - 1;
+        while (j1 >= 0) {
+            parent[i1][j1] = PII(i, i);
+            i1++;
+            j1--;
+        }
+    }
+    
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < m; j++) {
+            int x; cin >> x;
+            pos1[x].insert(PII(i, j));
+        }
+    }
+
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < m; j++) {
+            int x; cin >> x;
+            pos2[x].insert(PII(i, j));
+        }
+    }
+    bool ok = true;
+    for (auto it = pos2.begin(); it != pos2.end(); ++it) {
+        if (it->second.size() != pos1[it->first].size()) {
+            ok = false;
+            break;
+        }
+    }
+    if (!ok) {
+        cout << "NO" << endl;
+        return 0;
+    }
+    for (auto it = pos2.begin(); it != pos2.end(); it++) {
+        map <PII, int> cnt;
+        for (auto it2 = it->second.begin(); it2 != it->second.end(); ++it2) {
+            cnt[parent[it2->first][it2->second]]++;
+        }
+        for (auto it2 = pos1[it->first].begin(); it2 != pos1[it->first].end(); it2++) {
+            cnt[parent[it2->first][it2->second]]--;
+        }
+        for (auto it2 = cnt.begin(); it2 != cnt.end(); it2++) {
+            if (it2->second != 0) {
+                cout << "NO" << endl;
+                return 0;
+            }
+        }
+    }
+    cout << "YES" << endl;
+}

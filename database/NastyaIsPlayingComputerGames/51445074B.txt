@@ -1,0 +1,29 @@
+var n,k,s,st:int64;
+
+begin
+
+	readln (n,k);
+
+    if (k > n div 2) then k := n - k + 1;
+
+    
+
+    if (k >= 1) then begin
+
+    s:=0;
+
+    s:=3;
+
+    inc (s, (k - 2)*3);
+
+    s:=s + k - 1;
+
+    s:=s + 3*(n - k + 1);
+
+    writeln (s);
+
+    end
+
+    else writeln ((n) * 3);
+
+end.

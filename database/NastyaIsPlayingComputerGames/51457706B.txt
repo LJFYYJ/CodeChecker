@@ -1,0 +1,32 @@
+#include<bits/stdc++.h>
+
+
+
+using namespace std;
+
+
+
+int main()
+
+{
+
+    int n,k;
+
+
+
+    cin>>n>>k;
+
+
+
+    if (k==1 || k==n)
+
+    {
+
+        cout<<n*3;
+
+    }
+
+    else cout << n*3 + 1 ;
+
+}
+

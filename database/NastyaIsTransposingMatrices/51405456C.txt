@@ -1,0 +1,39 @@
+#include<bits/stdc++.h>
+using namespace std ;
+typedef long long ll;
+const ll N = ll(1e9 + 7);
+const ll ma = ll(1e6 + 7); 
+#define IOS {ios :: sync_with_stdio(false); cin.tie(0); }
+#define f first
+#define s second
+#define pb push_back
+#define mp make_pair
+
+
+int main(){ 
+	int n,m ;
+	cin >>n>>m ;
+	vector<vector<ll>> A(n);
+	vector<vector<ll>> B(n);
+	vector<ll> aa[n+m] ;
+	vector<ll> bb[n+m] ;
+	for(int i=0 ; i<n ; i++){
+		A[i]=vector<ll>(m) ;
+		for(int j=0 ; j<m ; j++ ){cin>>A[i][j] ; aa[i+j].pb(A[i][j]);}
+	}
+	for(int i=0 ; i<n ; i++){
+		B[i]=vector<ll>(m) ;
+		for(int j=0 ; j<m ; j++ ){cin>>B[i][j] ; bb[i+j].pb(B[i][j]);}
+	}
+	for(int i=0 ; i<m+n ; i++){
+		sort(aa[i].begin(),aa[i].end());
+		sort(bb[i].begin(),bb[i].end());
+		if(aa[i]!=bb[i]){
+			cout<<"NO"<<endl ;
+			return 0 ;
+		}
+	}
+	cout<<"YES"<<endl ;
+	
+	return 0 ;
+}	

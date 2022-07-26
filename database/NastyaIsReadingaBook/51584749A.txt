@@ -1,0 +1,62 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+int v[105];
+
+int caut(int v[],int k,int x)
+
+{
+
+    int m,st=1,dr=k;
+
+    while(st<=dr)
+
+    {
+
+        int m=(st+dr)/2;
+
+        if(x==v[m])
+
+            return m;
+
+        else if(x>v[m])
+
+            st=m+1;
+
+        else
+
+            dr=m-1;
+
+    }
+
+    return dr;
+
+}
+
+int main()
+
+{
+
+    int n,l,r,k;
+
+    cin>>n;
+
+    for(int i=1;i<=n;i++)
+
+    {
+
+        cin>>l>>r;
+
+        v[i]=l;
+
+    }
+
+    cin>>k;
+
+    cout<<n-caut(v,n,k)+1;
+
+    return 0;
+
+}
+

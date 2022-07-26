@@ -1,0 +1,20 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main(){
+    int n;
+    cin>>n;
+    vector< pair<int,int> > c;
+    for(int i=0;i<n;i++){
+        int a,b;
+        cin>>a>>b;
+        c.push_back(make_pair(a,b));
+    }
+    int s;
+    cin>>s;
+    int ans=0;
+    for(int i=0;i<n;i++){
+        if(s>=c[i].first  && s<=c[i].second){ans=n-i;break;} 
+    }
+    cout<<ans;
+    return 0;
+}

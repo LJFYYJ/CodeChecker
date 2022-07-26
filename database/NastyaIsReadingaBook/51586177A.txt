@@ -1,0 +1,21 @@
+n = int(input())
+
+a = []
+
+for x in range(n):
+
+    a.append([int(num) for num in input().split()])
+
+#print(a)
+
+page = int(input())
+
+rez=0
+
+for x in range(n):
+
+    if a[x][1]<page:
+
+        rez+=1
+
+print(n-rez)

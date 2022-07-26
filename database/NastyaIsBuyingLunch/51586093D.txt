@@ -1,0 +1,54 @@
+var  n,m,i,j,e,k,d,c:integer;
+
+     v,a,b:array[1..1000] of integer;
+
+begin
+
+     read (n,m);
+
+     for i:=1 to n do
+
+     read (v[i]);
+
+          d:=v[n];
+
+     for i:=1 to m do
+
+     read (a[i],b[i]);
+
+          k:=m; c:=m+1;
+
+     while (c<>k) and (k<>0) do begin
+
+           c:=k;
+
+           for i:=1 to m do
+
+               for j:=1 to n do
+
+               if (v[j]=a[i]) and (v[j+1]=b[i]) then
+
+               begin
+
+                    e:=v[j]; v[j]:=v[j+1]; v[j+1]:=e; dec(k); break;
+
+               end;
+
+     end;
+
+               for i:=1 to n do
+
+               if (v[i]=d) then
+
+               begin
+
+               write (n-i);
+
+               break ;
+
+               end;
+
+
+
+end.
+

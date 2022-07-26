@@ -1,0 +1,94 @@
+#include<bits/stdc++.h>
+
+using namespace std;
+
+const int MAXN=1e6+50;
+
+int a[MAXN];
+
+int ne[MAXN],pre[MAXN];
+
+set<int>s[MAXN];
+
+int main()
+
+{
+
+	int n,m;
+
+	scanf("%d%d",&n,&m);
+
+	for(int i=1;i<=n;i++)
+
+	{
+
+		scanf("%d",&a[i]);
+
+	}
+
+	for(int i=1;i<=m;i++)
+
+	{
+
+		int x,y;
+
+		scanf("%d%d",&x,&y);
+
+		s[x].insert(y);
+
+	}
+
+	int pos=n;
+
+	for(int i=pos;i>1;i--)
+
+	{
+
+		if(s[a[i-1]].count(a[i]))
+
+		{
+
+//			cout<<a[i]<<' '<<a[i-1]<<"???"<<endl;
+
+			swap(a[i],a[i-1]);
+
+			if(pos==i)
+
+			{
+
+				pos=i-1;
+
+			}
+
+		}
+
+	}
+
+//	cout<<pos<<"???"<<endl;
+
+	for(int i=pos;i>1;i--)
+
+	{
+
+		if(s[a[i-1]].count(a[i]))
+
+		{
+
+			swap(a[i],a[i-1]);
+
+			if(pos==i)
+
+			{
+
+				pos=i-1;
+
+			}
+
+		}
+
+	}
+
+	printf("%d\n",n-pos);
+
+} 
+

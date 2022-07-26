@@ -1,0 +1,113 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+
+
+#define mp make_pair
+
+#define pb push_back
+
+#define fi first
+
+#define se second
+
+#define fastt ios_base::sync_with_stdio(false); cin.tie(NULL)
+
+#define debug1(x) cout<<#x<<" : "<<x<<endl
+
+#define debug2(x,y) cout<<#x<<" : "<<x<<" "<<#y<<" : "<<y<<endl
+
+#define debug3(x,y,z) cout<<#x<<" : "<<x<<" "<<#y<<" : "<<y<<" "<<#z<<" : "<<z<<endl
+
+
+
+typedef long long ll;
+
+typedef pair<ll,ll> pii;
+
+const ll modd=1e9+7;
+
+
+
+ll poww(ll a,ll b){
+
+  ll ans=1;
+
+  while(b>0){
+
+    if(b%2==1) ans=(ans*a);
+
+    a=(a*a);
+
+    b=b/2;
+
+  }
+
+  return ans;
+
+}
+
+
+
+/*-----------------------------------------------------------------------*/
+
+
+
+ll dp[20000];
+
+ll chap[20000];
+
+
+
+int main(){
+
+   fastt;
+
+
+
+   ll n;
+
+   cin>>n;
+
+
+
+   for(ll i=1;i<=n;i++){
+
+   	 ll l,r;
+
+   	 cin>>l>>r;
+
+   	 dp[r+1]++;
+
+   }
+
+
+
+   ll count=0;
+
+
+
+   for(ll i=1;i<=20000;i++){
+
+      count+=dp[i];
+
+      chap[i]+=count;
+
+   }
+
+
+
+   ll k;
+
+   cin>>k;
+
+
+
+   cout<<n-chap[k]<<endl;
+
+
+
+   return 0;
+
+}

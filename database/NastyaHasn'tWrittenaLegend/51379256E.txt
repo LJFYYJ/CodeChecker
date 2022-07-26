@@ -1,0 +1,49 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+int n,m,i,j,k,a[100000],b[100000];
+
+char c;
+
+int main(){
+
+	for(cin>>n;i<n;i++)cin>>a[i];
+
+	for(i=0;i<n-1;i++)cin>>b[i];
+
+	for(cin>>m;m>0;m--)
+
+	{
+
+		cin>>c>>j>>k;
+
+		if(c=='s')
+
+		{
+
+			int t=0;
+
+			for(j--;j<k;j++)t+=a[j];
+
+			cout << t << '\n';
+
+		}
+
+		else 
+
+		{
+
+			a[--j] += k;
+
+			while(j<n-1&&b[j]+a[j]>a[j++])
+
+				a[j]=a[j-1]+b[j-1];
+
+		}
+
+	}
+
+	
+
+}

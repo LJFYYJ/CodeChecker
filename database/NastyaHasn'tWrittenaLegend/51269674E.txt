@@ -1,0 +1,27 @@
+n=int(input())
+
+a=[int(i) for i in input().split()]
+
+k=[int(i) for i in input().split()]
+
+for i in range(int(input())):
+
+    c=[j for j in input().split()]
+
+    if c[0]=="+":
+
+        y,x=int(c[1])-1,int(c[2])
+
+        a[y]+=x
+
+        while y<n-1 and a[y+1]<a[y]+k[y]:
+
+            a[y+1]=a[y]+k[y]
+
+    else:
+
+        l,r=int(c[1]),int(c[2])
+
+        s=sum(int(a[j]) for j in range(l-1,r))
+
+        print(s)

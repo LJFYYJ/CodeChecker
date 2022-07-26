@@ -1,0 +1,25 @@
+#include<bits/stdc++.h>
+
+using namespace std;
+
+long long int lol=0;
+
+ 
+
+int main()
+
+{
+
+    ios::sync_with_stdio(false);
+
+    cin.tie(NULL);
+
+    long long int t,n,i;
+
+    cin>>n>>t;
+
+    cout<<6+(n-2)*3+min(n-t,t-1);
+
+    return 0;
+
+}

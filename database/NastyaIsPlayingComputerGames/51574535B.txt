@@ -1,0 +1,19 @@
+#include<bits/stdc++.h>
+
+using namespace std;
+
+int main(void)
+
+{
+
+	int n,k;
+
+	cin>>n>>k;
+
+	int d = min(k-1,n-k);
+
+	cout<<3*n+d<<endl; 
+
+	return 0;
+
+}

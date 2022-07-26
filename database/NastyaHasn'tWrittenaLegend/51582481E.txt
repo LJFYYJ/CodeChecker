@@ -1,0 +1,189 @@
+#include <ext/pb_ds/assoc_container.hpp>
+#include <ext/pb_ds/tree_policy.hpp>
+#include <bits/stdc++.h>
+ 
+using namespace __gnu_pbds;
+using namespace std;
+
+typedef long double ld;
+typedef long long ll;
+typedef pair <int, int> pii;
+typedef pair <ll, ll> pll;
+
+template<typename has_less>
+using ordered_set =
+tree<has_less,
+	null_type,
+	less<has_less>,
+	rb_tree_tag,
+	tree_order_statistics_node_update>;
+
+#define pb push_back
+#define F first
+#define S second
+#define ALL(v) v.begin(),v.end()
+#define fast_cin() ios_base::sync_with_stdio(0);cin.tie(NULL);cout.tie(NULL);
+
+typedef long long ll;
+typedef long double ld;
+typedef pair <ll,ll> pll;
+typedef pair <int,int> pii;
+
+#define TRACE
+#ifndef ONLINE_JUDGE
+#define trace(...) __f(#__VA_ARGS__, __VA_ARGS__)
+template <typename Arg1>
+void __f(const char* name, Arg1&& arg1){
+    cerr << name << " : " << arg1 << std::endl;
+}
+template <typename Arg1, typename... Args>
+void __f(const char* names, Arg1&& arg1, Args&&... args){
+    const char* comma = strchr(names + 1, ',');cerr.write(names, comma - names) << " : " << arg1<<" | ";__f(comma+1, args...);
+}
+#else
+#define trace(...)
+#endif
+
+bool bit(int n, int i) { return (n >> i) & 1; }
+
+int faltu;
+
+const int mod = 1e9+7;
+const ll inf = 5e18;
+const int N = 1e5 + 100;
+
+struct node {
+	ll sum, sml, i;
+	node() {}
+	node(ll sum, ll sml, ll i) : sum(sum), sml(sml), i(i) {}
+}stree[N * 4];
+
+int n, q;
+ll a[N], pre[N], k[N], suf[N];
+
+void build(int i, int j, int sidx) {
+	if(i == j) {
+		stree[sidx].sum = a[i];
+		return;
+	} else {
+		int mid = (i + j) >> 1, lc = sidx * 2, rc = lc + 1;
+		build(i, mid, lc);
+		build(mid + 1, j, rc);
+		stree[sidx].sum = stree[lc].sum + stree[rc].sum;
+	}
+}
+
+ll sum(int i, int j) {
+	return pre[j] - pre[i - 1];
+}
+
+ll get_tight_sum(int i, int j, ll start) {
+	ll ans = start * (j - i + 1);
+	ll tadd = suf[i] - suf[j];
+	ll ps = pre[j - 1] - pre[i - 1];
+	tadd -= (ps * (n - j));
+	// trace(tadd);
+	ans += tadd;	
+	// trace(i, j, start);
+	return ans;
+}
+
+void propagate(int i, int j, int sidx) {
+	int mid = (i + j) >> 1, lc = sidx * 2, rc = lc + 1;
+	if(stree[sidx].i != 0) {
+		stree[lc].i = i;
+		stree[lc].sml = stree[sidx].sml;
+		stree[lc].sum = get_tight_sum(i, mid, stree[lc].sml);
+
+		stree[rc].i = mid + 1;
+		stree[rc].sml = stree[sidx].sml + sum(i, mid);
+		stree[rc].sum = get_tight_sum(mid + 1, j, stree[rc].sml);
+
+		stree[sidx].i = 0;
+		stree[sidx].sum = get_tight_sum(i, j, stree[sidx].sml);
+	}
+}
+
+ll query(int i, int j, int sidx, int ql, int qr) {
+	if(i > qr or j < ql) {
+		return 0;
+	} else if(i >= ql and qr >= j) {
+		if(i < j) {
+			propagate(i, j, sidx);
+		}
+		return stree[sidx].sum;
+	} else {
+		propagate(i, j, sidx);
+		int mid = (i + j) >> 1, lc = sidx * 2, rc = lc + 1;
+		return query(i, mid, lc, ql, qr) + query(mid + 1, j, rc, ql, qr);
+	}
+}
+
+void update(int i, int j, int sidx, int ql, int qr, ll val) {
+	if(i > qr or j < ql) {
+		return;
+	} else if(i >= ql and qr >= j) {
+		stree[sidx].sml = val + sum(ql, i - 1);
+		stree[sidx].sum = get_tight_sum(i, j, stree[sidx].sml);
+		stree[sidx].i = i;
+	} else {
+		propagate(i, j, sidx);
+		int mid = (i + j) >> 1, lc = sidx * 2, rc = lc + 1;		
+		update(i, mid, lc, ql, qr, val);
+		update(mid + 1, j, rc, ql, qr, val);
+		stree[sidx].sum = stree[lc].sum + stree[rc].sum;
+	}
+}
+
+int main()
+{
+	fast_cin();
+	srand(time(0));
+
+	cin >> n;
+	for(int i = 1; i <= n; i++) {
+		cin >> a[i];
+	}
+	for(int i = 1; i < n; i++) {
+		cin >> k[i];
+		pre[i] = pre[i - 1] + k[i];
+	}
+	suf[n] = 0;
+	ll ct = 1;
+	for(int i = n - 1; i >= 1; i--) {
+		suf[i] = k[i] * ct;
+		ct++;
+	}
+	for(int i = n - 2; i >= 1; i--) {
+		suf[i] += suf[i + 1];
+	}
+	build(1, n, 1);
+	cin >> q;
+	while(q--) {
+		char ch; cin >> ch;
+		if(ch == '+') {
+			ll i, x;
+			cin >> i >> x;
+			int lo = i, hi = n, mid, j = lo;
+			ll p = query(1, n, 1, i, i);
+			while(lo <= hi) {
+				mid = (lo + hi) >> 1;
+				ll val = query(1, n, 1, mid, mid);
+				if(val < p + x + sum(i, mid - 1)) {
+					j = mid, lo = mid + 1;
+				} else {
+					hi = mid - 1;
+				}
+			}
+			trace(i, j);
+			update(1, n, 1, i, j, p + x);
+		} else {
+			ll ql, qr;
+			cin >> ql >> qr;
+			cout << query(1, n, 1, ql, qr) << endl;
+		}
+	}
+
+
+	return 0;
+}

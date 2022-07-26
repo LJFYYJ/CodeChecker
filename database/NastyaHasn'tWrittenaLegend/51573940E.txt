@@ -1,0 +1,133 @@
+#include <iostream>
+
+#include <cstring>
+
+using namespace std;
+
+const int maxn=10005;
+
+int Next[maxn][30],fa[maxn],len[maxn],root=1,tot=1,last=1;
+
+int n,a,b;
+
+char s[maxn];
+
+void extend(int c){
+
+	int p=last,np=++tot;
+
+	len[np]=len[p]+1;
+
+	last=np;
+
+	for (;p&&!Next[p][c];p=fa[p]) Next[p][c]=np;
+
+	if (!p){
+
+		fa[np]=root;
+
+	}else{
+
+		int q=Next[p][c];
+
+		if (len[q]==len[p]+1)
+
+			fa[np]=q;
+
+		else{
+
+			int nq=++tot;
+
+			len[nq]=len[p]+1;
+
+			fa[nq]=fa[q];
+
+			fa[np]=fa[q]=nq;
+
+			memcpy(Next[nq],Next[q],sizeof Next[nq]);
+
+			for(;p&&Next[p][c]==q;p=fa[p]) Next[p][c]=nq;
+
+		}
+
+	}
+
+}
+
+int yuan[maxn],dp[maxn];
+
+int pao(int u){
+
+	int cur=root;
+
+	int len=0; 
+
+	for (int i=u;i<n;i++){
+
+		if (Next[cur][s[i]-'a'])
+
+			cur=Next[cur][s[i]-'a'],len++;
+
+		else
+
+			return len;
+
+	}
+
+	return len;
+
+}
+
+int main(){
+
+	scanf("%d%d%d",&n,&a,&b);
+
+	scanf("%s",s);
+
+	for (int i=0;i<n;i++){
+
+		yuan[i]=pao(i);
+
+		extend(s[i]-'a');
+
+	}
+
+	memset(dp,1,sizeof(dp));
+
+	dp[0]=0;
+
+	/*for (int i=0;i<n;i++){
+
+		cout << yuan[i] << ' ';
+
+	}*/
+
+	cout << endl;
+
+	for (int i=0;i<n;i++){
+
+		for (int j=i+1;j<=i+yuan[i+1];j++){
+
+			dp[j]=min(dp[j],dp[i]+b);			
+
+		}
+
+		dp[i+1]=min(dp[i+1],dp[i]+a);
+
+	}
+
+	cout << dp[n];
+
+}/*
+
+30 4114 2743
+
+eeaeaebdacdbabccbddcaddcddceea
+
+010221001011111111111321321321
+
+69944
+
+010221001011111121111322321321
+
+67201*/

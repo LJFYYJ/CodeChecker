@@ -1,0 +1,231 @@
+#include <vector>
+
+#include <string>
+
+#include <map>
+
+#include <set>
+
+#include <string.h>
+
+#include <cmath>
+
+#include <cstdio>
+
+#include <queue>
+
+#include <random>
+
+#include <iostream>
+
+#include <algorithm>
+
+#include <unordered_map>
+
+using namespace std;
+
+#define rep(i,lo,hi) for(int i=(lo);i<=(hi);++i)
+
+#define rev(i,hi,lo) for(int i=(hi);i>=(lo);--i)
+
+#define pb push_back
+
+#define mp make_pair
+
+#define sz(x) ((int)((x).size()))
+
+#define out(x)  cout<<#x<<"="<<(x)<<"\n"
+
+#define LL "%lld" //%I64d 
+
+typedef long long ll;
+
+typedef long long lint;
+
+typedef long double ldouble;
+
+typedef long long ull;
+
+typedef pair<int, int> pii;
+
+typedef vector<int> vi;
+
+typedef set<int> si;
+
+typedef vector<si> vsi;
+
+typedef vector<pii> vpii;
+
+typedef vector<double> vd;
+
+typedef vector<vi> vvi;
+
+typedef vector<string> vs;
+
+typedef vector<long long> vl;
+
+typedef map<int, int> mii;
+
+const int MAXN = 1 << 18;
+
+const int MAXQ = 1 << 21;
+
+const int MAXS = 1 << 19;
+
+const int INF = 1 << 30;
+
+void print(vector<int> &v) {cout << "v = ";for (int i = 0; i < v.size(); ++i) {cout << v[i] << " ";}cout << endl;}
+
+const lint MOD = 1000 * 1000 * 1000 + 7;
+
+
+
+int N, M;
+
+
+
+vvi read() {
+
+	vvi a(N, vi(M, 0));
+
+	for (int i = 0; i < N; ++i) {
+
+		for (int j = 0; j < M; ++j) {
+
+			cin >> a[i][j];
+
+		}
+
+	}
+
+	return a;
+
+}
+
+
+
+
+
+vvi build(vvi &a) {
+
+	int n = N - 1 + M - 1 + 1;
+
+	vvi r(n);
+
+	for (int i = 0; i < N; ++i) {
+
+		for (int j = 0; j < M; ++j) {
+
+			int p = i + j;
+
+			int x = a[i][j];
+
+			r[p].pb(x);
+
+		}
+
+	}
+
+	return r;
+
+}
+
+
+
+void printv(vi &v) {
+
+	cout << "{";
+
+	for (auto x : v) {
+
+		cout << x << " ";
+
+	}
+
+	cout << "}\n";
+
+}
+
+
+
+bool eqv(vi &a, vi &b) {
+
+	if (sz(a) != sz(b)) {
+
+		return false;
+
+	}
+
+	for (int i = 0; i < sz(a); ++i) {
+
+		if (a[i] != b[i]) {
+
+			return false;
+
+		}
+
+	}
+
+	return true;
+
+}
+
+
+
+
+
+bool eq(vvi &a, vvi b) {
+
+	for (int i = 0; i < sz(a); ++i) {
+
+		sort(a[i].begin(), a[i].end());
+
+		sort(b[i].begin(), b[i].end());		
+
+		// out(i);
+
+		// printv(a[i]);
+
+		// printv(b[i]);
+
+		if (!eqv(a[i], b[i])) {
+
+			return false;
+
+		}
+
+	}
+
+	return true;
+
+}
+
+
+
+
+
+int main() {
+
+#ifndef ONLINE_JUDGE
+
+	freopen("input.txt", "r", stdin);
+
+#endif
+
+	cin >> N >> M;
+
+	vvi a1 = read();
+
+	vvi a2 = read();
+
+	vvi b1 = build(a1);
+
+	vvi b2 = build(a2);
+
+	if (eq(b1, b2)) puts("YES");
+
+	else puts("NO");
+
+	return 0;
+
+}

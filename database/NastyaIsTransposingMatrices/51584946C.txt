@@ -1,0 +1,172 @@
+#include<bits/stdc++.h>
+
+using namespace std;
+
+typedef long long ll;
+
+#define maxn 510
+
+ll mod=998244353;
+
+int mata[maxn][maxn],matb[maxn][maxn];
+
+int a[maxn*2],b[maxn*2];
+
+int main()
+
+{
+
+	int n,m;cin>>n>>m;
+
+	for(int i=1;i<=n;i++)
+
+	{
+
+		for(int j=1;j<=m;j++)
+
+		{
+
+			cin>>mata[i][j];
+
+		}
+
+	}
+
+	for(int i=1;i<=n;i++)
+
+	{
+
+		for(int j=1;j<=n;j++)
+
+		{
+
+			cin>>matb[i][j];
+
+		}
+
+	}
+
+	int flag=1;
+
+	if(n>m)
+
+	{
+
+		for(int i=1;i<=n;i++)
+
+		{
+
+			int N=min(i,m);
+
+			for(int j=1;j<=N;j++)
+
+			{
+
+				a[j]=mata[i-j+1][j];
+
+				b[j]=matb[i-j+1][j];
+
+			}
+
+			sort(a+1,a+1+N);sort(b+1,b+1+N);
+
+			for(int j=1;j<=N;j++)
+
+			{
+
+				if(a[j]!=b[j])
+
+				{
+
+					flag=0;break;
+
+				}
+
+			}
+
+			if(!flag)
+
+			{
+
+				break;
+
+			}
+
+		}
+
+	}
+
+	else
+
+	{
+
+		for(int j=1;j<=m;j++)
+
+		{
+
+			int N=min(j,n);
+
+			for(int i=1;i<=N;i++)
+
+			{
+
+				a[i]=mata[i][j-i+1];
+
+				b[i]=matb[i][j-i+1];
+
+			}
+
+			sort(a+1,a+1+N);sort(b+1,b+1+N);
+
+			for(int i=1;i<=N;i++)
+
+			{
+
+				if(a[i]!=b[i])
+
+				{
+
+					flag=0;break;
+
+				}
+
+			}
+
+			if(!flag)
+
+			{
+
+				break;
+
+			}
+
+		}
+
+	}
+
+	if(flag)
+
+	{
+
+		printf("YES\n");
+
+	}
+
+	else
+
+	{
+
+		printf("NO\n");
+
+	}
+
+    return 0;
+
+}
+
+
+
+
+
+
+

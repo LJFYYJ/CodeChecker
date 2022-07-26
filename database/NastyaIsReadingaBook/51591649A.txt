@@ -1,0 +1,46 @@
+#include <iostream>
+
+using namespace std;
+
+int main()
+
+{   unsigned int mt [101][3];
+
+
+
+    unsigned int n,k,i,j;
+
+    cin>>n;
+
+    for( i =1;i<=n;i++)
+
+        for( j =1;j<=2;j++)
+
+    {
+
+        cin>>mt[i][j];
+
+    }
+
+    cin>>k;
+
+    for( i =1;i<=n;i++)
+
+        {
+
+            if(k>=mt[i][1] && k<=mt[i][2])
+
+            {
+
+              cout<<(n-i)+1;
+
+              break;
+
+            }
+
+
+
+        }
+
+}
+

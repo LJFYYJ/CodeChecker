@@ -1,0 +1,473 @@
+
+
+/*
+
+In English  По-русски
+
+Enter | Register
+
+
+
+HOME
+
+TOP
+
+CONTESTS
+
+GYM
+
+PROBLEMSET
+
+GROUPS
+
+RATING
+
+API
+
+HELP
+
+CALENDAR
+
+
+
+ABHINAV__BLOGTEAMSSUBMISSIONSCONTESTS
+
+ show unofficial
+
+Abhinav__ submissions
+
+    
+
+Abhinav__ submissions 
+
+  
+
+#	When	Who	Problem	Lang	Verdict	Time	Memory
+
+51472735	2019-03-19 10:35:43	Abhinav__	D - Nastya Is Buying Lunch	GNU C++14	Wrong answer on test 69	623 ms	18800 KB
+
+51471498	2019-03-19 09:48:27	Abhinav__	D - Nastya Is Buying Lunch	GNU C++14	Wrong answer on test 12	326 ms	9600 KB
+
+51307942	2019-03-14 20:45:54	Abhinav__	D - Colorful Graph	GNU C++14	Accepted	248 ms	9200 KB
+
+51306619	2019-03-14 20:07:08	Abhinav__	D - Colorful Graph	GNU C++14	Memory limit exceeded on test 13	498 ms	262100 KB
+
+51306523	2019-03-14 20:04:02	Abhinav__	D - Colorful Graph	GNU C++14	Wrong answer on test 7	30 ms	100 KB
+
+51306455	2019-03-14 20:02:07	Abhinav__	D - Colorful Graph	GNU C++14	Wrong answer on test 3	30 ms	100 KB
+
+51305515	2019-03-14 19:35:19	Abhinav__	C - Game with Coins	GNU C++14	Accepted	92 ms	200 KB
+
+51260908	2019-03-13 16:16:58	Abhinav__	C - Game with Coins	GNU C++14	Wrong answer on test 4	30 ms	0 KB
+
+51260889	2019-03-13 16:16:24	Abhinav__	C - Game with Coins	GNU C++14	Wrong answer on test 1	0 ms	0 KB
+
+51260813	2019-03-13 16:14:59	Abhinav__	C - Game with Coins	GNU C++14	Wrong answer on test 3	30 ms	0 KB
+
+51260681	2019-03-13 16:12:14	Abhinav__	C - Game with Coins	GNU C++14	Wrong answer on test 1	0 ms	0 KB
+
+51260191	2019-03-13 16:00:39	Abhinav__	C - Game with Coins	GNU C++14	Wrong answer on test 4	30 ms	0 KB
+
+51259848	2019-03-13 15:52:53	Abhinav__	C - Game with Coins	GNU C++14	Wrong answer on test 3	30 ms	0 KB
+
+51259711	2019-03-13 15:49:47	Abhinav__	C - Game with Coins	GNU C++14	Wrong answer on test 1	30 ms	0 KB
+
+51254790	2019-03-13 13:45:28	Abhinav__	A - Not Wool Sequences	GNU C++14	Accepted	62 ms	0 KB
+
+51246657	2019-03-13 08:49:08	Abhinav__	B - Maximize Sum of Digits	GNU C++14	Wrong answer on test 14	31 ms	0 KB
+
+51246278	2019-03-13 08:30:31	Abhinav__	B - Maximize Sum of Digits	GNU C++14	Wrong answer on test 7	31 ms	0 KB
+
+51245590	2019-03-13 07:47:08	Abhinav__	A - Success Rate	GNU C++14	Accepted	31 ms	200 KB
+
+51113742	2019-03-10 08:56:03	Abhinav__	C - Mike and gcd problem	GNU C++14	Accepted	46 ms	400 KB
+
+51088818	2019-03-09 17:02:31	Abhinav__	A - Numbers Joke	GNU C++14	Accepted	46 ms	0 KB
+
+51088667	2019-03-09 16:59:29	Abhinav__	A - Numbers Joke	GNU C++14	Wrong answer on test 2	15 ms	0 KB
+
+51088616	2019-03-09 16:58:40	Abhinav__	A - Numbers Joke	GNU C++14	Wrong answer on test 1	0 ms	0 KB
+
+51084349	2019-03-09 15:37:38	Abhinav__	C - Naming Company	GNU C++14	Wrong answer on test 5	15 ms	0 KB
+
+51081197	2019-03-09 14:21:36	Abhinav__	C - Naming Company	GNU C++14	Wrong answer on test 6	30 ms	0 KB
+
+51080162	2019-03-09 13:57:50	Abhinav__	C - Minimal string	GNU C++14	Accepted	46 ms	11100 KB
+
+51069505	2019-03-09 10:11:23	Abhinav__	A - Heidi and Library (easy)	GNU C++14	Accepted	30 ms	100 KB
+
+51066374	2019-03-09 09:05:16	Abhinav__	A - Heidi and Library (easy)	GNU C++14	Wrong answer on test 8	30 ms	0 KB
+
+51065603	2019-03-09 08:45:20	Abhinav__	A - Heidi and Library (easy)	GNU C++14	Wrong answer on test 4	15 ms	0 KB
+
+51028900	2019-03-08 15:51:39	Abhinav__	C - Fountains	GNU C++14	Accepted	78 ms	2100 KB
+
+51028771	2019-03-08 15:45:42	Abhinav__	C - Fountains	GNU C++14	Runtime error on test 5	15 ms	0 KB
+
+49608641	2019-02-08 00:20:25	Abhinav__	C - Vladik and Memorable Trip	GNU C++14	Accepted	358 ms	700 KB
+
+49602699	2019-02-07 20:56:24	Abhinav__	B - The Golden Age	GNU C++14	Accepted	31 ms	100 KB
+
+49560901	2019-02-07 15:32:04	Abhinav__	C - The Tag Game	GNU C++14	Accepted	140 ms	16400 KB
+
+49529095	2019-02-06 16:00:09	Abhinav__	D - Multicolored Cars	GNU C++14	Accepted	124 ms	7000 KB
+
+49520623	2019-02-06 10:37:56	Abhinav__	D - My pretty girl Noora	GNU C++14	Accepted	358 ms	58700 KB
+
+49520280	2019-02-06 10:21:50	Abhinav__	D - My pretty girl Noora	GNU C++14	Wrong answer on test 2	62 ms	43100 KB
+
+49520202	2019-02-06 10:18:40	Abhinav__	D - My pretty girl Noora	GNU C++14	Wrong answer on test 2	62 ms	43000 KB
+
+49501554	2019-02-05 18:27:28	Abhinav__	B - High Load	GNU C++14	Wrong answer on test 11	31 ms	0 KB
+
+49501200	2019-02-05 18:15:39	Abhinav__	B - High Load	GNU C++14	Wrong answer on test 8	31 ms	0 KB
+
+49488097	2019-02-05 10:40:35	Abhinav__	A - The Meaningless Game	GNU C++14	Accepted	358 ms	0 KB
+
+49488077	2019-02-05 10:39:21	Abhinav__	A - The Meaningless Game	GNU C++14	Compilation error	0 ms	0 KB
+
+49485190	2019-02-05 07:55:53	Abhinav__	A - The Meaningless Game	GNU C++14	Wrong answer on test 1	15 ms	0 KB
+
+49472019	2019-02-04 20:32:19	Abhinav__	B - Game of the Rows	GNU C++14	Accepted	31 ms	0 KB
+
+49471806	2019-02-04 20:26:28	Abhinav__	B - Game of the Rows	GNU C++14	Wrong answer on test 43	31 ms	0 KB
+
+49471674	2019-02-04 20:23:03	Abhinav__	B - Game of the Rows	GNU C++14	Wrong answer on test 33	46 ms	0 KB
+
+49462297	2019-02-04 16:35:32	Abhinav__	B - Preparing for Merge Sort	GNU C++14	Accepted	218 ms	19300 KB
+
+49459463	2019-02-04 15:13:40	Abhinav__	B - Digital root	GNU C++14	Accepted	31 ms	0 KB
+
+49459413	2019-02-04 15:12:06	Abhinav__	A - Digits Sequence Dividing	GNU C++14	Wrong answer on test 1	15 ms	0 KB
+
+48632753	2019-01-20 16:37:02	Abhinav__	C - Ayoub and Lost Array	GNU C++14	Accepted	62 ms	22400 KB
+
+48632489	2019-01-20 16:35:42	Abhinav__	C - Ayoub and Lost Array	GNU C++14	Runtime error on pretest 5	30 ms	2400 KB
+
+← 1 2 3 ... 5 6 →
+
+  
+
+→ Pay attention
+
+Before contest
+
+Codeforces Round #547 (Div. 3)
+
+06:21:54
+
+Register now »
+
+
+
+  
+
+→ Top rated
+
+#	User	Rating
+
+1	tourist	3624
+
+2	Um_nik	3468
+
+3	mnbvmar	3363
+
+4	Petr	3330
+
+5	wxhtxdy	3329
+
+6	LHiC	3300
+
+7	sunset	3278
+
+8	V--o_o--V	3275
+
+9	Vn_nV	3182
+
+10	dotorya	3156
+
+Countries | Cities | Organizations	View all →
+
+  
+
+→ Top contributors
+
+#	User	Contrib.
+
+1	Radewoosh	191
+
+2	Errichto	184
+
+3	rng_58	160
+
+4	PikMike	158
+
+5	Petr	156
+
+6	Vovuh	153
+
+6	Um_nik	153
+
+6	neal	153
+
+9	Ashishgup	152
+
+10	majk	151
+
+10	300iq	151
+
+View all →
+
+  
+
+→ Find user
+
+Handle:  
+
+ Find
+
+  
+
+→ Recent actions
+
+yutaka1999 → Japanese Olympiad in Informatics (JOI) Spring Camp 2019   New comment(s)
+
+aman_naughty → Estimate time complexity of randomized algorithm   New comment(s)
+
+Vovuh → Codeforces Round #544 (Div. 3) Editorial   New comment(s)
+
+Chilli → Benchmarking Complexity of Dinic's With Scaling   Text created or updated
+
+UNoobAble → khung   Text created or updated
+
+DmitryGrigorev → Editorial of Round #546(Div.2)   New comment(s)
+
+Leviosarz → Need help for a problem   New comment(s)
+
+ojuz → A blog post for people who want to connect their account with oj.uz   New comment(s)
+
+Updown → Teams going to ACM-ICPC World Finals 2019 Completed List!   New comment(s)
+
+ko_osaga → ...And another boring OI solving stream   New comment(s)
+
+Anurag → Site has become too slow??   New comment(s)
+
+atlasworld → Help in atcoder GC problem(b) colorful slimes   New comment(s)
+
+popabogdannnn → Counting Problem   New comment(s)
+
+dzy493941464 → Codeforces Round #FF(255) Editorial   New comment(s)
+
+sinha → Kosaraju's Algorithm vs Tarjan's Algorithm   New comment(s)
+
+dotorya → Multiple accounts for one person should be banned   New comment(s)
+
+joker70 → Want to Learn Binary Search   New comment(s)
+
+aman_naughty → Help Bear and three Musketeers   New comment(s)
+
+finnlidbetter → MAPS 2019   New comment(s)
+
+Edvard → Editorial of Educational Codeforces Round 16   New comment(s)
+
+_kun_ → Codeforces Round #545 – Editorial   New comment(s)
+
+mohammedehab2002 → Codeforces round #525 editorial   New comment(s)
+
+MikeMirzayanov → Codeforces Round #547 (Div. 3)   New comment(s)
+
+MikeMirzayanov → Codeforces: MathJax in Blog Posts and Comments   New comment(s)
+
+-Morass- → Problem Topics   New comment(s)
+
+Detailed →
+
+Codeforces (c) Copyright 2010-2019 Mike Mirzayanov
+
+The only programming contests Web 2.0 platform
+
+Server time: Mar/19/2019 13:41:04UTC+5.5 (f1).
+
+Mobile version, switch to desktop version.
+
+Privacy Policy
+
+Supported by
+
+Telegram  ИТМО
+
+By Abhinav__, contest: Codeforces Round #546 (Div. 2), problem: (D) Nastya Is Buying Lunch, Wrong answer on test 69, #
+
+*/
+
+ //long cout cin push_back insert vector resize string length size char reverse fill adj visited 1005 erase
+
+//pair make_pair sort for int begin end first second else lower_bound upper_bound tuple flag dist 100005
+
+//unordered_map unordered_set multiset set map front pop top back queue stack endl clear arr mat temp bitset
+
+//make_tuple get rbegin rend arr val ans INT_MAX INT_MIN float double empty push memset binary_search multimap
+
+#include <bits/stdc++.h>
+
+#define mod 1000000007
+
+#define pb push_back
+
+#define mp make_pair
+
+#define ft first
+
+#define sd second
+
+#define bg begin()
+
+#define ed end()
+
+#define sz size()
+
+#define pbp(a,b) pb(mp(a,b))
+
+#define all(a) a.begin(),a.end()
+
+#define reverse(a) reverse(all(a))
+
+#define sort(a) sort(all(a))
+
+#define mset(a,i) memset(a,i,sizeof(a)) 
+
+#define fill(a,b) fill(all(a),b)
+
+#define ll long long
+
+#define pii pair<int,int>
+
+#define pll pair<long,long>
+
+#define vll vector<long long> 
+
+#define vi vector<int> 
+
+#define vpll vector<pair<ll,ll>>
+
+#define vpii vector<pair<int,int>> 
+
+#define vvi vector<vector<int>> 
+
+#define vvpii vector<vector<pair<int,int>>>
+
+#define nl cout<<'\n'
+
+#define el else
+
+#define elif else if
+
+#define loop(i,mx) for(int i=0;i<mx;i++) 
+
+#define fori(i,s,n) for(int i=s;i<n;i++)
+
+#define input(a,n) a.resize(n); for(int i=0;i<n;i++) cin>>a[i]
+
+#define print(a,n) for(int i=0;i<n;i++) cout<<a[i]<<" "
+
+#define sayYorN(fg) (fg==1)?cout<<"YES":cout<<"NO"
+
+#define Yup cout<<"YES"
+
+#define Nope cout<<"NO"
+
+#define itn int
+
+using namespace std;
+
+int i,j,k,x,y,a,b,c,d,n,m,q,t,l,r,ans,temp,T=1;
+
+vvi adj,adjRev;
+
+vi arr;
+
+set<int> nb;
+
+
+
+void solve()
+
+{
+
+    cin>>n>>m; input(arr,n); adjRev.resize(n+1);
+
+    loop(i,m)
+
+    {
+
+        cin>>a>>b;
+
+        //adj[a].push_back(b);
+
+        adjRev[b].push_back(a);
+
+        if(b==arr[n-1]) nb.insert(a);
+
+    }
+
+    map<int,int> mp;
+
+    for(int i=n-2;i>=0;i--)
+
+    {
+
+        if(nb.find(arr[i])==nb.ed)
+
+        {
+
+            temp++;
+
+            loop(j,adjRev[arr[i]].sz) 
+
+            if(nb.find(adjRev[arr[i]][j])!=nb.end()) //st.insert(adjRev[arr[i]][j]);
+
+            {
+
+                mp[adjRev[arr[i]][j]]++;
+
+            }
+
+        }
+
+        else
+
+        {
+
+            if(mp[arr[i]]==temp) ans++,mp.erase(arr[i]);
+
+else temp++;
+
+            //if(st.find(arr[i])!=st.ed || st.empty()) ans++,st.erase(arr[i]);    
+
+        }
+
+    }
+
+    cout<<ans;
+
+}
+
+
+
+int main() {
+
+    ios_base::sync_with_stdio(false);
+
+    cin.tie(NULL);
+
+	cout.tie(NULL);
+
+	//cin>>T;
+
+	while(T--){
+
+	solve(); nl;
+
+	}return 0;
+
+}

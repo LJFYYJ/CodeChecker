@@ -1,0 +1,47 @@
+#include<cstdio>
+
+
+
+int r[200];
+
+
+
+int main()
+
+{
+
+	int n;
+
+	scanf("%d", &n);
+
+	for (int i = 1; i <= n; i ++)
+
+	{
+
+		scanf("%*d%d",r+i);
+
+	}
+
+	int p;
+
+	scanf("%d", &p);
+
+	int ans = 0;
+
+	for (int i = 1; i <= n ; i ++)
+
+	{
+
+		if(r[i] >= p)
+
+		{
+
+			ans ++;
+
+		}
+
+	}
+
+	printf("%d",ans);
+
+}

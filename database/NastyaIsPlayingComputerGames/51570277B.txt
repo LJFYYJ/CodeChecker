@@ -1,0 +1,54 @@
+import java.util.Scanner;
+
+
+
+public class Main {
+
+
+
+	public static void main(String[] args) {
+
+		Scanner scan=new Scanner(System.in);
+
+		
+
+		int n=scan.nextInt();
+
+		
+
+		int k=scan.nextInt();
+
+		
+
+		int sum=2*n+1;
+
+		
+
+		if(k>n/2)
+
+			for(int i=k;i<=n;i++)
+
+				sum++;
+
+		
+
+		else
+
+			for(int i=k;i>0;i--)
+
+				sum++;
+
+		sum+=n-2;
+
+		
+
+		System.out.print(sum);
+
+
+
+	}
+
+
+
+}
+

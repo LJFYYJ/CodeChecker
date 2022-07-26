@@ -1,0 +1,29 @@
+n, m = map(int, raw_input().split())
+p = map(int, raw_input().split())
+e = [{} for i in range(n + 1)]
+
+for i in range(m):
+    u, v = map(int, raw_input().split())
+    e[u][v] = 1
+
+j = n - 1
+q = { p[-1]: 1 }
+h = p[:-1]
+z = 0
+
+while j >= 0:
+    if p[j] not in q:
+        z += 1
+        j -= 1
+        continue
+
+    t = []
+    for pi in h:
+        if p[j] in e[pi]:
+            t.append(pi)
+        else:
+            q[pi] = 1
+    h = t
+    j -= 1
+
+print z

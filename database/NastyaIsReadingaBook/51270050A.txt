@@ -1,0 +1,58 @@
+#include <bits/stdc++.h>
+
+
+
+using namespace std;
+
+
+
+int main() {
+
+    int n, k;
+
+    vector <int> pages;
+
+
+
+    cin >> n;
+
+
+
+    int a, b;
+
+    for (int i = 0; i < n; i++)
+
+    {
+
+        cin >> a >> b;
+
+        pages.push_back(a);
+
+    }
+
+
+
+    pages.push_back(b+1);
+
+
+
+    cin >> k;
+
+
+
+    int j = 0;
+
+    while (pages[j] < k) j++;
+
+
+
+    cout << n - j + 1;
+
+
+
+
+
+    return 0;
+
+}
+

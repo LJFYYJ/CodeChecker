@@ -1,0 +1,19 @@
+#include <iostream>
+
+using namespace std;
+
+
+
+int main() {
+
+	int n,k;
+
+	cin>>n>>k;
+
+	k=3*n+min(k-1,n-k);
+
+	cout<<k;
+
+	return 0;
+
+}

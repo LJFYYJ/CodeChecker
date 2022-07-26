@@ -1,0 +1,75 @@
+#include<bits/stdc++.h>
+
+using namespace std;
+
+#define N 1000005
+
+int a[N];
+
+int val[N];
+
+set<int> adj[N];
+
+int main() {
+
+	ios_base::sync_with_stdio(false);cout.tie(0);cin.tie(0);
+
+	int i,j,k,l,m,n,t;
+
+	cin >> n >> m;
+
+	for(i = 1;i <= n;i++) {
+
+		cin >> a[i];
+
+		val[a[i]] = i;
+
+	}
+
+	for(i = 0;i < m;i++) {
+
+		int u,v;
+
+		cin >> u >> v;
+
+		u = val[u];
+
+		v = val[v];
+
+		adj[u].insert(v);
+
+	}
+
+	set<int> to_reach;
+
+	to_reach.insert(n);
+
+	int an = 0;
+
+	for(i = n-1;i >= 1;i--) {
+
+		int flag = 0;
+
+		for(int it : to_reach) {
+
+			if(adj[i].find(it) == adj[i].end()) {
+
+				flag = 1;
+
+				to_reach.insert(i);
+
+			}
+
+		}
+
+		if(!flag) {
+
+			an++;
+
+		}
+
+	}
+
+	cout << an << endl;
+
+}

@@ -1,0 +1,95 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+
+
+int main()
+
+{
+
+	int n, m;
+
+	cin >> n >> m;
+
+	list<int> q;
+
+	for (int i = 0; i < n; i++)
+
+	{
+
+		int temp;
+
+		cin >> temp;
+
+		q.push_back(temp);
+
+	}
+
+	map<int, map<int, bool>> check;
+
+	for (int i = 0; i < m; i++)
+
+	{
+
+		int front, back;
+
+		cin >> front >> back;
+
+		check[back][front] = true;
+
+	}
+
+	int ans = 0;
+
+	auto curr = q.rbegin();
+
+	for (auto i = next(q.rbegin()); i != q.rend(); i++)
+
+	{
+
+		int num = *i;
+
+		bool skip = false;
+
+		auto comp = i;
+
+		for (auto j = i; j != curr; j--)
+
+		{
+
+			int front = *comp;
+
+			int back = *prev(j);
+
+			if (!check[*prev(j)][*comp])
+
+			{
+
+				skip = true;
+
+				break;
+
+			}
+
+		}
+
+		if (skip)
+
+			continue;
+
+		ans++;
+
+		curr++;
+
+		i = prev(i);
+
+		q.erase(prev(i.base(), 2));
+
+	}
+
+	cout << ans << endl;
+
+	return 0;
+
+}

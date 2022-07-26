@@ -1,0 +1,5 @@
+n,k = map(int,raw_input().split())
+
+distance = min(k-1,n-k)
+
+print distance+3*n

@@ -1,0 +1,69 @@
+#include<bits/stdc++.h>
+using namespace std;
+typedef long long ll;
+int main()
+{
+    ios_base::sync_with_stdio(0);
+    cin.tie(0);
+    int n,m;
+    cin>>n>>m;
+    vector<vector<int> > a(n, vector<int> (m));
+    vector<vector<int> > b(n, vector<int> (m));
+    vector<int> c,d;
+    for(int i = 0; i < n; i++)
+    {
+        for(int j = 0; j < m; j++)
+        {
+            cin>>a[i][j];
+        }
+    }
+    for(int i = 0; i < n; i++)
+    {
+        for(int j = 0; j < m; j++)
+        {
+            cin>>b[i][j];
+        }
+    }
+    int i, j, k;
+    for(i = 0; i < m; i++)
+    {
+        for(j = 0, k = i; k>=0; j++, k--)
+        {
+            c.push_back(a[j][k]);
+            d.push_back(b[j][k]);
+        }
+        sort(c.begin(), c.end());
+        sort(d.begin(), d.end());
+        for(int l = 0; l < c.size(); l++)
+        {   
+            if(c[l] != d[l])
+            {
+                cout<<"NO";
+                exit(0);
+            }
+        }
+        c.clear();
+        d.clear();
+    }    
+    for(i = 0; i < n; i++)
+    {
+        for(j = i, k = m-1; k>=0 && j<n; j++, k--)
+        {
+            c.push_back(a[j][k]);
+            d.push_back(b[j][k]);
+        }
+        sort(c.begin(), c.end());
+        sort(d.begin(), d.end());
+        for(int l = 0; l < c.size(); l++)
+        {   
+            if(c[l] != d[l])
+            {
+                cout<<"NO";
+                exit(0);
+            }
+        }
+        c.clear();
+        d.clear();
+    }
+    cout<<"YES";
+}

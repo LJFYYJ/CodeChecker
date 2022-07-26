@@ -1,0 +1,151 @@
+#include<bits/stdc++.h>
+
+#define lson l,m,rt<<1
+
+#define rson m+1,r,rt<<1|1
+
+#define x first
+
+#define y second
+
+#define rep(i,a,b) for(int i=(a);i<(b);++i)
+
+#define per(i,a,b) for(int i=(a)-1;i>=(b);--i)
+
+#define fuck(x) cout<<'['<<#x<<' '<<(x)<<']'<<endl
+
+#define clr(a,b) memset(a,b,sizeof(a))
+
+#define cp(a,b) memcpy(a,b,sizeof(b))
+
+#define eps 1e-10
+
+#define pb push_back
+
+#define speed_read ios::sync_with_stdio(false), cin.tie(0);
+
+using namespace std;
+
+typedef long long ll;
+
+typedef unsigned long long ull;
+
+typedef vector<int> VI;
+
+typedef pair<int, int> pii;
+
+typedef unsigned int ui;
+
+const int INF = 0x3f3f3f3f;
+
+const ll INFLL = 0x3f3f3f3f3f3f3f3fLL;
+
+
+
+const int MX = 3e5 + 5;
+
+int p[MX];
+
+set<int> s[MX];
+
+struct node {
+
+    int pos, u, v;
+
+    bool operator<(const node& _A) const {
+
+        return pos < _A.pos;
+
+    }
+
+};
+
+priority_queue<node>q;
+
+int n;
+
+bool check(int u, int v) {
+
+    if(s[u].count(v)) {
+
+        return 1;
+
+    }
+
+    return 0;
+
+}
+
+void push(int pos) {
+
+    if(pos <= 1 || pos > n) return;
+
+    if(check(p[pos - 1], p[pos])) {
+
+        q.push(node {pos, p[pos - 1], p[pos]});
+
+    }
+
+}
+
+int solve() {
+
+    int now = p[n], idx = n;
+
+    while(!q.empty()) {
+
+        node np = q.top(); q.pop();
+
+        int pos = np.pos;
+
+        //printf("%d %d\n", np.u, np.v);
+
+        //if(np.pos < idx - 1) break;
+
+        if(pos > idx) continue;
+
+        if(np.u != p[pos - 1] || np.v != p[pos]) continue;
+
+        swap(p[pos - 1], p[pos]);
+
+        s[np.u].erase(np.v);
+
+        if(p[pos - 1] == now) idx--;
+
+        if(pos - 1 <= idx) push(pos - 1);
+
+        if(pos + 1 <= idx) push(pos + 1);
+
+    }
+
+    return n - idx;
+
+}
+
+int main() {
+
+#ifdef local
+
+    freopen("in.txt", "r", stdin);
+
+#endif // local
+
+    int m; cin >> n >> m;
+
+    rep(i, 1, n + 1) scanf("%d", &p[i]);
+
+    rep(i, 1, m + 1) {
+
+        int u, v; scanf("%d%d", &u, &v);
+
+        s[u].insert(v);
+
+    }
+
+    rep(i, 2, n + 1) push(i);
+
+    printf("%d\n", solve());
+
+    return 0;
+
+}

@@ -1,0 +1,50 @@
+#include <iostream>
+
+using namespace std;
+
+
+
+int main()
+
+{
+
+    int A[500][500], B[500][500], i, j, n, m, k, x;;
+
+    cin>>n>>m;
+
+    for(i=1; i<=n; i++)
+
+        for(j=1; j<=m; j++)
+
+        cin>>A[i][j];
+
+    for(i=1; i<=n; i++)
+
+        for(j=1; j<=m; j++)
+
+        cin>>B[i][j];
+
+    x=1;
+
+    k=1;
+
+    while(x<=n && k==1){
+
+        for(i=x; i<=n; i++){
+
+            if(A[i][i]!=B[i][j] && A[i][i]!=B[i][i]) k=0;
+
+        }
+
+        x++;
+
+    }
+
+    if(k==0) cout<<"NO";
+
+    else cout<<"YES";
+
+    return 0;
+
+}
+

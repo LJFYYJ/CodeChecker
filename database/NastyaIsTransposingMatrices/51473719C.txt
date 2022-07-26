@@ -1,0 +1,122 @@
+//
+
+//  main.cpp
+
+//
+
+//  4-9
+
+//  Created by Edwin on 2019/3/18.
+
+//  Copyright &#169; 2019 Edwiv. All rights reserved.
+
+//
+
+#include<bits/stdc++.h>
+
+//#include<iostream>
+
+//#include<string.h>
+
+//#include<cstring>
+
+//#include<cmath>
+
+//#include<stdio.h>
+
+//#include<algorithm>
+
+#define ll long long
+
+#define ull unsigned long long
+
+#define INF 0x3f3f3f3f
+
+#define eps 1e-8
+
+#define PI acos(-1.0)
+
+#define mst(a,b) memset(a,b,sizeof(a))
+
+#define FF(i,a) for(int i=0;i<(a);++i)
+
+#define dep(i,a,b) for(int i=(a);i>=(b);--i)
+
+#define rep(i,a,b) for(int i=(a);i<=(b);++i)
+
+#define sc(t) scanf("%d",&(t))
+
+#define sc2(t,x) scanf("%d%d",&(t),&(x))
+
+#define pr(t) printf("%d\n",(t))
+
+#define pb push_back
+
+#define quickcin ios::sync_with_stdio(0);cin.tie(0);cout.tie(0);
+
+#define lson rt<<1
+
+#define rson rt<<1|1
+
+#define delf (l+r)>>1
+
+#define lowbit(x) (x&-x)
+
+#define maxn int(1e5)+100
+
+#define mod int(1e9)+7
+
+using namespace std;
+
+map<int,int> t[1010];
+
+int main(){
+
+    int n,m;sc2(n,m);
+
+    FF(i,n)
+
+    FF(j,m){
+
+        int x;sc(x);
+
+        t[i+j][x]++;
+
+    }
+
+    int flag=1;
+
+    for(int i=0;i<n&&flag;++i){
+
+    FF(j,m){
+
+        int x;sc(x);
+
+        if(t[i+j][x]==0){
+
+            printf("NO\n");
+
+            flag=0;
+
+            break;
+
+        }
+
+        t[i+j][x]--;
+
+    }
+
+    }
+
+    if(flag==1)
+
+        printf("YES\n");
+
+    return 0;
+
+}
+
+
+
+
+

@@ -1,0 +1,238 @@
+#include<bits/stdc++.h>
+
+using namespace std;
+
+
+
+#define xx  100000
+
+#define ST  262500
+
+
+
+long long a[xx+10];
+
+long long k[xx+10];
+
+long long x[xx+10];
+
+long long sum[ST];
+
+long long mx[ST];
+
+long long pro[ST];
+
+
+
+int Mx(int s,int e,int node){
+
+   if(s==e) return node;
+
+   int mid=(s+e)>>1,lft=node<<1,rht=(node<<1)|1;
+
+   return max(Mx(s,mid,lft),Mx(mid+1,e,rht));
+
+}
+
+
+
+void ini(int s,int e,int node){
+
+    if(s==e){
+
+        sum[node]=x[s];
+
+        mx[node]=x[s];
+
+        return ;
+
+    }
+
+    int mid=(s+e)>>1,lft=(node<<1),rht=(node<<1)|1;
+
+    ini(s,mid,lft);
+
+    ini(mid+1,e,rht);
+
+    sum[node]=sum[lft]+sum[rht];
+
+    mx[node]=max(mx[lft],mx[rht]);
+
+    return;
+
+}
+
+
+
+void calc(int s,int e,int node,int v){
+
+    sum[node]=v*(e-s+1);
+
+    pro[node]=v;
+
+    mx[node]=v;
+
+    return;
+
+}
+
+
+
+void update(int s,int e,int node,int v,int ix){
+
+
+
+    if(ix>e) return;
+
+    int mid=(s+e)>>1,lft=(node<<1),rht=(node<<1)|1;
+
+    if(pro[node] && s!=e) {
+
+        calc(s,mid,lft,pro[node]);
+
+        calc(mid+1,e,rht,pro[node]);
+
+        pro[node]=0;
+
+    }
+
+
+
+    if(s<ix){
+
+        update(s,mid,lft,v,ix);
+
+        update(mid+1,e,rht,v,ix);
+
+    }
+
+    else{
+
+       if(mx[node]<v){
+
+          calc(s,e,node,v);
+
+          return;
+
+       }
+
+       if(s==e) return;
+
+       if(mx[lft]<v) update(mid+1,e,rht,v,ix);
+
+       update(s,mid,lft,v,ix);
+
+    }
+
+    sum[node]=sum[lft]+sum[rht];
+
+    mx[node]=max(mx[lft],mx[rht]);
+
+    return;
+
+}
+
+
+
+int qry1(int s,int e,int node,int ix){
+
+    if(pro[node]) return pro[node];
+
+    if(s==e) return mx[node];
+
+    int mid=(s+e)>>1,lft=(node<<1),rht=(node<<1)|1;
+
+    if(ix<=mid) return qry1(s,mid,lft,ix);
+
+    else return qry1(mid+1,e,rht,ix);
+
+}
+
+
+
+long long qry(int s,int e,int node,int S,int E){
+
+   if(s>E||S>e) return 0;
+
+   if(S<=s&&e<=E) return sum[node];
+
+   int mid=(s+e)>>1,lft=(node<<1),rht=(node<<1)|1;
+
+   if(pro[node]){
+
+     calc(s,mid,lft,pro[node]);
+
+     calc(mid+1,e,rht,pro[node]);
+
+     pro[node]=0;
+
+   }
+
+   return qry(s,mid,lft,S,E)+qry(mid+1,e,rht,S,E);
+
+}
+
+
+
+
+
+main(){
+
+    long long n;
+
+    scanf("%I64d",&n);
+
+    for(int i=1;i<=n;i++) scanf("%I64d",a+i);
+
+    for(int i=2;i<=n;i++) scanf("%I64d",k+i);
+
+
+
+    for(int i=1;i<=n;i++) x[i]=a[i]-a[i-1]-k[i];
+
+
+
+    for(int i=1;i<=n;i++) x[i]+=x[i-1];
+
+
+
+    for(int i=1;i<=n;i++) k[i]+=k[i-1];
+
+
+
+    for(int i=n;i>=1;i--) k[i]+=k[i+1];
+
+
+
+    ini(1,n,1);
+
+
+
+    long long q;
+
+    scanf("%I64d",&q);
+
+    while(q--){
+
+        char ch;
+
+        int S,E;
+
+        scanf(" %c %d %d",&ch,&S,&E);
+
+        if(ch=='+') {
+
+            int v=qry1(1,n,1,S)+E;
+
+            update(1,n,1,v,S);
+
+        }
+
+        else printf("%I64d\n",qry(1,n,1,S,E)+k[S]-k[E+1]);
+
+    }
+
+    return 0;
+
+}
+

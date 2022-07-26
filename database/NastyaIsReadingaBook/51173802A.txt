@@ -1,0 +1,21 @@
+n = int(input())
+
+chaps = []
+
+for i in range(n):
+
+    chaps.append(tuple(map(int,input().split())))
+
+y = int(input())
+
+count=0
+
+for i in range(n):
+
+    if chaps[i][0]<=y and chaps[i][1]>=y:
+
+        count=i
+
+        break
+
+print(n-count)

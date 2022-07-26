@@ -1,0 +1,175 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+#define int long long
+
+#define ii pair<int, int>
+
+#define pb emplace_back
+
+const int N = 2e5+5, inf = 1e9+7;
+
+int n, k;
+
+
+
+int t[4*N], lazy[4*N], t2[4*N], lazy2[4*N], k1[N], k2[N], k3[N], A[N];
+
+void push(int v, int l, int r) {
+
+    int m = l+r>>1;
+
+    t[v*2] = lazy[v]*(m-l+1);
+
+    lazy[v*2] = lazy[v];
+
+    lazy2[v*2] = lazy2[v];
+
+    t2[v*2] = k3[m]-k3[l-1]-(m-l+1)*k2[lazy2[v]];
+
+    t[v*2+1] = lazy[v]*(r-m);
+
+    lazy[v*2+1] = lazy[v];
+
+    lazy2[v*2+1] = lazy2[v];
+
+    t2[v*2+1] = k3[r]-k3[m]-(r-m)*k2[lazy2[v]];
+
+    lazy2[v]=0; lazy[v]=0;
+
+}
+
+
+
+void build(int v, int tl, int tr) {
+
+    if (tl == tr) {
+
+        t[v] = A[tl];
+
+    } else {
+
+        int tm = (tl + tr) / 2;
+
+        build(v*2, tl, tm);
+
+        build(v*2+1, tm+1, tr);
+
+        t[v] = t[v*2] + t[v*2+1];
+
+    }
+
+}
+
+
+
+void update(int v, int tl, int tr, int l, int r, int addend, int pnt) {
+
+    if (l > r) 
+
+        return;
+
+    if (l == tl && tr == r) {
+
+        t[v] = addend*(r-l+1);
+
+        lazy[v] = addend;
+
+        t2[v] = k3[r]-k3[l-1]-(r-l+1)*k2[pnt];
+
+        lazy2[v] = pnt;
+
+    } else {
+
+        if(lazy[v] || lazy2[v]) push(v, tl, tr);
+
+        int tm = (tl + tr) / 2;
+
+        update(v*2, tl, tm, l, min(r, tm), addend, pnt);
+
+        update(v*2+1, tm+1, tr, max(l, tm+1), r, addend, pnt);
+
+        t[v] = t[v*2] + t[v*2+1];
+
+        t2[v] = t2[v*2] + t2[v*2+1];
+
+    }
+
+}
+
+
+
+int query(int v, int tl, int tr, int l, int r) {
+
+    if (l > r)
+
+        return 0;
+
+    if (l <= tl && tr <= r)
+
+        return t[v]+t2[v];
+
+
+
+    if(lazy[v] || lazy2[v]) push(v, tl, tr);
+
+    int tm = (tl + tr) / 2;
+
+    return query(v*2, tl, tm, l, min(r, tm)) +
+
+               query(v*2+1, tm+1, tr, max(l, tm+1), r);
+
+}
+
+
+
+signed main()
+
+{
+
+    ios_base::sync_with_stdio(false); cin.tie(0);
+
+    int i, j, a, b, ans = 0;
+
+    cin>>n;
+
+    for(i=1; i<=n; i++) cin>>A[i];
+
+    for(i=2; i<=n; i++) cin>>k1[i], k2[i]=k2[i-1]+k1[i], k3[i]=k3[i-1]+k2[i];
+
+    build(1, 1, n);
+
+    int q; cin>>q;
+
+    char c;
+
+    while(q--){
+
+        cin>>c>>a>>b;
+
+        if(c=='s') cout<<query(1, 1, n, a, b)<<"\n";
+
+        else{
+
+            int tmp = query(1, 1, n, a, a), l=a, r=n, m, f=l;
+
+            while(l<=r){
+
+                m = l+r>>1;
+
+                int cur = query(1, 1, n, m, m);
+
+                if(cur<=tmp+k2[m]-k2[a]+b) f=m, l=m+1;
+
+                else r=m-1;
+
+            }
+
+            update(1, 1, n, a, f, b+tmp, a);
+
+        }
+
+    }
+
+}

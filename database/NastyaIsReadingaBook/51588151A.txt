@@ -1,0 +1,69 @@
+#include <iostream>
+
+#include <algorithm>
+
+#include <cmath>
+
+#include <string.h>
+
+using namespace std;
+
+int main(){
+
+	int N;
+
+	cin>>N;	
+
+	int Gl=N;
+
+	int a[N][2];
+
+	for(int i=0;i<N;i++){
+
+		for(int j=0;j<2;j++){
+
+			cin>>a[i][j];
+
+		}
+
+	}
+
+	int M;
+
+	cin>>M;
+
+	int f=0;
+
+	for(int i=0;i<N;i++){
+
+		for(int j=0;j<1;j++){
+
+			if(a[i][0]<=M && a[i][1]>M){
+
+				f=1;
+
+				break;
+
+			}
+
+			if(a[i][0]<M && a[i][1]<M){
+
+				Gl--;
+
+			}
+
+		}
+
+		if(f==1){
+
+			break;
+
+		}
+
+	}
+
+	cout<<Gl;
+
+	return 0;
+
+}

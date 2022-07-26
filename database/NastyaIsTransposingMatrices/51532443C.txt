@@ -1,0 +1,103 @@
+#include<stdio.h>
+
+
+
+int main()
+
+{
+
+	int N, M;
+
+	scanf("%d %d", &N, &M);
+
+	long A[N][M], B[N][M];
+
+	for(int i=0; i<N; i++){
+
+		for(int j=0; j<M; j++)
+
+			scanf("%ld", &A[i][j]);
+
+	}
+
+	for(int i=0; i<N; i++){
+
+		for(int j=0; j<M; j++)
+
+			scanf("%ld", &B[i][j]);
+
+	}
+
+	
+
+	for(int i=0; i<M+N-1; i++){
+
+		if(i<N)
+
+		{
+
+			for(int j=0; j<=i; j++){
+
+				for(int k=0; k<=i; k++){
+
+					if(A[i-j][j] == B[i-k][k]){
+
+						B[i-k][k] = 0;
+
+						break;
+
+					}
+
+					else if(k==i && A[i-j][j] != B[i-k][k]){
+
+						printf("NO");
+
+						return 0;
+
+					}
+
+				} 
+
+			}
+
+		}
+
+		else
+
+		{
+
+			for(int j=1; j<=i-N; j++){
+
+				for(int k=1; k<=i-N; k++){
+
+					if(A[j][M-j] == B[k][M-k]){
+
+						B[k][M-k] = 0;
+
+						break;
+
+					}
+
+					else if(k==i-N && A[j][M-j] != B[k][M-k]){
+
+						printf("NO");
+
+						return 0;
+
+					}
+
+				} 
+
+			}
+
+		}
+
+	}
+
+	
+
+	printf("YES");
+
+	return 0;
+
+} 

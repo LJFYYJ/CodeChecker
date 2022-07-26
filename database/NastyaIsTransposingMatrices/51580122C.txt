@@ -1,0 +1,96 @@
+#include<bits/stdc++.h>
+
+
+
+using namespace std;
+
+
+
+int main(){
+
+    ios_base::sync_with_stdio(false);
+
+
+
+    int n,m,a[505][505],b[505][505];
+
+    cin>>n>>m;
+
+    vector<long long>v[n+m+3],v2[n+m+3];
+
+    for(int i=0;i<n+m+2;i++){
+
+        fill(v[i].begin(),v[i].end(),0);
+
+        fill(v2[i].begin(),v2[i].end(),0);
+
+    }
+
+    for(int i=0;i<n;i++){
+
+        for(int j=0;j<m;j++){
+
+            cin>>a[i][j];
+
+            v[i+j].push_back(a[i][j]);
+
+        }
+
+    }
+
+
+
+    for(int i=0;i<n;i++){
+
+        for(int j=0;j<m;j++){
+
+            cin>>b[i][j];
+
+            v2[i+j].push_back(b[i][j]);
+
+        }
+
+    }
+
+    bool f = true;
+
+    for(int i=0;i<n+m;i++){
+
+        sort(v[i].begin(),v[i].end());
+
+        sort(v2[i].begin(),v2[i].end());
+
+        for(int j = 0;j<v[i].size();j++){
+
+//            cout<<v[i][j]<<" "<<v2[i][j]<<endl;
+
+            if(v[i][j]!=v2[i][j]){
+
+                f = false;
+
+                break;
+
+            }
+
+        }
+
+        if(!f)
+
+            break;
+
+    }
+
+    if(!f)
+
+        cout<<"NO"<<endl;
+
+    else
+
+        cout<<"YES"<<endl;
+
+
+
+return 0;
+
+}
+

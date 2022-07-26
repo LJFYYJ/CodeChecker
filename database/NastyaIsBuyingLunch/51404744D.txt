@@ -1,0 +1,78 @@
+#include<bits/stdc++.h>
+
+using namespace std;
+
+
+
+#define xx 300000
+
+
+
+vector<int>vec[xx+10];
+
+
+
+bool ch[xx+10];
+
+
+
+int mp[500010];
+
+
+
+main(){
+
+    int n,q,u,v;
+
+    scanf("%d %d",&n,&q);
+
+    int a;
+
+    for(int i=1;i<=n;i++){
+
+        scanf("%d",&a);
+
+        mp[a]=i;
+
+    }
+
+    while(q--){
+
+        scanf("%d %d",&u,&v);
+
+        vec[mp[u]].push_back(mp[v]);
+
+    }
+
+
+
+    ch[n]=true;
+
+    int need=1,ans=0;
+
+
+
+    for(int i=n-1;i>0;i--){
+
+        int cnt=0;
+
+        int sz=vec[i].size();
+
+        for(int j=0;j<sz;j++) cnt+=ch[vec[i][j]];
+
+        if(cnt==need) ans++;
+
+        else need++,ch[i]=true;
+
+    }
+
+    cout<<ans<<endl;
+
+
+
+
+
+    return 0;
+
+}
+

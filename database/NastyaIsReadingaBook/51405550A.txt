@@ -1,0 +1,78 @@
+// C++ program to print all primes smaller than or equal to 
+
+// n using Sieve of Eratosthenes 
+
+#include <bits/stdc++.h> 
+
+using namespace std; 
+
+#define ll long long
+
+
+
+    // typedef pair<char, ll> pi; 
+
+    //priority_queue <?, vector<?>, greater<?> > pq; 
+
+
+
+
+
+int main() 
+
+{ 
+
+    
+
+    //cout<<"bala guru";
+
+
+
+    ios_base::sync_with_stdio(false); 
+
+    cin.tie(NULL); 
+
+
+
+    ll n;cin>>n;
+
+
+
+    ll a[n+2]={0};
+
+
+
+    ll i;
+
+    for(i=1;i<=n;i++){ll aa,bb;cin>>aa>>bb;a[i]=bb;}
+
+
+
+    ll k;cin>>k;
+
+
+
+
+
+    for(i=1;i<=n;i++)
+
+        if(k<=a[i])break;
+
+
+
+
+
+    cout<<n-i+1<<endl;
+
+
+
+
+
+
+
+
+
+    return 0; 
+
+} 
+

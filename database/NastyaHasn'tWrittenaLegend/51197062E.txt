@@ -1,0 +1,310 @@
+#include <bits/stdc++.h>
+
+#define NMAX 300005
+
+#define MOD 1000000007
+
+using namespace std;
+
+typedef long long ll;
+
+//1 e lazy, 2 nu
+
+ll lazy[4*NMAX],arb1[4*NMAX],arb2[4*NMAX],lef,righ,pos,val,rem,n;
+
+ll a[NMAX],k[NMAX];
+
+void propag(ll nod,ll st,ll dr)
+
+{
+
+    if(lazy[nod]==0)
+
+        return ;
+
+    arb1[nod]=arb1[nod]+(dr-st+1)*lazy[nod];
+
+    lazy[nod*2]+=lazy[nod];
+
+    lazy[nod*2+1]+=lazy[nod];
+
+    lazy[nod]=0;
+
+}
+
+void update1(ll nod,ll st,ll dr)
+
+{
+
+    propag(nod,st,dr);
+
+    if(lef<=st && dr<=righ)
+
+    {
+
+        lazy[nod]+=val;
+
+        return ;
+
+    }
+
+    ll mij=(st+dr)/2;
+
+    if(lef<=mij)
+
+        update1(nod*2,st,mij);
+
+    if(mij<righ)
+
+        update1(nod*2+1,mij+1,dr);
+
+    propag(nod*2,st,mij);
+
+    propag(nod*2+1,mij+1,dr);
+
+    arb1[nod]=arb1[nod*2]+arb1[nod*2+1];
+
+    return ;
+
+}
+
+void update2(ll nod,ll st,ll dr)
+
+{
+
+    if(st==dr)
+
+    {
+
+        arb2[nod]=val;
+
+        return ;
+
+    }
+
+    ll mij=(st+dr)/2;
+
+    if(pos<=mij)
+
+        update2(nod*2,st,mij);
+
+    else
+
+        update2(nod*2+1,mij+1,dr);
+
+    arb2[nod]=arb2[nod*2]+arb2[nod*2+1];
+
+}
+
+ll query1(ll nod,ll st,ll dr)
+
+{
+
+    propag(nod,st,dr);
+
+    if(lef<=st && dr<=righ)
+
+        return arb1[nod];
+
+    ll mij=(st+dr)/2,as=0,ad=0;
+
+    if(lef<=mij)
+
+        as=query1(nod*2,st,mij);
+
+    if(mij<righ)
+
+        ad=query1(nod*2+1,mij+1,dr);
+
+    return as+ad;
+
+}
+
+void query2(ll nod,ll st,ll dr)
+
+{
+
+    if(rem==0)
+
+        return ;
+
+    propag(nod,st,dr);
+
+    if(pos<=st)
+
+    {
+
+        if(arb2[nod]==0)
+
+        {
+
+            lazy[nod]+=rem;
+
+            return ;
+
+        }
+
+        if(st==dr)
+
+        {
+
+            ll dif=min(rem,arb2[nod]);
+
+            rem-=dif;
+
+            arb2[nod]-=dif;
+
+            lazy[nod]+=rem;
+
+            return ;
+
+        }
+
+    }
+
+    ll mij=(st+dr)/2;
+
+    if(pos<=mij)
+
+        query2(nod*2,st,mij);
+
+    query2(nod*2+1,mij+1,dr);
+
+    propag(nod*2,st,mij);
+
+    propag(nod*2+1,mij+1,dr);
+
+    arb1[nod]=arb1[nod*2]+arb1[nod*2+1];
+
+    return ;
+
+}
+
+void actval(ll i)
+
+{
+
+    if(i==1 || i>n)return ;
+
+    val=a[i-1]+k[i-1];
+
+    val=a[i]-val;
+
+    pos=i;
+
+    update2(1,1,n);
+
+}
+
+int main()
+
+{
+
+    ll i,q,x;
+
+    char op;
+
+    ios::sync_with_stdio(false);
+
+    cin>>n;
+
+    for(i=1;i<=n;i++)
+
+    {
+
+        cin>>a[i];
+
+    }
+
+    for(i=1;i<n;i++)
+
+    {
+
+        cin>>k[i];
+
+        a[i+1]=max(a[i+1],a[i]+k[i]);
+
+        val=a[i];
+
+        lef=righ=i;
+
+        update1(1,1,n);
+
+        actval(i);
+
+    }
+
+    lef=righ=n;
+
+    val=a[n];
+
+    update1(1,1,n);
+
+    actval(n);
+
+    cin>>q;
+
+    while(q--)
+
+    {
+
+        cin>>op;
+
+        if(op=='+')
+
+        {
+
+            cin>>i>>x;
+
+            if(x==0)
+
+                continue;
+
+            //x>0
+
+            lef=righ=i;
+
+            a[i]=query1(1,1,n);
+
+            a[i]+=x;
+
+            val=x;
+
+            update1(1,1,n);
+
+            if(i!=1)
+
+            {
+
+                lef=righ=i-1;
+
+                a[i-1]=query1(1,1,n);
+
+                actval(i);
+
+            }
+
+            pos=i+1;rem=x;
+
+            query2(1,1,n);
+
+        }
+
+        else
+
+        {
+
+            //op=='s'
+
+            cin>>lef>>righ;
+
+            cout<<query1(1,1,n)<<'\n';
+
+        }
+
+    }
+
+    return 0;
+
+}
+

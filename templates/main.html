@@ -1,0 +1,440 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+{% load staticfiles %}
+<head>
+    <meta charset="utf-8" />
+    <title>首页</title>
+    <link rel="stylesheet" href="{% static 'css/mainpage.css' %}" />
+    <link href="{%  static 'css/fonts.css'  %}" rel="stylesheet" type="text/css">
+    <script src="{% static 'js/jquery.js' %}"></script>
+
+    <script src="{% static 'js/jquery.min.js' %} "></script>
+    <script src="{% static 'js/jquery-migrate-1.2.1.min.js' %}" ></script>
+
+    <script src="{% static 'jss/selectUi.js' %}" ></script>
+    <script src="{% static 'jss/deco-common.js' %}"></script>
+    <script src="{% static 'jss/plugins/laydate/laydate.js' %}"></script>
+    <script src="{% static 'jss/plugins/layer/layer.js' %}"></script>
+    <script src="{% static 'jss/plugins/queryCity/js/public.js' %}"></script>
+    <script src="{% static 'jss/unslider.js' %}" ></script>
+    <script src="{% static 'jss/plugins/jquery.scrollLoading.js' %}"  > </script>
+    <script src="{% static 'jss/deco-common.js' %}"  > </script>
+    <script src="{% static 'jss/index.js' %}"></script>
+
+</head>
+<body style="background-color:white">
+    <div id="header">
+        <div class="container">
+            <div class="header_left left">
+                <div class="logo"><a href="main.html" id="main" ><img id="img1" src="{% static 'images/magic.png' %}"/></a></div>
+                <div class="logo"><span id="text_" class="left" style="color:#333333;font-size:20px; font-weight:650;margin-left:20px">CodeChecker</span></div>
+            </div>
+            <div class="header_right right">
+                <ul>
+                    <li class="text"><a href="{% url 'login' %}" class="nav">登录</a></li>
+                    <li class="text"><a href="{% url 'register' %}" class="nav">注册</a></li>
+                    <li class="text"><a href="#" class="nav" style="color:black">帮助</a></li>
+                    {% if request.user.is_authenticated%}
+                        <li class="text"><span id="identity">{{ request.user.username }}</span></li>
+                        {% else %}
+                        <li class="text"><span id="identity">未登录用户</span></li>
+                    {% endif %}
+                </ul>
+            </div>
+
+        </div>
+    </div>
+<style>
+
+    .banner {
+    height: 476px;
+    width: 100%;
+    position: relative;
+    margin-left: 160px;
+    top: 0;
+    left: 0;
+    background: white;
+    border-bottom: 1px solid #f6f6f6;
+    padding-top: 10px;
+}
+
+/*.banner .wp{overflow: hidden;position: absolute;top:10px;left:50%;margin-left:-600px;}*/
+.banner .fl {
+    position: relative;
+    height: 478px;
+    width: 1200px;
+}
+
+/*焦点图 CSS*/
+.imgslide {
+    height: 478px;
+    width: 880px;
+    position: relative;
+    overflow: hidden;
+}
+
+.imgslide li,
+.imgslide2 li,
+.imgslide3 li,
+.imgslide4 li,
+.imgslide5 li {
+    float: left;
+}
+
+.unslider-arrow,
+.unslider-arrow2,
+.unslider-arrow3,
+.unslider-arrow4,
+.unslider-arrow5 {
+    position: absolute;
+    top: 45%;
+    cursor: pointer;
+    z-index: 100;
+    width: 33px;
+    height: 50px;
+}
+
+.unslider-arrow.prev,
+.unslider-arrow2.prev,
+.unslider-arrow3.prev,
+.unslider-arrow4.prev,
+.unslider-arrow5.prev {
+    left: 0;
+    background: url(../images/slide_l.png) no-repeat center center;
+}
+
+.unslider-arrow.prev:hover,
+.unslider-arrow2.prev:hover,
+.unslider-arrow3.prev:hover,
+.unslider-arrow4.prev:hover,
+.unslider-arrow5.prev:hover {
+    background: url(../images/slide_l_1.png) no-repeat center center;
+}
+
+.unslider-arrow.next,
+.unslider-arrow2.next,
+.unslider-arrow3.next,
+.unslider-arrow4.next,
+.unslider-arrow5.next {
+    right: 0;
+    background: url(../images/slide_r.png) no-repeat center center;
+}
+
+.unslider-arrow.next:hover,
+.unslider-arrow2.next:hover,
+.unslider-arrow3.next:hover,
+.unslider-arrow4.next:hover,
+.unslider-arrow5.next:hover {
+    background: url(../images/slide_r_1.png) no-repeat center center;
+}
+
+.imgslide .dots,
+.imgslide2 .dots,
+.imgslide3 .dots,
+.imgslide4 .dots,
+.imgslide5 .dots {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    width: 80px;
+    margin-left: -40px;
+}
+.imgslide .dots{
+    width:110px;
+    margin-left:-55px;
+}
+
+.imgslide .dots li,
+.imgslide2 .dots li,
+.imgslide3 .dots li,
+.imgslide4 .dots li,
+.imgslide5 .dots li {
+    float: left;
+    margin: 5px;
+    background: #fff;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    color: #fff;
+    text-align: center;
+    cursor: pointer;
+    overflow: hidden;
+}
+
+.imgslide .dots .active,
+.imgslide2 .dots .active,
+.imgslide3 .dots .active,
+.imgslide4 .dots .active,
+.imgslide5 .dots .active {
+    background: #717171 !important;
+    color: #717171 !important;
+}
+
+.banner .fr {
+    width: 310px;
+    height: 100%;
+    position: relative;
+}
+
+.banner .top {
+    background: #fff;
+    height: 340px;
+    border: 1px solid #f0f0f0;
+    text-align: center;
+}
+
+.banner .fr .head {
+    height: 78px;
+    background: #4fb137;
+}
+
+.banner .fr .center {
+    line-height: 100%;
+}
+
+.banner .fr h1 {
+    color: #fff;
+    font-size: 24px;
+    padding-top: 20px;
+}
+
+.banner .fr p {
+    padding-top: 5px;
+    color: #f3f3f3;
+}
+
+.banner .fr form {
+    position: relative;
+}
+
+.banner .fr input {
+    text-indent: 40px;
+    width: 265px;
+    padding: 7px 0;
+    line-height: 24px;
+    border: 1px solid #c6c6c6;
+    border-radius: 3px;
+    margin: 5px auto;
+}
+
+.banner .fr .icon1 {
+    background: url(../images/banner_icon1.png) no-repeat 8px center;
+}
+
+.banner .fr .icon2 {
+    background: url(../images/banner_icon2.png) no-repeat 8px center;
+}
+
+.banner .fr .icon3{
+    background: url(../images/banner_icon3.png) no-repeat 8px center;
+}
+
+.banner .fr .demand_form_tips {
+    position: absolute;
+    width: 100%;
+    padding: 0;
+    font-size: 14px;
+    color: #ff8400;
+    display: none;
+}
+
+/*
+.banner .fr .vali{position: relative;width: 265px;line-height: 40px;height: 40px;border: 1px solid #c6c6c6; border-radius: 3px;left:18px;top: 140px;margin: 10px 0;}
+*/
+.banner .fr .submit {
+    margin-top: 28px;
+    border-radius: 0;
+    border: 0;
+    color: #fff;
+    text-indent: 0;
+    font-size: 14px;
+    top: 230px;
+    background: #ff9d33 url(../images/banner_icon4.png) no-repeat 70% center;
+    cursor: pointer;
+}
+
+.banner .fr .submit:hover {
+    background: #ff8400 url(../images/banner_icon4.png) no-repeat 70% center;
+}
+
+.banner .bottom {
+    width: 290px;
+    background: #fff;
+    margin-top: 10px;
+    padding: 10px;
+    border: 1px solid #f0f0f0;
+}
+
+.banner .bottom h1 {
+    font-size: 16px;
+    color: #545454;
+    padding-top: 10px;
+}
+
+.banner .bottom ul {
+    width: 270px;
+    padding-left: 20px;
+    margin-top: 15px;
+    overflow: hidden;
+}
+
+.banner .bottom li {
+    line-height: 25px;
+    list-style: disc;
+    color: #999;
+}
+
+.banner .bottom a {
+    color: #999;
+}
+
+.banner .bottom .more {
+    color: #717171;
+    font-size: 12px;
+    float: right;
+}
+/*feature*/
+.feature {
+    float: left;
+    height: 100px;
+    width:1200px;
+    margin: 30px 0;
+    margin-left: 160px;
+    background-color: #FFFAFA;
+    margin-top: 0px;
+    margin-bottom: 50px;
+}
+
+.feature li {
+    float: left;
+    width: 24%;
+    height: 90px;
+    margin-top: 17px;
+    border-left: 1px dashed #ccc;
+    position: relative;
+}
+
+.feature li:first-child {
+    border: 0;
+}
+
+.feature .center {
+    margin-top: 70px;
+    color: #464646;
+}
+
+.feature .pic {
+    position: absolute;
+    top: 20px;
+    left: 97px;
+    transition: all 0.5s ease 0s;
+}
+
+.feature li:hover .pic {
+    -webkit-animation: swing .4s .2s ease both;
+    -moz-animation: swing .4s .2s ease both;
+}
+</style>
+   <div class="banner" style="margin-top:10px">
+            <div class="wp">
+                <div class="fl">
+                    <div class="imgslide" style="margin-top: 20px;">
+                        <ul class="imgs">
+                            
+                            <li>
+                                  
+                                        <img width="1200" height="420" src="../static/images/1.jpg" />
+                                   
+                                </li>
+                            <li>
+                                        <img width="1200" height="420" src="../static/images/2.jpg" />
+                                </li>                  
+                            <li>
+                                        <img width="1200" height="420" src="../static/images/3.jpg" />
+                                </li>
+       
+                        </ul>
+                    </div>
+                    <div class="unslider-arrow prev"></div>
+                    <div class="unslider-arrow next"></div>
+                </div>
+
+                </div>
+            </div>
+
+
+
+<style>
+
+  .ffont {
+    font-family: Lobster；
+  }
+
+  .thick-green-border {
+    border-color: green;
+    border-width: 10px;
+    border-style: solid;
+    border-radius: 50%;
+  }
+.btn {
+    width: 200px;
+    height: 50px;
+    line-height: 50px;
+    margin-top: 10px;
+    margin-left: -30px;
+    text-align: center;
+    float: left;
+    cursor: pointer;
+    font-size: 24px;
+    border-radius:6px
+}
+
+#start {
+    font-size:25px;
+    color: orange;
+}
+
+#start:hover {
+        color: #0099FF;
+        text-decoration-style: solid;
+    }
+
+  .smaller-image {
+    width: 100px;
+  }
+</style>
+               
+<div class="feature">
+        <article class="excerpt-minic excerpt-minic-index" style="background-color:#FFFAFA">
+        <h2 style="font-size:20px;font-weight:800"><span style="color:red;">【本站介绍】</span><span style="color:black">CodeChecker网站面向广大师生开放</span></h2>
+        </br>
+            <p class="note" style="font-size:18px;line-height:30px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;本站可实现自动化的代码查重，教师与学生均可注册账号。教师可自行上传文件作为查重对象，也可选择本网站内部查重范围进行查重。查重后可生成报告，可以同时下载查重报告与相似的两份代码。本站为公益性质，所有操作免费。</p>
+      </article>
+  </div>
+          
+
+
+
+     <div style="width: %100; height: 300px">
+        </br>
+            <pre style="text-decoration: none;font-weight: 100;font-size:20px; line-height: 80px;margin-left:566px">
+                <h2 class="btn ffont"><a id="start" href="{% url 'upload' %}"> < < <  点 击 进 入 ，开 始 查 重 > > > </a></h2>
+            </pre>
+    </div>
+    
+
+    <div id="responce">
+        <div class="container">
+            <ul style="margin-left: -8px;">
+                <li style="margin-top: 25px"><a href="#" class="recall">联系我们</a></li>
+                <li style="margin-top: 25px"><a href="#" class="recall">用户帮助</a></li>
+                <li style="margin-top: 25px"><a href="#" class="recall">隐私政策</a></li>
+                <li style="margin-top: 25px"><a href="#" class="recall">关于网站</a></li>
+            </ul>
+        
+         </div>
+     </div>
+</body>
+
+</html>

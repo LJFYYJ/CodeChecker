@@ -1,0 +1,54 @@
+#include <bits/stdc++.h>
+
+#define pb push_back
+
+#define mp make_pair
+
+using namespace std;
+
+int main()
+
+{
+
+   vector<pair<int,int>> v;
+
+   int n,count=0,x,y,k;
+
+   cin>>n;
+
+   for(int i=0;i<n;i++)
+
+   {
+
+       cin>>x;
+
+       cin>>y;
+
+       v.pb(mp(x,y));
+
+   }
+
+   cin>>k;
+
+   for(int i=0;i<n;i++)
+
+   {
+
+       if(k>v[i].second)
+
+       {
+
+           count++;
+
+       }
+
+   }
+
+   cout<<n-count<<endl;
+
+    return 0;
+
+}
+
+
+

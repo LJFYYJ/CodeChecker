@@ -1,0 +1,36 @@
+#include<iostream>
+
+using namespace std;
+
+int main()
+
+{
+
+    int n,i,j,k,a[101][3];
+
+    cin>>n;
+
+    for(i=1;i<=n;i++)
+
+        for(j=1;j<=2;j++)
+
+            cin>>a[i][j];
+
+    cin>>k;
+
+    for(i=1;i<=n;i++)
+
+        if(k>=a[i][1] && k<=a[i][2])
+
+        {
+
+            cout<<n-i+1;
+
+            break;
+
+        }
+
+    return 0;
+
+}
+

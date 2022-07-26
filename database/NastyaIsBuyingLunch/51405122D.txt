@@ -1,0 +1,77 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+
+
+vector<int> edge[500001];
+
+bool lastGuyHasEdge[500001];
+
+void pre() {
+
+	for(int i = 0; i<500001; i++) {
+
+		lastGuyHasEdge[i] = false;
+
+	}
+
+}
+
+
+
+int main() {
+
+	pre();
+
+	int n, m;
+
+	cin>>n>>m;
+
+	int arr[500001];
+
+	for(int i = 0; i<n; i++) {
+
+		cin>>arr[i];
+
+	}
+
+	for(int i = 0; i<m; i++) {
+
+		int t1, t2;
+
+		cin>>t1>>t2;
+
+		edge[t1].push_back(t2);
+
+		if(t2==arr[n-1]) {
+
+			lastGuyHasEdge[t1] = true;
+
+		}
+
+	}
+
+
+
+	int set1 = 0;
+
+	for(int i = n-2; i>=0; i--) {
+
+		if(lastGuyHasEdge[arr[i]]) {
+
+			if(n-1-i-set1 <= int(edge[arr[i]].size())) {
+
+				set1++;
+
+			}
+
+		}
+
+	}
+
+	cout<<set1;
+
+	return 0;
+
+}

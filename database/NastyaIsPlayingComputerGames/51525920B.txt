@@ -1,0 +1,46 @@
+#include "bits/stdc++.h"
+#define FILE_IN freopen("in", "r", stdin);
+#define FILE_OUT freopen("out", "w", stdout);
+#define fr(i,a,b) for(int i =a;i<b;i++)
+bool debug = 1;
+#define prin(a) if(debug) cout << #a << " = " << (a) << endl
+#define rang(a,b) if(debug) printf("%d -> %d\n", (a), (b))
+#define separa() if(debug) cout << endl
+#define mk make_pair
+#define pb push_back
+#define fi first
+#define se second
+#define ll long long
+#define pii pair<int,int>
+#define pll pair<ll, ll>
+const ll MOD = 1000000007;
+const double PI = acos(-1.0);
+const double eps = 1e-9;
+using namespace std;
+#define N 100100
+
+
+int main () {
+
+
+	int n,k;
+
+	int k1,k2;
+	
+	cin >> n >> k;
+	
+	if(k == 1 or k == n) {
+		cout << 3*n << endl;
+	} else {
+		k1 = k-1;
+		k2 = n-k;
+		if(k1 > k2) swap(k1,k2);
+		cout << 3 + 4*k1 + 3*k2 << endl;
+	}
+
+	return 0;
+
+}
+
+
+

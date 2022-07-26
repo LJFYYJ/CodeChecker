@@ -1,0 +1,29 @@
+#include<bits/stdc++.h>
+
+using namespace std;
+
+#define N 1000005
+
+int a[N];
+
+int main() {
+
+	ios_base::sync_with_stdio(false);cout.tie(0);cin.tie(0);
+
+	int i,j,k,l,m,n,t;
+
+	cin >> n >> k;
+
+	if(k == 1 || k == n) {
+
+		cout << n+1 + n-1 + n << endl;
+
+	}
+
+	else {
+
+		cout << n+1+n+ min(k-1 + n-1,n-k+n-1) << endl;
+
+	}
+
+}

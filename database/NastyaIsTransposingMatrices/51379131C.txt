@@ -1,0 +1,234 @@
+import java.io.*;
+
+import java.util.*;
+
+import java.lang.*;
+
+public class matrixtrans{
+
+	public static void main(String args[]){ 
+
+			try{
+
+				BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+				String[] inp = br.readLine().trim().split("\\s+");
+
+				int n = Integer.parseInt(inp[0]);
+
+				int k = Integer.parseInt(inp[1]);
+
+				int[][] mat1;
+
+				int[][] mat2;
+
+
+
+				if(k<=n){ 
+
+					 mat1 = new int[n][k];
+
+					 mat2 = new int[n][k];
+
+					for(int i =0 ; i<n ; i++){
+
+						inp = br.readLine().trim().split("\\s+");
+
+						for(int j = 0 ; j<k ; j++){
+
+							mat1[i][j] = Integer.parseInt(inp[j]);
+
+						}
+
+					}
+
+					for(int i =0 ; i<n ; i++){
+
+						inp = br.readLine().trim().split("\\s+");
+
+						for(int j = 0 ; j<k ; j++){
+
+							mat2[i][j] = Integer.parseInt(inp[j]);
+
+						}
+
+					}
+
+				}
+
+				else{
+
+					 mat1 = new int[k][n];
+
+					 mat2 = new int[k][n];
+
+					for(int i =0 ; i<n ; i++){
+
+						inp = br.readLine().trim().split("\\s+");
+
+						for(int j = 0 ; j<k ; j++){
+
+							mat1[j][i] = Integer.parseInt(inp[j]);
+
+						}
+
+					}
+
+					for(int i =0 ; i<n ; i++){
+
+						inp = br.readLine().trim().split("\\s+");
+
+						for(int j = 0 ; j<k ; j++){
+
+							mat2[j][i] = Integer.parseInt(inp[j]);
+
+						}
+
+					}
+
+					int tem = n;
+
+					n=k;
+
+					k=tem;
+
+				}
+
+				
+
+
+
+				//Processing 
+
+				int flag = 0;
+
+				int[] ar1;
+
+				int[] ar2;								
+
+					for(int i=0 ; i<n ; i++){
+
+						if(i<k){
+
+							 ar1 = new int[i+1];
+
+							 ar2 = new int[i+1];
+
+						}
+
+						else{
+
+							 ar1 = new int[k];
+
+							 ar2 = new int[k];
+
+						}
+
+						int j=0 ;
+
+						int temp = i ;
+
+						while(j<k && temp>=0){
+
+							ar1[j] = mat1[temp][j];
+
+							ar2[j] = mat2[temp][j];
+
+							temp-=1;
+
+							j+=1;
+
+						}
+
+						Arrays.sort(ar1);
+
+						Arrays.sort(ar2);
+
+						for(int l = 0 ; l<k && l<i+1 ; l++ ){
+
+							if(ar1[l]!=ar2[l]){
+
+								flag = 1;
+
+								break;
+
+							}
+
+						}
+
+						if(flag==1){
+
+							break;
+
+						}						
+
+					}
+
+				for(int j = 1 ; j<n ; j++){
+
+					int temp = j;
+
+					int i = n-1;
+
+					ar1 = new int[k];
+
+							 ar2 = new int[k];
+
+					while( i>=0 && temp<k){
+
+						ar1[temp-j] = mat1[i][j];
+
+						ar2[temp-j] = mat2[i][j];
+
+						i-=1;
+
+						temp+=1;
+
+					}
+
+					Arrays.sort(ar1);
+
+						Arrays.sort(ar2);
+
+						for(int l = 0 ; l<k ; l++ ){
+
+							if(ar1[l]!=ar2[l]){
+
+								flag = 1;
+
+								break;
+
+							}
+
+						}
+
+						if(flag==1){
+
+							break;
+
+						}
+
+
+
+				}			
+
+				if(flag==1){
+
+					System.out.println("NO");
+
+				}
+
+				else{
+
+					System.out.println("YES");
+
+				}
+
+			}
+
+			catch(Exception E){}
+
+	}
+
+}
+

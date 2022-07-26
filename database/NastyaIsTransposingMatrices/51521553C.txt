@@ -1,0 +1,195 @@
+#include<iostream>
+
+#include<cstdio>
+
+#include<algorithm>
+
+#include<cstring>
+
+#include<cmath>
+
+#include<vector>
+
+#include<queue>
+
+#include<map>
+
+#include<set>
+
+#define mem(a,x) memset(a,x,sizeof(a))
+
+#define s1(x) scanf("%d",&x)
+
+#define s2(x,y) scanf("%d%d",&x,&y)
+
+#define s3(x,y,z) scanf("%d%d%d",&x,&y,&z)
+
+#define s4(x,y,z,k) scanf("%d%d%d%d",&x,&y,&z,&k)
+
+#define ls 2*rt
+
+#define rs 2*rt+1
+
+#define lson ls,L,mid
+
+#define rson rs,mid+1,R
+
+#define ll long long
+
+using namespace std;
+
+typedef pair<int,int> pii;
+
+//inline ll ask(int x){ll res=0;while(x)res+=c[x],x-=x&(-x);return res;}
+
+//inline void add(int x,int d){while(x<=n)c[x]+=d,x+=x&(-x);}
+
+//int gcd(int a, int b) { return b == 0 ? a : gcd(b, a%b);}
+
+const ll inf = 0x3f3f3f3f;
+
+const int mx = 5e5+10;
+
+int mat1[505][505],mat2[505][505],vis[mx];
+
+map<int,int> ma;
+
+int n,m,id = 0;
+
+int getHash(int x){
+
+	if(ma.count(x) == 0){
+
+		return ma[x]=++id;
+
+	}
+
+	else {
+
+		return ma[x];
+
+	}
+
+}
+
+int main(){
+
+	//freopen("C:\\Users\\black\\Desktop\\in.txt","r",stdin);
+
+	//int T=10;	scanf("%d",&T);
+
+	int x;
+
+	s2(n,m);
+
+	for(int i = 1; i <= n ;i++)
+
+		for(int j = 1; j <= m ;j++){
+
+			s1(x);
+
+			mat1[i][j] = getHash(x);	
+
+		} 
+
+	for(int i = 1; i <= n ;i++)
+
+		for(int j = 1; j <= m ;j++){
+
+			s1(x);
+
+			mat2[i][j] = getHash(x);	
+
+		} 
+
+	//int p = max(n,m);
+
+	bool ok = true;
+
+	if(n >= m){
+
+		for(int i = 1; i <= n&&ok; i++){
+
+			int a = i,b = 1;
+
+			while(a>0&&a<=n&&b>0&&b<=m){
+
+				vis[mat1[a][b]]++;
+
+				a--; b++;
+
+			}
+
+			a = i; b = 1;
+
+			while(a>0&&a<=n&&b>0&&b<=m){
+
+				if(vis[mat2[a][b]] < 1){
+
+					ok = false;
+
+					break;
+
+				}
+
+				vis[mat2[a][b]]--;
+
+				a--; b++;
+
+			}
+
+		}	
+
+	}
+
+	else{
+
+		for(int i = 1; i <= m&&ok; i++){
+
+			int a = 1,b = i;
+
+			while(a>0&&a<=n&&b>0&&b<=m){
+
+				vis[mat1[a][b]]++;
+
+				a++; b--;
+
+			}
+
+			a = 1,b = i;
+
+			while(a>0&&a<=n&&b>0&&b<=m){
+
+				if(vis[mat2[a][b]] < 1){
+
+					ok = false;
+
+					break;
+
+				}
+
+				vis[mat2[a][b]]--;
+
+					a++; b--;
+
+			}
+
+		}
+
+	}
+
+	if(ok)
+
+		puts("YES");
+
+	else
+
+		puts("NO");
+
+	
+
+	
+
+	return 0;
+
+}

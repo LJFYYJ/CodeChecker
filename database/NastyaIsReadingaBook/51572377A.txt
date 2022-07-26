@@ -1,0 +1,14 @@
+#include <bits/stdc++.h>
+using namespace std;
+int l[10005],r[10005],n,k,cnt;
+int main(){
+	scanf("%d",&n);
+	for(int i=0;i<n;i++){
+		scanf("%d%d",&l[i],&r[i]);
+	}
+	scanf("%d",&k);
+	for(int i=0;i<n;i++){
+		if(k<=r[i]) cnt++;
+	}
+	printf("%d\n",cnt);
+}

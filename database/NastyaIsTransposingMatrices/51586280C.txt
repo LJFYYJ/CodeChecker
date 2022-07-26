@@ -1,0 +1,112 @@
+#include <bits/stdc++.h>
+
+#define ll long long
+
+#define read1(a) scanf("%lld",&a)
+
+#define read2(a,b) scanf("%lld%lld",&a,&b)
+
+#define read3(a,b,c) scanf("%lld%lld%lld",&a,&b,&c)
+
+#define write(a) printf("%lld ",a)
+
+#define writen(a) printf("%lld\n",a)
+
+#define ff first
+
+#define ss second
+
+#define pll pair<long long ,long long>
+
+#define pii pair<int ,int>
+
+#define ull unsigned long long int
+
+
+
+using namespace std;
+
+int n,m,a[501][501],b[501][501];
+
+
+
+int main()
+
+{
+
+    //freopen("myfile.in","r",stdin);
+
+    //freopen("myfile.out","w",stdout);
+
+    vector < vector <int> > diagonalA (1002);
+
+    vector < vector <int> > diagonalB (1002);
+
+    cin >> n >> m;
+
+    for (int i=0;i<n;i++)
+
+        for (int j=0;j<m;j++)
+
+        {
+
+            int x;
+
+            cin >> x;
+
+            diagonalA[i+j].push_back(x);
+
+        }
+
+    for (int i=0;i<n;i++)
+
+        for (int j=0;j<m;j++)
+
+        {
+
+            int y;
+
+            cin >> y;
+
+            diagonalB[i+j].push_back(y);
+
+        }
+
+
+
+    for(int i=0;i<n+m-1;i++)
+
+    {
+
+        sort(diagonalA[i].begin(),diagonalA[i].end());
+
+        sort(diagonalB[i].begin(),diagonalB[i].end());
+
+        for(int j=0;j<diagonalA.size();j++)
+
+            if(diagonalA[i][j]!=diagonalB[i][j])
+
+        {
+
+            cout << "NO";
+
+            return 0;
+
+        }
+
+
+
+    }
+
+
+
+    cout << "YES";
+
+
+
+
+
+
+
+}
+

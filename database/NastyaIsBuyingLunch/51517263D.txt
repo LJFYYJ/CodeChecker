@@ -1,0 +1,74 @@
+#include<iostream>
+
+#include<stdio.h>
+
+#include<string.h>
+
+#include<algorithm>
+
+#include<vector>
+
+using namespace std;
+
+const int maxx = 3e5+7;
+
+vector<int>G[maxx];
+
+int cnt[maxx];
+
+int a[maxx];
+
+int main(){
+
+  int n,m;
+
+  int u,v;
+
+  while(~scanf("%d%d",&n,&m)){
+
+     for (int i=1;i<=n;i++){
+
+        scanf("%d",&a[i]);
+
+     }
+
+     while(m--){
+
+        scanf("%d%d",&u,&v);
+
+        G[v].push_back(u);
+
+     }
+
+     for (int i=0;i<G[a[n]].size();i++){
+
+        cnt[G[a[n]][i]]++;
+
+     }
+
+     int ans=0;
+
+     for (int i=n-1;i>=1;i--){
+
+        if (n-i-ans==cnt[a[i]])ans++;
+
+        else {
+
+            for (int j=0;j<G[a[i]].size();j++){
+
+                cnt[G[a[i]][j]]++;
+
+            }
+
+        }
+
+     }
+
+     printf("%d\n",ans);
+
+  }
+
+  return 0;
+
+}
+

@@ -1,0 +1,26 @@
+n = int(input())
+
+
+
+chapters = []
+
+for i in range(n):
+
+  l, r = map(int, input().split())
+
+  chapters.append((l, r))
+
+k = int(input())
+
+
+
+for i in range(n):
+
+  l, r = chapters[i]
+
+  if k >= l and k <=r:
+
+    print(n - i)
+
+    break
+

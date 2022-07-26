@@ -1,0 +1,128 @@
+#include<bits/stdc++.h>
+
+using namespace std;
+
+#define ll long long
+
+#define mx 500010
+
+#define pb push_back
+
+
+
+ll arr[mx];
+
+ll brr[mx];
+
+
+
+vector<ll>v[mx];
+
+int main()
+
+{
+
+ios_base::sync_with_stdio(false);
+
+int n,m;
+
+cin>>n>>m;
+
+for(int i=0;i<n;i++)
+
+{
+
+    cin>>arr[i];
+
+}
+
+
+
+for(int i=0;i<m;i++)
+
+{
+
+    int x,y;
+
+    cin>>x>>y;
+
+   // cout<<"a"<<endl;
+
+    v[x].push_back(y);
+
+
+
+}
+
+map<ll,ll>mp;
+
+mp[arr[n-1]]=1;
+
+int c=1;
+
+int m1=0;
+
+//cout<<mp[2]<<endl;
+
+for(int i=n-2;i>=0;i--)
+
+{
+
+
+
+    int p=0;
+
+    //cout<<v[arr[i]].size()<<endl;
+
+
+
+    //cout<<arr[i]<<endl;
+
+    for(int j=0;j<v[arr[i]].size();j++)
+
+    {
+
+        //cout<<v[i][j]<<" ";
+
+
+
+
+
+        if(mp[v[arr[i]][j]]==1)
+
+            p++;
+
+    }
+
+   // cout<<endl;
+
+    //cout<<p<<endl;
+
+    if(c==p)
+
+    {
+
+        m1++;
+
+    }
+
+    else{
+
+        c++;
+
+        mp[arr[i]]=1;
+
+    }
+
+}
+
+cout<<m1<<endl;
+
+
+
+//cout << fixed << showpoint;
+
+//cout << setprecision(12);
+
+}
+

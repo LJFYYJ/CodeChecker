@@ -1,0 +1,143 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+#define ll long long
+
+#define m_p make_pair
+
+#define p_b push_back
+
+#define Pq priority_queue
+
+#define u_set unordered_set
+
+#define MOD_ 1000000007
+
+#define MAXN 100001
+
+#define swap(a,b) a = a^b;b = a^b;a = a^b;
+
+#define set_val(arr,v) memset(arr, v, sizeof(arr))
+
+#define scanT(t) for(scanf("%d",&t); t; t--)
+
+#define print(result) printf("%d\n", result)
+
+#define scan(n) scanf("%d", &n)
+
+#define scanP(x,y) scanf("%d %d", &x, &y)
+
+#define sort(vec) sort(vec.begin(), vec.end())
+
+#define DFP(i, n) for (int i=0; i<n; i++)
+
+#define DFM(i, n) for (int i=n; i>=0; i--)
+
+#define F first
+
+#define S second
+
+
+
+int n;
+
+ll tree[MAXN];
+
+
+
+void update(int idx ,ll val){
+
+    while (idx <= n){
+
+        tree[idx] += val;
+
+        idx += (idx & -idx);
+
+    }
+
+}
+
+
+
+ll read(int idx){
+
+    ll sum = 0;
+
+    while (idx > 0){
+
+        sum += tree[idx];
+
+        idx = idx - (idx & -idx);
+
+    }
+
+    return sum;
+
+}
+
+
+
+int main() {
+
+    scan(n);
+
+    ll a[n+1];
+
+    a[0] = 0;
+
+    DFP(i,n){
+
+        scanf("%lld", &a[i+1]);
+
+        update(i+1,a[i+1]);
+
+    }
+
+    ll b[n];
+
+    DFP(i,n-1){
+
+        scanf("%lld", &b[i+1]);
+
+    }
+
+    int q; scan(q);
+
+    while(q--){
+
+        string s; cin >> s;
+
+        if(s[0] == 's'){
+
+            ll l,r; scanf("%lld %lld", &l, &r);
+
+            cout << read(r) - read(l-1) << endl;
+
+        }else {
+
+            ll i,x; scanf("%lld %lld", &i, &x);            
+
+            a[i] += x;
+
+            update(i, x);
+
+            while(i < n && a[i+1] < a[i] + b[i]){
+
+                ll t = a[i] + b[i] - a[i+1];
+
+                a[i+1] += t;
+
+                update(++i, t);
+
+            }
+
+        }
+
+    }
+
+    return 0;
+
+}
+
+ 

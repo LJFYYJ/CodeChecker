@@ -1,0 +1,20 @@
+#include <bits/stdc++.h>
+
+int l[200], r[200];
+
+int main() {
+  int n;
+  std::cin >> n;
+  for (int i = 0; i < n; ++i) {
+    std::cin >> l[i] >> r[i];
+  }
+  int k;
+  std::cin >> k;
+  int read = 0;
+  for (int i = 0; i < n; ++i) {
+    if (r[i] >= k) break;
+    ++read;
+  }
+  std::cout << (n - read) << std::endl;
+  return 0;
+}

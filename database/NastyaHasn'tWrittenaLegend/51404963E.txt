@@ -1,0 +1,117 @@
+#include <iostream>
+#include <stdio.h>
+#include <string.h>
+#include <vector>
+#include <algorithm>
+#include <set>
+#define ll long long
+using namespace std;
+
+struct Node {
+    ll a;
+    ll b;
+} tr[1 << 20];
+int M;
+int n;
+set <pair<int,int> > ss;
+ll k[100005];
+ll rec[100005];
+
+void init_tree(int n) {
+    for (M=1; M < n + 2; M <<= 1);
+    memset(tr, 0, sizeof(tr[0]) * (M << 1));
+}
+
+ll get(int pos) {
+    if (!pos) return 0;
+    ll res = 0;
+    for (int l=pos+M;l;l>>=1){
+        res += tr[l].a * pos + tr[l].b;
+    }
+    return res;
+}
+
+void mod(int l, int r, ll a, ll b) {
+    for (l+=M-1,r+=M+1;l^r^1;l>>=1,r>>=1){
+        if (~l&1) {
+            tr[l^1].a += a;
+            tr[l^1].b += b;
+        }
+        if (r&1) {
+            tr[r^1].a += a;
+            tr[r^1].b += b;
+        }
+    }
+}
+
+ll sum(int l, int r) {
+    return get(r) - get(l - 1);
+}
+
+void add(int pos, int v) {
+    ll now = sum(pos, pos);
+    set <pair<int,int> >::iterator it = ss.upper_bound(make_pair(pos, n+1));
+    it--;
+    int vl = it->first;
+    int vr = pos;
+    ll s = 0;
+    for (;it != ss.end();) {
+        int l = max(it->first, pos);
+        int r = it->second;
+        ll d = now + v + k[l] - k[pos] - sum(l, l) - s;
+        if (d <= 0) {
+            break;
+        }
+        vr = r;
+        mod(l, r, d, s - d * (l-1));
+        if (r < n) {
+            mod(r+1, n, 0, d * (r - l + 1));
+        }
+        //s += d * (r-l+1);
+        it = ss.erase(it);
+    }
+    if (vl < pos) {
+        ss.insert(make_pair(vl, pos-1));
+    }
+    ss.insert(make_pair(pos, vr));
+    if (vr < n) {
+        //mod(vr+1, n, 0, s);
+    }
+}
+
+
+void solve() {
+    int i, j;
+    cin >> n;
+    init_tree(n);
+    for (i=1;i<=n;i++) {
+        ll x;
+        cin >> x;
+        tr[i+M].b = tr[i+M-1].b + x;
+        ss.insert(make_pair(i,i));
+    }
+    for (i=1;i<n;i++) {
+        ll x;
+        cin >> x;
+        k[i+1] = k[i] + x;
+    }
+    int q;
+    cin >> q;
+    for (i=0;i<q;i++) {
+        char cmd[5];
+        int x, y;
+        cin >> cmd >> x >> y;
+        if (cmd[0] == '+') {
+            add(x, y);
+        } else {
+            cout << sum(x, y) << endl;
+        }
+    }
+}
+
+int main() {
+    //freopen("a.in", "r", stdin);
+    ios::sync_with_stdio(false);
+    solve();
+    return 0;
+}

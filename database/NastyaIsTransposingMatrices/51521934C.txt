@@ -1,0 +1,203 @@
+#include<bits/stdc++.h>
+
+using namespace std;
+
+typedef long long int ll;
+
+
+
+
+
+int main()
+
+{ 
+
+    int n,m,i,j,A[1000][1000],B[1000][1000],C[10000],l=1,D[10000],p=1,k,r;
+
+    cin>>n>>m;
+
+    for(i=1;i<=n;i++)
+
+    {
+
+        for(j=1;j<=m;j++)
+
+        {
+
+            cin>>A[i][j];
+
+        }
+
+    }
+
+     for(i=1;i<=n;i++)
+
+    {
+
+        for(j=1;j<=m;j++)
+
+        {
+
+            cin>>B[i][j];
+
+        }
+
+    }
+
+    for(i=1;i<=n;i++)
+
+    {
+
+        k=i;r=i; p=1; l=1;
+
+        while(k--)
+
+        {
+
+            C[l]=A[r][p];
+
+            
+
+            
+
+            D[l]=B[r][p];
+
+            l++;
+
+            r--;
+
+            p++;
+
+        }
+
+        
+
+        sort(C+1,C+1+l-1);
+
+        sort(D+1,D+1+l-1);
+
+    /*    for(j=1;j<=l-1;j++)
+
+        {
+
+            cout<<C[j]<<" ";
+
+        }
+
+        cout<<endl;
+
+        
+
+        for(j=1;j<=l-1;j++)
+
+        {
+
+            cout<<D[j]<<" ";
+
+        }
+
+        cout<<endl;    */
+
+        
+
+        for(j=1;j<=l-1;j++)
+
+        {
+
+            if(C[j]!=D[j])
+
+            {
+
+                cout<<"NO";
+
+                return 0;
+
+            }
+
+        }
+
+        
+
+        while(l--)
+
+        {
+
+            C[l]=0;
+
+            D[l]=0;
+
+        }
+
+        
+
+    }
+
+     for(i=1;i<=m;i++)
+
+    {
+
+        k=m-i+1;r=n; p=i; l=1;
+
+        while(m--)
+
+        {
+
+            C[l]=A[r][p];
+
+            
+
+            
+
+            D[l]=B[r][p];
+
+            l++;
+
+            r--;
+
+            p++;
+
+        }
+
+        sort(C+1,C+1+l-1);
+
+        sort(D+1,D+1+l-1);
+
+        for(j=1;j<=l-1;j++)
+
+        {
+
+            if(C[j]!=D[j])
+
+            {
+
+                cout<<"NO";
+
+                return 0;
+
+            }
+
+        }
+
+        
+
+        while(l--)
+
+        {
+
+            C[l]=0;
+
+            D[l]=0;
+
+        }
+
+        
+
+    }
+
+    
+
+    printf("YES");
+
+    return 0;
+
+}

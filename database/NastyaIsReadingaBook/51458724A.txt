@@ -1,0 +1,44 @@
+#include<iostream>
+
+using namespace std;
+
+int main()
+
+{
+
+    int N[101],M[102];
+
+    int n;
+
+    cin>>n;
+
+    for(int i=1;i<=n;i++)
+
+    {
+
+        cin>>N[i]>>M[i];
+
+    }
+
+    int k;
+
+    cin>>k;
+
+    for(int j=1;j<=n;j++)
+
+    {
+
+        if(k>=N[j] && k<=M[j])
+
+        {
+
+            cout<<n-j+1<<endl;
+
+        }
+
+    }
+
+
+
+}
+

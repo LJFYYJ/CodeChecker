@@ -1,0 +1,56 @@
+#include<iostream>
+
+using namespace std;
+
+int main()
+
+{
+
+    int n,m,a[501][501],i,j,b[501][501],yes,t;
+
+    cin>>n>>m;
+
+    yes=1;
+
+    for(i=1;i<=n;i++)
+
+        for(j=1;j<=n;j++)
+
+            cin>>a[i][j];
+
+    for(i=1;i<=m;i++)
+
+        for(j=1;j<=m;j++)
+
+            cin>>b[i][j];
+
+    for(i=1;i<=n/2;i++)
+
+        for(j=1;j<=n;j++)
+
+        {
+
+            t=a[i][j],a[i][j]=a[j][i],a[j][i]=t;
+
+        }
+
+    for(i=1;i<=n;i++)
+
+        for(j=1;j<=n;j++)
+
+            if (a[i][j]!=b[i][j])
+
+                yes=0;
+
+    if(yes)
+
+        cout<<"YES";
+
+    else
+
+        cout<<"NO";
+
+     return 0;
+
+}
+

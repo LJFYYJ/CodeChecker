@@ -1,0 +1,51 @@
+#include<iostream>
+
+using namespace std;
+
+int main()
+
+{
+
+	int pos, num;
+
+	int dem = 0;
+
+	cout << "nhap num: ";
+
+	cin >> num;
+
+	cout << "nhap pos: ";
+
+	cin >> pos;
+
+	dem += num * 3;
+
+	if (pos == 1 || pos == num)
+
+		goto end;
+
+		if (pos > 1 && pos <= num/2)
+
+	{
+
+		dem += pos-1;
+
+	}
+
+	if (pos > num / 2)
+
+	{
+
+		dem += num - pos;
+
+	}
+
+	end:
+
+	cout << dem;
+
+	system("pause");
+
+	return 0;
+
+}

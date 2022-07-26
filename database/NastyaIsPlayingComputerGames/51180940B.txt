@@ -1,0 +1,90 @@
+#pragma GCC optimize("Ofast")
+
+#pragma GCC target("sse,sse2,sse3,ssse3,sse4,popcnt,abm,mmx")
+
+
+
+#include <bits/stdc++.h>
+
+
+
+#define ll long long
+
+#define pb push_back
+
+#define F first
+
+#define S second
+
+#define pll pair <int , int>
+
+#define pii pair <ll ,ll >
+
+#define all(x) x.begin(),x.end()
+
+#define sz(x) (ll)(x.size())
+
+#define ld double
+
+#define file "lca"
+
+
+
+using namespace std;
+
+
+
+const int maxn = (int)5e5 + 7;
+
+const ll linf = (ll)1e18 + 7;
+
+const int INF = (int)1e9 + 7;
+
+const long double pi = 3.14159265359;
+
+const double eps = 1e-6;
+
+const int base = 1000 * 1000 * 1000;
+
+const ll P = 37;
+
+const int block = 100;
+
+
+
+void boost(){
+
+	ios_base::sync_with_stdio(NULL);
+
+	cin.tie(NULL);
+
+	cout.tie(NULL);
+
+}
+
+
+
+ll n, m, k, mn = INF, mx = -INF, ans, cnt;
+
+
+
+ll a[maxn];
+
+
+
+int main(){
+
+	boost();
+
+    cin >> n >> k;
+
+    ll res = 2 * min(k - 1, n - k) * 1ll + max(k - 1, n - k);
+
+    res = 2ll * n + 1ll + res;
+
+    cout << res;
+
+    return 0;
+
+}
+

@@ -1,0 +1,375 @@
+#include <bits/stdc++.h>
+
+
+
+#define ll long long
+
+#define left(x) (x << 1 | 1)
+
+#define right(x) (left(x) + 1)
+
+#define half (l + r) / 2
+
+#define all(x) (x).begin(), (x).end()
+
+#define fill(x, y) memset(x, y, sizeof(x))
+
+#define optimizar_io ios_base::sync_with_stdio(false);cin.tie(NULL)
+
+
+
+using namespace std;
+
+const ll LN = 1e5 + 5, LK = 10, INF = 1e15;
+
+ll N, Q;
+
+vector < ll > A, K, V;
+
+
+
+template < typename T >
+
+class CST
+
+{
+
+private:
+
+	vector < T > nodo, tmax;
+
+	vector < T > lazy;
+
+	vector < T > v;
+
+	T tl, tr, tval, N;
+
+
+
+	bool out_range(int l, int r)
+
+	{
+
+		if (tl > r || tr < l)
+
+			return true;
+
+		return false;
+
+	}
+
+
+
+	bool in_range(int l, int r)
+
+	{
+
+		if (tl <= l && r <= tr)
+
+			return true;
+
+		return false;
+
+	}
+
+
+
+	void act(int pos, int l, int r)
+
+	{
+
+		if (lazy[pos] == INF)
+
+			return;
+
+		nodo[pos] = (r - l + 1) * lazy[pos];
+
+		tmax[pos] = lazy[pos];
+
+		if (l != r)
+
+		{
+
+			lazy[left(pos)] = lazy[pos];
+
+			lazy[right(pos)] = lazy[pos];
+
+		}
+
+		lazy[pos] = INF;
+
+	}
+
+
+
+	void _build(int pos, int l, int r)
+
+	{
+
+		if (l == r)
+
+		{
+
+			nodo[pos] = v[l];
+
+			return;
+
+		}
+
+		_build(left(pos), l, half);
+
+		_build(right(pos), half + 1, r);
+
+		nodo[pos] = nodo[left(pos)] + nodo[right(pos)];
+
+		tmax[pos] = tmax[left(pos)] + tmax[right(pos)];
+
+		return;
+
+	}
+
+
+
+	void _update(int pos, int l, int r)
+
+	{
+
+		act(pos, l, r);
+
+		if (out_range(l, r))
+
+			return;
+
+		if (in_range(l, r))
+
+		{
+
+			lazy[pos] = tval;
+
+			act(pos, l, r);
+
+			return;
+
+		}
+
+		_update(left(pos), l, half);
+
+		_update(right(pos), half + 1, r);
+
+		nodo[pos] = nodo[left(pos)] + nodo[right(pos)];
+
+		tmax[pos] = tmax[left(pos)] + tmax[right(pos)];
+
+	}
+
+
+
+	T _query(int pos, int l, int r)
+
+	{
+
+		act(pos, l, r);
+
+		if (out_range(l, r))
+
+			return 0;
+
+		if (in_range(l, r))
+
+			return nodo[pos];
+
+		return _query(left(pos), l, half) + _query(right(pos), half + 1, r);
+
+	}
+
+
+
+	int search(int pos, int l, int r)
+
+	{
+
+		act(pos, l, r);
+
+		if (l == r)
+
+			return (nodo[pos] < tval ? 1 : 0) + l;
+
+		if (tmax[left(pos)] >= tval)
+
+			return search(left(pos), l, half);
+
+		else
+
+			return search(right(pos), half + 1, r);
+
+	}
+
+
+
+public:
+
+
+
+	void build(vector < T > v)
+
+	{
+
+		this->v = v;
+
+		N = v.size();
+
+		nodo.resize(4 * N);
+
+		tmax.resize(4 * N);
+
+		lazy.resize(4 * N, INF);
+
+		_build(0, 0, N - 1);
+
+	}
+
+
+
+	void update(int l, int val)
+
+	{
+
+		tval = val + query(l,l);
+
+		tl = l;
+
+		tr = search(0, 0, N - 1);
+
+		if(tr > tl)
+
+			tr--;
+
+		_update(0, 0, N - 1);
+
+	}
+
+
+
+	T query(int l, int r)
+
+	{
+
+		tl = l;
+
+		tr = r;
+
+		return _query(0, 0, N - 1);
+
+	}
+
+
+
+};
+
+
+
+
+
+CST < ll > STK, STV;
+
+
+
+int main()
+
+{
+
+	optimizar_io;
+
+
+
+	cin >> N;
+
+
+
+	A.resize(N);
+
+	K.resize(N);
+
+	V.resize(N);
+
+
+
+	for (int i = 0; i < N; i++)
+
+		cin >> A[i];
+
+
+
+	for (int i = 0; i < N-1; i++)
+
+	{
+
+		cin >> K[i + 1];
+
+		if (i)
+
+			K[i + 1] += K[i];
+
+		V[i] = A[i] - K[i];
+
+	}
+
+
+
+	V[N - 1] = A[N - 1] - K[N - 1];
+
+
+
+	STK.build(K);
+
+	STV.build(V);
+
+
+
+	cin >> Q;
+
+
+
+	char inst;
+
+	int l, r, x;
+
+	while (Q--)
+
+	{
+
+		cin >> inst;
+
+		if (inst == '+')
+
+		{
+
+			cin >> l >> x;
+
+			l--;
+
+			STV.update(l, x);
+
+		}
+
+		else
+
+		{
+
+			cin >> l >> r;
+
+			l--;
+
+			r--;
+
+			cout << STV.query(l, r) + STK.query(l,r) << "\n";
+
+		}
+
+	}
+
+
+
+	return 0;
+
+}

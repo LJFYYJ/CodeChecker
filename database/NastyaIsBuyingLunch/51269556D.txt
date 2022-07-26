@@ -1,0 +1,58 @@
+#include<bits/stdc++.h>
+
+using namespace std;
+
+
+
+
+
+int a[300009],pos[300009];
+
+set<int>v[300009];
+
+int main()
+
+{
+
+    int n,m;
+
+    cin>>n>>m;
+
+    for(int i=1;i<=n;i++)
+
+    {
+
+        scanf("%d",&a[i]);
+
+        pos[a[i]] = i;
+
+    }
+
+    while(m--)
+
+    {
+
+        int x,y;
+
+        cin>>x>>y;
+
+        if(pos[x]<pos[y]) v[x].insert(y);
+
+        else v[y].insert(x);
+
+    }
+
+    int ans = 0;
+
+    for(int i=n-1;i>=1;i--)
+
+    {
+
+        if(v[a[i]].size() == n-i) ans++;
+
+    }
+
+    cout<<ans<<endl;
+
+}
+

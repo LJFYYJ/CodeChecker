@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>Check Result</title>
+</head><style type="text/css">
+*
+{
+    padding:0;
+    margin:0;
+}
+body {
+    background-color: #f6f6f6;
+}
+
+.left {
+    float: left;
+}
+
+.right {
+    float: right;
+}
+
+.container {
+    margin: 0px auto;
+    width: 100%;
+}
+
+#header {
+    background-color: #f5f9fa;
+    height: 40px;
+    border-bottom: 1px inset #fff;
+    box-shadow: 10px 0px 20px #dddde8;
+}
+
+.header_right .text {
+    display: inline-block;
+    text-decoration-style: none;
+    margin-left: 10px;
+    margin-right: 10px;
+    line-height: 40px;
+    font-size: 16px;
+}
+
+.nav {
+    padding-right: 10px;
+}
+
+.header_left .logo {
+    display: inline-block;
+    line-height: 40px;
+}
+#main {
+    margin-left: 40px;
+}
+#show{
+    height:575px;
+    margin-top:30px;
+}
+#show .container{
+    margin:10px auto;
+    background-color:#FFFAFA;
+    border-radius:5px;
+    border:2px solid #333;
+    height:575px;
+    width:1343px;
+}
+#show .container #head{
+    height:58px;
+    border-bottom:3px solid #333;
+}
+#show .container #content_left{
+    width:670px;
+    float:left;
+    border-right:2px solid #333;
+    height:465px;
+    color:#333;
+}
+#show .container #content_right{
+    width:670px;
+    float:right;
+    height:465px;
+    color:#333;
+}
+#show .container #bottom{
+    height:48px;
+    border-top:2px solid #333;
+    clear:both;
+}
+</style><body>
+    <div id="header">
+        <div class="container">
+            <div class="header_left left">
+                <div class="logo"><span id="text_" class="left" style="color:#333333;font-size:20px; font-weight:650;margin-left:20px">CodeChecker</span></div>
+            </div>
+        </div>
+    </div>
+    <div id="show">
+        <div class="container">
+            <div id="head">
+                <div  style="display:inline-block;width:509px;height:58px;line-height:58px;font-size:18px;color:#333;margin-left:100px">
+                    <span id="left_file" style="text-align:center;margin:0px auto;width:509px;height:58px;display:inline-block;font-size:23px">
+51173760A.txt</span>
+                </div>
+                <div  style="display:inline-block;width:140px;height:58px;line-height:58px;color:red;font-weight:650;font-size:18px;margin-left:1px">
+                    <span style="text-align:center;margin:0px auto;width:140px;height:58px;display:inline-block;font-size:21px">
+60.2</span>
+                </div>
+                <div  style="display:inline-block;width:406px;margin-left:20px;color:#333;font-size:18px;line-height:58px;height:58px">
+                    <span id="right_file" style="text-align:center;margin:0px auto;width:406px;height:58px;display:inline-block;font-size:23px">
+51173797A.txt</span>
+                </div>
+            </div>
+
+            <div id="content_left" style="overflow:scroll" >
+                <p style="color:#333;font-size:16px">
+<span style="background-color: red">#include&lt;bits/stdc++.h&gt;</span></br>
+<span style="background-color: red">usingnamespacestd;</span></br>
+<span style="background-color: write">typedeflonglongll;</span></br>
+<span style="background-color: write">typedefunsignedlonglongunll;</span></br>
+<span style="background-color: write">typedefvector&lt;int&gt;vi;</span></br>
+<span style="background-color: write">typedefvector&lt;bool&gt;vb;</span></br>
+<span style="background-color: write">typedefmap&lt;int,int&gt;mii;</span></br>
+<span style="background-color: write">typedefpair&lt;int,int&gt;ii;</span></br>
+<span style="background-color: write">#defineinf0x3f3f3f3f</span></br>
+<span style="background-color: write">#defineeach(x,s)for(autoconst&x:s)</span></br>
+<span style="background-color: write">#definerep(x,y,z)for(inti=x;i&lt;y;i+=z)</span></br>
+<span style="background-color: greenyellow">#defineloop(x)for(inti=0;i&lt;x;i++)</span></br>
+<span style="background-color: greenyellow">#definevloop(i,x)for(inti=0;i&lt;x;i++)</span></br>
+<span style="background-color: write">#definepbpush_back</span></br>
+<span style="background-color: write">#defineebemplace_back</span></br>
+<span style="background-color: yellow">intmain(){</span></br>
+<span style="background-color: write">ios_base::sync_with_stdio(false);</span></br>
+<span style="background-color: greenyellow">intn;</span></br>
+<span style="background-color: yellow">cin&gt;&gt;n;</span></br>
+<span style="background-color: write">vector&lt;ii&gt;lr(n);</span></br>
+<span style="background-color: write">intc,k;</span></br>
+<span style="background-color: write">loop(n){</span></br>
+<span style="background-color: greenyellow">cin&gt;&gt;lr[i].first&gt;&gt;lr[i].second;</span></br>
+<span style="background-color: write">}</span>
+<span style="background-color: write">cin&gt;&gt;k;</span></br>
+<span style="background-color: write">for(c=0;c&lt;n&&k&gt;lr[c].second;c++);</span></br>
+<span style="background-color: greenyellow">cout&lt;&lt;n-c&lt;&lt;endl;</span></br>
+<span style="background-color: write">return0;</span></br>
+<span style="background-color: write">}</span>
+</p>
+            </div>
+            <div id="content_right" style="overflow:scroll">
+                <p style="color:#333;font-size:16px">
+<span style="background-color: red">#include&lt;bits/stdc++.h&gt;</span></br>
+<span style="background-color: red">usingnamespacestd;</span></br>
+<span style="background-color: yellow">intmain(void)</span></br>
+<span style="background-color: write">{</span>
+<span style="background-color: white">	intn,i,k,cnt=0;</span></br>
+<span style="background-color: greenyellow">	cin&gt;&gt;n;</span></br>
+<span style="background-color: white">	intl[n],r[n];</span></br>
+<span style="background-color: greenyellow">	for(i=0;i&lt;n;i++)</span></br>
+<span style="background-color: white">	{</span></br>
+<span style="background-color: greenyellow">		cin&gt;&gt;l[i]&gt;&gt;r[i];</span></br>
+<span style="background-color: greenyellow">	}</span></br>
+<span style="background-color: yellow">	cin&gt;&gt;k;</span></br>
+<span style="background-color: greenyellow">	for(i=0;i&lt;n;i++)</span></br>
+<span style="background-color: white">	{</span></br>
+<span style="background-color: white">		if(r[i]&gt;=k)</span></br>
+<span style="background-color: white">		{</span></br>
+<span style="background-color: white">			cnt++;</span></br>
+<span style="background-color: white">		}</span></br>
+<span style="background-color: greenyellow">	}</span></br>
+<span style="background-color: greenyellow">	cout&lt;&lt;cnt;</span></br>
+<span style="background-color: write">}</span>
+</p>
+            </div>
+
+
+            <div id="bottom" style="position:relative;border-bottom:2px solid #333"></div>
+
+            </div>
+        </div>
+    </div>
+</body>
+</html>

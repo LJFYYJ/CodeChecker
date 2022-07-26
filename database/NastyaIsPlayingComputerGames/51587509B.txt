@@ -1,0 +1,33 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+
+
+int main() 
+
+{
+
+	// your code goes here
+
+	
+
+	int n,k,i,j,ans=0;
+
+	cin >> n >> k;
+
+	
+
+	ans+=n+n+1;
+
+	ans+=min(k-1,n-k)+n-1;
+
+	
+
+	cout << ans;
+
+	
+
+	return 0;
+
+}

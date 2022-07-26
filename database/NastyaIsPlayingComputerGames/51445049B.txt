@@ -1,0 +1,58 @@
+#include <bits/stdc++.h>
+
+#define endl '\n'
+
+#define ll long long
+
+#define ull unsigned long long
+
+#define ENGZ ios::sync_with_stdio(0);ios_base::sync_with_stdio(0);cin.tie(0) , cout.tie(0) ;
+
+#define mod (ll)(1e9+7)
+
+#define all(v) v.begin(), v.end()
+
+#define allr(v) v.rbegin(), v.rend()
+
+#define pi 3.1415926536
+
+#define MAX 1005
+
+using namespace std;
+
+//freopen("input.txt","r",stdin);
+
+//freopen("output.txt","w",stdout);
+
+
+
+int main()
+
+{
+
+  ENGZ
+
+  int n , k ;
+
+  cin >> n >> k ;
+
+  ll ans = (n-1)*2 + 3 ;
+
+  if(k == 1 || k == n)
+
+    ans += n-1 ;
+
+  else{
+
+    int Lmx = k-1 , Rmx = n-k ;
+
+    ans += min(Lmx,Rmx)*2 + max(Lmx,Rmx) ;
+
+  }
+
+  cout << ans << endl;
+
+  return 0 ;
+
+}
+

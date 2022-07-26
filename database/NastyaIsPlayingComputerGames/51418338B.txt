@@ -1,0 +1,59 @@
+#include <bits/stdc++.h>
+
+
+
+using namespace std;
+
+
+
+int main()
+
+{
+
+	long long n,k;
+
+	cin>>n>>k;
+
+	k=k-1;
+
+	long long coins[n];
+
+	long long stones[n];
+
+	memset(coins,1,sizeof(coins));
+
+	memset(stones,1,sizeof(stones));
+
+	
+
+	if(k==n-1 || k==0)
+
+	{
+
+		cout<<((n)*3)<<endl;
+
+		return 0;
+
+	}
+
+	if(n-(k+1)<(k+1))
+
+	{
+
+		k=n-k-1;
+
+	}
+
+	
+
+		long long res=((k+1)*3)+(k+1)+((n-k-2)*3)+2;
+
+		cout<<res<<endl;
+
+	
+
+	
+
+	return 0;
+
+}

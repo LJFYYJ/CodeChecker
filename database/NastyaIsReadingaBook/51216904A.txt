@@ -1,0 +1,36 @@
+#include<bits/stdc++.h>
+
+using namespace std;
+
+int d[100],l,r,now,n,pre;
+
+int main(){
+
+    int sum=1;
+
+    cin>>n;
+
+    pre=1;
+
+    for(int i=1;i<=n;i++){
+
+        scanf("%d%d",&l,&r);
+
+
+
+        for(int j=pre;j<=r;j++)d[j]=sum;
+
+        sum++;
+
+        pre=r+1;
+
+    }
+
+    scanf("%d",&now);
+
+    printf("%d",n-d[now]+1);
+
+    return 0;
+
+}
+

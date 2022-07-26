@@ -1,0 +1,80 @@
+#include <iostream>
+
+using namespace std;
+
+int f;
+
+int main()
+
+{
+
+	int x;
+
+	cin>>x;
+
+	int a[x];
+
+	for(int i=1;i<=x;i++)
+
+	{
+
+		cin>>f>>a[i];
+
+	}
+
+	cin>>f;
+
+	f--;
+
+	for(int i=1;i<=x;i++)
+
+	{
+
+		if(i==1 and f<a[i])
+
+		{
+
+			cout<<x;
+
+			break;
+
+		}
+
+		if(i==1 and f==a[i])
+
+		{
+
+			cout<<x-i;
+
+			break;
+
+		}
+
+		if(f==a[i])
+
+		{
+
+			cout<<x-i;
+
+			break;
+
+		}
+
+		if(f<a[i])
+
+		{
+
+			cout<<x-i+1;
+
+			break;
+
+		}
+
+		
+
+	}
+
+	return 0;
+
+}
+

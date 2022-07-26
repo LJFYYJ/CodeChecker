@@ -1,0 +1,28 @@
+# include <iostream>
+
+# include <cstdio>
+
+using namespace std;
+
+int main(){
+
+    int n,m;
+
+    scanf("%d%d",&n,&m);
+
+    //int ans=n*2+m;
+
+    if(n==2){
+
+        printf("6\n");
+
+    }
+
+    else{
+
+        printf("%d\n",n*2+n+m-1);
+
+    }
+
+}
+

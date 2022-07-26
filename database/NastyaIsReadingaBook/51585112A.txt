@@ -1,0 +1,90 @@
+import java.util.ArrayList;
+
+import java.util.Scanner;
+
+public class Main {
+
+
+
+	public static void main(String[] args) {
+
+		// TODO Auto-generated method stub
+
+		
+
+		Scanner scan=new Scanner(System.in);
+
+		
+
+		int n=scan.nextInt();
+
+		
+
+		ArrayList<chaptr> book=new ArrayList(n);
+
+		for(int i=0;i<n;i++)
+
+		
+
+			book.add(new chaptr(i+1,Integer.parseInt(scan.next()),Integer.parseInt(scan.next())));
+
+		
+
+		int p=scan.nextInt();
+
+		int k=0;
+
+		for(int i=0;i<book.size();i++) {
+
+			if(book.get(i).first<=p && book.get(i).last>=p)
+
+				{
+
+				k=book.get(i).ch;
+
+				break;
+
+				}
+
+		}
+
+		
+
+		
+
+		System.out.println(n-k+1);
+
+	}
+
+	
+
+	static class chaptr{
+
+		int ch;
+
+		int first;
+
+		int last;
+
+		
+
+		public chaptr(int ch,int first,int last) {
+
+			this.ch=ch;
+
+			this.first=first;
+
+			this.last=last;
+
+			
+
+		}
+
+	
+
+	}
+
+
+
+}
+

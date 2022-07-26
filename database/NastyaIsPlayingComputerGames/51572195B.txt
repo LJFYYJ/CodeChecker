@@ -1,0 +1,39 @@
+
+
+#include<bits/stdc++.h>
+
+using namespace std;
+
+main()
+
+{
+
+	int n,k;
+
+	cin>>n>>k;
+
+	int m = min(k-1,n-k);
+
+	int ans=0;
+
+	if(m!=0)
+
+	{
+
+         ans = (m+1)*3+m+1;
+
+	     ans+=max(n-k,k-1)*3-1;
+
+	}
+
+	else{
+
+	ans = n*3;
+
+}
+
+  cout<<ans<<"\n";
+
+
+
+}

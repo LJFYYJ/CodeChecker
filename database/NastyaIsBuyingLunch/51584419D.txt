@@ -1,0 +1,30 @@
+#include<cstdio>
+#include<cstring>
+#include<iostream>
+#include<algorithm>
+#define rep(i,l,r) for (int i=(l); i<=(r); i++)
+#define For(i,x) for (int i=h[x],k; i; i=nxt[i])
+typedef long long ll;
+using namespace std;
+
+const int N=1000010;
+int n,m,u,v,cnt,ans,a[N],p[N],d[N],h[N],to[N<<1],nxt[N<<1];
+void add(int u,int v){ to[++cnt]=v; nxt[cnt]=h[u]; h[u]=cnt; }
+
+int main(){
+	scanf("%d%d",&n,&m);
+	rep(i,1,n) scanf("%d",&a[i]),p[a[i]]=i;
+	rep(i,1,m){
+		scanf("%d%d",&u,&v);
+		if (p[u]<p[v]) add(v,u),d[u]++;
+	}
+	for (int i=n-1; i; i--){
+		int x=a[i];
+		if (d[x]==n-ans-i){
+			ans++;
+			For(i,x) d[k=to[i]]--;
+		}
+	}
+	printf("%d\n",ans);
+	return 0;
+}

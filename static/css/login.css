@@ -1,0 +1,158 @@
+*
+{
+	padding: 0;
+	margin: 0;
+}
+
+.nav{
+	height:50px;
+	background-color: #f5f9fa;
+	border-bottom: 1px inset #fff;
+
+}
+.nav a{
+	text-decoration: none;
+	color:#333;
+	display:inline-block;
+	line-height:50px;
+	font-weight:650;
+	margin-left:40px;
+}
+.nav a:hover{
+	color:#1a73e8;
+}
+.nav h2{
+	color:#0571c0;
+	font-size:25px; 
+	font-weight:450;
+	line-height: 40px;
+	text-align: center;
+	margin-left:543px;
+	display:inline-block;
+}
+.login{
+	height:380px;
+	width:1000px;
+	border-bottom: 1px solid #d6dfea;
+	background-color: #fff;
+	margin:20px auto;
+}
+.login .login_left img{
+	width:400px;
+	float:left;
+}
+
+.login .login_right{
+	width:400px;
+	float:right;
+	margin-top: 20px;
+}
+.content{
+	border-radius: 10px;
+	border:1px solid #a0b1c4;
+	background-color: #fff;
+	height: 340px;
+	padding:0;
+	box-sizing: content-box;
+	position: relative;
+	top:0px;
+	margin:0;
+}
+.content .con-top{
+	height:50px;
+	background-color:#f9fbfe;
+	border-bottom: 1px solid #a0b1c4;
+}
+.con-top h3{
+	text-align: center;
+	margin:10px auto;
+	line-height: 50px;
+	margin:0;
+}
+.con-input{
+	margin-top:20px ;
+	height:200px;
+	border-bottom: 2px solid #a0b1c4;
+}
+.con-input .info{
+	margin:0px auto;
+}
+.con-input .user{
+	height:40px;
+	width:300px;
+	margin:20px 50px 20px 50px;
+}
+.con-input .pass{
+	height:40px;
+	width:300px;
+	margin:20px 50px 20px 50px;
+}
+.con-logo {
+	height:50px;
+    width:200px;
+	margin-top:10px;
+    display:inline-block;
+}
+.con-logo #log {
+	background-color: #5a98de;
+	width:100px;
+	height:50px;
+	margin:0px 150px 10px 150px;
+	border:0;
+	border-radius: 5px;
+	font-weight: 650;
+	font-size: 18px;
+	color:#ffffff;
+}
+.con-logo #log:hover {
+	transform: scale(1.1,1.1);
+	border:3px solid orange;
+}
+.con-register {
+    height: 60px;
+    width: 100px;
+    margin-top: 10px;
+    display: inline-block;
+    margin-left:82px;
+}
+.con-register #reg_in {
+	margin:10px auto;
+	background-color: #96b97d;
+	width:65px;
+	height:35px;
+	border-radius: 5px;
+    margin-right: -200px;
+}
+
+.service{
+	height:160px;
+	background-color: #eff4fa;
+	margin:0px auto;
+	clear:both;
+
+}
+.service ul{
+	height:50px;
+	width:460px;
+
+}
+.service ul li{
+	display:inline-block;
+	padding-right:5px;
+	height:50px;
+}
+
+
+.service ul li a{
+	line-height: 50px;
+	text-decoration: none;
+	color:#333;
+	margin-left:20px;
+	padding-bottom:20px;
+	height:30px;
+    font-weight:650;
+    font-size:18px;
+}
+.service ul li a:hover{
+	color:green;
+}

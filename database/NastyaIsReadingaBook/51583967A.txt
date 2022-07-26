@@ -1,0 +1,71 @@
+import java.util.*;
+
+import java.util.Map.Entry;
+
+import java.io.*;
+
+public class Main {
+
+	public static class node implements Comparable<node> {
+
+		int l,r;
+
+		node(){}
+
+		node(int l,int r) {
+
+			this.l=l;
+
+			this.r=r;
+
+		}
+
+		@Override
+
+		public int compareTo(node rhs) {
+
+			return r-rhs.r;
+
+		}
+
+	}
+
+	public static void main(String[] args) throws IOException {
+
+		BufferedReader in=new BufferedReader(new InputStreamReader(System.in));
+
+		PrintWriter out=new PrintWriter(System.out);
+
+		StringTokenizer sa=new StringTokenizer(in.readLine());
+
+		int n=Integer.parseInt(sa.nextToken());
+
+		int[] l=new int[n];
+
+		int[] r=new int[n];
+
+		for (int i=0;i<n;++i) {
+
+			sa=new StringTokenizer(in.readLine());
+
+			l[i]=Integer.parseInt(sa.nextToken());
+
+			r[i]=Integer.parseInt(sa.nextToken());
+
+		}
+
+		sa=new StringTokenizer(in.readLine());
+
+		int k=Integer.parseInt(sa.nextToken());
+
+		int res=0;
+
+		for (int i=0;i<n;++i) if (r[i]>=k) ++res;
+
+		out.println(res);
+
+		out.flush();
+
+	}
+
+}

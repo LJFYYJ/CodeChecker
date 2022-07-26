@@ -1,0 +1,45 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+#define endl '\n'
+#define int long long int
+
+signed main() {
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+    int n, m;
+    cin >> n >> m;
+    vector<int> a(n);
+    for (int i = 0; i < n; ++i) {
+        cin >> a[i];
+        a[i]--;
+    }
+    vector<set<int>> g(n);
+    for (int i = 0; i < m; ++i) {
+        int u, v;
+        cin >> u >> v;
+        --u;
+        --v;
+        g[u].insert(v);
+    }
+    int ans = 0;
+    set<int> cur{a.back()};
+    for (int i = n - 2; i >= 0; --i) {
+        int cnt = 0;
+        for (int v : g[a[i]]) {
+            if (cur.count(v)) {
+                cnt++;
+            }
+        }
+        if (cnt == cur.size() && cnt > 0) {
+            ans++;
+            cur.clear();
+            cur.insert(a.back());
+        } else {
+            cur.insert(a[i]);
+        }
+    }
+    cout << ans;
+
+}

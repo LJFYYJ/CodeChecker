@@ -1,0 +1,63 @@
+#include<cstdio>
+
+#include<iostream>
+
+#include<string>
+
+#include<cstring>
+
+#include<cmath>
+
+#include<algorithm>
+
+using namespace std;
+
+
+
+
+
+int main()
+
+{
+
+	int n, k, num[102], c = 0, t, i;
+
+	scanf("%d", &n);
+
+	while (n--)
+
+	{
+
+		scanf("%d %d", &t, &num[c++]);
+
+	}
+
+	scanf("%d", &k);
+
+	for (i = 0, t = 0; i < c; i++)
+
+	{
+
+		if (k > num[i])
+
+		{
+
+			t++;
+
+		}
+
+		else
+
+		{
+
+			break;
+
+		}
+
+	}
+
+	printf("%d\n", c - t);
+
+	return 0;
+
+}

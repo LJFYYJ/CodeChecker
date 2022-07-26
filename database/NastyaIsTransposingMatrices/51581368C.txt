@@ -1,0 +1,75 @@
+#include <iostream>
+#include <vector>
+#include <cmath>
+#include <ctime>
+#include <cassert>
+#include <cstdio>
+#include <queue>
+#include <set>
+#include <map>
+#include <fstream>
+#include <cstdlib>
+#include <string>
+#include <cstring>
+#include <algorithm>
+#include <numeric>
+
+#define mp make_pair
+#define fi first
+#define se second
+#define pb push_back
+#define all(x) (x).begin(), (x).end()
+#define rall(x) (x).rbegin(), (x).rend()
+#define forn(i, n) for (int i = 0; i < (int)(n); ++i)
+#define for1(i, n) for (int i = 1; i <= (int)(n); ++i)
+#define ford(i, n) for (int i = (int)(n) - 1; i >= 0; --i)
+#define fore(i, a, b) for (int i = (int)(a); i <= (int)(b); ++i)
+
+using namespace std;
+const int MAXN = 505;
+vector<int> aa[2*MAXN];
+vector<int> bb[2*MAXN];
+
+int main()
+{
+  int n, m;
+  cin >> n >> m;
+  int a[MAXN][MAXN], b[MAXN][MAXN];
+
+  forn(i, n)
+  {
+    forn(j, m)
+    {
+      cin >> a[i][j];
+      aa[i+j].pb(a[i][j]);
+    }
+  }
+
+  forn(i, n)
+  {
+    forn(j, m)
+    {
+      cin >> b[i][j];
+      bb[i+j].pb(b[i][j]);
+    }
+  }
+
+  forn(i, 2*MAXN)
+  {
+       sort(aa[i].begin(), aa[i].end());
+       sort(bb[i].begin(), bb[i].end());
+       if(aa[i]!=bb[i])
+       {
+         cout << "NO\n";
+         return 0;
+       }
+  }
+
+  cout << "YES\n";
+}
+
+    
+
+    
+
+

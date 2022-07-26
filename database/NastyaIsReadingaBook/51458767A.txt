@@ -1,0 +1,155 @@
+#include <bits/stdc++.h>
+
+#include <ext/pb_ds/tree_policy.hpp>
+
+#include <ext/pb_ds/assoc_container.hpp>
+
+#include <ext/rope>
+
+
+
+using namespace std;
+
+using namespace __gnu_pbds;
+
+using namespace __gnu_cxx;
+
+
+
+#define dv(i) for (int c=0; c<(int)(i).size(); c++) cout<<(i)[c]<<(c==(int)(i).size()-1?"\n":" ")
+
+#define da(i) for (int c=0; c<(int)(sizeof((i))/sizeof((i)[0])); c++) cout<<(i)[c]<<(c==(int)(sizeof((i))/sizeof((i)[0]))-1?"\n":" ")
+
+#define ds(i) for (auto f: i) cout<<f<<"\n";
+
+#define dm(i) for (auto f: i) cout<<f.first<<" "<<f.second<<"\n"
+
+#define FOR(i,a,b) for (int i=a; i<(b); i++)
+
+#define F0R(i,a) for (int i=0; i<(a); i++)
+
+#define FORd(i,a,b) for (int i=(b)-1; i>=a; i--)
+
+#define F0Rd(i,a) for (int i=(a)-1; i>=0; i--)
+
+
+
+typedef long long ll;
+
+typedef long double ld;
+
+typedef complex<ld> cd;
+
+
+
+typedef pair<int, int> pi;
+
+typedef pair<ll,ll> pl;
+
+typedef pair<ld,ld> pd;
+
+
+
+typedef vector<int> vi;
+
+typedef vector<string> vs;
+
+typedef vector<ld> vd;
+
+typedef vector<ll> vl;
+
+typedef vector<pi> vpi;
+
+typedef vector<pl> vpl;
+
+typedef vector<cd> vcd;
+
+
+
+#define sz(x) (int) x.size()
+
+#define mp make_pair
+
+#define pb push_back
+
+#define f first
+
+#define s second
+
+#define lb lower_bound
+
+#define ub upper_bound
+
+#define all(x) x.begin(), x.end()
+
+#define alp(i) i,i + sizeof(i) / sizeof(i[0])
+
+#define memp(i,x) std::memset(i, x, sizeof i)
+
+#define fils(i,x) std::fill(all(i), x)
+
+#define filp(i,x) std::fill(alp(i), x)
+
+#define dr4 {0, 1, 0, -1}
+
+#define dc4 {1, 0, -1, 0}
+
+#define dr8 {-1, -1, -1, 0, 1, 1, 1, 0}
+
+#define dc8 {-1, 0, 1, 1, 1, 0, -1, -1}
+
+#define inBounds(a,b,c,d) (a >= 0 && a < c && b >= 0 && b < d)
+
+
+
+template <class T> using policy_set = tree<T, null_type, less<T>, rb_tree_tag,tree_order_statistics_node_update>;
+
+template <class T1, class T2> using policy_map = tree<pair<T1, T2>, null_type, less<pair<T1, T2>>, rb_tree_tag,tree_order_statistics_node_update>;
+
+
+
+string rem(string s) {if(s[s.size()-1]=='\r')s.erase(s.size()-1);return s;}
+
+vector<string> split(string s, char delim) {replace(s.begin(),s.end(),delim,' ');stringstream ss(s); string buf;vector<string> v;while (ss>>buf) v.push_back(buf);return v;}
+
+
+
+const int MOD = 1000000007;
+
+const double EPS = 1e-6;
+
+
+
+#ifndef KMPC
+
+    const int MAXN = -1;
+
+#else
+
+    const int MAXN = -1;
+
+#endif
+
+
+
+int main() {
+
+    ios_base::sync_with_stdio(false); cin.tie(0);
+
+    
+
+    int N; cin>>N;
+
+    vpi A(N); FOR(i,0,N) cin>>A[i].f>>A[i].s;
+
+    int Q; cin>>Q;
+
+    auto it = lb(all(A), mp(Q, 0));
+
+    cout << N - (it - A.begin()) + 1<< '\n';
+
+
+
+    return 0;
+
+}

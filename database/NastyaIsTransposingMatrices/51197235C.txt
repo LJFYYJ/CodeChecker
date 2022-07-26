@@ -1,0 +1,105 @@
+#include<bits/stdc++.h>
+
+#define mod 1000000007
+
+#define F first
+
+#define S second
+
+#define pb push_back
+
+using namespace std;
+
+typedef long long int ll;
+
+
+
+int main()
+
+{
+
+    ios_base::sync_with_stdio(false);
+
+    cin.tie(NULL);
+
+    cout.tie(NULL);
+
+    ll t=1;
+
+    // cin>>t;
+
+    while(t--)
+
+    {
+
+        ll n,m,i,j,k;
+
+        cin>>n>>m;
+
+        ll a[n+10][m+10],b[n+10][m+10];
+
+        memset(a,0,sizeof(a));
+
+        memset(b,0,sizeof(b));
+
+        multiset<ll> m1[n+m+10],m2[n+m+10];
+
+        for(i=1;i<=n;i++)
+
+        {
+
+            for(j=1;j<=m;j++)
+
+                cin>>a[i][j];
+
+        }
+
+        for(i=1;i<=n;i++)
+
+        {
+
+            for(j=1;j<=m;j++)
+
+                cin>>b[i][j];
+
+        }
+
+        for(i=1;i<=n;i++)
+
+        {
+
+            for(j=1;j<=m;j++)
+
+            {
+
+                m1[i+j].insert(a[k][j]);
+
+                m2[i+j].insert(b[k][j]);
+
+            }
+
+        }
+
+        for(i=1;i<=m+n;i++)
+
+        {
+
+            if(m1[i] != m2[i])
+
+            {
+
+                cout<<"NO\n";
+
+                return 0;
+
+            }
+
+        }
+
+        cout<<"YES\n";
+
+    }
+
+    return 0;
+
+}

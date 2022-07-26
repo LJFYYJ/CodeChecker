@@ -1,0 +1,137 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+#define INF 4e18
+
+
+
+// #define N 300005
+
+#define FOR(n) for(ll i=0;i<n;++i)
+
+#define FORD(i,a,b) for(ll i=a;i>=b;--i)
+
+#define pb push_back
+
+#define mp make_pair
+
+#define all(x) x.begin(),x.end()
+
+#define ll long long int
+
+#define s(x) scanf("%d", &x)
+
+#define sd(x) scanf("%lf", &x)
+
+#define sl(x) scanf("%lld", &x)
+
+#define mod 1000000007
+
+#define fi first
+
+#define se second
+
+#define p(x) printf("%d",x)
+
+#define pl(x) printf("%lld", x)
+
+#define pd(x) printf("%lf", x)
+
+#define pn() printf("\n")
+
+#define vi vector<ll>
+
+#define vl(v) vector<long long ll>v
+
+#define pii pair<ll,ll>
+
+#define pll pair<long long ll,long long ll>
+
+#define len(s) s.length()
+
+#define start_code ios_base::sync_with_stdio(0)
+
+void input(ll n,ll a[]){FOR(n) cin>>a[i];}
+
+ll bin_expo(ll A, ll B, ll M){ll res = 1LL;while (B > 0){if(B % 2 == 1){res = (res * A) % M;}A = (A * A) % M; B = B / 2;}return res;}
+
+#define LOGN 20
+
+
+
+
+
+ll gcd(ll a,ll b)
+
+{
+
+    if (b == 0)
+
+        return a;
+
+    return gcd(b, a % b);
+
+}
+
+
+
+
+
+ll lcm(ll a, ll b)
+
+{
+
+    return (a*b)/gcd(a, b);
+
+}
+
+double distance(ll x1, ll y1, ll x2, ll y2)
+
+{
+
+    return sqrt(pow(x2 - x1, 2) + pow(y2 - y1, 2) * 1.0);
+
+}
+
+int main()
+
+{
+
+    start_code;
+
+    ll n,k;
+
+    cin>>n>>k;
+
+
+
+    ll dis=0;
+
+
+
+    if(k==1||k==n)
+
+        dis=n-1;
+
+    else
+
+    {
+
+        dis=(2*min(k-1 , n-k));
+
+        dis+=(max(k-1 , n-k));
+
+       // cout<<dis<<endl;
+
+    }
+
+
+
+    ll ans=(n*2)+1+dis;
+
+    cout<<ans;
+
+    return 0;
+
+}

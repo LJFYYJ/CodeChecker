@@ -1,0 +1,141 @@
+#include <bits/stdc++.h>
+
+#define int long long
+
+using namespace std;
+
+const int MX = 1e5 + 100;
+
+int a[MX], k[MX], suf[MX], presuf[MX];
+
+int T[MX * 4], tag[MX * 4];
+
+void build(int u, int l, int r) {
+
+	if(l == r) return T[u] = a[l], void();
+
+	int m = l + r >> 1;
+
+	build(u * 2 + 1,     l, m);
+
+	build(u * 2 + 2, m + 1, r);
+
+	T[u] = T[u * 2 + 1] + T[u * 2 + 2];
+
+}
+
+void push(int u, int l, int r) {
+
+	int m = l + r >> 1;
+
+	T[u * 2 + 1] = (m - l + 1) * tag[u];
+
+	T[u * 2 + 2] = (r - m    ) * tag[u];
+
+	tag[u * 2 + 1] = tag[u];
+
+	tag[u * 2 + 2] = tag[u];
+
+	tag[u] = 0;
+
+}
+
+int query(int u, int l, int r, int s, int t) {
+
+	if(l > r) exit(0);
+
+	if(s > t) exit(0);
+
+	if(l == s and r == t) return T[u];
+
+	if(tag[u]) push(u, l, r);
+
+	int m = l + r >> 1;
+
+	if(t <= m) return query(u * 2 + 1,     l, m, s, t);
+
+	if(s >  m) return query(u * 2 + 2, m + 1, r, s, t);
+
+	return query(u * 2 + 1, l, m, s, m) + query(u * 2 + 2, m + 1, r, m + 1, t);
+
+}
+
+void change(int u, int l, int r, int s, int t, int v) {
+
+	if(l == r and s == t) return T[u] = (r - s + 1) * v, tag[u], void();
+
+	if(tag[u]) push(u, l, r);
+
+	int m = l + r >> 1;
+
+		 if(t <= m) change(u * 2 + 1,     l, m, s, t, v);
+
+	else if(s >  m) change(u * 2 + 2, m + 1, r, s, t, v);
+
+	else {
+
+		change(u * 2 + 1,     l, m,     s, m, v);
+
+		change(u * 2 + 2, m + 1, r, m + 1, t, v);
+
+	}
+
+	T[u] = T[u * 2 + 1] + T[u * 2 + 2];
+
+}
+
+main () {
+
+	int n; cin >> n;
+
+	for(int i = 1; i <= n; i ++) cin >> a[i];
+
+	for(int i = 1; i < n; i ++) cin >> k[i];
+
+	for(int i = n - 1; i >= 1; i --) suf[i] = suf[i + 1] + k[i];
+
+	for(int i = 1; i <= n; i ++) presuf[i] = presuf[i - 1] + suf[i];
+
+	for(int i = 1; i <= n; i ++) a[i] += suf[i];
+
+	build(0, 1, n);
+
+	int q; cin >> q;
+
+	while(q --) {
+
+		char c; cin >> c;
+
+		if(c == '+') {
+
+			int p, x; cin >> p >> x;
+
+			int l = p, r = n + 1;
+
+			int v = query(0, 1, n, p, p) + x;
+
+			while(l != r) {
+
+				int m = l + r >> 1;
+
+				if(query(0, 1, n, m, m) < v) l = m + 1;
+
+				else                         r = m;
+
+			}
+
+			change(0, 1, n, p, l - 1, v);
+
+		}
+
+		else {
+
+			int l, r; cin >> l >> r;
+
+			cout << query(0, 1, n, l, r) - (presuf[r] - presuf[l - 1]) << '\n';
+
+		}
+
+	}
+
+}

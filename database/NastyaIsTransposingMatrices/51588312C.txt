@@ -1,0 +1,702 @@
+//__RAM__RAM
+
+//__THIS__IS__THE__ONLY__WAY__TO__MOKSHA__ :-)
+
+#include<bits/stdc++.h>
+
+using namespace std;
+
+typedef long long int ll;
+
+ll a[500][500];
+
+ll b[500][500];
+
+ll good;
+
+/*
+
+map<int, int>::iterator itr; 
+
+    cout << "\nThe map gquiz1 is : \n"; 
+
+    cout << "\tKEY\tELEMENT\n"; 
+
+   
+
+    for (itr = gquiz1.begin(); itr != gquiz1.end(); ++itr) { 
+
+        cout << '\t' << itr->first 
+
+             << '\t' << itr->second << '\n'; 
+
+    } 
+
+
+
+*/
+
+
+
+int main()
+
+{
+
+     unordered_map<ll,ll> a1;
+
+     unordered_map<ll,ll> b1;
+
+     unordered_map<ll,ll>::iterator itr; 
+
+    ll n,m;
+
+    cin>>n>>m;
+
+    ll a[n][m];
+
+    ll b[n][m];
+
+    ll i,j;
+
+    i=0;
+
+    while(i<n)
+
+    {
+
+        j=0;
+
+        while(j<m)
+
+        {
+
+            cin>>a[i][j];
+
+            a1[a[i][j]]++;
+
+            
+
+            j++;
+
+        }
+
+        
+
+        
+
+        i++;
+
+    }
+
+    
+
+    
+
+    
+
+    
+
+      i=0;
+
+    while(i<n)
+
+    {
+
+        
+
+        j=0;
+
+        while(j<m)
+
+        {
+
+            cin>>b[i][j];
+
+            b1[b[i][j]]++;
+
+            j++;
+
+        }
+
+        
+
+        i++;
+
+    }
+
+    ll c=0;
+
+    if(a1.size()==b1.size())
+
+    {
+
+        c=1;
+
+    }
+
+    else
+
+    {
+
+        
+
+        
+
+    }
+
+    
+
+     
+
+    if(c==1)
+
+    {
+
+         for (itr = b1.begin(); itr != b1.end(); ++itr)
+
+     { 
+
+    ll m=itr->first;
+
+    if(a1[m]==b1[m])
+
+    {
+
+         
+
+    }
+
+    else
+
+    {
+
+        
+
+        c=0;
+
+    
+
+    }
+
+     }
+
+     }
+
+ 
+
+ 
+
+   // cout<<c<<"\n";
+
+  // cout<<a[n][m]<<" "<<b[n][m];
+
+ 
+
+ 
+
+   
+
+    if(c==1)
+
+    {
+
+        if(a[0][0]==b[0][0] && a[n-1][m-1]==b[n-1][m-1])
+
+        {
+
+            
+
+        }
+
+        else
+
+        {
+
+            c=0;
+
+        }
+
+        
+
+    }
+
+    if(c==1)
+
+    {
+
+        
+
+        i=0;
+
+        while(i<=n-1)
+
+        {
+
+            
+
+     unordered_map<ll,ll> b2;
+
+     unordered_map<ll,ll> a2;
+
+            
+
+            
+
+            ll k=i;
+
+            j=0;
+
+            //!!!k......j!!!
+
+            while(k>=0 && j<=m-1)
+
+            {
+
+                a2[a[k][j]]++;
+
+                b2[b[k][j]]++;
+
+                
+
+                
+
+                
+
+                
+
+                
+
+                
+
+                k--;
+
+                j++;
+
+            }
+
+            
+
+            ll c1=0;
+
+            
+
+             if(a2.size()==b2.size())
+
+            {
+
+           c1=1;
+
+            }
+
+            
+
+             if(c1==1)
+
+    {
+
+         for (itr = b2.begin(); itr != b2.end(); ++itr)
+
+     { 
+
+    ll m=itr->first;
+
+    if(a2[m]==b2[m])
+
+    {
+
+        
+
+        
+
+        
+
+    }
+
+    else
+
+    {
+
+        c1=0;
+
+        
+
+        
+
+    }
+
+    
+
+
+
+     }
+
+     
+
+    }
+
+        
+
+            
+
+            
+
+            if(c1==1)
+
+            {good++;
+
+            //    cout<<"good";
+
+            }
+
+    
+
+    
+
+    
+
+            i++;
+
+        
+
+        
+
+        }
+
+        
+
+        
+
+        i=n-1;
+
+        j=1;
+
+        while(j<=m-1)
+
+        {
+
+            ll k=i;
+
+            
+
+            ll j1=j;
+
+            
+
+             unordered_map<ll,ll> b2;
+
+             
+
+             unordered_map<ll,ll> a2;
+
+      
+
+      
+
+            while(k>=0 && j1<=m-1)
+
+            {
+
+                a2[a[k][j1]]++;
+
+                b2[b[k][j1]]++;
+
+                
+
+                
+
+                
+
+                
+
+                
+
+                
+
+                k--;
+
+                j1++;
+
+            }
+
+            
+
+      
+
+      
+
+         ll c1=0;
+
+            
+
+             if(a2.size()==b2.size())
+
+            {
+
+           c1=1;
+
+            }
+
+            
+
+             if(c1==1)
+
+    {
+
+         for (itr = b2.begin(); itr != b2.end(); ++itr)
+
+     { 
+
+    ll m=itr->first;
+
+    if(a2[m]==b2[m])
+
+    {
+
+        
+
+        
+
+        
+
+    }
+
+    else
+
+    {
+
+        c1=0;
+
+        
+
+        
+
+    }
+
+    
+
+
+
+     }
+
+     
+
+    }
+
+        
+
+            
+
+            
+
+            if(c1==1)
+
+            {good++;
+
+              //  cout<<"good";
+
+            }
+
+            
+
+            
+
+            
+
+            
+
+            
+
+            
+
+            
+
+            
+
+            
+
+            
+
+            
+
+            j++;
+
+        }
+
+        
+
+        
+
+        
+
+        
+
+        
+
+        
+
+        
+
+        
+
+        
+
+        
+
+    
+
+        
+
+    }
+
+    
+
+
+
+    
+
+    
+
+    if(c==0)
+
+    {
+
+        cout<<"NO";
+
+    }
+
+    else
+
+    {
+
+        
+
+        
+
+        
+
+        if(good==n+m-1)
+
+        {
+
+          cout<<"YES";
+
+        }
+
+        else
+
+        {
+
+          cout<<"NO";    
+
+        }
+
+
+
+
+
+    }
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    return 0;
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+
+3 3 
+
+
+
+1 2 3
+
+4 5 6 
+
+7 8 9
+
+ 
+
+1 4 7 
+
+2 5 6
+
+3 8 9
+
+*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

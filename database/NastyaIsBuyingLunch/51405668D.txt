@@ -1,0 +1,75 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+int const N = int(3e5) + 7;
+int const mod = int(1e9) + 7;
+
+int p[N];
+bool good[N];
+vector<int> gr[N];
+int cnt_deleted[N];
+set<pair<int, int>> edges;
+vector<int> unachieavable;
+
+void dfs(int v, vector<int>& unvisited) {
+    while(unvisited.size()) {
+        int u = unvisited.back();
+        unvisited.pop_back();
+        if(edges.find({v, u}) == edges.end()) {
+            dfs(u, unvisited);
+        }else {
+            unachieavable.push_back(u);
+        }
+    }
+}
+
+int main()
+{
+    ios_base::sync_with_stdio(false);
+    ifstream in("input.txt");
+    //cin.rdbuf(in.rdbuf());
+    int n, m;
+    cin >> n >> m;
+    vector<int> unvisited;
+    for(int i = 0; i < n; ++i) {
+        cin >> p[i];
+        unvisited.push_back(p[i]);
+    }
+    unvisited.pop_back();
+    for(int i = 0; i < m; ++i) {
+        int v, u;
+        cin >> v >> u;
+        gr[u].push_back(v);
+        edges.insert({u, v});
+        if(u == p[n - 1])
+            good[v] = 1;
+    }
+
+    dfs(p[n - 1], unvisited);
+    cout << unachieavable.size();
+    /*int cntb = 0;
+    int cntg = 0;
+    for(int i = n - 2; i >= 0; --i) {
+        int u = p[i];
+        if(good[u]) {
+            if(cnt_deleted[u] == cntb) {
+                ++cntg;
+            } else {
+                ++cntb;
+                for(int i = 0; i < gr[u].size(); ++i) {
+                    int v = gr[u][i];
+                    ++cnt_deleted[v];
+                }
+            }
+        } else {
+            ++cntb;
+            for(int i = 0; i < gr[u].size(); ++i) {
+                int v = gr[u][i];
+                ++cnt_deleted[v];
+            }
+        }
+    }
+    cout << cntg;*/
+    return 0;
+}

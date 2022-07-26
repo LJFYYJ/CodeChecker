@@ -1,0 +1,61 @@
+#include <algorithm>
+#include <iostream>
+#include <unordered_map>
+#include <unordered_set>
+#include <vector>
+
+using namespace std;
+
+int main() {
+  int n, m;
+  cin >> n >> m;
+  vector<int> people(n);
+  vector<unordered_set<int>> map(n + 1);
+  vector<int> p;
+
+  for (int i = 0; i < n; i++) {
+    cin >> people[i];
+  }
+
+  int target = people[n - 1];
+
+  for (int i = 0; i < m; i++) {
+    int u, v;
+    cin >> u >> v;
+    map[u].insert(v);
+    if (v == target) {
+      p.push_back(u);
+    }
+  }
+
+  vector<pair<int, int>> t;
+  for (int i = 0; i < p.size(); i++) {
+    int j = find(people.begin(), people.end(), p[i]) - people.begin();
+    t.push_back({j, p[i]});
+  }
+  sort(t.begin(), t.end());
+
+  int swaps = 0;
+
+  while (!t.empty()) {
+    int curr = t.back().second;
+    int currPos = t.back().first;
+    bool canSwap = true;
+
+    t.pop_back();
+
+    for (int i = currPos + 1; i < people.size(); i++) {
+      if (find(map[curr].begin(), map[curr].end(), people[i]) == map[curr].end()) {
+        canSwap = false;
+        break;
+      }
+    }
+
+    if (canSwap) {
+      people.erase(people.begin() + currPos);
+      swaps++;
+    }
+  }
+
+  cout << swaps << endl;
+}

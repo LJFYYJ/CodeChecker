@@ -1,0 +1,150 @@
+/**
+
+ *
+
+ * author: Hamkor
+
+ *
+
+ **/
+
+
+
+#include <bits/stdc++.h>
+
+
+
+using namespace std;
+
+
+
+int main() {
+
+
+
+    int n, m, p = 1; cin>>n>>m;
+
+    int a[n][m], b[n][m];
+
+    string ans = "YES";
+
+
+
+    for (int i = 0; i<n; i++){
+
+        for (int j=0; j<m; j++) cin>>a[i][j];
+
+    }
+
+
+
+    for (int i = 0; i<n; i++){
+
+        for (int j=0; j<m; j++) cin>>b[i][j];
+
+    }
+
+
+
+    for (int i = 0; i<m; i++){
+
+        vector<int> da; vector<int> db;
+
+        int r = 0, c = i;
+
+        while (c>=0 && r<n){
+
+            da.push_back(a[r][c]);
+
+            db.push_back(b[r][c]);
+
+            c--; r++;
+
+        }
+
+
+
+        sort(da.begin(), da.end());
+
+        sort(db.begin(), db.end());
+
+
+
+        for (int x = 0; x<da.size(); x++){
+
+            if (da[x] != db[x]){
+
+                p = 0;
+
+                ans = "NO";
+
+                break;
+
+            }
+
+        }
+
+
+
+        if (!p) break;
+
+
+
+    }
+
+
+
+    for (int i = 1; i<n; i++){
+
+        vector<int> da; vector<int> db;
+
+        int r = i, c = m-1;
+
+        while (c>=0 && r<n){
+
+            da.push_back(a[r][c]);
+
+            db.push_back(b[r][c]);
+
+            c--; r++;
+
+        }
+
+
+
+        sort(da.begin(), da.end());
+
+        sort(db.begin(), db.end());
+
+
+
+        for (int x = 0;  x< da.size(); x++){
+
+            if (da[x] != db[x]){
+
+                p = 0;
+
+                ans = "NO";
+
+                break;
+
+            }
+
+        }
+
+
+
+        if (!p) break;
+
+
+
+    }
+
+
+
+    cout<<ans;
+
+    return 0;
+
+}
+

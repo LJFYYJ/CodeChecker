@@ -1,0 +1,39 @@
+//
+
+// Created by StupidTurtle on 2019/3/12.
+
+//
+
+
+
+#include <cstdio>
+
+#include <cstring>
+
+#include <algorithm>
+
+using namespace std;
+
+
+
+int main(){
+
+    int n,k;scanf("%d%d",&n,&k);
+
+    int ans=6+(n-2)*3;
+
+    if(n-k<k-1){  // right first
+
+        ans+=n-k;
+
+    }else{  // left first
+
+        ans+=k-1;
+
+    }
+
+    printf("%d\n",ans);
+
+    return 0;
+
+}

@@ -1,0 +1,13 @@
+object TaskB extends App {
+
+  val Array(n, k) = readLine().split(' ').map(_.toInt)
+
+
+
+  val res = (n - 2) * 3 + 2 + 4 + (if(k <= (n + 1)/2) k - 1 else n - k)
+
+
+
+  println(res)
+
+}

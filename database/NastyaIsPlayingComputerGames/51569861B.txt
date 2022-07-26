@@ -1,0 +1,17 @@
+#include <bits/stdc++.h>	
+
+using namespace std;
+
+int n,k;
+
+int main()
+
+{
+
+    cin >> n >> k;
+
+    cout << n*3 + min(n-k,k-1) << endl;
+
+    return 0;
+
+}

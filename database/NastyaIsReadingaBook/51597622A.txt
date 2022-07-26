@@ -1,0 +1,26 @@
+n_c = input()
+
+c_a = []
+
+for _ in xrange(nc):
+	start, finish = input().split(" ")
+	c_a.append((start, finish))
+
+page_to_find = input()
+
+print n_c - bin_s(page_to_find, c_a, 0, len(c_a))
+
+def bin_s(item, inp, start, end):
+	if (end == start):
+		return end
+
+	mid = (end + start) / 2 
+ 
+	if item >= inp[mid][0] and item <= inp[mid][1]:
+		return mid
+
+	if item < inp[mid][0]:
+		return bin_s(item, inp, start, mid)
+
+	else:
+		return bin_s(item, inp, mid+1, end)

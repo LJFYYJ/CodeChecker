@@ -1,0 +1,82 @@
+import java.util.*;
+
+
+
+
+
+public class Main{
+
+	public static void main(String args[]){
+
+		Scanner in = new Scanner(System.in);
+
+		int a = in.nextInt();
+
+		int b = in.nextInt();
+
+		int x[][] = new int[a+b][b];
+
+		int y[][] = new int[a+b][b];
+
+		for(int n=0;n<a;n++){
+
+			for(int m=0;m<b;m++){
+
+				x[n+m][m] = in.nextInt();
+
+			}
+
+		}
+
+		for(int n=0;n<a;n++){
+
+			for(int m=0;m<b;m++){
+
+				y[n+m][m] = in.nextInt();
+
+			}
+
+		}
+
+		boolean i = true;
+
+		for(int n=0;n<a+b;n++){
+
+			Arrays.sort(x[n]);
+
+			Arrays.sort(y[n]);
+
+			for(int m=0;m<x[n].length;m++){
+
+				if(x[n][m] != y[n][m]){
+
+					i = false;
+
+					break;
+
+				}
+
+				
+
+			}
+
+			if(!i)break;
+
+		}
+
+		if(i){
+
+			System.out.println("YES");
+
+		}
+
+		else{
+
+			System.out.println("NO");
+
+		}
+
+	}
+
+}
+

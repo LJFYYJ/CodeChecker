@@ -1,0 +1,111 @@
+#include <bits/stdc++.h>
+#include <iostream>
+#include <math.h>
+#include <string>
+#include <vector>
+#include <cstdio>
+using namespace std;
+
+int main()
+{
+	long long n,m;
+	cin>>n>>m;
+	long long ar[n][m];
+	long long br[n][m];
+	for(long long i=0; i<n; i++)
+	{
+		for(long long j=0; j<m; j++)
+		{
+			cin>>ar[i][j];
+		}
+	}
+	for(long long i=0; i<n; i++)
+	{
+		for(long long j=0; j<m; j++)
+		{
+			cin>>br[i][j];
+		}
+	}
+	long long min=n;
+	if(m<n)
+		min=m;
+	long long cr1[2000];
+	long long cr2[2000];
+	long long size1=0,size2=0;	
+	for(long long i=0; i<min; i++)
+	{
+		for(long long j=0,k=i; j<=i&&k>=0; j++,k--)
+		{
+			cr1[size1++]=ar[j][k];
+			cr2[size2++]=br[j][k];
+		}
+		sort(cr1,cr1+size1);
+		sort(cr2,cr2+size2);
+		long long l;
+		for( l=0; l<size1&&l<size2; l++)
+		{
+			if(cr1[l]!=cr2[l])
+			{
+				break;
+			}
+		}
+		if(l!=size1)
+		{
+			cout<<"NO"<<endl;
+		}
+		size1=0;
+		size2=0;
+	}
+	size1=0;
+	size2=0;
+	long long l;
+	for(long long j=0,k=m-1; j<n&&k>=0; j++,k--)
+	{
+		cr1[size1++]=ar[j][k];
+		cr2[size2++]=br[j][k];
+	}
+	sort(cr1,cr1+size1);
+	sort(cr2,cr2+size2);
+	for( l=0; l<size1&&l<size2; l++)
+	{
+		if(cr1[l]!=cr2[l])
+		{
+			break;
+		}
+	}
+	if(l!=size1)
+	{
+		cout<<"No"<<endl;
+		return 0;
+	}
+	size1=0;
+	size2=0;
+	for(long long i=1; i<n; i++)
+	{
+		for(long long j=i,k=m-1; j<n&&k>=i; j++,k--)
+		{
+			cr1[size1++]=ar[j][k];
+			cr2[size2++]=br[j][k];
+		}
+		sort(cr1,cr1+size1);
+		sort(cr2,cr2+size2);
+		long long l;
+		for(l=0; l<size1&&l<size2; l++)
+		{
+			if(cr1[l]!=cr2[l])
+			{
+				break;
+			}
+		}
+		if(l!=size1)
+		{
+			cout<<"NO"<<endl;
+			return 0;
+		}
+		size1=0;
+		size2=0;
+	}
+	cout<<"YES"<<endl;
+return 0;
+}
+

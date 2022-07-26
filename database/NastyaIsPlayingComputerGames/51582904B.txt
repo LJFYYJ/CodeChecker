@@ -1,0 +1,26 @@
+#include<stdio.h>
+int main(){
+    int n;
+    scanf("%d", &n);
+    int k;
+    scanf("%d",&k);
+    k--;
+    int diff_distance=2*k-n+1;
+    if(diff_distance>=0){
+        diff_distance=0; // Near to the last postion
+    } else {diff_distance=1;} // Near to the first position
+    int array_stone_on_manhole[n];
+    int array_coin_in_manhole[n];
+    for(int i=0;i<n;i++) {array_stone_on_manhole[i]=1;array_coin_in_manhole[i]=1;}
+    int count_step=0;
+    if(diff_distance==0){
+        count_step+=n-k+5;
+        count_step+=n-2;
+        count_step+=(n-2)*2;
+    } else {
+        count_step+=k+6;
+        count_step+=n-2;
+        count_step+=(n-2)*2;
+    }
+    printf("%d",count_step);
+}

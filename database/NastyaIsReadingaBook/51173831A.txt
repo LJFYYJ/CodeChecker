@@ -1,0 +1,55 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+#define ll long long
+#define PI 3.14159265359
+#define fore(i, l, r) for(int i = int(l); i < int(r); ++i)
+#define pb(a) push_back(a)
+
+//////////// Solution /////////////////////////////////
+
+const int MAXN = 105;
+int l[MAXN], r[MAXN];
+
+void solve() {
+	int n;
+	cin >> n;
+	for (int i = 1; i <= n; ++i) {
+		cin >> l[i] >> r[i];
+	}
+	int k;
+	cin >> k;
+	int cnt = 0;
+	int i = 1;
+	for (i = 1; i <= n; ++i) {
+		cnt += r[i]-l[i]+1;
+		if (cnt > k-1) break;
+	}
+	cout <<(n-i+1) << '\n';
+}
+
+/////////// End Solution ///////////////////////////////////////
+
+//////// Initialization ////////////////////////////////////
+
+int main() {
+
+	#ifndef ONLINE_JUDGE
+		FILE *FIN = freopen("/home/danil/prog/input.txt", "r", stdin);
+		clock_t time_start = clock();
+	#endif
+
+	ios::sync_with_stdio(false);
+	cin.tie(NULL);
+
+	solve();
+
+	#ifndef ONLINE_JUDGE
+		fclose(FIN);
+		cerr << "\x1b[031m\n-----------------\nTime=" << (ll)((double)(clock()-time_start) / CLOCKS_PER_SEC * 1000) << "ms\n\x1b[0m";
+	#endif
+
+	return 0;
+}
+
+//////// End Initialization ///////////////////////////////////////

@@ -1,0 +1,64 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>{% load staticfiles %}
+    <meta charset="utf-8" />
+    <title>代码查重登录页面</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/login.css' %}">
+    <script src="{% static 'js/jquery.js' %}"></script>
+</head>
+<body>
+	<div class="nav">
+		<a href="{% url 'main' %}" style="font-size: 18px;">首页</a>
+		<h2 class="logo" style="margin-left:615px;font-weight:800">CodeChecker</h2>
+	</div>
+	<div class="login" style="height:380px;margin-top:50px;margin-bottom: 50px;">
+		<div class="login_left" >
+			<img  style="height:340px" src="{% static 'images/daima.png' %}" >
+		</div>
+		<div class="login_right">
+			<div class="content" style="height:340px">
+				<div class="con-top" >
+					<h3>查重网站账号登录</h3>
+				</div>
+				<div class="con-input"  style="height:200px;">
+					<form action="{% url 'login' %}" method="post" class="info" name="basic">
+                        {% csrf_token %}
+						<input type="text" name="username" class="user" placeholder="请输入用户名或邮箱"
+                            value="{{ login_form.username.value }}">
+						<input type="password" name="password" class="pass" placeholder="请输入密码"
+                            value="{{ login_form.password.value }}">
+                        <!--修改按钮的样式-->
+
+                         <a href="{% url 'forget' %}" style="color:#0099FF;text-decoration:none;margin-left: 310px;font-weight: 700;">忘记密码？</a>
+
+                    <!--修改错误提示的样式-->
+                    <div style="color:red;position: absolute; left:47px;bottom:173px;width=200px;">
+                        {{ msg }}
+                    </div>
+				</div>
+                <div class="con-register">
+                    <input type="submit" name="login" value="登录" style="position:absolute;bottom:14px;right:165px;font-weight: 650;font-size: 18px;color:black;background-color:#99CCFF;line-height: 35px;width:80px;border:2px solid #5a98de;border-radius:5px;">
+                        </form>
+                    <div id="reg_in" style="position:absolute;bottom:4px;right:210px;border:2px solid #669900;border-radius:5px;width:60px;height:32px;">
+
+                        <a href="{% url 'register' %}" style="text-decoration: none;font-weight: 650;font-size: 17px;color:#fff;line-height: 35px;margin-left:15px;">注册</a>
+                    </div>
+
+                </div>
+			</div>
+		</div>
+	</div>
+	<div class="service">
+		<div style="margin:20px auto; width:420px">
+			<ul>
+				<li ><a href="#" class="recall">联系我们</a></li>
+				<li > <a href="#" class="recall">用户帮助</a></li>
+				<li ><a href="#" class="recall">隐私政策</a></li>
+				<li ><a href="#" class="recall">关于网站</a></li>
+			</ul>
+		</div>
+		
+	</div>
+</body>
+</html>

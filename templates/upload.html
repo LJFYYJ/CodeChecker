@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+{% load staticfiles %}
+<head>
+    <meta charset="utf-8" />
+    <title>首页</title>
+    <link rel="stylesheet" href="{% static 'css/mainpage.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/upload_scroll.css' %}" />
+    <script src="{% static 'js/jquery.js' %}"></script>
+    <link href="{%  static 'css/fonts.css'  %}" rel="stylesheet" type="text/css">
+</head>
+<body>
+    <div id="header">
+        <div class="container">
+            <div class="header_left left">
+                <div class="logo"><a href="main.html" id="main" ><img id="img1" src="{% static 'images/magic.png' %}"/></a></div>
+                <div class="logo"><span id="text_" class="left" style="color:#333333;font-size:20px; font-weight:650;margin-left:20px">CodeChecker</span></div>
+            </div>
+            <div class="header_right right">
+                <ul>
+                    <li class="text"><a href="{% url 'login' %}" class="nav">登录</a></li>
+                    <li class="text"><a href="{% url 'register' %}" class="nav">注册</a></li>
+                    <li class="text"><a href="" class="nav" style="color:black">帮助</a></li>
+                    {% if request.user.is_authenticated %}
+                        <li class="text"><span id="identity">{{ request.user.username }}</span></li>
+                        {% else %}
+                        <li class="text"><span id="identity">未登录用户</span></li>
+                    {% endif %}
+                </ul>
+            </div>
+
+        </div>
+    </div>
+
+    <div id="system">
+        <div class="container" style="margin-top: 30px;margin-left: 310px;border:0px">
+            <div id="sys_head" style="border: 2px solid #a0b1c4;
+    border-radius: 5px;">
+                <h2 style="display:inline-block;color:#333;font-weight:650;margin-left:381px;line-height: 50px">代码查重系统</h2>
+                <label id="head_usr" style="float:right;height:50px;width:90px;display:inline-block;line-height:50px;color:#333"></label>
+                <script type="text/javascript">
+                    //可以补充头部右侧的文字提示项
+                </script>
+            </div>
+            <div id="sys_left" style="width: 672px;
+    float: left;
+    height: 448px;
+    border-right: 2px solid #a0b1c4;
+    background-color: #fff;
+    border-left: 2px solid #a0b1c4;
+    border-bottom: 2px solid #a0b1c4;
+    border-radius: 5px;">
+                <div class="pos" style="margin-top: 22px ">
+                    <div style="overflow:scroll; height: 398px; margin-top:0px; ">
+                    <form action="{% url 'upload' %}"  name="upload_form" method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <h3 class="red text">1. 上传代码文件（可选）</h3>
+                        <label style="font-size:20px height:20px; line-height:20px;"><br></label>
+                        <!-- 用于区分表单 --->
+                        <input   type="hidden" name="type" value="upload_form"/>
+                        <input class="ffont " type="file" name="upload_file" value="浏览"/>
+                        </br>
+                        <input class="ffont btn" type="submit" value="确认上传" onclick="upload_alert()"/>
+                        </br>
+                        <pre><p style="font-size:17px;font-weight:700;color:red">     {{ upload_msg }}</p></pre>
+
+                    </form >
+                    <form action="{% url 'upload' %}" name="choose_form" method="POST">
+                        {% csrf_token %}
+                        <!-- 用于区分表单 --->
+                        <input type="hidden" name="type" value="choose_form"/>
+                    </br>
+                        </br><h3>2. 选择个人库文件</h3></br>
+                        {% for upload_file in uploaded_files %}
+                            <input type="checkbox" name="{{ upload_file.title }}">{{ upload_file.title }}
+                            </br>
+                        {% endfor %}
+                        <br><h3>3. 代码查重范围</h3></br>
+                        <div onclick="per_lib_check()">
+                            <input class="ffont" type="radio" name="file_scope" checked="checked" value="rar"/><label>选中文件代码查重</label><br/>
+                            <input class="ffont" type="radio" name="file_scope" value="per_lib" id="per_lib"/><label>选中文件在个人库中代码查重</label><br/>
+                            <!--未选中时需要隐藏--->
+                            <div style="display: none;" id="per_lib_choose">
+                                {% for upload_file in uploaded_files %}
+                                    <input type="checkbox" name="{{ upload_file.title }}">{{ upload_file.title }}
+                                    </br>
+                                {% endfor %}
+                            </div>
+                            <input type="radio" name="file_scope" value="database"/><label>选中文件在系统数据库内代码查重</label><br/>
+                        </div>
+                        <input class="ffont btn" type="submit" value="开始查重"/>
+                    </form>
+
+                    <script>
+                        function per_lib_check()
+                        {
+                            if(document.getElementById("per_lib").checked === true)
+                                document.getElementById("per_lib_choose").style.display = "block";
+                            else
+                                document.getElementById("per_lib_choose").style.display = "none";
+                        }
+                    </script>
+
+                </div>
+            </div>
+        </div>
+
+
+
+            <div id="sys_right" style="border-bottom: 2px solid #a0b1c4;
+    border-right: 2px solid #a0b1c4;
+    border-radius: 5px; width:222px">
+                <div id="right_head">
+                    <div >
+                        <button id="btl" type="button" onclick="history()" value="history log"  style="width:108px;height:50px;color:#333;background-color:#f9fbfe;border:none;font-weight:650;display:inline-block">历史记录</button>
+                        <button id="btr" type="button" onclick="personnal_lib()" value="personal lib" style="width:109px;height:50px;color:#333;border-top:none;border-left:none;border-right:none; border-bottom:3px solid #65ac39;background-color:#fff;font-weight:650;display:inline-block" >个人库</button>
+                        <script>
+                            var bt1 = document.getElementById("btl");
+                            var bt2 = document.getElementById("btr");
+                            var content = document.getElementById("right_list");
+
+                            function history() {
+                                bt1.style.color = "#333";
+                                bt1.style.borderBottom = "3px solid #65ac39";
+                                bt1.style.backgroundColor = "#fff";
+                                bt2.style.color = "#333";
+                                bt2.style.borderBottom = "none";
+                                bt2.style.backgroundColor = "#f9fbfe";
+                                document.forms['rl_content'].style.display = "inline-block";
+                                document.forms['RL_content'].style.display = "none";
+
+                            }
+                            function personnal_lib() {
+                                bt2.style.color = "#333";
+                                bt2.style.borderBottom = "3px solid #65ac39";
+                                bt2.style.backgroundColor = "#fff";
+                                bt1.style.color = "#333";
+                                bt1.style.borderBottom = "none";
+                                bt1.style.backgroundColor = "#f9fbfe";
+                                document.forms['RL_content'].style.display = "inline-block";
+                                document.forms['rl_content'].style.display = "none";
+
+                            }
+                        </script>
+                    </div>
+                </div>
+                <div id="right_list" >
+                        <form action="{% url 'upload' %}" method="post" name="rl_content" style="display:none">
+                            {% csrf_token %} <br/>
+                            <!-- 用于区分表单 --->
+<!--  here-width-????-->  <div style="height: 346px; width: 224px; margin-top:0px; ">
+                            <input type="hidden" name="type" value="history_form"/>
+                                {% for info in check_info %}
+                                   <p style="display:inline-block;padding-left:5px;"><input class="check_history" type="checkbox" name="{{ info.check_time }}"/><a href="{% url 'checkinfo' info.id %}">{{ info.check_time }}</a></p><br/>
+                                {% endfor %}
+                        </div>
+                            <button type="button" class="ffont btn" style="position:absolute; bottom:1px;left:8px; margin-top:7px; " onclick="choose_all()">全选</button>
+                            <button type="submit" class="ffont btn" style="position:absolute; bottom:1px; left:130px;margin-top:7px; ">删除记录</button>
+                        </form>
+                        <form action="{% url 'upload' %}" method="post" name="RL_content" style="display:inline-block">
+                            {% csrf_token %}
+                            <br/>
+                            <!-- 用于区分表单 --->
+                        <div style="height: 346px; margin-top:0px; ">
+                            <input type="hidden" name="type" value="perlib_form"/>
+                            {% for uploaded_file in uploaded_files %}
+                            <p style="display:inline-block;padding-left:5px;" ><input type="checkbox" name="{{ uploaded_file.title }}"/><span style="color:#333;background-color:none">{{ uploaded_file.title }}</span></p><br>
+                            {% endfor %}
+                        </div>
+                            <div id="list_bottom" style="position:absolute; bottom:5px; height:30px">
+                                <button type="submit" name="delete" value="delete"  class="ffont btn"  style="margin-top:4px; margin-left:8px;width:80px;height:30px;line-height:26px">删 除</button>
+                                <button type="submit" name="download" value="download" class="ffont btn"  style="margin-top:4px; margin-right:8px;width:80px;height:30px;background-color: #f9fbfe;margin-left:42px ;line-height:26px">下 载</button>
+                            </div>
+                        </form>
+                        <script>
+                            function choose_all() {
+                                var hists = document.getElementsByClassName("check_history");
+                                var flag = false;
+                                var i;
+                                for (i = 0; i < hists.length; i++)
+                                {
+                                    if (hists[i].checked === false)
+                                        flag = true;
+                                }
+                                //如果没有全选，就全选
+                                if (flag)
+                                {
+                                    for (i = 0; i < hists.length; i++)
+                                        hists[i].checked = true;
+                                }
+                                //如果全选了，则取消全选
+                                else
+                                {
+                                    for (i = 0; i < hists.length; i++)
+                                        hists[i].checked = false;
+                                }
+                            }
+                        </script>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="responce" style="margin-top: 440px;">
+        <div class="container">
+            <ul>
+                <li style="margin-top: 22px;"><a href="#" class="recall">联系我们</a></li>
+                <li style="margin-top: 22px;"><a href="#" class="recall">用户帮助</a></li>
+                <li style="margin-top: 22px;"><a href="#" class="recall">隐私政策</a></li>
+                <li style="margin-top: 22px;"><a href="#" class="recall">关于网站</a></li>
+            </ul>
+        </div>
+    </div>
+
+</body>
+
+<style>
+  h3 {
+    font-family: Lobster, Monospace;
+  }
+
+  .ffont {
+    font-size: 16px;
+    font-family: Lobster；
+  }
+
+  .thick-green-border {
+    border-color: green;
+    border-width: 10px;
+    border-style: solid;
+    border-radius: 50%;
+  }
+.btn {
+    width: 80px;
+    height: 30px;
+    line-height: 30px;
+    margin-top: 10px;
+    background:  #f9fbfe;
+    margin-left: 0px;
+    text-align: center;
+    float: left;
+    cursor: pointer;
+    font-size: 14px;
+    border-radius:6px
+}
+  .smaller-image {
+    width: 100px;
+  }
+</style>
+
+</html>

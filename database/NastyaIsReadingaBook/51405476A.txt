@@ -1,0 +1,40 @@
+    #include <bits/stdc++.h>
+
+using namespace std;   //1 2 10 12 15 17
+
+int n,k;
+
+pair<int,int>chap[105];
+
+main()
+
+{
+
+   cin>>n;
+
+   for(int i=0;i<n;i++)
+
+   {
+
+       cin>>chap[i].first>>chap[i].second;
+
+   }
+
+   cin>>k;
+
+   for(int i=0;i<n;i++)
+
+   {
+
+       if(chap[i].first<=k && k<=chap[i].second)
+
+       {
+
+           cout<<n-i;return 0;
+
+       }
+
+   }
+
+}
+

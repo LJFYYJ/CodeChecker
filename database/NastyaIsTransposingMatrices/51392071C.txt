@@ -1,0 +1,26 @@
+import sys
+
+
+input = iter(sys.stdin)
+
+n, m = map(int, next(input).split())
+
+def read_matrix():
+    mat = []
+    for _ in range(n):
+        mat.append(tuple(map(int, next(input).split())))
+    return build_diags(mat)
+
+
+def build_diags(mat):
+    import collections
+    diags = collections.defaultdict(list)
+    for i in range(n):
+        for j in range(m):
+            diags[i + j].append(mat[i][j])
+    diags = sorted((k, sorted(v)) for k, v in diags.items())
+    return diags
+
+d1 = read_matrix()
+d2 = read_matrix()
+print(['NO', 'YES'][d1 == d2])

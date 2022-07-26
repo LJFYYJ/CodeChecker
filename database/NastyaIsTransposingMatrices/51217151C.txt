@@ -1,0 +1,303 @@
+// Author : Het Pandya  @hetpandya98
+
+
+
+// So often we are judged by the things we do and mistakes we make,
+
+// for once I'd like to be judged by the steps I took today, rather
+
+// than the footprints of yesterday 
+
+
+
+
+
+#include<bits/stdc++.h>
+
+using namespace std;
+
+// #include <ext/pb_ds/assoc_container.hpp>
+
+// using namespace __gnu_pbds;
+
+typedef long long ll;
+
+typedef long double ld;
+
+typedef unsigned long long ull;
+
+#define MOD 1000000007
+
+#define pii pair<int,int>
+
+#define pll pair<ll,ll>
+
+#define PB push_back
+
+#define POPB  pop_back
+
+#define TR(v,it) for(auto it=v.begin();it!=v.end();it++)
+
+#define FT(i,n) for(int i=0;i<n;i++)
+
+#define FRT(i,n) for(int i=n-1;i>=0;i--)
+
+#define FTG(i,a,b) for(int i=a;i<=b;i++)
+
+#define FTGR(i,a,b) for(int i=a;i>=b;i--)
+
+#define SORTALL(v) sort(v.begin(),v.end())
+
+#define SORTALLG(v) sort(v.begin(),v.end(),greater<>())
+
+#define MP make_pair
+
+#define F first
+
+#define S second
+
+
+
+struct custom_hash {
+
+    static uint64_t splitmix64(uint64_t x) {
+
+        x += 0x9e3779b97f4a7c15;
+
+        x = (x ^ (x >> 30)) * 0xbf58476d1ce4e5b9;
+
+        x = (x ^ (x >> 27)) * 0x94d049bb133111eb;
+
+        return x ^ (x >> 31);
+
+    }
+
+
+
+    size_t operator()(uint64_t x) const {
+
+        static const uint64_t FIXED_RANDOM = chrono::steady_clock::now().time_since_epoch().count();
+
+        return splitmix64(x + FIXED_RANDOM);
+
+    }
+
+};
+
+
+
+
+
+void shoot(){
+
+    #ifndef ONLINE_JUDGE
+
+    freopen ("input.txt","r",stdin);
+
+    freopen ("output.txt","w",stdout);
+
+    #else
+
+    ios_base::sync_with_stdio(false);
+
+    cin.tie(NULL);
+
+    cout.tie(NULL);
+
+    #endif
+
+}
+
+
+
+
+
+// int Find(int node) {
+
+//   if(parent[node] != node) {
+
+//       parent[node] = Find(parent[node]);
+
+//   }
+
+//   return parent[node];
+
+// }
+
+
+
+// void Union(int a, int b) {
+
+//   int parent1, parent2;
+
+//   parent1 = Find(a);
+
+//   parent2 = Find(b);
+
+//   if(parent1 != parent2)
+
+//       parent[parent1] = parent2;
+
+//   //or parent[parent2] = parent1
+
+// }
+
+
+
+// ll power(ll n,ll pwr){
+
+//   ll ans=1LL;
+
+//   while(pwr){
+
+//       if(pwr&1)
+
+//       ans=(ans*n);
+
+//       n=(n*n);
+
+//       pwr>>=1;
+
+//   }
+
+//   return ans;
+
+// }
+
+
+
+// vector <ll> pr;
+
+// bool prime[1000001];
+
+// void BuildSieve(){
+
+//     memset(prime, true, sizeof(prime));
+
+//     prime[1]=false;
+
+//     for (int p=2; p<=1000001; p++){
+
+//         if (prime[p] == true){
+
+//           pr.PB(p);
+
+//             for (int i=p*2; i<=1000001; i += p)
+
+//                 prime[i] = false;
+
+//         }
+
+//     }
+
+// }
+
+
+
+// ll bigmod(ll num,ll n){
+
+//   if(n==0) return 1;
+
+//   ll x=bigmod(num,n/2);
+
+//   x=x*x%MOD;
+
+//   if(n%2==1) x=x*num%MOD;
+
+//   return x;
+
+// }
+
+
+
+// ll modinverse(ll num){
+
+//   return bigmod(num,MOD-2)%MOD;
+
+// }
+
+
+
+// ll gcd(ll a, ll b){
+
+//     if (a == 0)
+
+//         return b;
+
+//     return gcd(b%a, a);
+
+// }
+
+
+
+// bool isPowerOfTwo (ll x){
+
+//   return x && (!(x&(x-1)));
+
+// }
+
+
+
+int main(){
+
+    shoot();
+
+    ll i,j,n,m,x;
+
+    cin>>n>>m;
+
+    map <ll,ll> mp[n+m-1]; 
+
+    for(i=0;i<n;i++){
+
+      for(j=0;j<m;j++){
+
+        cin>>x;
+
+        mp[i+j][x]++;
+
+      }
+
+    }
+
+    for(i=0;i<n;i++){
+
+      for(j=0;j<m;j++){
+
+        cin>>x;
+
+        if(!mp[i+j][x]){
+
+          cout<<"NO";
+
+          return 0;
+
+        }
+
+        mp[i+j][x]--;
+
+      }
+
+    }
+
+    cout<<"YES";
+
+
+
+
+
+
+
+
+
+
+
+    #ifdef LOCAL_DEFINE
+
+    cerr << "Time elapsed: " << 1.0 * clock() / CLOCKS_PER_SEC << " s.\n";
+
+    #endif
+
+    return 0;
+
+}

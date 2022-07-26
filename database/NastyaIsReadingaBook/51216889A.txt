@@ -1,0 +1,111 @@
+/****HVARDHANSINGH****/
+
+
+
+#include <bits/stdc++.h>
+
+using namespace std;
+
+
+
+typedef vector<int> vi;
+
+typedef vector<long long> vll;
+
+typedef vector<vi> vvi;
+
+typedef pair<int, int> ii;
+
+typedef set<int> si;
+
+typedef map<int, int> mii;
+
+
+
+#define F first
+
+#define S second
+
+#define sz(a) int((a).size())
+
+#define pb push_back
+
+#define all(c) (c).begin(), (c).end()
+
+
+
+#define ll long long
+
+#define rep(i, a, b) for (int i = a; i < b; i++)
+
+#define endl "\n"
+
+
+
+int main()
+
+{
+
+    ios_base::sync_with_stdio(false);
+
+    cin.tie(0);
+
+    cout.tie(0);
+
+
+
+    int T = 1;
+
+    //cin >> T;
+
+    while (T--)
+
+    {
+
+        int n;
+
+        cin>>n;
+
+        vi s(n),e(n);
+
+        rep(i,0,n)  
+
+        {
+
+            cin>>s[i];
+
+            cin>>e[i];
+
+        }
+
+        int k;
+
+        cin>>k;
+
+        int pos;
+
+        rep(i,0,n)
+
+        {
+
+            if(k>=s[i] && k<=e[i])
+
+            {
+
+                pos=i;
+
+                break;
+
+            }
+
+        }
+
+
+
+        cout<<n-pos;
+
+    }
+
+    return 0;
+
+}

@@ -1,0 +1,372 @@
+import java.io.*;
+
+import java.util.*;
+
+import java.text.*;
+
+import java.math.*;
+
+import java.util.regex.*;
+
+
+
+public class Solution 
+
+{
+
+	static class InputReader
+
+	{
+
+	    private final InputStream stream;
+
+	    private final byte[] buf = new byte[8192];
+
+	    private int curChar, snumChars;
+
+
+
+	    public InputReader(InputStream st) {
+
+	      this.stream = st;
+
+	    }
+
+
+
+	    public int read() {
+
+	      if (snumChars == -1)
+
+	        throw new InputMismatchException();
+
+	      if (curChar >= snumChars) {
+
+	        curChar = 0;
+
+	        try {
+
+	          snumChars = stream.read(buf);
+
+	        } catch (IOException e) {
+
+	          throw new InputMismatchException();
+
+	        }
+
+	        if (snumChars <= 0)
+
+	          return -1;
+
+	      }
+
+	      return buf[curChar++];
+
+	    }
+
+
+
+	    public int nextInt() {
+
+	      int c = read();
+
+	      while (isSpaceChar(c)) {
+
+	        c = read();
+
+	      }
+
+	      int sgn = 1;
+
+	      if (c == '-') {
+
+	        sgn = -1;
+
+	        c = read();
+
+	      }
+
+	      int res = 0;
+
+	      do {
+
+	        res *= 10;
+
+	        res += c - '0';
+
+	        c = read();
+
+	      } while (!isSpaceChar(c));
+
+	      return res * sgn;
+
+	    }
+
+
+
+	    public long nextLong() {
+
+	      int c = read();
+
+	      while (isSpaceChar(c)) {
+
+	        c = read();
+
+	      }
+
+	      int sgn = 1;
+
+	      if (c == '-') {
+
+	        sgn = -1;
+
+	        c = read();
+
+	      }
+
+	      long res = 0;
+
+	      do {
+
+	        res *= 10;
+
+	        res += c - '0';
+
+	        c = read();
+
+	      } while (!isSpaceChar(c));
+
+	      return res * sgn;
+
+	    }
+
+
+
+	    public int[] nextIntArray(int n) {
+
+	      int a[] = new int[n];
+
+	      for (int i = 0; i < n; i++) {
+
+	        a[i] = nextInt();
+
+	      }
+
+	      return a;
+
+	    }
+
+
+
+	    public String readString() {
+
+	      int c = read();
+
+	      while (isSpaceChar(c)) {
+
+	        c = read();
+
+	      }
+
+	      StringBuilder res = new StringBuilder();
+
+	      do {
+
+	        res.appendCodePoint(c);
+
+	        c = read();
+
+	      } while (!isSpaceChar(c));
+
+	      return res.toString();
+
+	    }
+
+
+
+	    public String nextLine() {
+
+	      int c = read();
+
+	      while (isSpaceChar(c))
+
+	        c = read();
+
+	      StringBuilder res = new StringBuilder();
+
+	      do {
+
+	        res.appendCodePoint(c);
+
+	        c = read();
+
+	      } while (!isEndOfLine(c));
+
+	      return res.toString();
+
+	    }
+
+
+
+	    public boolean isSpaceChar(int c) {
+
+	      return c == ' ' || c == '\n' || c == '\r' || c == '\t' || c == -1;
+
+	    }
+
+
+
+	    private boolean isEndOfLine(int c) {
+
+	      return c == '\n' || c == '\r' || c == -1;
+
+	    }
+
+	}
+
+	 public static class DSU
+
+    {
+
+        int[] parent,rank;
+
+        public DSU(int n)
+
+        {
+
+            parent = new int[n];
+
+            rank = new int[n];
+
+            for(int i=0;i<n;i++)
+
+                parent[i] = -1;
+
+        }
+
+        public int find(int node)
+
+        {
+
+            if(parent[node] == -1)
+
+                return node;
+
+            parent[node] = find(parent[node]);
+
+            return parent[node];
+
+        }
+
+        public void union(int x,int y)
+
+        {
+
+            int xroot = find(x);
+
+            int yroot = find(y);
+
+            if(rank[x] > rank[y])
+
+                parent[yroot] = xroot;
+
+            else if(rank[x] < parent[y])
+
+                parent[xroot] = yroot;
+
+            else
+
+            {
+
+                parent[yroot] = xroot;
+
+                rank[xroot]++;
+
+            }
+
+        }
+
+        public boolean sameset(int x,int y)
+
+        {
+
+            return find(x) == find(y);
+
+        }
+
+    }
+
+    public static class pair implements Comparable<pair>
+
+    {
+
+        int l,r;
+
+        public pair(int a,int b)
+
+        {
+
+            this.l = a;
+
+            this.r = b;
+
+        }
+
+        public int compareTo(pair u)
+
+        {
+
+            return l - u.l;
+
+        }
+
+    }
+
+    public static void main(String[] args) throws Exception
+
+    {
+
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+        int n = Integer.parseInt(br.readLine());
+
+        pair[] arr = new pair[n];
+
+        for(int i=0;i<n;i++)
+
+        {
+
+            String[] str = (br.readLine()).trim().split(" ");
+
+            arr[i] = new pair(Integer.parseInt(str[0]),Integer.parseInt(str[1]));
+
+        }
+
+        Arrays.sort(arr);
+
+        int k = Integer.parseInt(br.readLine());
+
+        int count = 0;
+
+        for(int i=0;i<n;i++)
+
+        {
+
+            if(k >= arr[i].l && k <= arr[i].r)
+
+            {
+
+                break;
+
+            }
+
+            count++;
+
+        }
+
+        System.out.println(Math.max(0,n - count));
+
+    }
+
+}
+

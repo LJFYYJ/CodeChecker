@@ -1,0 +1,6 @@
+lr = [input().split() for _ in range(int(input()))]
+
+k = int(input())
+
+print(sum((int(int(lri[1]) >= k) for lri in lr)))
+

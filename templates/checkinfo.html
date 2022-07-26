@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+{% load staticfiles %}
+<head>
+    <meta charset="utf-8" />
+    <title>查重信息</title>
+    <link rel="stylesheet" href="{% static 'css/checkinfo.css' %}" />
+    <script src="{% static 'js/jquery.js' %}"></script>
+</head>
+<body>
+    <div id="header">
+        <div class="container">
+            <div class="header_left left">
+                <div class="logo"><a href="main.html" id="main" ><img id="img1" src="{% static 'images/magic.png' %}"/></a></div>
+                <div class="logo"><span id="text_" class="left" style="color:#333333;font-size:20px; font-weight:650;margin-left:20px">CodeChecker</span></div>
+            </div>
+            <div class="header_right right">
+                <ul>
+                    <li class="text"><a href="{% url 'login' %}" class="nav">登录</a></li>
+                    <li class="text"><a href="{% url 'register' %}" class="nav">注册</a></li>
+                    <li class="text"><a href="#" class="nav">帮助</a></li>
+                    {% if request.user.is_authenticated %}
+                        <li class="text"><span id="identity">{{ request.user.username }}</span></li>
+                        {% else %}
+                        <li class="text"><span id="identity">未登录用户</span></li>
+                    {% endif %}
+                </ul>
+            </div>
+
+        </div>
+    </div>
+
+    <div id="system">
+        <div class="container">
+            <div id="sys_head" style="height:45px;">
+                <pre style="text-align: center;padding-top: 13px;font-size:18px;font-weight:600;"> <span style="font-weight:800;font-size: 19px;">查重文件: </span>{% for file in checkinfofiles %} {{ file.filename }}{% endfor %}</pre>
+            </div>
+        <div id="main_content">
+        <form method="post" action="{% url 'checkinfo' infoid %}" >
+        {% csrf_token %}
+        <div style="overflow:scroll;height:483px;width:1000px;margin-top:0px;background-color: #FFFAFA;">
+        <div style="text-align: center;padding-top: 40px;">
+            <pre><p style="padding-bottom: 35px;font-size: 18px;font-weight: 700;">共有<span style="font-weight:800;color:#CC3366;"> {{ checkresults.count }} </span>组文件的相似度超过 60 %  :</p></pre>
+                {% for result in checkresults %}
+                    <pre style="font-size:17px;font-weight:600;"><input type="checkbox" name="{{ result.id }}">{{ forloop.counter }}.   相似度：<span style="color:#CC3366;font-size: 17px;">{{ result.sim3 | floatformat:1 }}%</span>    <a href="{% url 'checkresult' result.id %}"><span style="background-color:#FFFFCC">{{ result.filename1 }}  {{ result.filename2 }}</span></a>
+
+                    </pre>
+                {% endfor %}
+        </div>
+        </div>
+        </div>
+            <div id="bottom" style="position:relative;border-bottom:2px solid #333;width:1000px;height:0px;">
+        </div>
+        <button type="submit" style="background-color:#99CCFF;color:black;width:150px;height:30px;border:2px solid #5a98de;border-radius:5px;font-size:18px;font-weight:600;position:relative;margin-left: 420px;margin-top: 5px;">下载查重结果</button>
+                </form>
+                <button style="background-color:#c8f599;color:#333;width:80px;height:30px;border:2px solid #b0ca65;border-radius:5px;font-size:18px;font-weight:600;position:relative;margin-left:330px;"><a href="{% url 'upload' %}">返回</a></button>
+        </div>
+    </div>
+
+
+</body>
+
+</html>

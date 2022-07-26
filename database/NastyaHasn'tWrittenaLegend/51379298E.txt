@@ -1,0 +1,465 @@
+#include <stdio.h>
+
+#include <vector>
+
+#include <queue>
+
+#include <algorithm>
+
+#include <iostream>
+
+#include <string>
+
+#include <bitset>
+
+#include <map>
+
+#include <set>
+
+#include <tuple>
+
+#include <string.h>
+
+#include <math.h>
+
+#include <random>
+
+#include <functional>
+
+#include <assert.h>
+
+#include <math.h>
+
+#include <iterator>
+
+#include <chrono>
+
+#define all(x) (x).begin(), (x).end()
+
+#define xx first
+
+#define yy second
+
+
+
+using namespace std;
+
+
+
+using i64 = long long int;
+
+using ii = pair<int, int>;
+
+using ii64 = pair<i64, i64>;
+
+using vi = vector<long long int>;
+
+
+
+long long int init(vi& tree, vi& arr, int start, int end, int node)
+
+{
+
+	if (start == end)
+
+		return tree[node] = arr[start];
+
+
+
+	int mid = (start + end) / 2;
+
+
+
+	return tree[node] = init(tree, arr, start, mid, node * 2) + init(tree, arr, mid + 1, end, node * 2 + 1);
+
+}
+
+
+
+void update_lazy(vi& tree, vi& lazy, int start, int end, int node)
+
+{
+
+	if (lazy[node] == 0)
+
+		return;
+
+
+
+	tree[node] += (end - start + 1) * lazy[node];
+
+
+
+	if (start != end)
+
+	{
+
+		lazy[node * 2] += lazy[node];
+
+		lazy[node * 2 + 1] += lazy[node];
+
+	}
+
+
+
+	lazy[node] = 0;
+
+}
+
+
+
+void update_range(vi& tree, vi& lazy, int start, int end, int node, int left, int right, long long int diff)
+
+{
+
+	update_lazy(tree, lazy, start, end, node);
+
+
+
+	if (left > end || right < start)
+
+		return;
+
+
+
+	if (left <= start && end <= right)
+
+	{
+
+		tree[node] += (end - start + 1) * diff;
+
+
+
+		if (start != end)
+
+		{
+
+			lazy[node * 2] += diff;
+
+			lazy[node * 2 + 1] += diff;
+
+		}
+
+
+
+		return;
+
+	}
+
+
+
+	int mid = (start + end) / 2;
+
+	update_range(tree, lazy, start, mid, node * 2, left, right, diff);
+
+	update_range(tree, lazy, mid + 1, end, node * 2 + 1, left, right, diff);
+
+	tree[node] = tree[node * 2] + tree[node * 2 + 1];
+
+}
+
+
+
+long long query(vi& tree, vi& lazy, int start, int end, int node, int left, int right)
+
+{
+
+	update_lazy(tree, lazy, start, end, node);
+
+
+
+	if (left > end || right < start)
+
+		return 0;
+
+
+
+	if (left <= start && end <= right)
+
+	{
+
+		return tree[node];
+
+	}
+
+
+
+	int mid = (start + end) / 2;
+
+	return query(tree, lazy, start, mid, node * 2, left, right) +
+
+		query(tree, lazy, mid + 1, end, node * 2 + 1, left, right);
+
+}
+
+
+
+class FenwickTree
+
+{
+
+public:
+
+	FenwickTree(int k)
+
+	{
+
+		data.resize(k);
+
+	}
+
+
+
+	i64 sum(int n)
+
+	{
+
+		i64 ans = 0;
+
+
+
+		while (n > 0)
+
+		{
+
+			ans += data[n];
+
+			n -= (n & -n);
+
+		}
+
+
+
+		return ans;
+
+	}
+
+
+
+	void add(int n, i64 num)
+
+	{
+
+		while (n < data.size())
+
+		{
+
+			data[n] += num;
+
+			n += (n & -n);
+
+		}
+
+	}
+
+
+
+	int search(i64 k)
+
+	{
+
+		int lo = 0, hi = data.size() - 1;
+
+		int ans = data.size();
+
+
+
+		while (lo <= hi)
+
+		{
+
+			int mid = (lo + hi) / 2;
+
+
+
+			i64 q = sum(mid);
+
+
+
+			if (q >= k)
+
+			{
+
+				ans = mid;
+
+				hi = mid - 1;
+
+			}
+
+			else
+
+			{
+
+				lo = mid + 1;
+
+			}
+
+		}
+
+
+
+		return ans;
+
+	}
+
+
+
+private:
+
+	vector<i64> data;
+
+};
+
+
+
+int main()
+
+{
+
+	int n;
+
+	scanf("%d", &n);
+
+
+
+	vector<i64> arr(n + 1);
+
+	FenwickTree capa(n + 2);
+
+	vector<i64> c(n + 2);
+
+
+
+	for (int i = 1; i <= n; i++)
+
+		scanf("%lld", &arr[i]);
+
+
+
+	for (int i = 2; i <= n; i++)
+
+	{
+
+		i64 ki;
+
+		scanf("%lld", &ki);
+
+		c[i] = arr[i] - (arr[i - 1] + ki);
+
+		capa.add(i, c[i]);
+
+	}
+
+
+
+	c[n + 1] = 1ll << 52;
+
+	capa.add(n + 1, 1ll << 52);
+
+
+
+	vi tree;
+
+	tree.resize(n * 5);
+
+
+
+	vi lazy;
+
+	lazy.resize(n * 5);
+
+
+
+	init(tree, arr, 1, n, 1);
+
+
+
+	int q;
+
+	scanf("%d", &q);
+
+
+
+	for (int i = 0; i < q; i++)
+
+	{
+
+		char type[3];
+
+		scanf("%s", type);
+
+
+
+		if (type[0] == '+')
+
+		{
+
+			int l;
+
+			i64 x;
+
+			scanf("%d %lld", &l, &x);
+
+
+
+			//x로 커버하는 capa 구간 구한다
+
+			int k = capa.search(x + capa.sum(l));
+
+			i64 xrem = x;
+
+			int ki = k;
+
+
+
+			while (c[ki - 1] > 0)
+
+				ki--;
+
+
+
+			// 이 지점부터 시작해서 하나씩 0으로 만든다
+
+			for (int j = ki; j <= k; j++)
+
+			{
+
+				i64 g = min(xrem, c[j]);
+
+
+
+				update_range(tree, lazy, 1, n, 1, j, j, xrem - g);
+
+				xrem -= g;
+
+				c[j] -= g;
+
+				capa.add(j, -g);
+
+			}
+
+
+
+			update_range(tree, lazy, 1, n, 1, l, ki - 1, x);
+
+		}
+
+		else
+
+		{
+
+			int l, r;
+
+			scanf("%d %d", &l, &r);
+
+			printf("%lld\n", query(tree, lazy, 1, n, 1, l, r));
+
+		}
+
+	}
+
+
+
+	return 0;
+
+}

@@ -1,0 +1,49 @@
+#include<bits/stdc++.h>
+
+using namespace std;
+
+#define ll long long int
+
+#define forn(a,b) for(ll i=a;i<b;i++)
+
+
+
+void solve()
+
+{
+
+    ll n,k;
+
+    cin>>n>>k;
+
+
+
+    cout<<((n-1)+n+n+1)+(min(k-1,n-k))<<endl;
+
+
+
+    return;
+
+}
+
+
+
+int main()
+
+{
+
+    #ifndef ONLINE_JUDGE             
+
+    freopen("input.txt","r",stdin);freopen("output.txt","w",stdout);
+
+    #endif
+
+    ios_base::sync_with_stdio(false);cin.tie(NULL);cout.tie(NULL);
+
+    
+
+    solve();
+
+    return 0;
+
+}

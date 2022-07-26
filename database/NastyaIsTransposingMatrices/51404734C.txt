@@ -1,0 +1,103 @@
+#include <bits/stdc++.h>
+
+#include <set>
+
+#define lowbit(x) (x&-x)
+
+#define jh(x, y) x^=y^=x^=y
+
+#define rg register
+
+#define inl inline
+
+typedef long long ll;
+
+const int N = 5e2 + 5, mod = 1e9 + 7, INF = 0x3f3f3f3f;
+
+using namespace std;
+
+namespace fast_IO {
+
+	inl ll read() {
+
+		rg char c;
+
+		rg ll x = 0;
+
+		rg bool flag = false;
+
+		while ((c = getchar()) == ' ' || c == '\n' || c == '\r');
+
+		if (c == EOF)return c; if (c == '-')flag = true; else x = c ^ 48;
+
+		while ((c = getchar()) != ' ' && c != '\n' && c != '\r'&&~c)
+
+			x = (x << 1) + (x << 3) + (c ^ 48);
+
+		if (flag)return -x; return x;
+
+	}
+
+	inl ll max(rg ll a, rg ll b) { if (a > b)return a; return b; }
+
+	inl ll min(rg ll a, rg ll b) { if (a < b)return a; return b; }
+
+	void write(rg ll x) { if (x < 0)putchar('-'), x = -x; if (x >= 10)write(x / 10); putchar(x % 10 ^ 48); }
+
+}
+
+int num[2][N], A[N][N], B[N][N];
+
+
+
+int main(void)
+
+{
+
+	rg int n = fast_IO::read(), m = fast_IO::read();
+
+	for (rg int i = 1; i <= n; ++i)
+
+		for (rg int j = 1; j <= m; ++j)
+
+			A[i][j] = fast_IO::read();
+
+	for (rg int i = 1; i <= n; ++i)
+
+		for (rg int j = 1; j <= m; ++j)
+
+			B[i][j] = fast_IO::read();
+
+	for (rg int i = 1; i <= n; ++i)
+
+	{
+
+		rg int x = i, y = 1; *num[0] = *num[1] = 0;
+
+		while (x&&y<=m)num[0][++*num[0]] = A[x][y], num[1][++*num[1]] = B[x][y], --x, ++y;
+
+		sort(num[0] + 1, num[0] + *num[0] + 1); sort(num[1] + 1, num[1] + *num[1] + 1);
+
+		for (rg int i = 1; i <= *num[0]; ++i)if (num[0][i] != num[1][i]) { puts("NO"); return 0; }
+
+	}
+
+	for (rg int i = 2; i <= m; ++i)
+
+	{
+
+		rg int x = n, y = i; *num[0] = *num[1] = 0;
+
+		while (y <= m && x)num[0][++*num[0]] = A[x][y], num[1][++*num[1]] = B[x][y], --x, ++y;
+
+		sort(num[0] + 1, num[0] + *num[0] + 1); sort(num[1] + 1, num[1] + *num[1] + 1);
+
+		for (rg int i = 1; i <= *num[0]; ++i)if (num[0][i] != num[1][i]) { puts("NO"); return 0; }
+
+	}
+
+	puts("YES");
+
+	return 0;
+
+}

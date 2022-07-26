@@ -1,0 +1,54 @@
+#include<bits/stdc++.h>
+
+using namespace std;
+
+int main()
+
+{
+
+    int n,m,i,cnt=0,ran;
+
+    cin>>n;
+
+   int j=0;
+
+    int a[n];
+
+    for(i=0;i<n*2;i++)
+
+        if(i%2!=0)
+
+            cin>>a[j++];
+
+        else
+
+            cin>>ran;
+
+
+
+        cin>>m;
+
+        for(j=0;j<n;j++)
+
+        {
+
+            if(m>a[i])
+
+                cnt++;
+
+
+
+        }
+
+
+
+        cout<<n-cnt;
+
+
+
+
+
+
+
+    }
+

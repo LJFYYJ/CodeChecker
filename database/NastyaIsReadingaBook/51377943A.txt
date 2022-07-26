@@ -1,0 +1,68 @@
+#include <iostream>
+
+#include <string>
+
+#include <vector>
+
+using namespace std;
+
+
+
+int main()
+
+{
+
+
+
+
+
+int n ;
+
+int k,c=0 ;
+
+cin >> n ;
+
+
+
+int x[100][100];
+
+
+
+for ( int q = 0 ; q < n ; q ++ )
+
+   for ( int h=0 ; h < 2 ;h++)
+
+    cin >>x[q] [h ] ;
+
+cin >> k ;
+
+
+
+
+
+
+
+
+
+for ( int q = 0 ; q < n  ; q ++ )
+
+
+
+    if (x[q][0] > k )
+
+{c++;
+
+//if ( k <= x[q][1] && x)
+
+}
+
+
+
+cout << ++c;
+
+
+
+    return 0;
+
+}
+

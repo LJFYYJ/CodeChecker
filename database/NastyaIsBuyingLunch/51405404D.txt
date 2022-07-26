@@ -1,0 +1,58 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+typedef unsigned long long ull;
+typedef long long ll;
+typedef pair<int, int> pii;
+typedef pair<ll, ll> pll;
+typedef pair<double, double> pdd;
+const ull mod = 1e9 + 7;
+#define REP(i,n) for(int i=0;i<(int)n;++i)
+
+//debug
+#define dump(x)  cerr << #x << " = " << (x) << endl;
+#define debug(x) cerr << #x << " = " << (x) << " (L" << __LINE__ << ")" << " " << __FILE__ << endl;
+
+template < typename T >
+void vprint(T &v){
+	REP(i, v.size()){
+		cout << v[i] << " ";
+	}
+	cout << endl;
+}
+
+int main(){
+	cin.tie(0);
+	ios::sync_with_stdio(false);
+
+	ll n, m;
+	cin >> n >> m;
+	vector<ll> p(n);
+	REP(i, n) cin >> p[i];
+	vector<ll> G[101010];
+	REP(i, m){
+		ll x, y;
+		cin >> x >> y;
+		G[x].push_back(y);
+	}
+
+	set<ll> st;
+	st.insert(p[n-1]);
+	ll res = 0;
+	for(int i=n-2;i>-1;i--){
+		ll now = p[i];
+		ll tmp = 0;
+		REP(j, G[now].size()){
+			if(st.find(G[now][j]) != st.end()){
+				tmp++;
+			}
+		}
+		if(tmp == st.size()){
+			res++;
+		}else{
+			st.insert(now);
+		}
+	}
+	cout << res << endl;
+    return 0;
+}

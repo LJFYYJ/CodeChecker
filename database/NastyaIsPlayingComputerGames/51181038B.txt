@@ -1,0 +1,60 @@
+#include "bits/stdc++.h"
+
+using namespace std;
+
+
+
+#define ll long long
+
+
+
+ll n;
+
+
+
+pair<ll,ll> ar[1002];
+
+
+
+int main()
+
+{
+
+    ios_base::sync_with_stdio(false);
+
+    cin.tie(NULL);
+
+
+
+    ll k;
+
+    cin>>n>>k;
+
+
+
+    ll haha = min(abs(k-1), abs(n-k));
+
+
+
+    cout << haha + n*3 << endl;
+
+
+
+    return 0;
+
+}
+
+
+
+/*
+
+
+
+
+
+
+
+
+
+*/
+

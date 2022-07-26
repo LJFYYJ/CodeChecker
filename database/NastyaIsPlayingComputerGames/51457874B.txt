@@ -1,0 +1,163 @@
+import java.io.BufferedReader;
+
+import java.io.FileReader;
+
+import java.io.IOException; 
+
+import java.io.InputStreamReader; 
+
+import java.util.Scanner; 
+
+import java.util.StringTokenizer; 
+
+import java.util.*;
+
+import java.io.*;
+
+public class codeforces 
+
+{ 
+
+    static int max=Integer.MAX_VALUE;
+
+    static class FastReader 
+
+    { 
+
+        BufferedReader br; 
+
+        StringTokenizer st; 
+
+  
+
+        public FastReader() 
+
+        { 
+
+            br = new BufferedReader(new
+
+                     InputStreamReader(System.in)); 
+
+        } 
+
+  
+
+        String next() 
+
+        { 
+
+            while (st == null || !st.hasMoreElements()) 
+
+            { 
+
+                try
+
+                { 
+
+                    st = new StringTokenizer(br.readLine()); 
+
+                } 
+
+                catch (IOException  e) 
+
+                { 
+
+                    e.printStackTrace(); 
+
+                } 
+
+            } 
+
+            return st.nextToken(); 
+
+        } 
+
+  
+
+        int nextInt() 
+
+        { 
+
+            return Integer.parseInt(next()); 
+
+        } 
+
+  
+
+        long nextLong() 
+
+        { 
+
+            return Long.parseLong(next()); 
+
+        } 
+
+  
+
+        double nextDouble() 
+
+        { 
+
+            return Double.parseDouble(next()); 
+
+        } 
+
+  
+
+        String nextLine() 
+
+        { 
+
+            String str = ""; 
+
+            try
+
+            { 
+
+                str = br.readLine(); 
+
+            } 
+
+            catch (IOException e) 
+
+            { 
+
+                e.printStackTrace(); 
+
+            } 
+
+            return str; 
+
+        } 
+
+    }
+
+    public static void main(String[] args){
+
+        //long sum=0;
+
+        int n,j,k,ans=0,pos=0,c=-1,c1=-1,i,x,s,e,m;
+
+        FastReader sc=new FastReader();
+
+        n=sc.nextInt();
+
+        k=sc.nextInt();
+
+     ans=6;
+
+        if(k==1||k==n)
+
+            ans+=(n-2)*3;
+
+        else{
+
+            ans+=(k-2)*3+k-1+(n-k)*3;
+
+        }
+
+        System.out.println(ans);
+
+    }
+
+}

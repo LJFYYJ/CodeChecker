@@ -1,0 +1,57 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+vector<pair<int,int>> a;
+
+class fastio {
+
+public:
+
+    fastio() {
+
+        ios_base::sync_with_stdio(false);
+
+        cout.tie(nullptr);
+
+        cin.tie(nullptr);
+
+    }
+
+} __fastio;
+
+void solve() {
+
+    int n;
+
+    cin >> n;
+
+    for(int i=1; i<=n; i++) {
+
+        cin >> a[i].first >> a[i].second;
+
+    }
+
+    int mark; cin >> mark;
+
+    for(int i=1; i<=n; i++) {
+
+        if(a[i].second > mark)
+
+            cout << n - i + 1;
+
+            exit(0);
+
+    }
+
+}
+
+int main() {
+
+  __fastio;
+
+  solve();
+
+  return 0;
+
+}

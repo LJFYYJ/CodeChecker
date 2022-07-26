@@ -1,0 +1,64 @@
+import java.io.BufferedReader;
+
+import java.io.InputStreamReader;
+
+import java.util.ArrayList;
+
+import java.util.List;
+
+
+
+public class Main {
+
+  public static void main(String[] args) throws Exception {
+
+    List<Integer> pageToChapter = new ArrayList<>();
+
+    pageToChapter.add(0, 0);
+
+    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+    int chapters = Integer.parseInt(br.readLine());
+
+    //System.out.println("chapters=" + chapters);
+
+    for (int i = 1; i <= chapters; i++) {
+
+      String[] range = br.readLine().split("\\s+");
+
+      int firstPage = Integer.parseInt(range[0]);
+
+      int lastPage = Integer.parseInt(range[1]);
+
+      //System.out.println("chapter " + i + " : " + firstPage + " - " + lastPage);
+
+      for (int f = firstPage; f <= lastPage; f++) {
+
+        pageToChapter.add(f, i);
+
+      }
+
+    }
+
+    int pagesRead = Integer.parseInt(br.readLine());
+
+
+
+    //System.out.println("pagesRead=" + pagesRead);
+
+
+
+    int chaptersLeft = chapters - pageToChapter.get(pagesRead) + 1;
+
+
+
+    //System.out.println("chaptersLeft=" + chaptersLeft);
+
+    System.out.println(chaptersLeft);
+
+
+
+  }
+
+}
+

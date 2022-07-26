@@ -1,0 +1,98 @@
+#include<bits/stdc++.h>
+
+using namespace std;
+
+const int N=2e5+5;
+
+typedef long long ll;
+
+vector<pair<int, int> > vp;
+
+#define srt(x) sort(x.begin(),x.end())
+
+#define srta(x,y) sort(a,a+y);
+
+int main()
+
+{
+
+    int n,m;
+
+    scanf("%d %d",&n,&m);
+
+    int a[n+1][n+1],b[m+1][m+1];
+
+    for(int i=0; i<n; i++)
+
+    {
+
+        for(int j=0; j<m; j++)
+
+            scanf("%d",&a[i][j]);
+
+    }
+
+    for(int i=0; i<n; i++)
+
+    {
+
+        for(int j=0; j<m; j++)
+
+            scanf("%d",&b[i][j]);
+
+    }
+
+    vector<int> d1[n+m+2],d2[n+m+2];
+
+    for(int i=0; i<n; i++)
+
+    {
+
+        for(int j=0; j<m; j++)
+
+        {
+
+            d1[i+j].push_back(a[i][j]);
+
+            d2[i+j].push_back(b[i][j]);
+
+        }
+
+    }
+
+    unordered_map<int, int> mp;
+
+    for(int i=0; i<n+m; i++)
+
+    {
+
+        srt(d1[i]),srt(d2[i]);
+
+        int sz=d1[i].size();
+
+        for(int j=0; j<sz; j++)
+
+        {
+
+            if(d1[i][j]!=d2[i][j])
+
+            {
+
+                printf("NO\n");
+
+                return 0;
+
+            }
+
+        }
+
+    }
+
+    printf("YES\n");
+
+    return 0;
+
+}
+
+
+

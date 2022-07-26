@@ -1,0 +1,85 @@
+import java.io.OutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.PrintWriter;
+import java.util.StringTokenizer;
+import java.io.IOException;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.InputStream;
+
+/**
+ * Built using CHelper plug-in
+ * Actual solution is at the top
+ */
+public class Main {
+    public static void main(String[] args) {
+        InputStream inputStream = System.in;
+        OutputStream outputStream = System.out;
+        ReaderFastIO in = new ReaderFastIO(inputStream);
+        PrintWriter out = new PrintWriter(outputStream);
+        ANastyaIsReadingABook solver = new ANastyaIsReadingABook();
+        solver.solve(1, in, out);
+        out.close();
+    }
+
+    static class ANastyaIsReadingABook {
+        public void solve(int testNumber, ReaderFastIO in, PrintWriter out) {
+
+            int n = in.nextInt();
+            int[] a = new int[n];
+
+            for (int i = 0; i < n; i++) {
+                int l = in.nextInt();
+                int r = in.nextInt();
+                a[i] = r - l + 1;
+            }
+
+            int k = in.nextInt();
+            int cap = 0;
+
+            for (int i = 0; i < n; i++) {
+
+                if (k - 1 >= a[i]) {
+                    cap++;
+                }
+                k -= a[i];
+
+                if (k < 0) break;
+            }
+
+            out.println(n - cap);
+        }
+
+    }
+
+    static class ReaderFastIO {
+        BufferedReader br;
+        StringTokenizer st;
+
+        public ReaderFastIO() {
+            br = new BufferedReader(new InputStreamReader(System.in));
+        }
+
+        public ReaderFastIO(InputStream input) {
+            br = new BufferedReader(new InputStreamReader(input));
+        }
+
+        public String next() {
+            while (st == null || !st.hasMoreElements()) {
+                try {
+                    st = new StringTokenizer(br.readLine());
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            return st.nextToken();
+        }
+
+        public int nextInt() {
+            return Integer.parseInt(next());
+        }
+
+    }
+}
+

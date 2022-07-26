@@ -1,0 +1,371 @@
+#include <iostream>
+
+#include <vector>
+
+#include <set>
+
+#include <algorithm>
+
+using namespace std;
+
+#define int long long
+
+int prefix[100005];
+
+int znachenie[100005];
+
+int prefix_prefix[100005];
+
+int DO[400005];
+
+int vershina[400005];
+
+int znachenie_left[400005];
+
+int sum[400005];
+
+void build_tree(int root, int l, int r)
+
+{
+
+	if (l != r)
+
+	{
+
+		build_tree(root * 2, l, (r + l) / 2);
+
+		build_tree(root * 2 + 1, (r + l) / 2 + 1, r);
+
+		DO[root] = DO[root * 2] + DO[root * 2 + 1];
+
+	}
+
+	else
+
+	{
+
+		DO[root] = znachenie[l];
+
+	}
+
+	sum[root] = 0;
+
+	vershina[root] = -1;
+
+	znachenie_left[root] = 0;
+
+}
+
+
+
+void push_(int root, int l, int r)
+
+{
+
+	if (vershina[root] != -1)
+
+	{
+
+		znachenie_left[root * 2] = znachenie_left[root];
+
+		vershina[root * 2] = vershina[root];
+
+		vershina[root * 2 + 1] = vershina[root];
+
+		znachenie_left[root * 2 + 1] = znachenie_left[root];
+
+		DO[root * 2] = 0;
+
+		DO[root * 2 + 1] = 0;
+
+		vershina[root] = -1;
+
+		znachenie_left[root] = 0;
+
+	}
+
+}
+
+////////////////////////////////////////////////////////////////
+
+void set_value(int root, int l, int r, int l1, int r1, int add_first_number, int add_first_value)
+
+{
+
+	if (l1 > r || l > r1)                                        
+
+	{
+
+		return;
+
+	}
+
+	else
+
+	{
+
+		if (l1 == l && r1 == r)
+
+		{
+
+			DO[root] = 0;
+
+			znachenie_left[root] = add_first_value;
+
+			vershina[root] = add_first_number;
+
+		}
+
+		else
+
+		{
+
+			push_(root, l, r);
+
+			set_value(root * 2, l, (r + l) / 2, l1, min(r1, (l + r) / 2), add_first_number, add_first_value);
+
+			set_value(root * 2 + 1, (r + l) / 2 + 1, r, max(l1, (r + l) / 2 + 1), r1, add_first_number, add_first_value);
+
+			DO[root] = 0;
+
+			
+
+			if (vershina[root * 2] != -1)
+
+			{
+
+				
+
+				DO[root] += (prefix_prefix[(r + l) / 2 - 1]- prefix_prefix[l - 2]) + (znachenie_left[root * 2] - prefix_prefix[vershina[root * 2] - 1])* ((r + l) / 2 - l + 1) ;
+
+			}
+
+			if (vershina[root * 2 + 1] != -1)
+
+			{
+
+				DO[root] += (prefix_prefix[r - 1] - prefix_prefix[(r + l) / 2 - 1]) + (znachenie_left[root * 2 + 1] - prefix_prefix[vershina[root * 2 + 1] - 1]) * (r - (r + l) / 2);
+
+			}
+
+			DO[root] += DO[root * 2] + DO[root * 2 + 1];
+
+		}
+
+	}
+
+}
+
+//////////////////////////////////////////////////////////////////
+
+int find_sum(int root, int l, int r, int l1, int r1)
+
+{
+
+	if (l1 > r || l > r1)
+
+	{
+
+		return 0;
+
+	}
+
+	else
+
+	{
+
+		
+
+		if (l1 == l && r1 == r)
+
+		{
+
+			if (vershina[root] != -1)
+
+			{
+
+				return DO[root] + prefix_prefix[r - 1] + (znachenie_left[root] - prefix[vershina[root] - 1]) * (r - l + 1) - prefix_prefix[l - 2];
+
+			}
+
+			else
+
+			{
+
+				return DO[root];
+
+			}
+
+		}
+
+		else
+
+		{
+
+			push_(root, l, r);
+
+			DO[root] = 0;
+
+			int y = find_sum(root * 2, l, (r + l) / 2, l1, min(r1, (r + l) / 2)) + find_sum(root * 2 + 1, (r + l) / 2 + 1, r, max(l1, (r + l) / 2 + 1), r1);	
+
+			if(vershina[root * 2] != -1)
+
+			{
+
+
+
+				DO[root] += (prefix_prefix[(r + l) / 2 - 1] - prefix_prefix[l - 2]) + (znachenie_left[root * 2] - prefix[vershina[root * 2] - 1])* ((r + l) / 2 - l + 1);
+
+			}
+
+			if (vershina[root * 2 + 1] != -1)
+
+			{
+
+				DO[root] += (prefix_prefix[r - 1] - prefix_prefix[(r + l) / 2 - 1]) + (znachenie_left[root * 2 + 1] - prefix[vershina[root * 2 + 1] - 1]) * (r - (r + l) / 2);
+
+			}
+
+			DO[root] += DO[root * 2] + DO[root * 2 + 1];
+
+			return y;
+
+		
+
+		}
+
+	}
+
+}
+
+#define int int
+
+int main()
+
+{
+
+#define int long long
+
+	int n;
+
+	cin >> n;
+
+	prefix[0] = 0;
+
+	prefix_prefix[0] = 0;
+
+	for (int y = 0; y < n; y++)
+
+	{
+
+		int a;
+
+		cin >> a;
+
+		znachenie[y + 1] = a;
+
+	}
+
+	for (int h = 1; h < n; h++)
+
+	{
+
+		int o;
+
+		cin >> o;
+
+		prefix[h] = prefix[h - 1] + o;
+
+	
+
+	}
+
+	for (int y = 1; y < n; y++)
+
+	{
+
+		prefix_prefix[y] = prefix_prefix[y - 1] + prefix[y];
+
+	}
+
+	build_tree(1, 1, n);
+
+	int m;
+
+	cin >> m;
+
+	for (int r = 0; r < m; r++)
+
+	{
+
+		char k;
+
+		cin >> k;
+
+		if (k != '+')
+
+		{
+
+			int a, b;
+
+			cin >> a >> b;
+
+			cout << find_sum(1, 1, n, a, b) << endl;
+
+		}
+
+		else
+
+		{
+
+			int a, b;
+
+			cin >> a >> b;
+
+			int r = n;
+
+			int l = a;
+
+			int u = find_sum(1, 1, n, a, a);
+
+			while (l < r)
+
+			{
+
+			
+
+				int m = (r + l) / 2 + (r + l) % 2;
+
+				if (find_sum(1, 1, n, m, m) < b + prefix[m - 1] - prefix[a - 1] + u)
+
+				{
+
+				    l = m;
+
+				}
+
+				else
+
+				{
+
+					r = m - 1;
+
+				}
+
+			
+
+			}
+
+			
+
+				set_value(1, 1, n, a, l, a, b + u);
+
+		
+
+		}
+
+	
+
+	}
+
+}

@@ -1,0 +1,82 @@
+#include<bits/stdc++.h>
+
+using namespace std;
+
+typedef long long ll;
+
+#define maxn 510
+
+ll mod=998244353;
+
+int a[maxn][maxn],b[maxn][maxn];
+
+map<int,int> mp[maxn*2];
+
+int main()
+
+{
+
+	int n,m;cin>>n>>m;
+
+	for(int i=1;i<=n;i++)
+
+	{
+
+		for(int j=1;j<=m;j++)
+
+		{
+
+			cin>>a[i][j];
+
+			mp[i+j][a[i][j]]++;
+
+		}
+
+	}
+
+	int flag=1;
+
+	for(int i=1;i<=n;i++)
+
+	{
+
+		for(int j=1;j<=m;j++)
+
+		{
+
+			cin>>b[i][j];
+
+			if(mp[i+j][b[i][j]]<=0)flag=0;
+
+			mp[i+j][b[i][j]]--;
+
+		}
+
+	}
+
+	if(flag)
+
+	{
+
+		cout<<"YES"<<endl;
+
+	}
+
+	else
+
+	{
+
+		cout<<"NO"<<endl;
+
+	}
+
+    return 0;
+
+}
+
+
+
+
+
+
+

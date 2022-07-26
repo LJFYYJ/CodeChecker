@@ -1,0 +1,68 @@
+#include <iostream>
+#include <algorithm> 
+
+using namespace std; 
+
+
+int compare(int n,int m,long long int **a,long long int **b,int k)
+{
+ 
+ int l=0,c1=0,c2=0,i,j;
+ long long int x[n+m],y[n+m];
+ for(i=0;i<=k;i++)
+ {
+  j=k-i;
+  if(i<n && j<m)
+  {
+   x[c1++]=a[i][j];
+      y[c2++]=b[i][j];
+      l++;
+  }
+  
+ }  
+ 
+ sort(x,x+l);
+ sort(y,y+l);
+ for(i=0;i<l;i++)
+ {
+
+  if(x[i]!=y[i]) return 0;
+ }
+ return 1;
+ 
+
+}
+int main()
+{
+ int i,j;
+ int n,m;
+ cin>>n>>m;
+ long long int **a=new long long int*[n],**b=new long long int*[n];
+ for(i=0;i<n;i++)
+ {
+  a[i]=new long long int[m];
+  b[i]=new long long int[m];
+ }
+ for(i=0;i<n;i++)
+ {
+  for(j=0;j<m;j++)
+  {
+   cin>>a[i][j];
+  }
+ }
+  for(i=0;i<n;i++)
+ {
+  for(j=0;j<m;j++)
+  {
+   cin>>b[i][j];
+  }
+ }
+ for(i=0;i<n+m-1;i++)
+ {
+  if(compare(n,m,a,b,i)==0) {cout<<"NO"<<endl;return 0;};
+ }
+ cout<<"YES"<<endl;
+
+ return 0;
+}
+

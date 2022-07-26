@@ -1,0 +1,60 @@
+#include<bits/stdc++.h>
+
+using namespace std;
+
+
+
+int n, m, x;
+
+pair < int , int > ara[3000];
+
+
+
+int main()
+
+{
+
+    cin >> n;
+
+    for(int i = 1; i <= n; i++){
+
+
+
+        cin >> ara[i].first >> ara[i].second;
+
+
+
+    }
+
+    cin >> m;
+
+
+
+    for(int i = 1; i <= n; i++){
+
+
+
+        if(ara[i].first == m){
+
+            cout << n - i + 1 << endl;
+
+            return 0;
+
+        }
+
+        if(ara[i].first < m && ara[i].second >= m){
+
+            cout << n - i + 1 << endl;
+
+            return 0;
+
+        }
+
+
+
+    }
+
+    return 0;
+
+}
+

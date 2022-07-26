@@ -1,0 +1,148 @@
+#include<iostream>
+
+#include<algorithm>
+
+#include<cmath>
+
+#include<math.h>
+
+#include<iomanip>
+
+#include<string>
+
+#include<vector>
+
+#include<set>
+
+#include<map>
+
+#include<stack>
+
+#include<queue>
+
+#include<sstream>
+
+#include<bitset>
+
+#include<list>
+
+#include<cstring>
+
+#include<stdio.h>
+
+#include<math.h>
+
+#include<cmath>
+
+using namespace std;
+
+typedef long long int ll;
+
+typedef vector<ll>vl;
+
+typedef long double ld;
+
+#define all(v) ((v).begin()), ((v).end())
+
+#define boom main
+
+#define cn(n)  scanf("%d", &n)
+
+#define cnl(n)  scanf("%lld", &n)
+
+#define cnd(n)  scanf("%Lf", &n)
+
+#define F(i, a, b) for(int i=a; i<=b; i++)
+
+#define rep(i, n) for(int i=0; i<n; i++)
+
+#define Fill(ar, val) memset(ar, val, sizeof(ar))
+
+#define bit(n) (1<<(n))
+
+#define   fn           "\n"
+
+//#define PI  3.1415926
+
+void file()
+
+{
+
+    freopen("in.txt", "r", stdin);
+
+    freopen("out.txt", "w", stdout);
+
+}
+
+void Abdo()
+
+{
+
+    std::ios_base::sync_with_stdio(0);
+
+    cin.tie(NULL);
+
+    cout.tie(NULL);
+
+}
+
+int dx[] = {1,  1, -1, -1 };
+
+int dy[] = {1, -1, -1,  1 };
+
+const ld EPS = 1e-9, PI = 3.141592653589793238462643383279502884;
+
+const long long N = 1e3 + 5, M = 1e5 +5, OO = 0x3f3f3f3f, MOD = 1e9+7;
+
+double dis(double x1,double y1, double x2, double y2)
+
+{
+
+    return sqrt((x1-x2)*(x1-x2)+(y1-y2)*(y1-y2));
+
+}
+
+int boom(void)
+
+{
+
+    Abdo();
+
+   int n;
+
+   cin>>n;
+
+   vector<pair<int, int> >v;
+
+   rep(i ,n){
+
+   int x,y;
+
+   cin>>x>>y;
+
+   v.push_back({x,y});
+
+   }
+
+   sort(all(v));
+
+   int k;
+
+   cin>>k;
+
+   int ans = 0;
+
+   rep(i ,n){
+
+   if(k >= v[i].first && k <= v[i].second){
+
+      ans = n - i ;
+
+   }
+
+   }
+
+   cout<<ans;
+
+}
+

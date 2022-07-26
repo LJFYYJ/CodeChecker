@@ -1,0 +1,63 @@
+#include <bits/stdc++.h>
+
+
+
+using namespace std;
+
+
+
+#define int     long long
+
+#define N       (int)(1e5 + 7)
+
+#define MOD     (int)(1e9 + 7)
+
+#define INF     (int)(1e18)
+
+#define LG      (int)(20)
+
+
+
+void beforeMain() __attribute__((constructor));
+
+
+
+void beforeMain() {
+
+    ios::sync_with_stdio(false);
+
+    cin.tie(nullptr);
+
+    cout.tie(nullptr);
+
+    cout.setf(ios::fixed);
+
+    cout.precision(20);
+
+#ifndef ONLINE_JUDGE
+
+    freopen("input.txt", "r", stdin);
+
+    freopen("output.txt", "w", stdout);
+
+#endif
+
+}
+
+
+
+signed main() {
+
+    int n,k;
+
+    cin>>n>>k;
+
+    int ans=min(4*n-k,3*n+k-1);
+
+    if(n==1)
+
+        ans--;
+
+    cout<<ans;
+
+}

@@ -1,0 +1,85 @@
+#include <bits/stdc++.h>
+using namespace std;
+#define ll long long
+#define pb push_back
+#define mp make_pair
+#define MOD 1000000007  
+#include <ext/pb_ds/assoc_container.hpp> 
+#include <ext/pb_ds/tree_policy.hpp> 
+using namespace __gnu_pbds; 
+  
+#define ordered_set tree<ll, null_type,less<ll>, rb_tree_tag,tree_order_statistics_node_update> 
+//find_by_order(k) - k is the kth element of the set
+//order_of_key(k) - Number of elements striclty samller than k
+ll exp(ll a,ll b)
+{
+    if(b==0)
+        return 1;
+    ll ans=exp(a,b/2);
+    if(b%2==1)
+        return ((ans%MOD)*(ans%MOD)*(a%MOD))%MOD;
+    else if(b%2==0)
+        return ((ans%MOD)*(ans%MOD))%MOD;
+}
+int main()
+{
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    ll n,m;
+    cin>>n>>m;
+    vector<ll> v,w;
+    for(int i=0;i<n;i++)
+    {
+        ll a;
+        cin>>a;
+        v.pb(a);
+        w.pb(a);
+    }
+    ll me=v[n-1];
+    vector<ll>::iterator itr,itr1;
+    queue< pair<ll,pair<ll,ll> > > q;
+    for(int i=0;i<m;i++)
+    {
+        ll a,b;
+        cin>>a>>b;
+        q.push(mp(a,mp(b,-1)));
+    }
+    ll curr=q.size();
+    while(!q.empty())
+    {
+        pair<ll,pair<ll,ll> > temp;
+        temp=q.front();
+        //cout<<temp.first<<" "<<temp.second<<" "<<q.size()<<endl;
+        if(temp.second.second>=0)
+        {
+            ll curr=q.size();
+            if(temp.second.second==curr)
+                break;
+        }
+        temp.second.second=q.size();
+        q.pop();
+        
+        itr=find(v.begin(),v.end(),temp.first);
+        int pos=itr-v.begin();
+        ll m=*itr;
+        itr++;
+        int pos1=itr-v.begin();
+        ll n=*itr;
+
+        itr=find(w.begin(),w.end(),temp.first);
+        itr1=find(w.begin(),w.end(),temp.second.first);
+        if(itr-w.begin()>itr1-w.begin())
+            continue;
+        if(temp.second.first==n)
+        {
+            swap(v[pos],v[pos1]);
+        }
+        else if(temp.second.first!=n)
+        {
+            q.push(mp(temp.first,mp(temp.second.first,temp.second.second)));
+        }
+    }
+    itr=find(v.begin(),v.end(),me);
+    ll pos=itr-v.begin()+1;
+    cout<<n-pos<<endl;
+}

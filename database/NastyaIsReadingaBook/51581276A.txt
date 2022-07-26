@@ -1,0 +1,52 @@
+#include<bits/stdc++.h>
+
+using namespace std;
+
+int a[105];
+
+int main()
+
+{
+
+    int k,n,b,read;
+
+    scanf("%d",&n);
+
+    for(int i=1;i<=n;i++)
+
+    {
+
+        scanf("%d %d",&b,&a[i]);
+
+    }
+
+    scanf("%d",&k);
+
+    read=0;
+
+    for(int i=1;i<=n;i++)
+
+    {
+
+        if(k>a[i])
+
+        {
+
+            read++;
+
+        }
+
+        else if(k<=a[i])
+
+        {
+
+            break;
+
+        }
+
+    }
+
+    printf("%d",n-read);
+
+}
+

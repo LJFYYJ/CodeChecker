@@ -1,0 +1,71 @@
+#include<bits/stdc++.h>
+
+using namespace std;
+
+unordered_multiset<int> map1[1001];
+
+unordered_multiset<int> map2[1001];
+
+int main() {
+
+  int n,m,tmp;
+
+  cin>>n>>m;
+
+  for(int i=0; i<n; i++){
+
+    for(int j=0; j<m; j++){
+
+      cin>>tmp;
+
+      map1[i+j].insert(tmp);
+
+    }
+
+  }
+
+
+
+  for(int i=0; i<n; i++){
+
+    for(int j=0; j<m; j++){
+
+      cin>>tmp; 
+
+      map2[i+j].insert(tmp);
+
+    }
+
+  }
+
+
+
+  bool ans = true;
+
+
+
+  for(int i=0; i<=(n+m); i++) {
+
+    if(map1[i] != map2[i]){
+
+      ans = false;
+
+      break;
+
+    }
+
+  }
+
+  
+
+  if(ans)
+
+    cout<<"YES";
+
+  else
+
+    cout<<"NO";
+
+
+
+}

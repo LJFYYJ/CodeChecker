@@ -1,0 +1,28 @@
+#include <bits/stdc++.h>
+
+#define ll long long
+
+#define MOD 10000007
+
+using namespace std;
+
+int main() {
+
+    int n,k;
+
+    cin>>n>>k;
+
+    int st[n+1];
+
+    if(k==1 || k==n){
+
+        cout<<(n-2)*3+6;
+
+    }else{
+
+        cout<<(k-2)*3+6+min(k-1,n-k)+(n-k)*3;
+
+    }
+
+}
+

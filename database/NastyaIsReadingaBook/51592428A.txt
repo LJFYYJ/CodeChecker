@@ -1,0 +1,67 @@
+#include <iostream>
+
+using namespace std;
+
+int a[101], n, k, i, j, st, dr, mij, m, r, ok;
+
+int main()
+
+{
+
+    cin>>n;
+
+    dr=n;
+
+    for (k=1;k<=n;k++) {
+
+        cin>>i>>j;
+
+        a[k]=j;
+
+    }
+
+    a[0]=1;
+
+    cin>>m;
+
+    ok=1;
+
+    while (st<=dr&&ok) {
+
+        mij=(st+dr)/2;
+
+        if (a[mij]==m) {
+
+            st=mij;
+
+            dr=mij;
+
+            ok=0;
+
+        }
+
+        else if (a[mij]<m&&a[mij+1]>m) {
+
+            st=mij+1;
+
+            dr=mij+1;
+
+            mij++;
+
+            ok=0;
+
+        }
+
+        else if (a[mij]>m) dr=mij-1;
+
+        else st=mij+1;
+
+    }
+
+    cout<<n-st+1;
+
+   // afisare (n,a);
+
+    return 0;
+
+}

@@ -1,0 +1,26 @@
+from bisect import bisect_left
+
+
+
+chapters = int(input())
+
+
+
+pages = []
+
+for _ in range(chapters):
+
+    l, r = map(int, input().split())
+
+    pages.append(r)
+
+
+
+k = int(input())
+
+
+
+chapter = bisect_left(pages, k)
+
+print(chapters - chapter)
+

@@ -1,0 +1,41 @@
+#include <iostream>
+
+using namespace std;
+
+int main(){
+
+    int chapters, page[100], mark, ans;
+
+    cin >> chapters;
+
+    for(int i=0; i<chapters; i++){
+
+        cin >> page[2*i] >> page[2*i+1];
+
+    }
+
+    cin >> mark;
+
+    // for(int start=0, end=chapters/2; i<chapters; ){
+
+    //     if(mark<page[i]) end=i=chapters/2
+
+    // }
+
+    for(int i=0; i<chapters; i++){
+
+        if(mark<=page[2*i+1]){
+
+            ans=chapters-i;
+
+            break;
+
+        }
+
+    }
+
+    cout << ans;
+
+    
+
+}

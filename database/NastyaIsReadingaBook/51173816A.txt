@@ -1,0 +1,62 @@
+#include <bits/stdc++.h>
+
+
+
+#define ll		long long
+
+#define vi		vector<long long int>
+
+#define vs		vector<string>
+
+#define pb		push_back
+
+#define lg		1000000007
+
+using namespace std;
+
+
+
+int main()
+
+{
+
+	ll n;
+
+	cin >> n;
+
+	ll arr[n], brr[n];
+
+	for(ll i = 0; i < n; i++)
+
+	{
+
+		cin >> arr[i] >> brr[i];
+
+	}
+
+	ll q, p= n;
+
+	cin >> q;
+
+	for(ll i = 0; i < n; i++ )
+
+	{
+
+		if(brr[i] >= q)
+
+		{
+
+			p = i;
+
+			break;
+
+		}
+
+	}
+
+	cout << n-p;
+
+}
+
+
+

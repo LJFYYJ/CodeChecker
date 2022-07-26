@@ -1,0 +1,218 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+
+
+#define ll long long
+
+#define pb push_back
+
+#define ff first
+
+#define ss second
+
+#define endl "\n"
+
+#define gcd __gcd
+
+#define ull unsigned long long
+
+#define bits(x) __builtin_popcount(x)
+
+#define print(x) for(auto el: x) cout<<el<<" ";cout<<endl
+
+#define sswap(a,b) {a=a^b;b=a^b;a=a^b;}
+
+#define swap(a,b) {auto temp=a; a=b; b=temp;}
+
+
+
+
+
+
+
+
+
+#define pi  3.1415926358
+
+
+
+
+
+const int MAX= int(1e9)+1;
+
+const int MOD =int(1e9)+7;
+
+const ll INF = 1999999999999999997; 
+
+const int inf= INT_MAX;
+
+const int SIZE = int( 1e6)+5;
+
+
+
+#define trace(arr) for(auto i: arr) cerr<<i<<" "
+
+#define trace1(x)                cerr<<#x<<": "<<x<<endl
+
+#define trace2(x, y)             cerr<<#x<<": "<<x<<" | "<<#y<<": "<<y<<endl
+
+#define trace3(x, y, z)          cerr<<#x<<":" <<x<<" | "<<#y<<": "<<y<<" | "<<#z<<": "<<z<<endl
+
+#define trace4(a, b, c, d)       cerr<<#a<<": "<<a<<" | "<<#b<<": "<<b<<" | "<<#c<<": "<<c<<" | "<<#d<<": "<<d<<endl
+
+#define trace5(a, b, c, d, e)    cerr<<#a<<": "<<a<<" | "<<#b<<": "<<b<<" | "<<#c<<": "<<c<<" | "<<#d<<": "<<d<<" | "<<#e<< ": "<<e<<endl
+
+#define trace6(a, b, c, d, e, f) cerr<<#a<<": "<<a<<" | "<<#b<<": "<<b<<" | "<<#c<<": "<<c<<" | "<<#d<<": "<<d<<" | "<<#e<< ": "<<e<<" | "<<#f<<": "<<f<<endl
+
+
+
+
+
+
+
+
+
+
+
+
+
+int main()
+
+{
+
+	ios_base::sync_with_stdio(false);
+
+	cin.tie(NULL); cout.tie(NULL);
+
+	
+
+	#ifndef ONLINE_JUDGE
+
+		freopen("in.txt","r",stdin);
+
+		freopen("out.txt","w",stdout);
+
+	#endif
+
+
+
+	int n,m; cin>>n>>m;
+
+
+
+
+
+	ll arr[n][m];
+
+	for(int i=0;i<n;i++){
+
+		for(int j=0;j<m;j++){
+
+			cin>>arr[i][j];
+
+		}
+
+	}
+
+
+
+
+
+	ll b[n][m];
+
+	bool flag=true;
+
+
+
+	for(int i=0;i<n;i++){
+
+		for(int j=0;j<m;j++){
+
+			cin>>b[i][j];
+
+		}
+
+	}
+
+
+
+
+
+	 map<ll,int> M;
+
+
+
+	 for(int s=0;s<=n+m-2 && flag ;s++){
+
+
+
+	 	for(int i=0,j=s-i; (i<=s && i<n && j>=0)&& flag ;i++,j--){
+
+
+
+	 		if(j<m){
+
+
+
+	 			//cout<<i<<" "<<j<<" ";
+
+	 			M[arr[i][j]]++;
+
+	 			M[b[i][j]]--;
+
+	 		}
+
+	 		
+
+
+
+	 	}
+
+//	 	cout<<endl;
+
+
+
+	 	for(auto i: M){
+
+	 		if(M[i.ff]){
+
+	 			flag=false;
+
+	 			break;
+
+	 		}
+
+	 	}
+
+	 }
+
+
+
+
+
+
+
+	if(flag){
+
+		cout<<"YES\n";
+
+	}
+
+	else{
+
+		cout<<"NO\n";
+
+	}
+
+
+
+
+
+	return 0;
+
+}
+
+
+

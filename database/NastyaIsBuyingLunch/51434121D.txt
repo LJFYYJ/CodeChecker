@@ -1,0 +1,125 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+#define ll long long
+
+#define pb push_back
+
+#define pii pair<int,int>
+
+#define pll pair<long long,long long>
+
+#define all(v) v.begin(),v.end()
+
+#define inc(a,n) sort(a,a+n)
+
+#define dec(a,n) sort(a,a+n,greater<int>() )
+
+#define f(i,n) for(int i=0;i<n;i++)
+
+#define fr(i,n) for(int i=n-1;i>=0;i--)
+
+#define rep(i,a,b) for(int i=a;i<=b;i++)
+
+#define repr(i,a,b) for(int i=a;i>=b;i--)
+
+#define F first
+
+#define S second
+
+#define M 1000000007
+
+ 
+
+/* int x[]={-1,-1,0,1,1,1,0,-1};
+
+int y[]={0,1,1,1,0,-1,-1,-1};
+
+*/
+
+/* int x[]={-1,0,1,0};
+
+int y[]={0,1,0,-1};
+
+*/
+
+const int N=3e5+5;
+
+vector<ll> g[N];
+
+int main() {
+
+	ios::sync_with_stdio(0);
+
+	cin.tie(0);cout.tie(0);
+
+	int t=1;
+
+//	cin>>t;
+
+	while(t--){
+
+		ll n,m;
+
+		cin>>n>>m;
+
+		ll i,j;
+
+		vector<ll> p(n);
+
+		rep(i,0,n-1){
+
+			cin>>p[i];
+
+		}
+
+		ll x,y,ans=0;
+
+		rep(i,0,m-1){
+
+			cin>>x>>y;
+
+			g[x].pb(y);
+
+		}
+
+		ll cnt=1;
+
+		ll a[n+1]={};
+
+		a[p[n-1]]=1;
+
+		for(i=n-2;i>=0;i--){
+
+			ll c=0;
+
+			for(auto j:g[p[i]]){
+
+				if(a[j]==1)
+
+				c++;
+
+			}
+
+			if(c==cnt)
+
+			ans++;
+
+			else{
+
+				cnt++;
+
+				a[p[i]]=1;
+
+			}
+
+		}
+
+		cout<<ans<<'\n';
+
+	}
+
+	return 0;
+
+}

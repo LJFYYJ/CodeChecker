@@ -1,0 +1,90 @@
+#include<bits/stdc++.h>
+
+using namespace std;
+
+#define ll long long
+
+#define MOD 1000000007
+
+#define INV2 500000004
+
+#define INV6 166666668
+
+#define pb push_back
+
+#define fi first
+
+#define se second
+
+#define mp make_pair
+
+int main()
+
+{
+
+	//ios_base::sync_with_stdio(false);
+
+	//cin.tie(NULL);
+
+	ll t,i,j;
+
+	ll n;
+
+	cin>>n;
+
+	set<ll> s;
+
+	set<ll> :: iterator it;
+
+	map<ll,ll> mp;
+
+	for(i=0;i<n;i++)
+
+    {
+
+        cin>>t>>j;
+
+        mp[t]=j;
+
+        s.insert(t);
+
+    }
+
+    ll k;
+
+    cin>>k;
+
+    it=s.upper_bound(k);
+
+    it--;
+
+    //cout<<*it;
+
+    ll cnt=0;
+
+    t=*it;
+
+    for(;it!=s.end();it++)
+
+        cnt++;
+
+   // t=distance(it,s.begin());
+
+    //cout<<t;
+
+
+
+    //cout<<t;
+
+   // cout<<"abba"<<mp[t];
+
+    if(mp[t]>=k)
+
+        cout<<cnt;
+
+    else
+
+        cout<<cnt-1;
+
+}
+

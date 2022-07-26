@@ -1,0 +1,77 @@
+
+
+
+
+fun solve_from_stdin () {
+
+    fun rlsm_int (): List<Int> {
+
+        return readLine()!!.split(' ').map(String::toInt)
+
+    }
+
+
+
+    val (n, m) = rlsm_int()
+
+    val p = rlsm_int()
+
+    val uv = HashSet<Pair<Int, Int>>()
+
+    for (i in 1..m) {
+
+        val (x, y) = rlsm_int()
+
+        uv.add(Pair(x, y))
+
+    }
+
+
+
+    solve(n, m, p, uv)
+
+}
+
+
+
+fun solve (n: Int, m: Int, p: List<Int>, uv: HashSet<Pair<Int, Int>>) {
+
+    val passed = HashSet<Int>()
+
+
+
+    for (i in n-2 downTo 0) {
+
+        val e = p[i]
+
+        var passable = true
+
+        for (j in i+1 until n) {
+
+            if (!(p[j] in passed || Pair(e, p[j]) in uv)) {
+
+                passable = false
+
+                break
+
+            }
+
+        }
+
+        if (passable)
+
+            passed.add(e)
+
+    }
+
+    print(passed.size)
+
+}
+
+
+
+fun main (args: Array<String>) {
+
+    solve_from_stdin()
+
+}

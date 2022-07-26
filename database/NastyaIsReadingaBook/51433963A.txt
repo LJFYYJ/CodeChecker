@@ -1,0 +1,38 @@
+#include<bits/stdc++.h>
+
+#define ll long long
+
+using namespace std;
+
+int main()
+
+{
+
+         ll n;
+
+         cin>>n;
+
+         ll temp=n;
+
+         vector<ll>v;
+
+         while(n--)
+
+         {
+
+                  ll l,r;
+
+                  cin>>l>>r;
+
+                  v.push_back(r);
+
+         }
+
+         cin>>n;
+
+         auto p=lower_bound(v.begin(),v.end(),n);
+
+         cout<<temp-(p-v.begin());
+
+}
+

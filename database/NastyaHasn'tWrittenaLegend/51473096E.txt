@@ -1,0 +1,277 @@
+//You are the SEMICOLON to My STATEMENTS;
+
+/* 
+
+ ____       _                      _ ____   __   
+
+|  _ \ __ _| |___      ____ _ _ __(_)___ \ / /_  
+
+| |_) / _` | __\ \ /\ / / _` | '__| | __) | '_ \ 
+
+|  __/ (_| | |_ \ V  V / (_| | |  | |/ __/| (_) |
+
+|_|   \__,_|\__| \_/\_/ \__,_|_|  |_|_____|\___/ 
+
+*/
+
+#include<bits/stdc++.h>
+
+#define int          long long
+
+#define pb          push_back
+
+#define ppb         pop_back
+
+#define    endl        '\n'
+
+#define mii         map<int int,int int>
+
+#define pii         pair<int,int>
+
+#define vi          vector<int>
+
+#define all(a)      (a).begin(),(a).end()
+
+#define F           first
+
+#define S           second
+
+#define sz(x)       (int)x.size()
+
+#define heint        1000000007
+
+#define MN          -1100000000000000000ll
+
+#define lbnd        lower_bound
+
+#define ubnd        upper_bound
+
+#define bs          binary_search
+
+#define mp          make_pair
+
+#define INF         (1ll<<60)
+
+#define rep(i,a,b)  for(int i=a;i<=b;i++)
+
+#define rrep(i,a,b)  for(int i=a;i>=b;i--)
+
+#define present(c,x) ((c).find(x) != (c).end())
+
+#define cpresent(c,x) (find(aint(c),x) != (c).end())
+
+#define what_is(x)  cerr << #x << " is " << x << endl;
+
+#define ios ios_base::sync_with_stdio(false);cin.tie(0);cout.tie(0);
+
+using namespace std;
+
+const int N=100005;
+
+int n,q;
+
+int a[N],k[N],lazy[4*N];
+
+int val[N],prek[N],presum[N];
+
+pii seg[4*N];
+
+void build(int node,int start,int end){
+
+    if(start==end){
+
+        seg[node]={val[start],val[start]};
+
+        return;
+
+    }
+
+    int mid=(start+end)>>1;
+
+    build(node<<1,start,mid);
+
+    build(node<<1|1,mid+1,end);
+
+    seg[node].F=max(seg[node<<1].F,seg[node<<1|1].F);
+
+    seg[node].S=(seg[node<<1].S+seg[node<<1|1].S);
+
+}
+
+void update(int node,int start,int end,int l,int r,int val){
+
+    if(lazy[node]!=MN){
+
+    	seg[node].F=lazy[node];
+
+        seg[node].S=(end-start+1)*lazy[node];
+
+        if(start!=end){
+
+            lazy[node<<1]=lazy[node];
+
+            lazy[node<<1|1]=lazy[node];
+
+        }
+
+        lazy[node]=MN;
+
+    }
+
+    if(start>end || start>r || end<l) return;
+
+    if(l<=start && end<=r){
+
+        seg[node].F=val;
+
+        seg[node].S=(end-start+1)*val;
+
+        if(start!=end){
+
+            lazy[node<<1]=val;
+
+            lazy[node<<1|1]=val;
+
+        }
+
+        return;
+
+    }
+
+    int mid=(start+end)>>1;
+
+    update(node<<1,start,mid,l,r,val);
+
+    update(node<<1|1,mid+1,end,l,r,val);
+
+    seg[node].F=max(seg[node<<1].F,seg[node<<1|1].F);
+
+    seg[node].S=seg[node<<1].S+seg[node<<1|1].S;
+
+}
+
+pii query(int node,int start,int end,int l,int r){
+
+    if(start>end || start>r || end<l) return {MN,0};
+
+    if(lazy[node]!=MN){
+
+        seg[node].S=(end-start+1)*lazy[node];
+
+        seg[node].F=lazy[node];
+
+        if(start!=end){
+
+            lazy[node<<1]=lazy[node];
+
+            lazy[node<<1|1]=lazy[node];
+
+        }
+
+        lazy[node]=MN;
+
+    }
+
+    if(start>=l && end<=r) return seg[node];
+
+    int mid=(start+end)>>1;
+
+    pii q1=query(node<<1,start,mid,l,r);
+
+    pii q2=query(node<<1|1,mid+1,end,l,r);
+
+    return {max(q1.F,q2.F),q1.S+q2.S};
+
+}
+
+void solve(){
+
+	cin>>n;
+
+	rep(i,0,4*n) lazy[i]=MN;
+
+	rep(i,1,n) cin>>a[i];
+
+	rep(i,1,n-1) cin>>k[i];
+
+	rep(i,1,n){
+
+		val[i]=a[i]-prek[i-1];
+
+		prek[i]=prek[i-1]+k[i];
+
+		presum[i]=presum[i-1]+prek[i-1];
+
+	}
+
+	build(1,1,n);
+
+	cin>>q;
+
+	while(q--){
+
+		char ch;
+
+		cin>>ch;
+
+		if(ch=='+'){
+
+			int pos,x;
+
+			cin>>pos>>x;
+
+			int w=query(1,1,n,pos,pos).S+x;
+
+			int lo=pos,hi=n+1;
+
+			while(hi-lo>1){
+
+				int mid=(lo+hi)/2;
+
+				if(query(1,1,n,pos,mid).F>=w) hi=mid;
+
+				else lo=mid;
+
+			}
+
+			update(1,1,n,pos,lo,w);
+
+		}
+
+		else{
+
+			int l,r;
+
+			cin>>l>>r;
+
+			pii w=query(1,1,n,l,r);
+
+			cout<<w.S+presum[r]-presum[l-1]<<endl;
+
+		}
+
+	}
+
+
+
+}
+
+signed main()
+
+{
+
+    ios
+
+    int TESTS=1;
+
+   // cin>>TESTS;
+
+    while(TESTS--){
+
+        solve();
+
+    }
+
+    return 0;
+
+}

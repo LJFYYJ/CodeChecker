@@ -1,0 +1,112 @@
+#include <bits/stdc++.h>
+
+
+
+using namespace std;
+
+
+
+int main()
+
+{
+
+    ios::sync_with_stdio(false), cin.tie(0);
+
+    int n, m;
+
+    cin >> n >> m;
+
+    vector<vector<int> > c1(n, vector<int>(m, 0));
+
+    auto c2 = c1;
+
+    for(int i = 0; i < n; i ++) {
+
+        for(int j = 0; j < m; j ++) {
+
+            cin >> c1[i][j];
+
+        }
+
+    }
+
+    for(int i = 0; i < n; i ++) {
+
+        for(int j = 0; j < m; j ++) {
+
+            cin >> c2[i][j];
+
+        }
+
+    }
+
+    bool fg = 1;
+
+    for(int i = 0; i < m; i ++) {
+
+        vector<int> t1, t2;
+
+        int x = i, y = 0;
+
+        while(x >= 0 && y < n) {
+
+            t1.push_back(c1[x][y]);
+
+            t2.push_back(c2[x][y]);
+
+            x --, y ++;
+
+        }
+
+        sort(begin(t1), end(t1));
+
+        sort(begin(t2), end(t2));
+
+        for(int j = 0; j < t1.size(); j ++) fg &= (t1[j] == t2[j]);
+
+        if(!fg) break;
+
+    }
+
+    if(!fg) {
+
+        cout << "NO\n";
+
+        return 0;
+
+    }
+
+    for(int i = 1; i < n; i ++) {
+
+        int x = m - 1, y = i;
+
+        vector<int> t1, t2;
+
+        while(x >= 0 && y < n) {
+
+            t1.push_back(c1[x][y]);
+
+            t2.push_back(c2[x][y]);
+
+            x --, y ++;
+
+        }
+
+        sort(begin(t1), end(t1));
+
+        sort(begin(t2), end(t2));
+
+        for(int j = 0; j < t1.size(); j ++) fg &= (t1[j] == t2[j]);
+
+        if(!fg) break;
+
+    }
+
+    if(fg) cout << "YES\n";
+
+    else cout << "NO\n";
+
+    return 0;
+
+}
+

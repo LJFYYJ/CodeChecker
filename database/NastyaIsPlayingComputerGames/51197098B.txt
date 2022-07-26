@@ -1,0 +1,102 @@
+#include<bits/stdc++.h>
+
+#define all(p) p.begin(),p.end()
+
+#define mem(p, v) memset(p, v, sizeof(p))
+
+#define sz(c) (int)c.size()
+
+#define pb(x) push_back(x)
+
+#define ll long long
+
+#define nl "\n"
+
+using namespace std;
+
+
+
+typedef vector< int > vi;
+
+int main()
+
+{
+
+    ios::sync_with_stdio(false); cin.tie(0); cout.tie(NULL);
+
+    int k,n,ans  = 2;
+
+    cin>>n>>k;
+
+    int mid = n/2;
+
+   if(k==1||k == n)
+
+	{
+
+		ans += 3*(n-2);
+
+		ans +=4;
+
+		
+
+	}
+
+    else if(k<=mid&&k!=1)
+
+    {
+
+    	for(int i =k-1,j = 2; i>0;i--)
+
+	    {
+
+	    	ans++;
+
+	    	ans += (j+1);
+
+	    	j = 1;
+
+		}
+
+		ans += k-1;
+
+		int re = n-k;
+
+		ans += (re*3);
+
+		//cout<<"jhdjhgf";
+
+	}
+
+	else if(k>=mid&&k!=n)
+
+    {
+
+    	for(int i =k+1,j = 2; i<=n;i++)
+
+	    {
+
+	    	ans++;
+
+	    	ans += (j+1);
+
+	    	j = 1;
+
+		}
+
+		ans += n-k;
+
+		int re = k-1;
+
+		ans += (re*3);
+
+	}
+
+	
+
+	cout<<ans<<nl;
+
+    return 0;
+
+}
+

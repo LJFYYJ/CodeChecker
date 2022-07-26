@@ -1,0 +1,120 @@
+#include <iostream>
+#include <cstdio>
+#include <vector>
+#include <cmath>
+#include <cstring>
+#include <numeric>
+#include <algorithm>
+#include <functional>
+#include <array>
+#include <map>
+#include <queue>
+#include <limits.h>
+#include <set>
+#include <stack>
+#include <random>
+#include <complex>
+#include <unordered_map>
+#define rep(i,s,n) for(int i = (s); (n) > i; i++)
+#define REP(i,n) rep(i,0,n)
+#define RANGE(x,a,b) ((a) <= (x) && (x) < (b))
+#define DUPLE(a,b,c,d) (RANGE(a,c,d) || RANGE(b,c,d) || RANGE(c,a,b) || RANGE(d,a,b))
+#define INCLU(a,b,c,d) (RANGE(a,c,d) && (b,c,d))
+#define PW(x) ((x)*(x))
+#define ALL(x) (x).begin(), (x).end()
+#define RALL(x) (x).rbegin(), (x).rend()
+#define MODU 1000000007LL
+#define bitcheck(a,b)   ((a >> b) & 1)
+#define bitset(a,b)      ( a |= (1 << b))
+#define bitunset(a,b)    (a &= ~(1 << b))
+#define MP(a,b) make_pair((a),(b))
+#define Manh(a,b) (abs((a).first-(b).first) + abs((a).second - ((b).second))
+#define pritnf printf
+#define scnaf scanf
+#define itn int
+#define PI 3.141592653589
+
+
+#define izryt bool
+using namespace std;
+typedef long long ll;
+typedef pair<int, int> pii;
+typedef pair<ll, ll> pll;
+template<typename A, size_t N, typename T>
+void Fill(A(&array)[N], const T &val) {
+	std::fill((T*)array, (T*)(array + N), val);
+}
+pll Dir[8] = { //移動
+	{ 0 ,1 },{ -1 ,0 },{ 1 ,0 },{ 0 ,-1 },
+	{ 1 ,1 },{ 1 ,-1 },{ -1 ,1 },{ -1 ,-1 }
+};
+
+//[a, b)
+#define Getsum(ar, a,b) (ar[b] - ar[a])
+#define INF 10000000000000000LL
+
+struct Edge {
+	ll from, to;
+	ll w;
+};
+
+
+class Loli {
+	string str;
+	vector<int> hash, pw;
+	int mod = 1000000007, base = 1007;
+	int len;
+public:
+	Loli(string st) : hash(st.length() + 1), pw(st.length() + 1), str(st), len(str.length()) {
+
+
+		hash[0] = 0, pw[0] = 1;
+
+		rep(i, 1, len + 1) {
+			pw[i] = ((ll)pw[i - 1] * base) % mod;
+			hash[i] = ((ll)hash[i - 1] * base + (ll)str[i - 1]) % mod;
+		}
+	}
+
+	inline int gethash(int l, int r) {//半開
+		return  (hash[r] - (ll)hash[l] * pw[r - l] % mod + mod) % mod;
+	}
+};
+
+
+signed main(void) {
+
+	int n, m;
+	cin >> n >> m;
+
+	vector<int> p(n);
+
+	map<int, vector<int>> uv, vu;
+	REP(i, n) {
+		scanf("%d", &p[i]);
+	}
+	REP(i, m) {
+		int a, b;
+		scanf("%d %d", &a, &b);
+		uv[a].push_back(b);
+		vu[b].push_back(a);
+	}
+
+	int ans = 0;
+
+	int cou[300001] = {};
+	int sum = 0;
+	for (int i = n-1; 0 <= i; i--) {
+
+		if (i != n-1 && cou[p[i]] == sum)
+			ans++;
+		else {
+			for (auto itr : vu[p[i]]) {
+				cou[itr]++;
+			}
+			sum++;
+		}
+	}
+	cout << ans << endl;
+	return 0;
+}

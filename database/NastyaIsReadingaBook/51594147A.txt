@@ -1,0 +1,62 @@
+#include <iostream>
+
+using namespace std;
+
+int a[101], n, k, i, j, st, dr, mijl, m, r, ok, cn;
+
+int main()
+
+{
+
+    cin>>n;
+
+    cn=n;
+
+    dr=n*2;
+
+    i=0;
+
+    while(cn>0)
+
+    {
+
+        i++;
+
+        cin>>j;
+
+        a[i]=j;
+
+        i++;
+
+        cin>>j;
+
+        a[i]=j;
+
+        cn--;
+
+    }
+
+    cin>>m;
+
+    st=1;
+
+    while(st<dr)
+
+    {
+
+        mijl=(st+dr)/2;
+
+        if(m>a[mijl]) st=mijl+1;
+
+        else dr=mijl;
+
+    }
+
+    cout<<mijl/2;
+
+
+
+    return 0;
+
+}
+

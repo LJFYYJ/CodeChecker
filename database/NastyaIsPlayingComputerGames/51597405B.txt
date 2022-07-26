@@ -1,0 +1,5 @@
+N, K = map(int, raw_input().strip().split())
+
+
+
+print N + (N + 1) + (N - 1) + min(K - 1, N - K)

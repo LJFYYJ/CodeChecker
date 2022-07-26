@@ -1,0 +1,56 @@
+#include <iostream>
+
+
+
+using namespace std;
+
+
+
+int num;
+
+    int n;
+
+
+
+void rez(int t){
+
+    if (t>0) {
+
+        int a,b;
+
+        cin >> a >> b;
+
+        rez(t-1);
+
+        if (num<=b&&num>=a){
+
+            cout << t;
+
+        }
+
+        
+
+    } else {
+
+        cin>>num;
+
+    }
+
+    
+
+}
+
+
+
+int main()
+
+{
+
+    cin >> n;
+
+    rez(n);
+
+    return 0;
+
+}
+

@@ -1,0 +1,111 @@
+from typing import List, Set, Tuple
+
+import random
+
+
+
+def solve(n, m, p: List, uv: Set[Tuple]):
+
+    passed = [False] * (n+1)
+
+    passed_count = 0
+
+    for i in range(n-2, -1, -1):
+
+        e = p[i]
+
+        passable = True
+
+        for j in range(i+1, n):
+
+            if not (passed[p[j]] or (e, p[j]) in uv):
+
+                passable = False
+
+                break
+
+        if passable:
+
+            passed[e] = True
+
+            passed_count += 1
+
+    print(passed_count)
+
+
+
+def solve_old(n, m, p: List, uv: Set[Tuple]):
+
+    passed = set()
+
+    for i in range(n-2, -1, -1):
+
+        e = p[i]
+
+        passable = True
+
+        for j in range(i+1, len(p)):
+
+            if not (p[j] in passed or (e, p[j]) in uv):
+
+                passable = False
+
+                break
+
+        if passable:
+
+            passed.add(e)
+
+    print(len(passed))
+
+
+
+def solve_from_stdin():
+
+    n, m = map(int, input().split())
+
+    p = list(map(int, input().split()))
+
+    uv = set()
+
+    for _ in range(m):
+
+        uv.add(tuple(map(int, input().split())))
+
+
+
+    solve(n, m, p, uv)
+
+
+
+def solve_test(n, m):
+
+    p = list(range(1, n+1))
+
+    uv = set()
+
+    while len(uv) < m:
+
+        x = random.randrange(1, n+1)
+
+        y = random.randrange(1, n+1)
+
+        while x == y:
+
+            y = random.randrange(1, n+1)
+
+        uv.add((x, y))
+
+
+
+    # print(n, m)
+
+    # print(*p)
+
+    # print(*uv, sep='\n')
+
+    solve(n, m, p, uv)
+
+
+
+solve_test(300000, 500000)

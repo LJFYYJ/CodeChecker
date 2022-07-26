@@ -1,0 +1,88 @@
+#include <algorithm>
+#include <cassert>
+#include <exception>
+#include <functional>
+#include <iostream>
+#include <iterator>
+#include <map>
+#include <numeric>
+#include <set>
+#include <string>
+#include <unordered_map>
+#include <unordered_set>
+#include <vector>
+
+#define forn(k, n) for (int k=0; k<(n); ++k)
+#define all(c) begin(c), end(c)
+
+template <class C>
+inline void log_c(const C& c)
+{
+#ifdef LOCAL_PROJECT
+	std::copy(std::begin(c), std::end(c), std::ostream_iterator<typename C::value_type>(std::clog, " "));
+	std::clog << std::endl;
+#endif
+}
+
+template <class C>
+inline int sz(const C& c)
+{
+	return static_cast<int>(c.size());
+}
+
+
+using namespace std;
+
+using num = int32_t;
+
+const std::string eol = "\n";
+
+
+int main()
+{
+	std::ios_base::sync_with_stdio(false);
+	cin.tie(nullptr);
+
+	int n, m;
+	cin >> n >> m;
+
+	vector<int> p(n);
+	forn (k, n) { cin >> p.at(k); --p.at(k); }
+
+	vector<set<int>> e(n);
+	set<int> g;
+	forn (k, m)
+	{
+		int u, v;
+		cin >> u >> v;
+		--u; --v;
+		e.at(u).insert(v);
+
+		if (v == p.back()) g.insert(u);
+	}
+
+	int cnt = 0;
+	vector<int> t;
+	t.reserve(n);
+
+	for (int k = n - 2; k >= 0; --k)
+	{
+		int pk = p.at(k);
+		if (g.find(pk) != g.end() && all_of(all(t), [&e, pk](int v){ return e.at(pk).find(v) != e.at(pk).end(); }))
+		{
+			++cnt;
+		}
+		else
+		{
+			t.push_back(k);
+		}
+
+		//log_c(t);
+	}
+
+	cout << cnt << endl;
+
+	return 0;
+}
+
+

@@ -1,0 +1,51 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+typedef long long ll;
+
+ll choose(ll n,ll k);
+bool isprime(ll n);
+ll power(ll x,ll y,ll p);
+
+int main()
+{
+    int n,k; cin>>n>>k;
+    int ans = 3*n-1; ans+= max(1,(k-1));
+    if(n!=2)
+    {
+      ans+=(k-1);
+    }
+    cout<<ans;
+  return 0;
+}
+
+ll choose(ll n,ll k)
+{
+  if(k==0)
+    return 1;
+  return (n* choose(n-1,k-1))/k;
+}
+
+bool isprime(ll n)
+{
+  for(ll i=2;i*i<=n;i++)
+  {
+    if(n%i==0)
+      return false;
+  }
+  return true;
+}
+
+ll power(ll x,ll y,ll p)
+{
+  ll res=1;
+  x=x%p;
+  while(y>0)
+  {
+    if(y&1)
+      res=(res*x)%p;
+    y=y>>1;
+    x=(x*x)%p;
+  }
+  return res;
+}

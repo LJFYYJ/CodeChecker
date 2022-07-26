@@ -1,0 +1,58 @@
+#include <iostream>
+
+using namespace std;
+
+int gheu(int n,int k)
+
+{
+
+    int l,a;
+
+    if(k<n/2)
+
+        l=k;
+
+    else
+
+        l=n-k;
+
+    a = 2*(l-1)+(n-k) + (n*2) +1;
+
+    cout<<a<<endl;
+
+}
+
+int mew(int n,int k)
+
+{
+
+    int a;
+
+    a = 3*n;
+
+    cout<<a<<endl;
+
+}
+
+int main()
+
+{
+
+    int n,k,l;
+
+    cin>>n>>k;
+
+    if(k==n || k==1)
+
+    {
+
+        mew(n,k);
+
+        return 0;
+
+    }
+
+    gheu(n,k);
+
+}
+

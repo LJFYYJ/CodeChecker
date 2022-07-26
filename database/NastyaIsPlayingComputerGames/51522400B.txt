@@ -1,0 +1,26 @@
+#include <iostream>
+
+
+
+using namespace std;
+
+typedef long long ll;
+
+
+
+ll N, K;
+
+
+
+int main ()
+
+{
+
+	cin >> N >> K;
+
+	cout << (3 * N) + min ( N - K, K - 1 ) << "\n";
+
+	return 0;
+
+}
+

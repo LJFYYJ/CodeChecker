@@ -1,0 +1,90 @@
+#include <bits/stdc++.h>
+
+
+
+using namespace std;
+
+
+
+const int N = 1e3 + 10;
+
+
+
+vector<int> A[N], B[N];
+
+
+
+int main() {
+
+	int n, m, x;
+
+	while(cin >> n >> m) {
+
+		for(int i = 0; i < n + m; i++) {
+
+			A[i].clear();
+
+			B[i].clear();
+
+		}
+
+		for(int i = 0; i < n; i++) {
+
+			for(int j = 0; j < m; j++) {
+
+				cin >> x;
+
+				A[i + j].push_back(x);
+
+			}
+
+		}
+
+		for(int i = 0; i < n; i++) {
+
+			for(int j = 0; j < m; j++) {
+
+				cin >> x;
+
+				B[i + j].push_back(x);
+
+			}
+
+		}
+
+		bool sw = true;
+
+		for(int i = 0; i < n + m; i++) {
+
+			sort(A[i].begin(), A[i].end());
+
+			sort(B[i].begin(), B[i].end());
+
+			for(int j = 0; j < A[i].size(); j++) {
+
+				if(A[i][j] != B[i][j]) {
+
+					sw = false;
+
+				}
+
+			}
+
+		}
+
+		if(sw) {
+
+			cout << "YES\n";
+
+		} else {
+
+			cout << "NO\n";
+
+		}
+
+	}
+
+	return 0;
+
+}
+

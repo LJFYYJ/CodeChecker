@@ -1,0 +1,337 @@
+import java.util.Scanner;
+
+import java.util.*;
+
+public class A
+
+{
+
+
+
+	public static void main (String [] args)
+
+	{
+
+		Scanner input=new Scanner(System.in);
+
+		int n,m;
+
+		n= input.nextInt();
+
+		m= input.nextInt();
+
+		int [][] a= new int [n][m];
+
+		int [][] b= new int [n][m];
+
+
+
+		for (int i=0;i<n;i++)
+
+			{
+
+				for (int j=0;j<m;j++)
+
+				{
+
+					a[i][j] = input.nextInt();
+
+				}
+
+			}
+
+		for (int i=0;i<n;i++)
+
+			{
+
+				for (int j=0;j<m;j++)
+
+				{
+
+					b[i][j]= input.nextInt();
+
+				}
+
+			}
+
+		
+
+		boolean x=true;
+
+		if (n>m)
+
+		{
+
+			for (int i=0;i<m-1;i++)
+
+			{
+
+				int[] c=new int [i+1];
+
+				int[] d=new int [i+1];
+
+				for (int j=0;j<=i;j++)
+
+				{
+
+					c[j]=a[i-j][j];
+
+					d[j]=b[i-j][j];
+
+				}
+
+				Arrays.sort(c);
+
+				Arrays.sort(d);
+
+				for (int k=0;k<=i;k++)
+
+				{
+
+					if (c[k]!=d[k]) 
+
+					{
+
+						x=false;
+
+						break;
+
+					}
+
+				}
+
+				if(!x) break;
+
+			}
+
+			for (int i=m-1;i<=n-1;i++)
+
+			{
+
+				int[] c=new int [m];
+
+				int[] d=new int [m];
+
+				for (int j=0;j<=m-1;j++)
+
+				{
+
+					c[j]=a[i-j][j];
+
+					d[j]=b[i-j][j];
+
+				}
+
+				Arrays.sort(c);
+
+				Arrays.sort(d);
+
+				for (int k=0;k<=m-1;k++)
+
+				{
+
+					if (c[k]!=d[k]) 
+
+					{
+
+						x=false;
+
+						break;
+
+					}
+
+				}
+
+				if(!x) break;
+
+
+
+			}
+
+			for (int j=0;j<=m-1;j++)
+
+			{
+
+				int[] c=new int[m-j];
+
+				int[] d=new int[m-j];
+
+				for (int i=0;i<m-j;i++)
+
+				{
+
+					c[i]=a[n-i-1][j+i];
+
+					d[i]=b[n-i-1][j+i];
+
+				}
+
+				Arrays.sort(c);
+
+				Arrays.sort(d);
+
+				for (int k=0;k<m-j;k++)
+
+				{
+
+					if (c[k]!=d[k]) 
+
+					{
+
+						x=false;
+
+						break;
+
+					}
+
+				}
+
+				if(!x) break;
+
+			}
+
+		}
+
+		else
+
+		{
+
+			for (int j=0;j<n-1;j++)
+
+			{
+
+				int[] c=new int [j+1];
+
+				int[] d=new int [j+1];
+
+				for (int i=0;i<=j;i++)
+
+				{
+
+					c[i]=a[i][j-i];
+
+					d[i]=b[i][j-i];
+
+				}
+
+				Arrays.sort(c);
+
+				Arrays.sort(d);
+
+				for (int k=0;k<=j;k++)
+
+				{
+
+					if (c[k]!=d[k]) 
+
+					{
+
+						x=false;
+
+						break;
+
+					}
+
+				}
+
+				if(!x) break;
+
+			}
+
+			for (int j=n-1;j<=m-1;j++)
+
+			{
+
+				int[] c=new int [n];
+
+				int[] d=new int [n];
+
+				for (int i=0;i<=n-1;i++)
+
+				{
+
+					c[i]=a[i][j-i];
+
+					d[i]=b[i][j-i];
+
+				}
+
+				Arrays.sort(c);
+
+				Arrays.sort(d);
+
+				for (int k=0;k<=n-1;k++)
+
+				{
+
+					if (c[k]!=d[k]) 
+
+					{
+
+						x=false;
+
+						break;
+
+					}
+
+				}
+
+				if(!x) break;
+
+
+
+			}
+
+			for (int i=0;i<=n-1;i++)
+
+			{
+
+				int[] c=new int[n-i];
+
+				int[] d=new int[n-i];
+
+				for (int j=0;j<n-i;j++)
+
+				{
+
+					c[j]=a[i+j][m-j-1];
+
+					d[j]=b[i+j][m-j-1];
+
+				}
+
+				Arrays.sort(c);
+
+				Arrays.sort(d);
+
+				for (int k=0;k<n-i;k++)
+
+				{
+
+					if (c[k]!=d[k]) 
+
+					{
+
+						x=false;
+
+						break;
+
+					}
+
+				}
+
+				if(!x) break;
+
+			}
+
+		}
+
+
+
+		if (x) System.out.println("YES");
+
+		else System.out.println("NO");
+
+	}
+
+}

@@ -1,0 +1,91 @@
+#include <bits/stdc++.h>
+
+typedef long long ll;
+
+#define FOR(i,a,b) for(int i=(a);i<(b);i++)
+
+#define REP(i,a) FOR(i,0,a)
+
+
+
+using namespace std;
+
+const int MAX_N=500,MAX_M=500;
+
+int N,M;
+
+int A[MAX_N][MAX_M],B[MAX_N][MAX_M];
+
+int main(){
+
+	cin.tie(0);
+
+	ios::sync_with_stdio(false);
+
+	cin>>N>>M;
+
+	REP(i,N){
+
+		REP(j,M){
+
+			cin>>A[i][j];
+
+		}
+
+	}
+
+	REP(i,N){
+
+		REP(j,M){
+
+			cin>>B[i][j];
+
+		}
+
+	}
+
+	bool ans=true;
+
+	REP(i,N+M-1){
+
+		map<int,int> mp;
+
+		int w0,h0;
+
+		w0=min(M-1,i);
+
+		h0=max(0,i-M+1);
+
+		int w=w0,h=h0;
+
+		while(w>=0 && h<N){
+
+			mp[A[h][w]]++;
+
+			w--;
+
+			h++;
+
+		}
+
+		w=w0,h=h0;
+
+		while(w>=0 && h<N){
+
+			if(--mp[B[h][w]]<0){
+
+				ans=false;
+
+			}
+
+			w--;
+
+			h++;
+
+		}
+
+	}
+
+	cout<<(ans ? "yes" : "no")<<endl;
+
+}

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+{% load staticfiles %}
+<head>
+    <meta charset="utf-8" />
+    <title>验证失败</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/register.css' %}">
+    <script src="{% static 'js/jquery.js' %}"></script>
+</head>
+<body>
+	<div class="nav">
+		<a href="{% url 'main' %}" style="font-size: 18px;">首页</a>
+		<h2 class="logo" style="margin-left:610px">CodeChecker</h2>
+	</div>
+    <pre><p style="line-height:400px;text-align: center;font-size: 23px;font-weight: 900;margin: 0 auto;">您的验证链接已失效</p></pre>
+	<div class="service" style="background-color: #f5f9fa;margin-top: 120px;">
+		<div class="bottom" style="background-color: #f5f9fa">
+			<ul>
+				<li ><a href="#" class="help">联系我们</a></li>
+				<li ><a href="#" class="help">用户帮助</a></li>
+				<li ><a href="#" class="help">隐私政策</a></li>
+				<li ><a href="#" class="help">关于网站</a></li>
+			</ul>
+		</div>
+	</div>
+</body>
+</html>

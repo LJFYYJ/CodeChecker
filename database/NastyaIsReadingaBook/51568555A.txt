@@ -1,0 +1,98 @@
+#include<iostream>
+
+#include<cstdio>
+
+#include<string>
+
+#include<cmath>
+
+#include<vector>
+
+#include<queue>
+
+#include<algorithm>
+
+#include<set>
+
+#include<cstring>
+
+#include<stack>
+
+#include<iomanip>
+
+#define mxan
+
+#define max3(a,b,c) max(a,max(b,c))
+
+#define min3(a,b,c) min(a,min(b,c))
+
+#define mod 1000000009
+
+#define INF 0x3f3f3f3f
+
+#define pi acos(-1.0)
+
+#define eps 1e-6
+
+using namespace std;
+
+typedef long long ll;
+
+const int N=2e6+100;
+
+const ll IN=1e18;
+
+const int maxn=1020;
+
+ll n,m,s,ans,sum;
+
+ll a[N],b[N],c[N];
+
+
+
+int main()
+
+{
+
+    ios::sync_with_stdio(false);
+
+    cin.tie(0);
+
+    cin>>n;
+
+    for(int i=0;i<n;i++)
+
+    {
+
+        cin>>a[i]>>b[i];
+
+    }
+
+    cin>>m;
+
+    for(int i=0;i<n;i++)
+
+    {
+
+        if(b[i]>=m)
+
+        {
+
+            ans=i;
+
+            break;
+
+        }
+
+    }
+
+    cout<<n-ans<<endl;
+
+
+
+
+
+
+
+}
+

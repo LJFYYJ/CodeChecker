@@ -1,0 +1,41 @@
+#include<cstdio>
+#include<vector>
+//#include<algorithm>
+#include<iostream>
+#include<map>
+using namespace std;
+
+int main()
+{
+	map<int,int>mp[1000];
+	int a[501][501];
+	int b[501][501];
+	int n,m;
+	bool flag=true;
+	cin>>n>>m;
+	for(int i=1;i<=n;i++)
+	{
+		for(int j=1;j<=m;j++)
+		{
+			cin>>a[i][j];
+			mp[i+j-1][a[i][j]]+=1;
+		}
+	}
+	for(int i=1;i<=n;i++)
+	{
+		for(int j=1;j<=m;j++)
+		{
+			cin>>b[i][j];
+			if(mp[i+j-1][b[i][j]]<=0){
+				flag=false;
+				break;
+			}
+			mp[i+j-1][b[i][j]]-=1;
+		}
+	}
+	if(flag)
+		cout<<"YES";
+	else
+		cout<<"NO";
+	return 0;
+}

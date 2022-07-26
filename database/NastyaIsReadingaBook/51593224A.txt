@@ -1,0 +1,61 @@
+#include <bits/stdc++.h>
+
+
+
+using namespace std;
+
+
+
+int main()
+
+{
+
+    ios_base::sync_with_stdio(0);
+
+    cin.tie(0);
+
+    cout.tie(0);
+
+
+
+    int N, K, ans = 0;
+
+    vector<pair<int, int> > chapters;
+
+
+
+    cin >> N;
+
+
+
+    for (int i = 0; i < N; i++)
+
+    {
+
+        int l, r;
+
+        cin >> l >> r;
+
+        chapters.push_back(make_pair(l, r));
+
+    }
+
+
+
+    cin >> K;
+
+
+
+    for (int i = 0; i < N; i++)
+
+        if (chapters[i].first >= K || K <= chapters[i].second)
+
+            ans++;
+
+
+
+    cout << ans << '\n';
+
+    return 0;
+
+}

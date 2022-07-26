@@ -1,0 +1,48 @@
+#include<bits/stdc++.h>
+
+
+
+using namespace std;
+
+
+
+int main(){
+
+    int n,k,l,r;
+
+    cin>>n;
+
+
+
+    vector<pair<int,int> >v;
+
+
+
+    for(int i=0;i<n;i++){
+
+        cin>>l>>r;
+
+        v.push_back(make_pair(l,r));
+
+    }
+
+    cin>>k;
+
+    int i=0;
+
+    for(i=0;i<n;i++){
+
+        if(v[i].first<=k && v[i].second>=k){
+
+            break;
+
+        }
+
+    }
+
+    cout<<n-i<<endl;
+
+return 0;
+
+}
+

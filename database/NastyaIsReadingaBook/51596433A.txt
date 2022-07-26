@@ -1,0 +1,42 @@
+#include<bits/stdc++.h>
+
+using namespace std;
+
+int main()
+
+{
+
+    long long int n,a,ck=0;
+
+    cin>>n;
+
+    int arr[n];
+
+    int arr1[n];
+
+    for(int i=0;i<n;i++){
+
+        cin>>arr[i]>>arr1[i];
+
+    }
+
+    cin>>a;
+
+    for(int i=0;i<n;i++){
+
+        if(a>=arr[i] && a<=arr1[i]){
+
+            break;
+
+        }
+
+        else ck++;
+
+    }
+
+    cout<<n-ck<<endl;
+
+    return 0;
+
+}
+

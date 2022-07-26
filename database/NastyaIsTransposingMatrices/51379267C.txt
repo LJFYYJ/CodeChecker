@@ -1,0 +1,74 @@
+n,m=map(int,input().split(" "))
+
+lia=[]
+
+for i in range(n):
+
+    tm = list(map(int,input().split(" ",m)[:m]))
+
+    lia.append(tm)
+
+lib=[]
+
+for i in range(n):
+
+    tm = list(map(int,input().split(" ",m)[:m]))
+
+    lib.append(tm)
+
+fl=0
+
+for i in range(n):
+
+    for j in range(m):
+
+        x = lia[i][j]
+
+        fl=0
+
+        if i+j<m:
+
+            c=i+j
+
+            r=0
+
+        else:
+
+            c=m-1
+
+            r=i-(m-j-1)
+
+        while r<n and c>=0:
+
+            if lib[r][c]==x:
+
+                fl=1
+
+                lib[r][c]=-1
+
+                break
+
+            else:
+
+                r+=1
+
+                c-=1
+
+        if fl==0:
+
+            fl=-1
+
+            break
+
+    if fl==-1:
+
+        break
+
+if fl==-1:
+
+    print("No")
+
+else:
+
+    print("Yes")
+

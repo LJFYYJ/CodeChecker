@@ -1,0 +1,46 @@
+import java.util.*;
+
+import java.lang.*;
+
+
+
+public class Main {
+
+  
+
+  public static void main(String[] args) {
+
+        // TODO Auto-generated method stub
+
+        Scanner sc=new Scanner(System.in);
+
+       int n=sc.nextInt();
+
+       int k=sc.nextInt();
+
+       int temp=Math.min(n-k, k-1);
+
+       int t=temp;
+
+       int min=(4*temp +2 +3*(n-1-temp) + temp+1);
+
+       while(temp>=0) {
+
+         int tt=(t-temp)+(4*temp +2 +3*(n-1-temp) + temp+1);
+
+         if(tt<min) {
+
+           min=tt;
+
+         }
+
+         temp--;
+
+       }
+
+       System.out.println(min);
+
+  }
+
+}
+

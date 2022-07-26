@@ -1,0 +1,51 @@
+n, m = map(int, input().split())
+
+
+
+A = dict()
+
+B = dict()
+
+
+
+for i in range(n):
+
+  a = list(map(int, input().split()))
+
+  for j in range(m):
+
+    if (i + j) in A:
+
+      A[i + j].add(a[j])
+
+    else:
+
+      A[i + j] = set([a[j]])
+
+
+
+for i in range(n):
+
+  b = list(map(int, input().split()))
+
+  for j in range(m):
+
+    if (i + j) in B:
+
+      B[i + j].add(b[j])
+
+    else:
+
+      B[i + j] = set([b[j]])
+
+yes = True
+
+for d in A:
+
+  if A[d] != B[d]:
+
+    yes = False
+
+    break
+
+print('YES') if yes else print('NO')

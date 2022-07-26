@@ -1,0 +1,47 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+typedef long long lli;
+
+typedef vector <int> vi;
+
+typedef vector <long> vl;
+
+#define pb push_back
+
+#define pop pop_back
+
+
+
+
+
+int main()
+
+{	ios_base::sync_with_stdio(false);
+
+	cin.tie(NULL);
+
+	cout.tie(NULL);
+
+	#ifndef ONLINE_JUDGE
+
+    	// for getting input from input.txt
+
+    	freopen("input.txt", "r", stdin);
+
+    	// for writing output to output.txt
+
+    	freopen("output.txt", "w", stdout);
+
+	#endif
+
+    int n,k;
+
+    cin>>n>>k;
+
+    cout<<3*n+min(k-1,n-k);
+
+
+
+}

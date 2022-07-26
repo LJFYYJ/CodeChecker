@@ -1,0 +1,25 @@
+#include<bits/stdc++.h>
+
+using namespace std;
+
+int main()
+
+{
+
+	int n,k;
+
+	cin>>n>>k;
+
+	int minim = min(k-1,n-k);
+
+	int maxim = max(k-1,n-k);
+
+	if(minim)
+
+	cout<<max(minim-1,0)*4+2+3*maxim+5;
+
+	else
+
+	cout<<3+3*maxim;	
+
+}

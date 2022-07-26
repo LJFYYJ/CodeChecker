@@ -1,0 +1,43 @@
+m,n = input().split()
+m = int(m)
+n = int(n)
+mat1 = []
+mat2 = []
+
+for _ in range(m):
+	mat1.append(list(map(int,input().split())))
+
+
+for _ in range(m):
+	mat2.append(list(map(int,input().split())))
+
+flag = 0
+
+for i in range(n):
+	list1 = []
+	list2 = []
+	list3 = []
+	list4 = []
+
+	for j in range(m):
+		if(i >=	j):
+			list1.append(mat1[j][i-j])
+			list2.append(mat2[j][i-j])
+		else:
+			list3.append(mat1[j][min(j-i,n-1)])
+			list4.append(mat2[j][min(j-i,n-1)])
+
+	list1.sort()
+	list2.sort()
+	list3.sort()
+	list4.sort()
+
+	if list1 != list2 or list3 != list4:
+		flag = 1
+		break
+
+if(flag == 1):
+	print('No')
+else:
+	print('Yes')
+

@@ -1,0 +1,53 @@
+#include<bits/stdc++.h>
+
+using namespace std;
+
+int32_t main()
+
+{
+
+    int n,m;
+
+    cin>>n>>m;
+
+
+
+    int u=n*3;
+
+
+
+    n++;
+
+    n/=2;
+
+
+
+    if(m<=n)
+
+    {
+
+        int ans=m+u;
+
+        ans--;
+
+        cout<<ans<<endl;
+
+        return 0;
+
+    }
+
+
+
+    int ans;
+
+    m=m-n;
+
+    ans=u+m;
+
+    ans--;
+
+    cout<<ans<<endl;
+
+    return 0;
+
+}

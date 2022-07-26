@@ -1,0 +1,19 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+
+
+int i, j, k, n, c[100];
+
+int main()
+
+{
+
+    for(cin>>n; i<n;) cin>>k>>c[i++];
+
+    for(cin>>k; c[j]<k;) j++;
+
+    cout<<n-j;
+
+}

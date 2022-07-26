@@ -1,0 +1,70 @@
+#include<bits/stdc++.h>
+
+using namespace std ;
+
+int a[300001];
+
+vector<int>G[300001];
+
+int num[300001];
+
+int  main()
+
+{
+
+    int n,m;
+
+    scanf("%d%d",&n,&m);
+
+    for(int i=1 ; i<=n ; i++)
+
+    scanf("%d",&a[i]);
+
+
+
+    for(int i=1 ; i<=m ; i++)
+
+    {
+
+        int u,v;
+
+        scanf("%d%d",&u,&v);
+
+        G[v].push_back(u);
+
+    }
+
+
+
+    for(int i=0 ; i<G[a[n]].size() ; i++)
+
+    num[G[a[n]][i]]++;
+
+    int ans=0;
+
+    int id=n;
+
+    for(int i=n-1 ; i>=1 ; i--)
+
+    {
+
+        if(num[a[i]]==id-i) {ans++; id=i;}
+
+        else
+
+        {
+
+            for(int j=0 ; j<G[a[i]].size() ; j++)
+
+            num[G[a[i]][j]]++;
+
+        }
+
+    }
+
+    printf("%d\n",ans);
+
+    return 0;
+
+}
+

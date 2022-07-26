@@ -1,0 +1,80 @@
+#include<bits/stdc++.h>
+
+using namespace std;
+
+int main(void)
+
+{
+
+   long long int n,m,x;
+
+   vector<long long int> a[503],b[503];
+
+   cin>>n>>m;
+
+   for(int i=0;i<n;i++)
+
+   {
+
+      for(int j=0;j<m;j++)
+
+      {
+
+       cin>>x;
+
+       a[i].push_back(x);
+
+      }
+
+   }
+
+   for(int i=0;i<n;i++)
+
+   {
+
+      for(int j=0;j<m;j++)
+
+      {
+
+       cin>>x;
+
+       b[i].push_back(x);
+
+      }
+
+   }
+
+   for(int i=0;i<n;i++)
+
+   {
+
+      for(int j=0;j<m;j++)
+
+      {
+
+      if((a[i][j]!=b[i][j]) && (a[i][j]!=b[j][i]))
+
+      {
+
+         //cout<<i<<" "<<j<<endl;
+
+         //cout<<a[i][j]<<" "<<b[i][j]<<endl;
+
+         //cout<<a[i][j]<<" "<<b[j][i]<<endl;
+
+         cout<<"No"<<endl;
+
+         return 0;
+
+      }
+
+      }
+
+   }
+
+   cout<<"Yes"<<endl;
+
+   return 0;
+
+}
+

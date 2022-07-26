@@ -1,0 +1,74 @@
+#include <iostream>
+
+#include <cmath>
+
+#include <cstdio>
+
+#include <cstring>
+
+#include <vector>
+
+#include <algorithm>
+
+#include <queue>
+
+#include <set>
+
+#include <map>
+
+#include <stack>
+
+#include <iomanip>
+
+#include <string>
+
+
+
+using namespace std;
+
+
+
+const int maxn=10000+10;
+
+int n,x,y,k;
+
+int arr[maxn];
+
+
+
+int main(){
+
+    int flag=0;
+
+    scanf("%d",&n);
+
+    for(int i=1;i<=n;i++){
+
+        scanf("%d%d",&x,&y);
+
+        arr[i]=y;
+
+    }
+
+    scanf("%d",&k);
+
+    for(int i=1;i<=n;i++){
+
+        if(k<=arr[i]){
+
+            printf("%d\n",n-i+1);
+
+            flag=1;
+
+            break;
+
+        }
+
+    }
+
+    if(!flag) printf("%d\n",0);
+
+    return 0;
+
+}
+

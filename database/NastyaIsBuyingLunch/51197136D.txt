@@ -1,0 +1,123 @@
+#define _CRT_SECURE_NO_WARNINGS
+
+#include <vector>
+
+#include <iostream>
+
+#include <map>
+
+#include <fstream>
+
+#include <set>
+
+#include <algorithm>
+
+#include <math.h>
+
+#include <string>
+
+#include <stdio.h>
+
+#include <limits.h>
+
+#include <queue>
+
+#define ll long long
+
+
+
+using namespace std;
+
+
+
+int main()
+
+{
+
+	//ifstream cin("input.txt");
+
+	//ofstream cout("output.txt");
+
+	int n, m;
+
+	scanf("%d%d", &n, &m);
+
+	vector<int> a(n);
+
+	map<int, int> mp;
+
+	for (int i = 0; i < n; i++)
+
+	{
+
+		scanf("%d", &a[i]);
+
+		mp[a[i]] = i;
+
+	}
+
+	vector<set<int>> st(n+1);
+
+	vector<int> fr;
+
+	for (int i = 0; i < m; i++)
+
+	{
+
+		int x, y;
+
+		scanf("%d%d", &x, &y);
+
+		st[x].insert(y);
+
+		if (y == a[n - 1])
+
+			fr.push_back(mp[x]);
+
+	}
+
+	sort(fr.begin(), fr.end());
+
+	reverse(fr.begin(), fr.end());
+
+	vector<int> ma;
+
+	vector<int> d(n,-10);
+
+	d[n - 1] = n;
+
+	int ans = 0;
+
+	for (auto i:fr)
+
+	{
+
+		int gr = n;
+
+		int j = i + 1;
+
+		for (; j < gr; j++)
+
+			if (!(d[j] > n - 2) && st[a[i]].find(a[j]) == st[a[i]].end() )
+
+				break;
+
+		if (j > n - 2)
+
+		{
+
+			ans++;
+
+			d[i] = n - 1;
+
+		}
+
+	}
+
+	
+
+	printf("%d", ans);
+
+	return 0;
+
+}

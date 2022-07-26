@@ -1,0 +1,67 @@
+n,m=map(int,input().split())
+
+L=[list(map(int,input().split())) for i in range(n)]
+
+L1=[list(map(int,input().split())) for i in range(n)]
+
+for i in range(m) :
+
+    d={}
+
+    for j in range(min(n,i+1)) :
+
+        v=L[j][i-j]
+
+        d[v]=d.get(v,0)+1
+
+        
+
+    for j in range(min(n,i+1)) :
+
+        v=L1[j][i-j]
+
+        d[v]=d.get(v,0)-1
+
+   
+
+    for x in d :
+
+        if d[x]!=0 :
+
+            print("NO")
+
+            exit()
+
+    
+
+for i in range(m) :
+
+    d={}
+
+    for j in range(min(m,n-i)) :
+
+        
+
+        v=L[n-i-j-1][j]
+
+        d[v]=d.get(v,0)+1
+
+        
+
+    for j in range(min(m,n-i)) :
+
+        v=L1[n-i-j-1][j]
+
+        d[v]=d.get(v,0)-1
+
+   
+
+    for x in d :
+
+        if d[x]!=0 :
+
+            print("NO")
+
+            exit()   
+
+print("YES")

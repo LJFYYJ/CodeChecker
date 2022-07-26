@@ -1,0 +1,128 @@
+#include<bits/stdc++.h>
+
+using namespace std;
+
+bool b[5005];
+
+int main()
+
+{
+
+    int stand,n,walk=3;
+
+    scanf("%d %d",&n,&stand);
+
+    b[stand]=true;
+
+    if(n-stand>=stand)
+
+    {
+
+        for(int i=stand-1;i>=1;i--)
+
+        {
+
+            if(b[i])
+
+            {
+
+                walk++;
+
+            }
+
+            else
+
+            {
+
+                walk+=3;
+
+                b[i]=true;
+
+            }
+
+        }
+
+        for(int i=2;i<=n;i++)
+
+        {
+
+            if(b[i])
+
+            {
+
+                walk++;
+
+            }
+
+            else
+
+            {
+
+                walk+=3;
+
+                b[i]=true;
+
+            }
+
+        }
+
+    }
+
+    else
+
+    {
+
+        for(int i=stand+1;i<=n;i++)
+
+        {
+
+            if(b[i])
+
+            {
+
+                walk++;
+
+            }
+
+            else
+
+            {
+
+                walk+=3;
+
+                b[i]=true;
+
+            }
+
+        }
+
+        for(int i=n-1;i>=1;i--)
+
+        {
+
+            if(b[i])
+
+            {
+
+                walk++;
+
+            }
+
+            else
+
+            {
+
+                walk+=3;
+
+                b[i]=true;
+
+            }
+
+        }
+
+    }
+
+    printf("%d",walk);
+
+}
+

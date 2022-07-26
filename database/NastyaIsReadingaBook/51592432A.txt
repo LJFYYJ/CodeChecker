@@ -1,0 +1,46 @@
+#include <iostream>
+
+#include <string>
+
+#include <algorithm>
+
+int n,i,e[101],r[101],k,ans;
+
+using namespace std;
+
+
+
+main(){
+
+cin>>n;
+
+for(i=1;i<=n;i++){
+
+	cin>>e[i]>>r[i];
+
+
+
+}
+
+cin>>k;
+
+  for(int i=1;i<=n;i++){
+
+    if(k>r[i])ans++;
+
+  }
+
+
+
+cout<<n-ans;
+
+
+
+
+
+
+
+
+
+}
+

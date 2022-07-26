@@ -1,0 +1,18 @@
+#include <iostream>
+
+using namespace std;
+
+int n, l, r, nr[10005];
+
+int main()  {
+  cin >> n;
+  for (int i = 1; i <= n; ++i)  {
+    cin >> l >> r;
+    ++nr[r];
+  }
+  for (int i = 1; i <= r; ++i)
+    nr[i] += nr[i - 1];
+  cin >> l;
+  cout << n - nr[l - 1];
+  return 0;
+}

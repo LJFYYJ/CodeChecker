@@ -1,0 +1,84 @@
+#include<bits/stdc++.h>
+
+
+
+using namespace std;
+
+
+
+int main(){
+
+
+
+    int n,m,a[505][505],b[505][505];
+
+    cin>>n>>m;
+
+
+
+    multiset<int>s2[1005],s[1005];
+
+
+
+    for(int i=0;i<n;i++){
+
+        for(int j=0;j<m;j++){
+
+            cin>>a[i][j];
+
+            s2[i+j].insert(a[i][j]);
+
+        }
+
+    }
+
+
+
+    for(int i=0;i<n;i++){
+
+        for(int j=0;j<m;j++){
+
+            cin>>b[i][j];
+
+            s[i+j].insert(b[i][j]);
+
+        }
+
+    }
+
+
+
+    bool f = true;
+
+
+
+    for(int i=0;i<n+m;i++){
+
+        if(s[i]!=s2[i]){
+
+            f = false;
+
+            break;
+
+        }
+
+    }
+
+
+
+    if(!f)
+
+        cout<<"NO"<<endl;
+
+    else
+
+        cout<<"YES"<<endl;
+
+
+
+
+
+return 0;
+
+}
+

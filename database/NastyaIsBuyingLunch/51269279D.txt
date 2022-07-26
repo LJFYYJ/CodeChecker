@@ -1,0 +1,41 @@
+#include <bits/stdc++.h>
+
+#define st first
+#define nd second
+#define pb push_back
+
+typedef long long ll;
+typedef long long unsigned llu;
+typedef long double ld;
+typedef std::pair<int, int> pii;
+typedef std::pair<int, pii> iii;
+//typedef std::pair<pii, int> iii;
+
+const int N = 3e5+10;
+int n, m, a, b, p[N], pos[N], vis[N];
+std::set<pii> nonedge;
+
+void dfs(int v) {
+  vis[v] = true;
+  for (int i = v-1; i >= 0; i--)
+    if (!vis[i] && nonedge.count({v, i}) == 0)
+      dfs(i);
+}
+
+int main() {
+  scanf("%d%d", &n, &m);
+
+  for (int i = 0; i < n; i++) {
+    scanf("%d", p+i);
+    pos[p[i]] = i;
+  }
+
+  for (int i = 0; i < m; i++) {
+    scanf("%d%d", &a, &b);
+    if (pos[a] < pos[b]) nonedge.insert({pos[b], pos[a]});
+  }
+
+  dfs(n-1);
+  printf("%d\n", n - std::accumulate(vis, vis+n, 0));
+  return 0;
+}

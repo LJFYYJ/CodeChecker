@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+{% load staticfiles %}
+<head>
+    <meta charset="utf-8" />
+    <title>注册成功</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/register.css' %}">
+    <script src="{% static 'js/jquery.js' %}"></script>
+</head>
+<body>
+	<div class="nav">
+		<a href="{% url 'main' %}" style="font-size: 18px;">首页</a>
+		<h2 class="logo" style="margin-left:610px">CodeChecker</h2>
+	</div>
+    <pre><p style="line-height:150px;text-align: center;font-size: 20px;font-weight: 800;margin: 0 auto;">恭喜用户 <span style="color:red">{{ username }}</span> ，注册成功！</p></pre>
+    <p style="line-height:100px;text-align: center;font-size: 20px;font-weight: 800;margin: 0 auto;">账号激活链接已发送至您的邮箱，请注意查收。</p>
+<pre><p style="line-height:150px;text-align: center;font-size: 20px;font-weight: 800;margin: 0 auto;">还有 <span id="time" style="color:orange">5</span> 秒将自动跳转至登录页面</p></pre>
+<script>
+    onload=function ()
+    {
+        setInterval(go,1000)
+    };
+    var x=4;
+    function go()
+    {
+        if (x>=0)
+        {
+            document.getElementById("time").innerText=x;
+        }
+        else
+        {
+            location.href="{% url 'login' %}";
+        }
+        x--;
+    }
+</script>
+	<div class="service" style="background-color: #f5f9fa;margin-top:120px;">
+		<div class="bottom" style="background-color: #f5f9fa">
+			<ul>
+				<li ><a href="#" class="help">联系我们</a></li>
+				<li ><a href="#" class="help">用户帮助</a></li>
+				<li ><a href="#" class="help">隐私政策</a></li>
+				<li ><a href="#" class="help">关于网站</a></li>
+			</ul>
+		</div>
+	</div>
+</body>
+</html>

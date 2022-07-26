@@ -1,0 +1,129 @@
+#include <bits/stdc++.h>
+
+#define ll long long int
+
+#define max(x, y) (x > y ? x : y)
+
+#define min(x, y) (x < y ? x : y)
+
+#define IO_BOOST                      \
+
+    ios_base::sync_with_stdio(false); \
+
+    cin.tie(0)
+
+#define setp(x) fixed << setprecision(x)
+
+#define INF 0x3f3f
+
+#define lowbit(x) ((x) & (-x))
+
+using namespace std;
+
+int n, m, pupil[(int)3e5 + 1];
+
+vector<int> mp[(int)3e5 + 1];
+
+bool find(int f, int major)
+
+{
+
+    return binary_search(mp[major].begin(), mp[major].end(), f);
+
+}
+
+void put(int start)
+
+{   
+
+    /*printf("[%d]\n", pupil[start]);
+
+    for(int i = 1 ; i <= n ; i++){
+
+        printf("<%d>", pupil[i]);
+
+    }printf("\n");*/
+
+
+
+    if (start + 1 <= n && find(pupil[start + 1], pupil[start])){
+
+        swap( pupil[start], pupil[start + 1] );
+
+        return;
+
+    } else if( start+1 <= n ) 
+
+        put(start+1);
+
+
+
+    if (start + 1 <= n && find(pupil[start + 1], pupil[start]))
+
+        swap( pupil[start], pupil[start + 1] );
+
+
+
+}
+
+int main()
+
+{
+
+    IO_BOOST;
+
+    cin >> n >> m;
+
+    for (int i = n; i >= 1; i--)
+
+        cin >> pupil[i];
+
+    for (int i = 0; i < m; i++)
+
+    {
+
+        int a, b;
+
+        cin >> a >> b;
+
+        mp[b].push_back(a);
+
+    }
+
+    for (int i = 1; i <= n; i++)
+
+        sort(mp[i].begin(), mp[i].end());
+
+
+
+    int after = 2, ans = 0;
+
+    while (after <= n)
+
+    {
+
+        if ( find(pupil[after], pupil[1]) ){
+
+             after++, ans++;
+
+        } else{
+
+            put(after);
+
+            if( find(pupil[after], pupil[1]) )
+
+                after++, ans++;
+
+            else break;
+
+        }
+
+            
+
+    }
+
+    cout << ans << '\n';
+
+    return 0;
+
+}

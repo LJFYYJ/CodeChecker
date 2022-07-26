@@ -1,0 +1,94 @@
+#include<bits/stdc++.h>
+
+using namespace std ;
+
+#include<math.h>
+
+#include<string.h>
+
+#define ll long long
+
+#define mod 1000000007
+
+
+
+
+
+int main()
+
+{
+
+    #ifndef ONLINE_JUDGE
+
+    freopen("input.txt","r",stdin);
+
+    freopen("output.txt","w",stdout);
+
+    #endif
+
+    ios_base::sync_with_stdio(false);
+
+    cin.tie(NULL);
+
+    cout.tie(NULL);
+
+    ll i,j,k,m,n,s,t,mx=0,mn=1000000009,sm=0;
+
+    cin >> n >> m ;
+
+    vector <ll> a[n+m+9],b[n+m+9];
+
+    for(i=1;i<=n;i++){
+
+        for(j=1;j<=m;j++){
+
+            cin >> k ;
+
+            a[i+j].push_back(k) ;
+
+        }
+
+    }
+
+    for(i=1;i<=n;i++){
+
+        for(j=1;j<=m;j++){
+
+            cin >> k ;
+
+            b[i+j].push_back(k) ;
+
+        }
+
+    }
+
+    for(i=1;i<=n+m;i++){
+
+        sort(a[i].begin(),a[i].end());
+
+        sort(b[i].begin(),b[i].end());
+
+        for(j=0;j<a[i].size();j++){
+
+            if(a[i][j]!=b[i][j]){
+
+                cout << "NO\n" ;
+
+                return 0 ;
+
+            }
+
+        }
+
+    }
+
+    cout << "YES\n" ;
+
+    return 0 ;
+
+}
+
+
+
+
+

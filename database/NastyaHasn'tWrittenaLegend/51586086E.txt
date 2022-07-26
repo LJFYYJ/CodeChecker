@@ -1,0 +1,218 @@
+#include<bits/stdc++.h>
+
+using namespace std;
+
+
+
+#define debug puts("YES");
+
+#define rep(x,y,z) for(int (x)=(y);(x)<(z);(x)++)
+
+#define ll long long
+
+
+
+#define lrt int l,int r,int rt
+
+#define lson l,mid,rt<<1
+
+#define rson mid+1,r,rt<<1|1
+
+#define root l,r,rt
+
+#define mst(a,b) memset((a),(b),sizeof(a))
+
+#define pii pair<int,int>
+
+#define fi first
+
+#define se second
+
+#define mk(x,y) make_pair(x,y)
+
+const int mod=1e9+7;
+
+const int maxn=1e5+5;
+
+const int ub=1e6;
+
+ll powmod(ll x,ll y){ll t; for(t=1;y;y>>=1,x=x*x%mod) if(y&1) t=t*x%mod; return t;}
+
+ll gcd(ll x,ll y){return y?gcd(y,x%y):x;}
+
+ll a[maxn],k[maxn];
+
+ll n,q;
+
+int x,y;
+
+int root[maxn<<2];
+
+ll sum[maxn<<2],maxv[maxn<<2],lazy[maxn<<2];
+
+void build(lrt){
+
+    lazy[rt]=0;
+
+    if(l==r){
+
+        maxv[rt]=sum[rt]=a[l];
+
+        return ;
+
+    }
+
+    int mid=l+r>>1;
+
+    build(lson),build(rson);
+
+    maxv[rt]=max(maxv[rt<<1],maxv[rt<<1|1]);
+
+    sum[rt]=sum[rt<<1]+sum[rt<<1|1];
+
+}
+
+void pushdown(int rt,int l,int r,int mid){
+
+    if(lazy[rt]){
+
+        sum[rt<<1]=1LL*(mid-l+1)*lazy[rt];
+
+        sum[rt<<1|1]=1LL*(r-mid)*lazy[rt];
+
+        maxv[rt<<1]=lazy[rt];
+
+        maxv[rt<<1|1]=lazy[rt];
+
+        lazy[rt<<1]=lazy[rt<<1|1]=lazy[rt];
+
+        lazy[rt]=0;
+
+    }
+
+}
+
+void update(int l,int r,int rt,int L,int R,ll v){
+
+    if(L>R) return ;
+
+    if(L<=l&&r<=R){
+
+        sum[rt]=1LL*(r-l+1)*v;
+
+        maxv[rt]=lazy[rt]=v;
+
+        return ;
+
+    }
+
+    int mid=l+r>>1;
+
+    pushdown(rt,l,r,mid);
+
+    if(L<=mid) update(l,mid,rt<<1,L,R,v);
+
+    if(mid<R) update(mid+1,r,rt<<1|1,L,R,v);
+
+    sum[rt]=sum[rt<<1]+sum[rt<<1|1];
+
+    maxv[rt]=max(maxv[rt<<1],maxv[rt<<1|1]);
+
+    return ;
+
+}
+
+ll query1(int l,int r,int rt,int L,int R){
+
+    if(L<=l&&r<=R) return sum[rt];
+
+    int mid=l+r>>1;
+
+    pushdown(rt,l,r,mid);
+
+    ll ret=0;
+
+    if(L<=mid) ret+=query1(l,mid,rt<<1,L,R);
+
+    if(mid<R) ret+=query1(mid+1,r,rt<<1|1,L,R);
+
+    return ret;
+
+}
+
+ll query2(int l,int r,int rt,int L,int R){
+
+    if(L<=l&&r<=R) return maxv[rt];
+
+    int mid=l+r>>1;
+
+    pushdown(rt,l,r,mid);
+
+    ll ret=-mod;
+
+    if(L<=mid) ret=max(ret,query2(l,mid,rt<<1,L,R));
+
+    if(mid<R) ret=max(ret,query2(mid+1,r,rt<<1|1,L,R));
+
+    return ret;
+
+}
+
+int main(){
+
+    mst(k,0),mst(a,0);
+
+    cin>>n;
+
+    rep(i,1,n+1) cin>>a[i];
+
+    rep(i,1,n) cin>>k[i],k[i]+=k[i-1];
+
+    rep(i,1,n+1) a[i]-=k[i-1];
+
+    rep(i,1,n) k[i]+=k[i-1];
+
+    build(1,n,1);///
+
+    cin>>q;
+
+    string op;
+
+    while(q--){
+
+        cin>>op;
+
+        if(op[0]=='s'){
+
+            cin>>x>>y;
+
+            cout<<query1(1,n,1,x,y)+k[y-1]-k[max(0,x-2)]<<endl;
+
+        }else{
+
+            cin>>x>>y;
+
+            ll v=query1(1,n,1,x,x)+y;
+
+            int l=x,r=n,ans=r;
+
+            while(l<=r){
+
+                int mid=l+r>>1;
+
+                if(query2(1,n,1,x,mid)<=v) ans=mid,l=mid+1;
+
+                else r=mid-1;
+
+            }
+
+            update(1,n,1,x,ans,v);
+
+        }
+
+    }
+
+    return 0;
+
+}
+

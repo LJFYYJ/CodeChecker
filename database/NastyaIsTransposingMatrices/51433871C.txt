@@ -1,0 +1,98 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+#define ll long long
+
+typedef pair<int, int> pi;
+
+
+
+int main() {
+
+    ios_base :: sync_with_stdio(false);
+
+    int n, m;
+
+    cin >> n >> m;
+
+    vector < vector<int>  > A(n, vector<int> (m, 0));
+
+    vector < vector<int>  > B(n, vector<int> (m, 0));
+
+
+
+    for(int i = 0; i < n; i++)
+
+        for(int j = 0; j < m; j++)
+
+            cin >> A[i][j];
+
+
+
+    for(int i = 0; i < n; i++)
+
+        for(int j = 0; j < m; j++)
+
+            cin >> B[i][j];
+
+
+
+    for(int sum = 0; sum < n; sum++){
+
+        multiset <int> seta;
+
+        multiset <int> setb;
+
+        for(int i = sum; i>=max(0, sum - m + 1); i--){
+
+            int j = sum - i;
+
+            seta.insert(A[i][j]);
+
+            setb.insert(B[i][j]);
+
+        }
+
+        if (seta != setb){
+
+            cout << "NO";
+
+            return 0;
+
+        }
+
+    }
+
+    for(int sum = 0; sum < m; sum++){
+
+        multiset <int> seta;
+
+        multiset <int> setb;
+
+        for(int i = sum; i>=max(0, sum - n + 1); i--){
+
+            int j = sum - i;
+
+            seta.insert(A[j][i]);
+
+            setb.insert(B[j][i]);
+
+        }
+
+        if (seta != setb){
+
+            cout << "NO";
+
+            return 0;
+
+        }
+
+    }
+
+    cout << "YES";
+
+
+
+}
+

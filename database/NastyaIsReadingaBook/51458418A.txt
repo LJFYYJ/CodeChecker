@@ -1,0 +1,63 @@
+#include <bits/stdc++.h>
+
+#define ll             long long
+
+#define f(i,a,b)       for(int i=(a);i<(b);i++)
+
+#define si(a)          scanf("%d",&a)
+
+#define sl(a)          scanf("%I64d",&a)
+
+#define sd(a)          scanf("%lf",&a)
+
+#define pf(a)          printf("%d\n",a)
+
+#define plf(a)         printf("%I64d\n",a)
+
+#define MOD 1000000007
+
+using namespace std;
+
+#define EPS 1e-10
+
+#define PI 3.141592653589
+
+
+
+
+
+int main()
+
+{
+
+    int n;
+
+    si(n);
+
+    vector<int>v;
+
+    for(int i=0;i<n;i++)
+
+    {
+
+        int a,b;
+
+        si(a);
+
+        si(b);
+
+        v.push_back(b);
+
+    }
+
+    int k;
+
+    si(k);
+
+    int read = lower_bound(v.begin(),v.end(),k) - v.begin();
+
+    pf(n-read);
+
+    return 0;
+
+}

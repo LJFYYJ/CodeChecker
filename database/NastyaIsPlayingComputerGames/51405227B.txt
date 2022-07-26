@@ -1,0 +1,54 @@
+//Road to Newbie
+
+#include <bits/stdc++.h>
+
+#define ll long long int
+
+#define FASTIO std::ios::sync_with_stdio(false);
+
+#define pb push_back
+
+#define mp make_pair
+
+#define ld long double
+
+#define F first
+
+#define S second
+
+#define inf 1e18
+
+#define debug(x) cout<<x<<endl
+
+#define all(x) x.begin(),x.end()
+
+
+
+using namespace std;
+
+int main()
+
+{
+
+    FASTIO
+
+    ll n,k;
+
+    cin>>n>>k;
+
+    ll curr=min(abs(1-k)+n-1,abs(n-k)+n-1);
+
+    ll ans=(n-1)+2ll+n;
+
+    ans+=curr;
+
+    cout<<ans;
+
+
+
+
+
+return 0;
+
+}
+

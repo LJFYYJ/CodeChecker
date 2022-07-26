@@ -1,0 +1,62 @@
+#include <iostream>
+
+using namespace std;
+
+int a[100001],b[100001],i,k,n,q,u,v,s,ok;
+
+char c;
+
+int main()
+
+{
+
+    cin>>n;
+
+    for (i=1;i<=n;i++) cin>>a[i];
+
+    for (i=1;i<=n-1;i++) cin>>b[i];
+
+    cin>>q;
+
+    for (k=1;k<=q;k++) {
+
+        cin>>c>>u>>v;
+
+        if (c=='s') {
+
+            s=0;
+
+            for (i=u;i<=v;i++) s+=a[i];
+
+            cout<<s<<"\n";
+
+        }
+
+        else if (c=='+') {
+
+            a[u]+=v;
+
+            ok=1;
+
+            for (i=u+1;i<=n&&ok;i++) {
+
+                if (a[i]<a[i-1]+b[i-1]) a[i]=a[i-1]+b[i-1];
+
+                else ok=0;
+
+            }
+
+        }
+
+    }
+
+ /*   for (i=1;i<=n;i++) fout<<a[i]<<" ";
+
+    fout<<"\n";
+
+    for (i=1;i<=n-1;i++) fout<<b[i]<<" ";  */
+
+    return 0;
+
+}
+

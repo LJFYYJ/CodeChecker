@@ -1,0 +1,257 @@
+#include <set>
+
+#include <map>
+
+#include <list>
+
+#include <queue>
+
+#include <cmath>
+
+#include <stack>
+
+#include <ctime>
+
+#include <string>
+
+#include <cstdio>
+
+#include <vector>
+
+#include <numeric>
+
+#include <iostream>
+
+#include <algorithm>
+
+#include <functional>
+
+#include <unordered_map>
+
+#include <unordered_set>
+
+
+
+using namespace std;
+
+
+
+/// Definitions
+
+typedef long long        LL;
+
+typedef long double      LD;
+
+typedef unsigned int     UI;
+
+typedef pair<int, int>   PII;
+
+typedef vector<int>      VI;
+
+
+
+// #define FILE
+
+// #define PRECISION   10
+
+#define SYNC
+
+#define fr          first
+
+#define sc          second
+
+#define mp          make_pair
+
+#define pb          push_back
+
+#define sz(x)       (x).size()
+
+#define all(x)      (x).begin(), (x).end()
+
+#define f(i,a,b)    for (int i = a; i < b; ++i)
+
+#define r(i,a,b)    for (int i = a - 1; i >= b; --i)
+
+#define loop(n)     f(_, 0, n)
+
+/// Constants
+
+const LL    INF64  = 1000000000000000000;
+
+const LL    BigMod = 252097800623;
+
+const LD    LDINF  = 1000000000000;
+
+const LL    INF    = 1000000000;
+
+const LL    Mod    = 1000000007;
+
+const LD    PI     = acosl(-1.);
+
+const LD    eps    = 10e-10;
+
+const LL    prime  = 31;
+
+const UI    N      = 505;
+
+/// ----------------------------------------------------
+
+map<int, vector<int>> aa, bb;
+
+int A[N][N], B[N][N], n, m;
+
+
+
+void input()
+
+{
+
+    cin >> n >> m;
+
+    for (int i = 0; i < n; i++)
+
+        for (int j = 0; j < m; j++) {
+
+            cin >> A[i][j];
+
+            aa[A[i][j]].pb(i + j);
+
+        }
+
+    for (int i = 0; i < n; i++)
+
+        for (int j = 0; j < m; j++) {
+
+            cin >> B[i][j];
+
+            bb[B[i][j]].pb(i + j);
+
+        }
+
+}
+
+
+
+void solve()
+
+{
+
+    if (aa.size() != bb.size()) {
+
+        cout << "NO" << endl;
+
+    }
+
+    else {
+
+        auto ita = aa.begin();
+
+        auto itb = bb.begin();
+
+        while (ita != aa.end() && itb != bb.end()) {
+
+            if (ita->first != itb->first) {
+
+                cout << "NO" << endl;
+
+                return;
+
+            }
+
+
+
+            sort(all(ita->second));
+
+            sort(all(itb->second));
+
+            if (ita->second.size() != itb->second.size()) {
+
+                cout << "NO" << endl;
+
+                return;
+
+            }
+
+
+
+            for (int i = 0; i < ita->second.size(); i++) {
+
+                if (ita->second[i] != itb->second[i]) {
+
+                    cout << "NO" << endl;
+
+                    return;
+
+                }
+
+            }
+
+            ita++;
+
+            itb++;
+
+        }
+
+    }
+
+    cout << "YES" << endl;
+
+}
+
+
+
+
+
+int main()
+
+{
+
+#ifdef FILE
+
+    freopen("input.txt", "r", stdin);
+
+    freopen("output.txt", "w", stdout);
+
+#endif
+
+#ifdef SYNC
+
+    ios_base::sync_with_stdio(false);
+
+    cin.tie(0);
+
+    cout.tie(0);
+
+#endif
+
+#ifdef PRECISION
+
+    cout.setf(ios::fixed);
+
+    cout.precision(PRECISION);
+
+#endif
+
+
+
+    int testcases = 1;
+
+    // cin >> testcases;
+
+    loop (testcases) {
+
+        input();
+
+        //clock_t start = clock();
+
+        solve();
+
+        //printf("---------------------\n%.5f seconds\n---------------------\n", (clock() - start + 0.) / CLOCKS_PER_SEC);
+
+    }
+
+
+
+    return 0;
+
+}

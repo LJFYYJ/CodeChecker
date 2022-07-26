@@ -1,0 +1,170 @@
+
+
+#include <bits/stdc++.h>
+
+using namespace std;
+
+#include <ext/pb_ds/assoc_container.hpp> //required
+
+#include <ext/pb_ds/tree_policy.hpp> //required
+
+using namespace __gnu_pbds; //required
+
+template <typename T> using ordered_set =  tree<T, null_type, less<T>, rb_tree_tag, tree_order_statistics_node_update>;
+
+#define int long long
+
+typedef cc_hash_table<int, int, hash<int > > ht;
+
+
+
+const int MAXN = 1e5+1;
+
+int32_t main(){
+
+     int n,m;
+
+     cin>>n>>m;
+
+     int a[n][m];
+
+     int b[n][m];
+
+
+
+     for(int i=0;i<n;i++){
+
+        for(int j=0;j<m;j++){
+
+            cin>>a[i][j];
+
+        }
+
+     }
+
+     for(int i=0;i<n;i++){
+
+        for(int j=0;j<m;j++){
+
+            cin>>b[i][j];
+
+        }
+
+     }
+
+     bool f=true;
+
+     for(int i=0;i<n;i++){
+
+        int x1=i,y1=0;
+
+        vector<int> va;
+
+        vector<int> vb;
+
+        while(x1>=0 and y1<m){
+
+            va.push_back(a[x1][y1]);
+
+            vb.push_back(b[x1][y1]);
+
+            x1-=1;
+
+            y1+=1;
+
+        }
+
+         sort(va.begin(),va.end());
+
+         sort(vb.begin(),vb.end());
+
+
+
+        for(int i=0;i<va.size();i++){
+
+        if(va[i]!=vb[i]){
+
+            f=false;
+
+            break;
+
+           }
+
+        }
+
+        if(f==false){
+
+            break;
+
+        }
+
+
+
+     }
+
+
+
+     for(int j=1;j<m;j++){
+
+        int x1=n-1,y1=j;
+
+        vector<int> va;
+
+        vector<int> vb;
+
+        while(x1>=0 and y1<m){
+
+             va.push_back(a[x1][y1]);
+
+            vb.push_back(b[x1][y1]);
+
+            x1-=1;
+
+            y1+=1;
+
+        }
+
+
+
+     sort(va.begin(),va.end());
+
+     sort(vb.begin(),vb.end());
+
+
+
+     for(int i=0;i<va.size();i++){
+
+        if(va[i]!=vb[i]){
+
+            f=false;
+
+            break;
+
+        }
+
+     }
+
+     if(f==false){
+
+            break;
+
+        }
+
+     }
+
+     if(f)
+
+        cout<<"YES";
+
+     else
+
+        cout<<"NO";
+
+
+
+
+
+     return 0;
+
+}
+

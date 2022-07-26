@@ -1,0 +1,56 @@
+m,n = input().split()
+m = int(m)
+n = int(n)
+mat1 = []
+mat2 = []
+
+for _ in range(m):
+	mat1.append(list(map(int,input().split())))
+
+
+for _ in range(m):
+	mat2.append(list(map(int,input().split())))
+
+if(n >= m):
+	flag = 0
+
+	for i in range(n):
+		list1 = []
+		list2 = []
+
+		for j in range(m):
+			if(i >=	j):
+				list1.append(mat1[j][i-j])
+				list2.append(mat2[j][i-j])
+			else:
+				break
+		list1.sort()
+		list2.sort()
+		if list1 != list2:
+			flag = 1
+			break
+else:
+	flag = 0
+
+	for i in range(m):
+		list1 = []
+		list2 = []
+
+		for j in range(n):
+			if(i >=	j):
+				list1.append(mat1[i-j][j])
+				list2.append(mat2[i-j][j])
+			else:
+				break
+		list1.sort()
+		list2.sort()
+
+		if list1 != list2:
+			flag = 1
+			break
+
+if(flag == 1):
+	print('No')
+else:
+	print('Yes')
+

@@ -1,0 +1,51 @@
+#include <stdio.h>
+
+
+int compare_matrix(int *matrix_a, int *matrix_b, int len) {
+
+    for (int i = 0; i < len; i++)
+        if (matrix_a[i] != matrix_b[i])
+            return 0;
+
+    return 1;
+}
+
+
+int main(void) {
+
+    int n, m;
+
+    scanf("%d %d", &n, &m);
+
+    int matrix_a[n][m], matrix_b[n][m];
+
+    for (int i = 0; i < n; i++)
+        for (int j = 0; j < m; j++)
+            scanf("%d", &matrix_a[i][j]);
+
+    for (int i = 0; i < n; i++)
+        for (int j = 0; j < m; j++)
+            scanf("%d", &matrix_b[i][j]);
+
+    int start = 0;
+    do {
+        // transpose
+        int tmp;
+        for (int i = start; i < n; i++) {
+            for (int j = i + 1; j < m; j++) {
+                tmp = matrix_a[i][j];
+                matrix_a[i][j] = matrix_a[j][i];
+                matrix_a[j][i] = tmp;
+            }
+        }
+
+        if (compare_matrix(&matrix_a[0][0], &matrix_b[0][0], n * m)) {
+            printf("YES");
+            return 0;
+        }
+    } while (start++ < n);
+
+    printf("NO");
+
+    return 0;
+}

@@ -1,0 +1,135 @@
+#include<bits/stdc++.h>
+
+using namespace std;
+
+int a[505][505],b[505][505];
+
+int main(){
+
+	int n,m;
+
+	cin>>n>>m;
+
+	vector<int>ax[2000],bx[2000];
+
+	for(int i=1;i<=n;i++){
+
+		for(int j=1;j<=m;j++){
+
+			scanf("%d",&a[i][j]);
+
+		}
+
+	}
+
+	for(int i=1;i<=n;i++){
+
+		for(int j=1;j<=m;j++){
+
+			scanf("%d",&b[i][j]);
+
+		}
+
+	}
+
+	int loc;
+
+	for(int i=1;i<=n;i++){
+
+	    int t=0;
+
+		while(i-t>0&&1+t<=m){
+
+		 	ax[i].push_back(a[i-t][1+t]);
+
+		 	bx[i].push_back(b[i-t][1+t]);
+
+		 	t++;
+
+		}
+
+	}
+
+	loc=n;
+
+	for(int i=2;i<=m;i++){
+
+	    int t=0;
+
+		++loc;
+
+ 	    while(n-t>=2&&i+t<=m){
+
+		 	ax[loc].push_back(a[n-t][i+t]);
+
+		 	bx[loc].push_back(b[n-t][i+t]);
+
+		 	t++;
+
+	    }
+
+    }
+
+	bool flag=true;
+
+	for(int i=1;i<=loc;i++){
+
+		sort(ax[i].begin(),ax[i].end());
+
+		sort(bx[i].begin(),bx[i].end());
+
+		for(int j=0;j<ax[i].size();j++){
+
+			if(ax[i][j]!=bx[i][j]){
+
+				flag=false;
+
+				break;
+
+			}
+
+		}
+
+		if(!flag){
+
+			break;
+
+		}
+
+	}
+
+//	for(int i=1;i<=loc;i++){
+
+//		for(int j=0;j<ax[i].size();j++){
+
+//			cout<<ax[i][j]<<" ";
+
+//		}
+
+//		cout<<endl;
+
+//	}
+
+//	for(int i=1;i<=loc;i++){
+
+//		for(int j=0;j<ax[i].size();j++){
+
+//			cout<<bx[i][j]<<" ";
+
+//		}
+
+//		cout<<endl;
+
+//	}
+
+	if(flag){
+
+		cout<<"YES";
+
+	}else{
+
+		cout<<"NO";
+
+	}
+
+}

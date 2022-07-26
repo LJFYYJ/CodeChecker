@@ -1,0 +1,44 @@
+#include <iostream>
+
+#define N 105
+
+using namespace std;
+
+int main() {
+
+	int n;
+
+	int k;
+
+	int number[N][N];
+
+	cin >> n;
+
+	for (int i = 0; i < n; i++) {
+
+		cin >> number[i][0] >> number[i][1];
+
+	}
+
+	cin >> k;
+
+	int cnt = 0;
+
+	for (int i = 0; i < n; i++) {
+
+		if (k >= number[i][0] && k <= number[i][1]) {
+
+			cnt = i;
+
+			break;
+
+		}
+
+	}
+
+	cout << n - cnt << endl;
+
+	return 0;
+
+}
+

@@ -1,0 +1,52 @@
+#include<bits/stdc++.h>
+#include<iostream>
+#define ll long long
+#define maxvalue 100000000000000000
+using namespace std;
+ll max(ll A,ll b){ if(A>b) return A; return b;}
+ll min(ll A,ll b){ if(A<b) return A; return b;}
+
+//******************* MY MAIN CODE STARTS HERE ************************/
+
+int main()
+{
+ll n,m;
+cin>>n>>m;
+ll mat1[n][m];
+ll mat2[n][m];
+for(int i=0;i<n;i++)
+{
+  for(int j=0;j<m;j++)
+    cin>>mat1[i][j];
+}
+
+for(int i=0;i<n;i++)
+{
+  for(int j=0;j<m;j++)
+    cin>>mat2[i][j];
+}
+std::vector<ll> v1[m+n];
+std::vector<ll> v2[m+n];
+for(int i=0;i<n;i++)
+{
+  for(int j=0;j<m;j++)
+  {
+    v1[i+j].push_back(mat1[i][j]);
+    v2[i+j].push_back(mat2[i][j]);
+  }
+}
+ll ans=1;
+for(int i=0;i<m+n-1;i++)
+{
+  sort(v1[i].begin(),v1[i].end());
+  sort(v2[i].begin(),v2[i].end());
+  if(v1[i]!=v2[i])
+  {
+    ans=0;
+    break;
+  }
+}
+if(ans==1)
+cout<<"YES"<<endl;
+else cout<<"NO"<<endl;
+} 

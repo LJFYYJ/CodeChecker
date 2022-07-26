@@ -1,0 +1,52 @@
+package codeforces;
+
+
+
+import java.util.Scanner;
+
+
+
+public class Codeforces {
+
+
+
+    public static void main(String[] args) {
+
+        Scanner teclado = new Scanner(System.in);
+
+        int n = teclado.nextInt();
+
+        int vet[][] = new int[n][2];
+
+        for (int x = 0; x < n; x++) {
+
+            for (int y = 0; y < 2; y++) {
+
+                vet[x][y] = teclado.nextInt();
+
+            }
+
+        }
+
+        int m = teclado.nextInt();
+
+        for (int x = 0; x < n; x++) {
+
+            for (int y = 0; y < 2; y++) {
+
+                if(m>=vet[x][y]&&vet[x][y]<=m){
+
+                    System.out.println(n-x);
+
+                    break;
+
+                }
+
+            }
+
+        }
+
+    }
+
+}
+

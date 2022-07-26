@@ -1,0 +1,38 @@
+#include<cstdio>
+
+#include<cstring>
+
+#include<iostream>
+
+#include<algorithm>
+
+using namespace std;
+
+#define ll long long
+
+#define inf 0x3f3f3f3f
+
+const int maxn=100010;
+
+
+
+int l[maxn],r[maxn],n,k;
+
+int main()
+
+{
+
+	while(~scanf("%d%d",&n,&k)){
+
+		if((k-1)>(n-k)) k=n-k+1;
+
+		int ans=3*n+k-2;
+
+		if(n>=2) ans++;
+
+		printf("%d\n",ans);
+
+	}
+
+}
+

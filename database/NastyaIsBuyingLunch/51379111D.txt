@@ -1,0 +1,40 @@
+#include <bits/stdc++.h>
+
+#define f(i, j, n) for(int i = j; i < (int)n; i++)
+#define all(v) v.begin(), v.end()
+
+using namespace std;
+
+int main() {
+  ios_base::sync_with_stdio(0); cin.tie(0);
+  int n, m;
+  cin >> n >> m;
+  vector<int> v(n);
+  vector<int> pos(n);
+  vector<vector<int> > agree(n, vector<int>());
+  f(i, 0, n) {
+    cin >> v[i];
+    v[i]--;
+    pos[v[i]] = i;
+  }
+  while(m--) {
+    int u, v;
+    cin >> u >> v;
+    u--, v--;
+    agree[u].push_back(v);
+  }
+  f(i, 0, n) sort(all(agree[i]), [pos](const int &a, const int &b) -> bool {return pos[a] - pos[b];});
+  vector<int> p;
+  p.push_back(v[n - 1]);
+  for(int i = n - 2; i >= 0; i--) {
+    int posP = (int)p.size() - 1;
+    for(int v : agree[v[i]])
+      if(posP >= 0 && p[posP] == v)
+        posP--;
+    if(posP >= 0) {
+      p.push_back(v[i]);
+    }
+  }
+
+  cout << n - (int)p.size() << "\n";
+}

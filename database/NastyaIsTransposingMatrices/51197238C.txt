@@ -1,0 +1,66 @@
+n, m = [int(item) for item in input().split()]
+
+
+
+a = [[] for _ in range(n)]
+
+b = [[] for _ in range(n)]
+
+
+
+for i in range(n):
+
+    a[i] = [int(item) for item in input().split()]
+
+
+
+for i in range(n):
+
+    b[i] = [int(item) for item in input().split()]
+
+
+
+ok = True
+
+
+
+for i in range(n):
+
+    for l in range(m):
+
+        if a[i][l] == b[i][l]:
+
+            continue
+
+        if l == i:
+
+            ok = False
+
+            break
+
+        flag = False
+
+        for col in range(max(0, l - n + 1), min(l, m)):
+
+            if b[i][l] == a[i + l - col][col]:
+
+                flag = True
+
+                a[i][l], a[l - col][col] = a[l - col][col], a[i][l]
+
+                # print(a, b)
+
+        if not flag:
+
+            ok = False
+
+            break
+
+    if ok == False:
+
+        break
+
+
+
+print("YES" if ok else "NO")
+

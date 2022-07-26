@@ -1,0 +1,52 @@
+#include<bits/stdc++.h>
+
+
+
+using namespace std;
+
+
+
+int main(){
+
+    int n,k,l=0,r=0;
+
+
+
+    cin>>n>>k;
+
+
+
+
+
+    int tmp = (n-1)*2;
+
+    l = (k-1);
+
+    r= n-k;
+
+    if(n==1)
+
+        cout<<2<<endl;
+
+    else{
+
+    if(k==1 || k==n)
+
+        cout<<tmp+3+l+r<<endl;
+
+    else{
+
+        int mi = min(l,r);
+
+        int mx = max(l,r);
+
+        cout<<tmp+3+mi*2+mx<<endl;
+
+    }
+
+    }
+
+return 0;
+
+}
+

@@ -1,0 +1,38 @@
+
+
+n, m = map(int, input().split())
+
+
+
+diag_A = []
+
+for i in range(n):
+
+    row = input().split()
+
+    if i < m:
+
+        diag_A.append(row[i])
+
+
+
+diag_B = []
+
+for i in range(n):
+
+    row = input().split()
+
+    if i < m:
+
+        diag_B.append(row[i])
+
+
+
+if diag_A == diag_B:
+
+    print('Yes')
+
+else:
+
+    print("No")
+

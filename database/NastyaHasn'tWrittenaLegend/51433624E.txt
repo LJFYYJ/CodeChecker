@@ -1,0 +1,131 @@
+#include <cstdio>
+
+typedef long long ll;
+
+const int N = 100005, M = 800005;
+
+ll sum[M], sv[M], a[N], k[N], g[N], G[N];
+
+bool ss[M];
+
+void ptag(int x, int y, int l, int r) {
+
+	ss[x]=true;
+
+	sv[x]=y;
+
+	sum[x]=(r-l+1)*y;
+
+}
+
+void pd(int x, int l, int r) { 
+
+	if (ss[x]) {
+
+		int m=(l+r)/2;
+
+		ptag(2*x, sv[x], l, m);
+
+		ptag(2*x+1, sv[x], m+1, r);
+
+		ss[x]=false;
+
+	}
+
+}
+
+void sset(int x, int l, int r, int ll, int rr, int y) {
+
+	if (r<ll || l>rr) return ;
+
+	if (ll<=l && r<=rr) { ptag(x, y, l, r); return ; }
+
+	pd(x, l, r);
+
+	int m = (l+r)/2;
+
+	sset(2*x, l, m, ll, rr, y);
+
+	sset(2*x+1, m+1, r, ll, rr, y);
+
+	sum[x]=sum[2*x]+sum[2*x+1];
+
+}
+
+ll qry(int x, int l, int r, int ll, int rr) {
+
+	if (r<ll || l>rr) return 0;
+
+	if (ll<=l && r<=rr) return sum[x];
+
+	pd(x, l, r);
+
+	int m = (l+r)/2;
+
+	return qry(2*x,l,m,ll,rr)+qry(2*x+1,m+1,r,ll,rr);
+
+}
+
+
+
+int n, q;
+
+int main() {
+
+	scanf("%d", &n);
+
+	for (int i = 1; i <= n; i++) scanf("%lld", &a[i]); 
+
+	for (int i = 1; i < n; i++) scanf("%lld", &k[i]);
+
+	for (int i = n-1; i>=1; i--) g[i]=g[i+1]+k[i];
+
+	for (int i = 1; i <= n; i++) G[i]=G[i-1]+g[i];
+
+	for (int i = 1; i <= n; i++) a[i]+=g[i];
+
+	for (int i = 1; i <= n; i++) sset(1, 1, n, i, i, a[i]);
+
+	//a[n]>=a[i]+g[i]
+
+	//a[j]>=a[i]+k[i]+...+k[j-1]=a[i]+g[i]-g[j]    a[j]+g[j]>=a[i]+g[i]
+
+	scanf("%d", &q);
+
+	while (q--) {
+
+		char c[10]; 
+
+		int x, y;
+
+		scanf("%s%d%d", &c, &x, &y);
+
+		if (c[0]=='+') {
+
+			int b = qry(1, 1, n, x, x) + y;
+
+			int l = x, r = n;
+
+			while (l < r) {
+
+				int m = (l+r+1)/2;
+
+				if (qry(1,1,n,m,m) >= b) r=m-1; else l=m; 
+
+			}
+
+		//	printf("work: [%d , %d]= %d\n", x, l, b);
+
+			sset(1, 1, n, x, l, b);
+
+		} else {
+
+			printf("%lld\n", qry(1, 1, n, x, y)-(G[y]-G[x-1]));			
+
+		}
+
+	}
+
+	return 0;
+
+} 

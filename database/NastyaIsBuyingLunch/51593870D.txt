@@ -1,0 +1,55 @@
+n, m = map(int, input().split())
+
+
+
+q = list(map(int, input().split()))
+
+index = [0] * (n + 1)
+
+for i in range(n):
+
+  index[q[i]] = i
+
+
+
+G = {}
+
+vn = []
+
+for i in range(m):
+
+  u, v = map(int, input().split())
+
+  if v == q[-1]:
+
+    vn.append(u)
+
+  elif u in G:
+
+    G[u].add(v)
+
+  else:
+
+    G[u] = set([v])
+
+
+
+res = 0
+
+for p in vn:
+
+  pi = index[p]
+
+  between = set(q[pi + 1:-1])
+
+  if between and set(q[pi + 1:-1]).issubset(G[p]):
+
+    res += 1
+
+  elif not between:
+
+    res += 1
+
+
+
+print(res)

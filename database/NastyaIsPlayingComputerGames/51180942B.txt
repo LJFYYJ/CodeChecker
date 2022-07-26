@@ -1,0 +1,80 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+#define ll          long long int
+
+#define pb          push_back
+
+#define pll         pair<ll,ll>
+
+#define pq          priority_queue
+
+#define speed_up    ios_base::sync_with_stdio(false); cin.tie(0); cout.tie(0);
+
+#define mode        998244353
+
+#define mod         1000000007
+
+#define inf         1000000000000000000LL
+
+#define vl          vector<ll>
+
+#define F           first
+
+#define S           second
+
+#define db          long double
+
+#define sz(x)       (ll)x.size()
+
+#define fix(n)      cout<<fixed<<setprecision(n)
+
+#define rep(i,a,b)  for(ll i=a;i<b;i++)
+
+#define all(x)      x.begin(),x.end()
+
+#define mset(x)     memset(x,0,sizeof x)
+
+#define pi          3.14159265358979323
+
+
+
+
+
+void solve()
+
+{
+
+       ll n,k; cin>>n>>k;
+
+       if(k>n/2) k=n-k+1;
+
+       ll ans = 2*(k-1)+2*k+n-k+2*(n-k-1)+3;
+
+       cout<<ans;
+
+}
+
+
+
+
+
+int main()
+
+{
+
+    speed_up
+
+    ll T=1;
+
+    //cin>>T;
+
+    while(T--)
+
+        solve();
+
+    return 0;
+
+}
+

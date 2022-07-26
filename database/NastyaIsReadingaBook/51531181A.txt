@@ -1,0 +1,86 @@
+#include<bits/stdc++.h>
+
+
+
+#define FORA(i, n, ii, s) for(int i=s;i<n;i+=ii)
+
+#define FOR(i, n) for(int i=0;i<n;i++)
+
+#define FORD(i, n) for(int i=n;i>=0;i--)
+
+#define FORF(i, n, s) for(int i=s;i<n;i++)
+
+#define MIN(x, y) ((x<y)?x:y)
+
+#define MAX(x, y) ((x>y)?x:y)
+
+#define ll long long
+
+#define il long
+
+#define ii pair<int,int>
+
+#define vll vector<ll>
+
+#define vi vector<int>
+
+#define vii vector<ii>
+
+#define vvi vector<vector<int>>
+
+#define MOD (int)(1e9 + 7)
+
+#define INF (int)(1e9)
+
+#define INFLL (ll)(1e18)
+
+#define flash ios_base::sync_with_stdio(false),cin.tie(NULL)
+
+#define pb(x) push_back(x)
+
+using namespace std;
+
+
+
+int main() {
+
+	flash;
+
+	int n;cin>>n;
+
+	vii a;
+
+	FOR(i,n){
+
+		int l,r;
+
+		cin>>l>>r;
+
+		a.pb(make_pair(l,r));
+
+	}
+
+	int k;cin>>k;
+
+	int nc = n;
+
+	FOR(i,n){
+
+		if(a[i].second < k){
+
+			nc--;
+
+		}else{
+
+			break;
+
+		}
+
+	}
+
+	cout<<nc<<endl;
+
+	return 0;
+
+}
+

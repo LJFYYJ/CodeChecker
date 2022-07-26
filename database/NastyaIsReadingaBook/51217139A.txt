@@ -1,0 +1,38 @@
+#include<bits/stdc++.h>
+
+using namespace std;
+
+struct Node{
+
+    int l,r;
+
+};
+
+Node d[101];
+
+int n,m,now;
+
+int main(){
+
+    cin>>n;
+
+    for(int i=1;i<=n;i++)cin>>d[i].l>>d[i].r;
+
+    cin>>now;
+
+    int res=0;
+
+    for(int i=n;i;i--){
+
+        if(d[i].r>=now)res++;
+
+        else break;
+
+    }
+
+    cout<<res;
+
+    return 0;
+
+}
+

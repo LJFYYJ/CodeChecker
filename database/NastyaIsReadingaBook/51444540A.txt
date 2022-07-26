@@ -1,0 +1,21 @@
+var a,b:array [1..100] of int64;
+
+	i,n,k:int64;
+
+begin
+
+	readln (n);
+
+    for i:=1 to n do
+
+    	readln (a[i],b[i]);
+
+    readln (k);
+
+    i:=1;
+
+    while k > b[i] do inc (i);
+
+    writeln (n - i + 1);
+
+end.

@@ -1,0 +1,125 @@
+#include <bits/stdc++.h>
+
+#define ll long long
+
+using namespace std;
+
+
+
+int n, m;
+
+vector <vector<int> > a, b;
+
+
+
+int main(){
+
+#ifndef ONLINE_JUDGE
+
+    freopen("in.txt", "r", stdin);
+
+#endif
+
+
+
+    scanf("%d %d", &n, &m);
+
+    
+
+    a.resize(n);
+
+    b.resize(n);
+
+    for(int i = 0; i < n; ++i){
+
+        a[i].resize(m);
+
+        for(int j = 0; j < m; ++j)
+
+            scanf("%d", &a[i][j]);
+
+    }
+
+    for(int i = 0; i < n; ++i){
+
+        b[i].resize(m);
+
+        for(int j = 0; j < m; ++j)
+
+            scanf("%d", &b[i][j]);
+
+    }
+
+    
+
+    for(int i = 0; i < m; ++i){
+
+        int x = 0, y = i;
+
+        vector <int> fA, fB;
+
+        while(y >= 0){
+
+            fA.push_back(a[x][y]);
+
+            fB.push_back(b[x][y]);
+
+            ++x, --y;
+
+        }
+
+        sort(fA.begin(), fA.end());
+
+        sort(fB.begin(), fB.end());
+
+        for(int i = 0; i < fA.size(); ++i)
+
+            if(fA[i] != fB[i]){
+
+                puts("NO");
+
+                return 0;
+
+            }
+
+    }
+
+    
+
+    for(int i = 0; i < n; ++i){
+
+        int x = i, y = n-1;
+
+        vector <int> fA, fB;
+
+        while(x < n){
+
+            fA.push_back(a[x][y]);
+
+            fB.push_back(b[x][y]);
+
+            ++x, --y;
+
+        }
+
+        sort(fA.begin(), fA.end());
+
+        sort(fB.begin(), fB.end());
+
+        for(int i = 0; i < fA.size(); ++i)
+
+            if(fA[i] != fB[i]){
+
+                puts("NO");
+
+                return 0;
+
+            }
+
+    }
+
+    puts("YES");
+
+    return 0;
+
+}

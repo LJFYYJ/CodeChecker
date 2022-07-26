@@ -1,0 +1,62 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+#define pb push_back
+
+#define ll long long
+
+#define pf push_front
+
+#define PI 3.14159265
+
+ll n,k;
+
+pair<ll,ll> p[100000];
+
+
+
+
+
+int main()
+
+{
+
+	ios::sync_with_stdio(0);
+
+	cin.tie(0);
+
+
+
+    cin >> n;
+
+
+
+    for(int i=0;i<n;i++){
+
+        cin >> p[i].first >> p[i].second;
+
+    }
+
+    cin >> k;
+
+
+
+    for(int i=0;i<n;i++){
+
+        if(k>=p[i].first && k<=p[i].second){
+
+            cout << n-i;
+
+            return 0;
+
+        }
+
+    }
+
+
+
+	return 0;
+
+}
+

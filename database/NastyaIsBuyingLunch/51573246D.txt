@@ -1,0 +1,65 @@
+#include <stdio.h>
+#include <math.h>
+#include<algorithm>
+#define SIZE_M 500005
+#define SIZE 300005
+using namespace std;
+
+int que[SIZE];
+struct
+{
+    int ui,vi;
+}abol[SIZE_M];
+
+void input(int n,int m)
+{
+    for(int i=1;i<=n;i++)
+        scanf("%d",&que[i]);
+    for(int i=1;i<=m;i++)
+        scanf("%d%d",&abol[i].ui,&abol[i].vi);
+}
+
+void change(int i)
+{
+    int t;
+    t=que[i];
+    que[i]=que[i+1];
+    que[i+1]=t;
+}
+
+int fun(int n,int m)
+{
+    int k=n,flag_change=0;
+    for(int i=1;i<n;)
+    {
+        for(int j=1;j<=m;j++)
+            if(que[i]==abol[j].ui&&que[i+1]==abol[j].vi)
+            {
+                change(i);
+                flag_change=1;
+                if(i+1==k)
+                    k-=1;
+                break;
+            }
+        if(flag_change==0)
+            i++;
+        else
+        {
+            if(i>=2)
+                i--;
+            else
+                i++;
+            flag_change=0;
+        }
+    }
+    return n-k;
+}
+
+int main()
+{
+    int n,m;
+    scanf("%d%d",&n,&m);
+    input(n,m);
+    printf("%d\n",fun(n,m));
+    return 0;
+}

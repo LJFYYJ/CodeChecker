@@ -1,0 +1,66 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+typedef pair<int,int> ii;
+typedef vector<int> vi;
+typedef vector<ii> vii;
+typedef long long int ll;
+
+
+int main() {
+    
+    int n, m;
+    scanf("%d%d",&n,&m);
+    
+    vi q(n), p(n); 
+    for(int i = 0; i < n; ++i) {
+        scanf("%d",&q[i]);
+        p[q[i]]=i;
+    } 
+    
+    vii ss;
+    set<int> natya;
+    for(int i = 0; i < m; ++i) {
+        int u, v; scanf("%d%d",&u,&v);
+        if(p[u]<p[v]) {
+            ss.push_back(ii(p[u],p[v]));
+            if(v == q[n-1]) natya.insert(p[u]);
+        }
+    }
+    
+    vii s;
+    for(int i = 0; i < (int)ss.size(); ++i) {
+        if(natya.count(ss[i].first) > 0) {
+            s.push_back(ss[i]);
+        }
+    }
+    
+    sort(s.begin(),s.end());
+    
+    set<int> taken;
+    int total = 0, ind = m-1;
+
+    for(int i = n-2; i >= 0 && ind >= 0; --i) {
+        
+        if(!(natya.count(i) > 0)) {
+            continue;
+        }
+        
+        int needed = n-i-2;
+        
+        while(ind >= 0 && s[ind].first == i) {
+            ind--;
+            if(!(taken.count(s[ind].second) > 0)) needed--;
+        }
+        
+        if(needed-total <= 0) {
+            total++;
+            taken.insert(i);
+        }
+    }
+        
+    cout << total << endl;
+    
+    return 0;
+}

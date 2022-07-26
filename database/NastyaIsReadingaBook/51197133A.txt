@@ -1,0 +1,69 @@
+//charulsharma57 || 4ul_sharma
+
+#include<bits/stdc++.h>
+
+#define pb push_back
+
+#define mp make_pair
+
+#define lli  long long int
+
+#define in(a,n) lli a[n];for(lli i=0;i<n;i++)cin>>a[i];
+
+#define print(a,n) for(lli i=0;i<n;i++)cout<<a[i]<<' ';br
+
+#define printv(v) for(vector<lli> :: iterator itv=v.begin();itv!=v.end();itv++)cout<<*itv<<' ';br
+
+#define prints(s) for(set<lli> :: iterator its=s.begin();its!=s.end();its++)cout<<*its<<' ';br
+
+#define print2(a,b) cout<<a<<' '<<b;br
+
+#define print3(a,b,c) cout<<a<<' '<<b<<' '<<c;br
+
+#define print4(a,b,c,d) cout<<a<<' '<<b<<' '<<c<<' '<<d;br
+
+#define sum(a,n) lli sum=0;for(lli i=0;i<n;i++)sum+=a[i];
+
+#define br cout<<endl;
+
+#define mod 1000000007
+
+#define me(arr,l,n) memset(arr, l, n*sizeof(arr[0]))
+
+#define rr 1000000000000
+
+#define fs ios_base::sync_with_stdio(false); cin.tie(NULL);
+
+using namespace std;
+
+lli a[1000001];
+
+int main(){
+
+	fs
+
+     lli i , k1 , j , k , n , h = 0;
+
+     cin >> n ;
+
+     memset( a , 0 , sizeof( a ) );
+
+     for( i = 0 ; i < n ; ++i ){
+
+          cin >> j >> k;
+
+          a[k+1]++;
+
+     }
+
+     cin >> k1;
+
+     for( i = 1 ; i < 1000001 ; ++i )
+
+          a[i] += a[i-1];
+
+     cout << n - a[k1];
+
+	return 0;
+
+}

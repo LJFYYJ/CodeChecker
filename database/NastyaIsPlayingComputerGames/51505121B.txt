@@ -1,0 +1,17 @@
+#include <iostream>
+#include <stdio.h>
+
+using namespace std;
+
+int main(){
+  int n;
+  int k;
+  scanf("%d",&n);
+  scanf("%d",&k);
+  int left = k -1;
+  int right = n -k;
+  int min = right < left ? right : left;
+  int ans = 3*n + min;
+  printf("%d\n",ans);
+  return 0;
+}

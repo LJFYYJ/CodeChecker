@@ -1,0 +1,608 @@
+#include <bits/stdc++.h>
+
+
+
+// #define DEBUG 1
+
+
+#define int long long
+#define for0(i,n) for (int i=0; i<n; i++)
+#define iter(c) for(auto it=c.begin(); it!=c.end(); it++)
+#define iter2(c) for(auto it2=c.begin(); it2!=c.end(); it2++)
+#define pb push_back
+#define ms(a,z) memset(a,z,sizeof(a));
+#define mp make_pair
+#define X first
+#define Y second
+#define sqr(x) 1LL*(x)*(x)
+#define max(a,b) ((a)>(b)?(a):(b))
+#define min(a,b) ((a)<(b)?(a):(b))
+#define all(a) a.begin(),a.end()
+#define sz(x) (int)(x).size()
+#define pmod(x,m) (((x)%(m)+m)%m)
+
+#ifdef int
+#define read(x) scanf("%I64d",&x);
+
+#else
+
+#define read(x) scanf("%d",&x);
+
+#endif
+
+
+
+#ifdef DEBUG
+
+#define nl cout<<"\n";
+
+#define pr(x) cout<<(x)<<" ";
+
+#define prl(x) cout<<#x " = "<<x<<endl;
+
+#define prp(x) cout<<"("<<(x).first<<" "<<(x).second<<") ";
+
+#define printv(v) {for(int _=0; _<sz(v); _++) cout<<v[_]<<" "; cout<<"\n";}
+
+#define printa(a,s) {for (int _=0; _<s; _++) cout<<a[_]<<" "; cout<<"\n";}
+
+#define print2D(a,m,n) {for (int _=0; _<m; _++) {for (int __=0; __<n; __++) cout<<a[_][__]<<" "; cout<<"\n";} cout<<"\n";}
+
+#define priter(v) iter(v) {pr(*it)} nl
+
+#define debug cout<<"ok at line "<<__LINE__<<endl;
+
+#else
+
+#define nl
+
+#define pr(x)
+
+#define prl(x)
+
+#define prp(x)
+
+#define printv(v)
+
+#define printa(a,s)
+
+#define print2D(a,m,n)
+
+#define priter(v)
+
+#define debug
+
+#endif
+
+#define MAXN 100000
+
+using namespace std;
+
+typedef long long ll;
+
+const int INF = 2147483647;
+const long long INFL = 9223372036854775807LL;
+const double EPSILON = 0.00000001;
+const long long MOD = 1000000007;
+
+
+int k[MAXN+5], arr[MAXN+5];
+
+int slack_vals[MAXN+5]; 
+
+
+
+#define Q_OP(x1,x2) ((x1)+(x2))
+
+#define UPD_OP(x1,x2) (x1+x2)
+
+#define RANGE_OP(x, len) ((x)*(len))
+
+#define IDENTITY 0
+
+#define NO_LAZY -1
+
+
+
+template <class DATA_TYPE> 
+
+class SegmentTree
+
+{
+
+public:
+
+    struct node
+
+    {
+
+        int l, r;
+
+        DATA_TYPE x;
+
+        DATA_TYPE lazy;
+
+        node *left_child, *right_child;
+
+        node (int l, int r) : l(l), r(r), x(IDENTITY), lazy(NO_LAZY), left_child(nullptr), right_child(nullptr)
+
+        {}
+
+    };
+
+
+
+    node * root;
+
+
+
+    SegmentTree() {}
+
+    /***
+
+    Constructs and initializes a new segment tree from the underlying array arr
+
+    ***/
+
+    SegmentTree(int l, int r, DATA_TYPE * arr)
+
+    {
+
+        root = construct(l,r,arr);
+
+    }
+
+
+
+    node * construct(int l, int r, DATA_TYPE * arr)
+
+    {
+
+        node * nd = new node(l, r);
+
+        if (l == r) {
+
+            nd->x = arr[l];
+
+        }
+
+        else {
+
+            node * left_child = construct(l, (l+r)/2, arr);
+
+            node * right_child = construct((l+r)/2+1, r, arr);
+
+            nd->left_child = left_child;
+
+            nd->right_child = right_child;
+
+            nd->x = Q_OP(left_child->x, right_child->x);
+
+        }
+
+        return nd;
+
+    }
+
+    
+
+    ~SegmentTree() {
+
+        destruct(root);
+
+    }
+
+    void destruct(node * nd) {
+
+        if (nd->left_child)
+
+            destruct(nd->left_child);
+
+        if (nd->right_child)
+
+            destruct(nd->right_child);
+
+        delete nd;
+
+    }
+
+
+
+    void push_lazy(node *cur)
+
+    {
+
+        //push lazy field down to children
+
+        if (cur->left_child->lazy == NO_LAZY)
+
+            cur->left_child->lazy = cur->lazy;
+
+        else
+
+            cur->left_child->lazy = UPD_OP(cur->left_child->lazy, cur->lazy);
+
+        cur->left_child->x = UPD_OP(cur->left_child->x,
+
+                             RANGE_OP(cur->lazy, cur->left_child->r - cur->left_child->l+1));
+
+                          
+
+        if (cur->right_child->lazy == NO_LAZY)
+
+            cur->right_child->lazy = cur->lazy;
+
+        else 
+
+            cur->right_child->lazy = UPD_OP(cur->right_child->lazy, cur->lazy);
+
+        cur->right_child->x = UPD_OP(cur->right_child->x,
+
+                              RANGE_OP(cur->lazy, cur->right_child->r - cur->right_child->l+1));
+
+        cur->lazy = NO_LAZY;
+
+        assert(cur->x == Q_OP(cur->right_child->x, cur->left_child->x));
+
+    }
+
+
+
+    /***
+
+    Return Q_OP of range l..r inclusive
+
+    ***/
+
+    DATA_TYPE query(int l, int r)
+
+    {
+
+        if (r < l) return 0;
+
+        //pr("query") pr(l) pr(r) nl
+
+        return query(l,r,root);
+
+    }
+
+
+
+    DATA_TYPE query(int l, int r, node * cur)
+
+    {
+
+        if (l <= cur->l && cur->r <= r) {
+
+            //current interval is fully contained within interval of interest
+
+            //(they should be equal actually)
+
+            assert(l == cur->l);
+
+            assert(r == cur->r);
+
+            return cur->x;
+
+        }
+
+        else {
+
+            DATA_TYPE xl = IDENTITY, xr = IDENTITY;
+
+            if (cur->lazy != NO_LAZY) {
+
+                push_lazy(cur);
+
+            }
+
+
+
+            if (l <= cur->left_child->r) {
+
+                //part of the interval overlaps with the left child
+
+                xl = query(l, min(cur->left_child->r,r), cur->left_child);
+
+            }
+
+            if (r >= cur->right_child->l) {
+
+                //part of the interval overlaps with the right child
+
+                xr = query(max(cur->right_child->l,l), r, cur->right_child);
+
+            }
+
+            return Q_OP(xl, xr);
+
+        }
+
+    }
+
+
+
+    /***
+
+    Apply UPD_OP with x to all items in range l..r inclusive
+
+    ***/
+
+    void update(int l, int r, DATA_TYPE x)
+
+    {
+
+        if (r < l) return;
+
+        pr("update") pr(l) pr(r) pr(x) nl
+
+        update(l,r,x,root);
+
+    }
+
+
+
+    void update(int l, int r, DATA_TYPE x, node * cur)
+
+    {
+
+        if (l <= cur->l && cur->r <= r) {
+
+            #ifdef DEBUG
+
+            assert(l == cur->l);
+
+            assert(r == cur->r);
+
+            #endif // DEBUG
+
+            if (l == r) {
+
+                cur->x = UPD_OP(cur->x, x);
+
+                cur->lazy = NO_LAZY;
+
+            }
+
+            else {
+
+                cur->x = UPD_OP(cur->x, RANGE_OP(x, r-l+1));
+
+                if (cur->lazy == NO_LAZY)
+
+                    cur->lazy = x; 
+
+                else 
+
+                    cur->lazy = UPD_OP(cur->lazy,x);
+
+            }
+
+        }
+
+        else {
+
+            if (cur->lazy != NO_LAZY) {
+
+                push_lazy(cur);
+
+            }
+
+            if (l <= cur->left_child->r) {
+
+                //part of the interval overlaps with the left child
+
+                update(l, min(cur->left_child->r,r), x, cur->left_child);
+
+            }
+
+            if (r >= cur->right_child->l) {
+
+                //part of the interval overlaps with the right child
+
+                update(max(cur->right_child->l,l), r, x, cur->right_child);
+
+            }
+
+            cur->x = Q_OP(cur->left_child->x, cur->right_child->x);
+
+        }
+
+    }
+
+};
+
+
+
+
+int32_t main()
+{
+    #ifdef DEBUG
+
+    //freopen("E.txt","r",stdin);
+
+    //freopen("","w",stdout);
+
+    #endif
+
+    
+
+    int n;
+
+    cin >> n ;
+
+    for0(i,n) {
+
+        read(arr[i]); 
+
+    }
+
+    for0(i,n-1) {
+
+        read(k[i]); 
+
+    }
+
+    
+
+    set<int> slacks;
+
+    ms(slack_vals,0); 
+
+    for (int i=1; i<n; i++) {
+
+        int s = arr[i] - (arr[i-1]+k[i-1]); 
+
+        if (s > 0) {
+
+            slacks.insert(i); 
+
+            slack_vals[i] = s; 
+
+        }
+
+    }
+
+    printa(slack_vals,n); 
+
+    for (int s : slacks) {pr(s)} nl 
+
+    nl
+
+    
+
+    SegmentTree<ll> segtree = SegmentTree<ll>(0,n-1,arr); 
+
+    
+
+    int q; 
+
+    cin >> q;
+
+    for0(i,q) {
+
+        string type; 
+
+        cin >> type; 
+
+        if (type == "+") {
+
+            int i, x;
+
+            read(i); read(x); i--; 
+
+            pr("update") pr(i) pr(x) nl 
+
+            
+
+            int prev = i; 
+
+            set<int>::iterator it = slacks.lower_bound(i+1); 
+
+            
+
+            int delta = x;   
+
+            while (it != slacks.end() and delta > 0) {
+
+                int l = prev; 
+
+                int r = *it-1; 
+
+                pr(l) pr(r) pr(delta) nl 
+
+                // update l to r 
+
+                segtree.update(l,r,delta); 
+
+                
+
+                prev = *it; 
+
+                
+
+                if (slack_vals[*it] > delta) {
+
+                    slack_vals[*it] -= delta; 
+
+                    it++; 
+
+                    delta = 0;
+
+                }
+
+                else {
+
+                    delta -= slack_vals[*it]; 
+
+                    slack_vals[*it] = 0; 
+
+                    it = slacks.erase(it); 
+
+                }
+
+                #ifdef DEBUG 
+
+                printa(slack_vals,n)
+
+                for (int s : slacks) {pr(s)} nl 
+
+                nl
+
+                #endif 
+
+            }
+
+
+
+            if (slack_vals[i] == 0) {
+
+                slacks.insert(i); 
+
+            }
+
+            slack_vals[i] += x; 
+
+            
+
+            if (delta > 0) {
+
+                segtree.update(prev,n-1,delta); 
+
+            }
+
+            // segtree.update(i,i,x); 
+
+            #ifdef DEBUG 
+
+            printa(slack_vals,n)
+
+            for (int s : slacks) {pr(s)} nl 
+
+            nl
+
+            #endif 
+
+
+
+        }
+
+        else {
+
+            int l,r;
+
+            read(l); read(r); l--; r--; 
+
+            pr("sum") pr(l) pr(r) nl 
+
+            ll ans = segtree.query(l,r); 
+
+            cout<<ans<<endl; 
+
+            nl
+
+        }
+
+    }
+    return 0;
+}

@@ -1,0 +1,145 @@
+<span style="background-color: write">#define_crt_secure_no_warnings</span></br>
+<span style="background-color: yellow">#include&lt;stdio.h&gt;</span></br>
+<span style="background-color: write">#include&lt;math.h&gt;</span></br>
+<span style="background-color: write">#include&lt;string&gt;</span></br>
+<span style="background-color: write">#include&lt;string.h&gt;</span></br>
+<span style="background-color: write">#include&lt;iostream&gt;</span></br>
+<span style="background-color: write">#include&lt;vector&gt;</span></br>
+<span style="background-color: write">#include&lt;set&gt;</span></br>
+<span style="background-color: write">#include&lt;algorithm&gt;</span></br>
+<span style="background-color: write">#include&lt;time.h&gt;</span></br>
+<span style="background-color: write">#include&lt;queue&gt;</span></br>
+<span style="background-color: write">#include&lt;map&gt;</span></br>
+<span style="background-color: write">#include&lt;limits.h&gt;</span></br>
+<span style="background-color: write">#definevivector&lt;int&gt;</span></br>
+<span style="background-color: write">#definelllonglong</span></br>
+<span style="background-color: write">#defineullunsignedlonglong</span></br>
+<span style="background-color: write">#defineldlongdouble</span></br>
+<span style="background-color: write">#definedddouble</span></br>
+<span style="background-color: write">#defineam&</span></br>
+<span style="background-color: write">#definepi3.141592653589793238462643383279</span></br>
+<span style="background-color: write">#definerad57.295779513082323</span></br>
+<span style="background-color: write">#definescscanf</span></br>
+<span style="background-color: write">#defineprprintf</span></br>
+<span style="background-color: write">#definempmake_pair</span></br>
+<span style="background-color: write">#definepoo(i,a,b)for(lli=a;i&lt;=b;i++)</span></br>
+<span style="background-color: write">#defineoop(i,a,b)for(lli=a;i&gt;=b;i--)</span></br>
+<span style="background-color: red">usingnamespacestd;</span></br>
+<span style="background-color: write">namespacehelp</span></br>
+<span style="background-color: write">{</span>
+<span style="background-color: write">	llgcd(lla,llb)</span></br>
+<span style="background-color: write">	{</span></br>
+<span style="background-color: write">		while(a!=0&&b!=0)</span></br>
+<span style="background-color: write">		{</span></br>
+<span style="background-color: write">			if(a&gt;b)</span></br>
+<span style="background-color: write">				a&=b;</span></br>
+<span style="background-color: write">			else</span></br>
+<span style="background-color: write">				b%=a;</span></br>
+<span style="background-color: write">		}</span></br>
+<span style="background-color: greenyellow">		returna+b;</span></br>
+<span style="background-color: greenyellow">	}</span></br>
+<span style="background-color: write">	voidqsort(inta[],intf,intq)</span></br>
+<span style="background-color: write">	{</span></br>
+<span style="background-color: write">		intl=f,r=q,x=a[(f+q)/2],c;</span></br>
+<span style="background-color: write">		if(f&gt;=q)return;</span></br>
+<span style="background-color: write">		while(l&lt;=r)</span></br>
+<span style="background-color: write">		{</span></br>
+<span style="background-color: write">			while(a[l]&lt;x)</span></br>
+<span style="background-color: write">				l++;</span></br>
+<span style="background-color: write">			while(a[r]&gt;x)</span></br>
+<span style="background-color: write">				r--;</span></br>
+<span style="background-color: write">			if(l&lt;=r)</span></br>
+<span style="background-color: write">			{</span></br>
+<span style="background-color: write">				swap(a[l],a[r]);</span></br>
+<span style="background-color: write">				l++;</span></br>
+<span style="background-color: write">				r--;</span></br>
+<span style="background-color: write">			}</span></br>
+<span style="background-color: write">		}</span></br>
+<span style="background-color: write">		qsort(a,f,r);</span></br>
+<span style="background-color: write">		qsort(a,l,q);</span></br>
+<span style="background-color: write">	}</span></br>
+<span style="background-color: write">	voidqsort(lla[],intf,intq)</span></br>
+<span style="background-color: write">	{</span></br>
+<span style="background-color: write">		lll=f,r=q,x=a[(f+q)/2],c;</span></br>
+<span style="background-color: write">		if(f&gt;=q)return;</span></br>
+<span style="background-color: write">		while(l&lt;=r)</span></br>
+<span style="background-color: write">		{</span></br>
+<span style="background-color: write">			while(a[l]&lt;x)</span></br>
+<span style="background-color: write">				l++;</span></br>
+<span style="background-color: write">			while(a[r]&gt;x)</span></br>
+<span style="background-color: write">				r--;</span></br>
+<span style="background-color: write">			if(l&lt;=r)</span></br>
+<span style="background-color: write">			{</span></br>
+<span style="background-color: write">				swap(a[l],a[r]);</span></br>
+<span style="background-color: write">				l++;</span></br>
+<span style="background-color: write">				r--;</span></br>
+<span style="background-color: write">			}</span></br>
+<span style="background-color: write">		}</span></br>
+<span style="background-color: write">		qsort(a,f,r);</span></br>
+<span style="background-color: write">		qsort(a,l,q);</span></br>
+<span style="background-color: write">	}</span></br>
+<span style="background-color: write">	intbinsearch(intn,inta[],inth)</span></br>
+<span style="background-color: write">	{</span></br>
+<span style="background-color: write">		intl=0,r=h,c=n;</span></br>
+<span style="background-color: write">		while(l&lt;r-1)</span></br>
+<span style="background-color: write">		{</span></br>
+<span style="background-color: write">			c=(l+r)/2;</span></br>
+<span style="background-color: write">			if(n&lt;a[c])</span></br>
+<span style="background-color: write">				r=c;</span></br>
+<span style="background-color: write">			elsel=c;</span></br>
+<span style="background-color: write">		}</span></br>
+<span style="background-color: write">		if(a[l]==n)</span></br>
+<span style="background-color: write">			returnl+1;</span></br>
+<span style="background-color: write">		elsereturn-1;</span></br>
+<span style="background-color: write">	}</span></br>
+<span style="background-color: write">	boolisprime(lla)</span></br>
+<span style="background-color: write">	{</span></br>
+<span style="background-color: write">		lli;</span></br>
+<span style="background-color: write">		if(a%2==0)</span></br>
+<span style="background-color: write">			return0;</span></br>
+<span style="background-color: write">		else</span></br>
+<span style="background-color: write">			for(i=3;i*i&lt;=a;i+=2)</span></br>
+<span style="background-color: write">				if(a%i==0)</span></br>
+<span style="background-color: write">					return0;</span></br>
+<span style="background-color: write">		return1;</span></br>
+<span style="background-color: write">	}</span></br>
+<span style="background-color: write">};</span>
+<span style="background-color: red">intmain()</span></br>
+<span style="background-color: write">{</span>
+<span style="background-color: write">	inta[5000],co=0,m,n;</span></br>
+<span style="background-color: write">	sc("%d%d",amn,amm);</span></br>
+<span style="background-color: write">	a[m-1]=1;</span></br>
+<span style="background-color: write">	if(m&lt;=n/2)</span></br>
+<span style="background-color: write">	{</span></br>
+<span style="background-color: write">		if(m==1)</span></br>
+<span style="background-color: write">		{</span></br>
+<span style="background-color: write">			co=6;</span></br>
+<span style="background-color: write">			co+=3*(n-2);</span></br>
+<span style="background-color: write">		}</span></br>
+<span style="background-color: write">		else</span></br>
+<span style="background-color: write">		{</span></br>
+<span style="background-color: write">			co=6;</span></br>
+<span style="background-color: write">			co+=(m-2)*3;</span></br>
+<span style="background-color: write">			co+=(n-m)*3;</span></br>
+<span style="background-color: write">			co+=m-1;</span></br>
+<span style="background-color: write">		}</span></br>
+<span style="background-color: write">	}</span></br>
+<span style="background-color: write">	else</span></br>
+<span style="background-color: write">	{</span></br>
+<span style="background-color: write">		if(m==n)</span></br>
+<span style="background-color: write">		{</span></br>
+<span style="background-color: write">			co=6;</span></br>
+<span style="background-color: write">			co+=3*(n-2);</span></br>
+<span style="background-color: write">		}</span></br>
+<span style="background-color: write">		else</span></br>
+<span style="background-color: write">		{</span></br>
+<span style="background-color: write">			co=6;</span></br>
+<span style="background-color: write">			co+=(n-m-1)*3;</span></br>
+<span style="background-color: write">			co+=(m-1)*3;</span></br>
+<span style="background-color: write">			co+=n-m;</span></br>
+<span style="background-color: write">		}</span></br>
+<span style="background-color: write">	</span></br>
+<span style="background-color: write">	}</span></br>
+<span style="background-color: write">	pr("%d",co);</span></br>
+<span style="background-color: write">	return0;</span></br>
+<span style="background-color: write">}</span>

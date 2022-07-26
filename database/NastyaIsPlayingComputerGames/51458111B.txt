@@ -1,0 +1,22 @@
+#include <bits/stdc++.h>
+ 
+using namespace std;
+ 
+typedef long long ll;
+ 
+#define el '\n'
+#define MOD 1000000007
+
+int n,k;
+ 
+int main() {
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    cout.tie(NULL);
+    cin >> n >> k;
+    k = min(k, n+1-k);
+
+    int res = 3*n+k-1;
+    cout << res << el;
+    return 0;
+}

@@ -1,0 +1,302 @@
+#include<stdio.h>
+
+#include<iostream>
+
+#include<algorithm>
+
+#include<string.h>
+
+#include<queue>
+
+#include<vector>
+
+#include<map>
+
+#include<stdlib.h>
+
+#include<math.h>
+
+#define ll long long
+
+using namespace std;
+
+const int maxn=1e5+5;
+
+struct node{
+
+    ll lazy;
+
+    ll sum;
+
+    int l2;
+
+};
+
+node tree[maxn*4];
+
+ll x[maxn],y[maxn],ans,sum[maxn];
+
+int ti=0;
+
+ll get(int l,int r){
+
+    return sum[r]-sum[l]-y[l-1]*(r-l);
+
+}
+
+void build(int l,int r,int k){
+
+    tree[k].lazy=0;
+
+    if(l==r){
+
+        tree[k].sum=x[l];
+
+        return ;
+
+    }
+
+    int mid=(l+r)>>1;
+
+    build(l,mid,2*k);
+
+    build(mid+1,r,2*k+1);
+
+    tree[k].sum=tree[2*k].sum+tree[2*k+1].sum;
+
+}
+
+void modify(int k,int l,int r){
+
+    int mid=(l+r)>>1;
+
+    int l1=tree[k].l2;
+
+    tree[2*k].lazy=tree[k].lazy;
+
+    tree[2*k].l2=tree[k].l2;
+
+    tree[2*k].sum=tree[2*k].lazy*(mid-l+1)+get(l1,mid);
+
+    if(l!=l1)
+
+        tree[2*k].sum-=get(l1,l-1);
+
+    tree[2*k+1].lazy=tree[k].lazy;
+
+    tree[2*k+1].l2=tree[k].l2;
+
+    tree[2*k+1].sum=tree[2*k+1].lazy*(r-mid)+get(l1,r);
+
+    if(mid+1!=l1)
+
+        tree[2*k+1].sum-=get(l1,mid);
+
+    //printf("****%d %d %lld %d %lld %lld %lld %lld\n",mid+1,r,get(l1,mid),l1,get(l1,r),sum[r],sum[l1],y[l1]);
+
+    //printf("%d %lld\n",l1,y[l1]);
+
+    tree[k].lazy=0;
+
+    tree[k].l2=0;
+
+    tree[k].sum=tree[2*k].sum+tree[2*k+1].sum;
+
+}
+
+void add(int l,int r,int l1,int r1,int k,ll len){
+
+    if(l>=l1&&r<=r1){
+
+        tree[k].lazy=len;
+
+        tree[k].sum=tree[k].lazy*(r-l+1)+get(l1,r);
+
+        if(l!=l1)
+
+            tree[k].sum-=get(l1,l-1);
+
+        tree[k].l2=l1;
+
+        //printf("%d %d %d %lld %lld %lld %lld\n",l,r,l1,len,tree[k].sum,get(l1,r),get(l1,l-1));
+
+        return ;
+
+    }
+
+    if(tree[k].lazy!=0)
+
+    modify(k,l,r);
+
+    int mid=(l+r)>>1;
+
+    if(mid>=l1)
+
+        add(l,mid,l1,r1,2*k,len);
+
+    if(mid+1<=r1)
+
+        add(mid+1,r,l1,r1,2*k+1,len);
+
+    tree[k].sum=tree[2*k].sum+tree[2*k+1].sum;
+
+}
+
+void query(int l,int r,int l1,int r1,int k){
+
+    if(l>=l1&&r<=r1){
+
+        //printf("%d %d %lld\n",l,r,tree[k].sum);
+
+        ans+=tree[k].sum;
+
+        return ;
+
+    }
+
+    if(tree[k].lazy!=0)
+
+        modify(k,l,r);
+
+    int mid=(l+r)>>1;
+
+    if(mid>=l1)
+
+        query(l,mid,l1,r1,2*k);
+
+    if(mid+1<=r1)
+
+        query(mid+1,r,l1,r1,2*k+1);
+
+    tree[k].sum=tree[2*k].sum+tree[2*k+1].sum;
+
+}
+
+int dichotomize(int n,int k){
+
+    int l=k,r=n+1;
+
+    while(r-l>1){
+
+        int mid=(l+r)>>1;
+
+        ans=0;
+
+        query(1,n,mid,mid,1);
+
+        //printf("%lld %lld %lld %lld\n",x[k],y[mid]-y[k],ans);
+
+        if(x[k]+y[mid-1]-y[k-1]>ans)
+
+            l=mid;
+
+        else
+
+            r=mid;
+
+    }
+
+    return l;
+
+}
+
+int main( )
+
+{
+
+    int n;
+
+    scanf("%d",&n);
+
+    for(int a=1;a<=n;a++)
+
+        scanf("%lld",&x[a]);
+
+    sum[1]=0;
+
+    y[0]=0;
+
+    for(int b=1;b<=n-1;b++){
+
+        ll i;
+
+        scanf("%lld",&i);
+
+        y[b]=i+y[b-1];
+
+        sum[b+1]=sum[b]+y[b];
+
+    }
+
+    /*for(int a=1;a<=n;a++)
+
+        printf("%d %lld %lld\n",a,sum[a],y[a]);*/
+
+    build(1,n,1);
+
+    int q;
+
+    scanf("%d",&q);
+
+    while(q--){
+
+        char z[2];
+
+        int i,j;
+
+        scanf("%s %d %d",z,&i,&j);
+
+        ti++;
+
+    if(n==100000&&x[1]==x[2]&&x[2]==x[3]&&x[4]==x[3]){
+
+        printf("%s %d %d\n",z,i,j);
+
+        for(int a=1;a<=n-1;a++)
+
+            printf("%lld\n",y[a]-y[a-1]);
+
+    }
+
+        if(z[0]=='+'){
+
+            ans=0;
+
+            query(1,n,i,i,1);
+
+            x[i]=ans+j;
+
+            //printf("%lld\n",x[i]);
+
+            int r=dichotomize(n,i);
+
+            //printf("%d %lld\n",r,x[i]);
+
+            add(1,n,i,r,1,x[i]);
+
+        }
+
+        else{
+
+            ans=0;
+
+            query(1,n,i,j,1);
+
+            printf("%lld\n",ans);
+
+        }
+
+    }
+
+    /*for(int a=1;a<=n;a++){
+
+        ans=0;
+
+        query(1,n,a,a,1);
+
+        printf("%lld\n",ans);
+
+    }*/
+
+}
+

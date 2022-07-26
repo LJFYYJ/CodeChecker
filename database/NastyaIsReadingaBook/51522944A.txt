@@ -1,0 +1,46 @@
+#include "stdafx.h"
+
+#include <iostream>
+
+using namespace std;
+
+
+
+int n, k, A[107], x, ans;
+
+
+
+int main()
+
+{
+
+	scanf_s("%i", &n);
+
+	for (int i = 0; i < n; ++i)
+
+		scanf_s("%i %i", &x, &A[i]);
+
+	scanf_s("%i", &k);
+
+	for (int i = 0; i < n; ++i)
+
+		if (A[i] >= k)
+
+		{
+
+			ans = i;
+
+			break;
+
+		}
+
+	printf("%i\n", n - ans);
+
+	system("pause");
+
+    return 0;
+
+}
+
+
+

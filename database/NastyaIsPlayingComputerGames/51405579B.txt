@@ -1,0 +1,82 @@
+#include<bits/stdc++.h>
+
+using namespace std;
+
+#define inf 9999999999
+
+
+
+typedef long long int ll;
+
+#define For(i,q,w) for(ll i=q; i<w; i++)
+
+#define pb push_back
+
+#define mp make_pair
+
+
+
+ll i,j,k;
+
+ll sz = 1e6;
+
+
+
+void solve()
+
+{
+
+    ll n,k;
+
+    cin>>n>>k;
+
+
+
+    ll ans=0,m=inf;
+
+    m = min(n-k,k-1);
+
+
+
+    ans = m+n*3;
+
+    cout<<ans;
+
+}
+
+
+
+int main()
+
+{
+
+    ios_base::sync_with_stdio(0);
+
+    cin.tie(NULL);
+
+    cout.tie(NULL);
+
+/*    #ifndef ONLINE_JUDGE
+
+            freopen("input.txt", "rt", stdin);
+
+            freopen("output.txt", "wt", stdout);
+
+    #endif
+
+*/
+
+    ll n=1;
+
+    while(n--){
+
+       solve();
+
+    }
+
+
+
+    return 0;
+
+}
+

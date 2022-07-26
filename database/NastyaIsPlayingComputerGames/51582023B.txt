@@ -1,0 +1,15 @@
+#include<cstdio>
+#include<cstring>
+#include<iostream>
+#include<algorithm>
+#define rep(i,l,r) for (int i=(l); i<=(r); i++)
+typedef long long ll;
+using namespace std;
+
+int n,k;
+
+int main(){
+	scanf("%d%d",&n,&k);
+	printf("%d\n",min(k-1,n-k)+(n-1)+(n+1)+n);
+	return 0;
+}

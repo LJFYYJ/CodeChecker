@@ -1,0 +1,83 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+
+
+#define io ios::sync_with_stdio(false)
+
+#define pb push_back
+
+#define pqueue priority_queue
+
+#define fi first
+
+#define se second
+
+#define ls rt<<1
+
+#define rs rt<<1|1
+
+#define mid (l+r)/2
+
+#define sz(x) (int)(x).size()
+
+#define dbg(x) cout<<#x<<"---"<<x<<endl
+
+#define mst(x,a) memset(x,a,sizeof(x))
+
+#define fin(a) freopen(a,"r",stdin)
+
+#define fout(a) freopen(a,"w",stdout)
+
+typedef long long ll;
+
+typedef pair<int,int> pii;
+
+typedef pair<ll,ll> pll;
+
+ll gcd(ll a,ll b){ return b==0?a:gcd(b,a%b); }
+
+ll qpow(ll a,ll b,ll m){ ll r=1;a%=m;for(;b;b>>=1){if(b&1)r=r*a%m;a=a*a%m;}return r; }
+
+const int inf=0x7fffffff;
+
+const int maxn=3e5+10;
+
+vector<int> g[maxn];
+
+int a[maxn],cnt[maxn];
+
+int n,m;
+
+
+
+int main(){
+
+	io;
+
+	cin>>n>>m;
+
+	for(int i=1;i<=n;i++)cin>>a[i];
+
+	while(m--){ int u,v;cin>>u>>v;g[v].pb(u); }
+
+	for(int i=0;i<sz(g[a[n]]);i++)cnt[g[a[n]][i]]++;
+
+	int ans=0;
+
+	for(int i=n-1;i>=1;i--){
+
+		if(cnt[a[i]]==n-ans-i){ ans++;continue; }
+
+		dbg(ans);
+
+		for(int j=0;j<sz(g[a[i]]);j++)cnt[g[a[i]][j]]++;
+
+	}
+
+	cout<<ans<<endl;
+
+	return 0;
+
+}

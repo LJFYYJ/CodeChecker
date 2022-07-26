@@ -1,0 +1,29 @@
+//============================================================================
+// Name        : codeforces.cpp
+// Author      : 
+// Version     :
+// Copyright   : Your copyright notice
+//============================================================================
+
+#include <iostream>
+using namespace std;
+
+int main() {
+	int c[100];
+	int n , m;
+	cin>>n;
+	for( int i = 0 ; i < n ; i ++)
+		cin >> c[i]>>c[i];
+
+	cin>> m;
+
+	for( int i =0 ; i < n ; i++)
+		if( m <= c[i])
+		{
+			cout<< n - i;
+			return 0;
+		}
+	cout<< 0;
+	return 0;
+	return 0;
+}

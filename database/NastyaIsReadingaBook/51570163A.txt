@@ -1,0 +1,20 @@
+#include <iostream>
+using namespace std;
+
+int main()
+{
+    int n, m; int arr1[n], arr2[n];
+    cin >> n;
+    for(int i = 0; i < n; i++){
+        cin >> arr1[i] >> arr2[i];
+    }
+    cin >> m;
+    
+    for(int j = 0; j < n; j++){
+        if(arr1[j] <= m && m <= arr2[j]){
+            cout << n - j;
+        }
+    }
+    
+    return 0;
+}

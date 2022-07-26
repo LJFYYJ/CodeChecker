@@ -1,0 +1,93 @@
+#include<bits/stdc++.h> 
+
+using namespace std;
+
+/* run this program using the console pauser or add your own getch, system("pause") or input loop */
+
+const int MAX = 505;
+
+int A[MAX][MAX], B[MAX][MAX], n, m;
+
+bool check(int row, int col)
+
+{
+
+	vector<int> x, y;
+
+	for(int i = row, j = col; i >= 1 && j <= m; i--, j++)
+
+	{
+
+		x.push_back(A[i][j]);
+
+		y.push_back(B[i][j]);
+
+	}
+
+	sort(x.begin(), x.end());
+
+	sort(y.begin(), y.end());
+
+	if(x != y)
+
+		return false;
+
+	return true;
+
+}
+
+int main()
+
+{
+
+	cin >> n >> m;
+
+	for(int i = 1; i <= n; i++)
+
+		for(int j = 1; j <= m; j++)
+
+			cin >> A[i][j];
+
+	for(int i = 1; i <= n; i++)
+
+		for(int j = 1; j <= m; j++)
+
+			cin >> B[i][j];
+
+	for(int i = 1; i <= n; i++)
+
+	{
+
+		if(!check(i, 1))
+
+		{
+
+			cout << "NO" << endl;
+
+			return 0;
+
+		}
+
+	}
+
+	for(int i = 1; i <= m; i++)
+
+	{
+
+		if(!check(n, i))
+
+		{
+
+			cout << "NO" << endl;
+
+			return 0;
+
+		}
+
+	}
+
+	cout << "YES" << endl;
+
+	return 0;
+
+}

@@ -1,0 +1,33 @@
+n = input()
+
+
+
+t = []
+
+
+
+for _ in range(n):
+
+    
+
+    x, y = map(int, raw_input().split())
+
+    
+
+    t.append((x, y))
+
+
+
+k = input()
+
+
+
+for _ in range(n):
+
+
+
+    if t[_][0] <= k <= t[_][1]:
+
+
+
+        print n-_

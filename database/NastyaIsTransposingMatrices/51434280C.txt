@@ -1,0 +1,125 @@
+#include<bits/stdc++.h>
+#include<ext/pb_ds/assoc_container.hpp>
+#include<ext/pb_ds/tree_policy.hpp>
+/* To read and write from a file
+freopen("input.txt", "r", stdin);
+freopen("output.txt", "w", stdout);*/
+/* To input a line 
+string s;
+getline(cin,s)*/
+using namespace std;
+using namespace __gnu_pbds;
+typedef long long ll;
+typedef long double ld;
+#define     pb      push_back
+#define     f       first
+#define     s       second    
+#define     all(a)  a.begin(),a.end()
+#define     vi      vector<int>
+#define     ii      pair<int, int>
+#define     pll     pair<ll,ll>
+#define     vii     vector<ii>
+#define     vl      vector<ll>
+#define     vll     vector<pll>
+#define     si      set<int>
+#define     mi      map<int,int>
+#define     msi     map<string, int>
+#define     vpp     pair< pair<int,int> , pair<int,int> >
+#define     present(container, element) (container.find(element) != container.end()) //for set and map
+#define     cpresent(container, element) (find(all(container),element) != container.end()) //for vectors
+#define     REP(i, a, b) \
+for(int i = a; i <= b; i++) // a to b, and variable i is local!
+#define     REPL(i, a, b) \
+for(ll i = a; i <= b; i++) // a to b, and variable i is local!
+#define     ios     ios_base::sync_with_stdio(false);cin.tie(NULL);
+#define     setbits(n) __builtin_popcount(n)
+#define     input(a,n)  REP(i,0,n-1) cin>>a[i]
+#define     input_ll(a,n) REPL(i,0,n-1) cin>>a[i]
+#define     ret(n) return cout<<n<<"\n",0;
+#define     sz(container) ll(container.size())
+#define     len(container) ll(container.length())
+#define     print(a,n) REPL(i,0,n-1) cout<<a[i]<<" "; cout<<"\n"
+template <typename T>
+using ordered_set = tree<T, null_type, less_equal<T>, rb_tree_tag, tree_order_statistics_node_update>;
+ll a[500][500],b[500][500];
+ll n,m;
+bool check() 
+{ 
+  
+    // Traverse all the diagonals 
+    // starting at first column 
+    for (ll i = 0; i < n; i++) { 
+        vector<ll> v1, v2; 
+        ll r = i; 
+        ll col = 0; 
+  
+        // Traverse in diagonal 
+        while (r >= 0 && col < m) { 
+  
+            // Store the diagonal elements 
+            v1.push_back(a[r][col]); 
+            v2.push_back(b[r][col]); 
+  
+            // Move up 
+            r--; 
+            col++; 
+        } 
+  
+        // Sort the elements 
+        sort(v1.begin(), v1.end()); 
+        sort(v2.begin(), v2.end()); 
+  
+        // Check if they are same 
+        for (ll i = 0; i < v1.size(); i++) { 
+            if (v1[i] != v2[i]) 
+                return false; 
+        } 
+    } 
+  
+    // Traverse all the diagonals 
+    // starting at last row 
+    for (ll j = 1; j < m; j++) { 
+        vector<ll> v1, v2; 
+        ll r = n - 1; 
+        ll col = j; 
+  
+        // Traverse in the diagonal 
+        while (r >= 0 && col < m) { 
+  
+            // Store diagonal elements 
+            v1.push_back(a[r][col]); 
+            v2.push_back(b[r][col]); 
+            r--; 
+            col++; 
+        } 
+  
+        // Sort all elements 
+        sort(v1.begin(), v1.end()); 
+        sort(v2.begin(), v2.end()); 
+  
+        // Check for same 
+        for (ll i = 0; i < v1.size(); i++) { 
+            if (v1[i] != v2[i]) 
+                return false; 
+        } 
+    } 
+  
+    // If every element matches 
+    return true; 
+} 
+int main(int argc, char const *argv[])
+{
+    ios
+    cin>>n>>m;
+    REPL(i,0,n-1)
+        REPL(j,0,m-1)
+            cin>>a[i][j];
+    REPL(i,0,n-1)
+        REPL(j,0,m-1)
+            cin>>b[i][j];
+    if(check())
+        cout<<"YES";
+    else
+        cout<<"NO";
+    return 0;
+}

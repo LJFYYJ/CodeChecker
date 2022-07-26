@@ -1,0 +1,100 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+int n,m;
+
+	int a[501][501];
+
+	int a1[501][501];
+
+	
+
+
+
+	
+
+	vector <vector <int> > vec(1002);
+
+    vector <vector <int> > vec1(1002);
+
+
+
+int main () {
+
+
+
+	
+
+	cin>>n>>m;
+
+	
+
+		cin>>n>>m;
+
+	
+
+	for (int k=1;k<=n;k++){
+
+		for (int j=1;j<=m;j++){
+
+			cin>>a[k][j];
+
+			vec[k+j].push_back(a[k][j]);
+
+		}
+
+	}
+
+	
+
+	for (int k=1;k<=n;k++){
+
+		for (int j=1;j<=m;j++){
+
+			cin>>a1[k][j];
+
+				vec1[k+j].push_back(a[k][j]);
+
+		}
+
+	}
+
+	for (int h=2;h<=n+m;h++){
+
+		sort (vec[h].begin(),vec[h].end());
+
+		sort (vec1[h].begin(),vec1[h].end());
+
+		
+
+		for (int y=0;y<vec[h].size();y++){
+
+			if (vec[h][y]!=vec1[h][y]){
+
+				cout<<"NO";
+
+				return 0;
+
+			}
+
+		}
+
+		
+
+	}
+
+	
+
+ 
+
+	
+
+    cout<<"YES";
+
+	return 0;
+
+	
+
+}
+

@@ -1,0 +1,244 @@
+//////////////////////////////////////
+
+//           Author : Hasan         //
+
+//              CSE,BUET            //
+
+//////////////////////////////////////
+
+#include <bits/stdc++.h>
+
+/*#include <ext/pb_ds/assoc_container.hpp>
+
+#include <ext/pb_ds/tree_policy.hpp>
+
+#include <ext/pb_ds/detail/standard_policies.hpp>
+
+#include<unordered_map>*/
+
+
+
+using namespace std;
+
+
+
+/*using namespace __gnu_pbds;*/
+
+
+
+#define ll long long
+
+#define N 300002
+
+#define M 500002
+
+#define INF 1000000000
+
+#define MOD 1000000007
+
+#define pb push_back
+
+#define rep(i,n,m) for(int i = n; i <= m; i++)
+
+#define repl(i,n,m) for(ll i = n; i < m; i++)
+
+#define reps(i,n,m) for(int i = n;i >= m; i--)
+
+#define sc scanf
+
+#define pc printf
+
+#define pii pair<int, pair<ll,int> >
+
+#define pi pair<int,int>
+
+#define pii pair<pair<int,int>,int>
+
+#define mp make_pair
+
+#define ff first
+
+#define ss second
+
+#define ct1(m) cout << m << endl
+
+#define ct2(n,m) cout << n << " " << m << endl
+
+#define lft(o) o<<1
+
+#define rght(o) ((o<<1)|1)
+
+#define mid(depth,r) ((depth+r)>>1)
+
+#define PI acos(-1.0)
+
+#define epsilon (1.0e-6)
+
+#define Join(s1,s2) printf("%s=%s %s=%s",#s1,s1,#s2,s2)
+
+
+
+/*
+
+typedef tree<
+
+int,
+
+null_type,
+
+less<int>,
+
+rb_tree_tag,
+
+tree_order_statistics_node_update>
+
+ordered_set;
+
+*/
+
+
+
+int n,m;
+
+int p[N];
+
+stack<int>S;
+
+set<int>adj[N];
+
+
+
+int main()
+
+{
+
+    sc("%d%d",&n,&m);
+
+
+
+    rep(i,1,n) sc("%d",&p[i]);
+
+
+
+    rep(i,1,m) {
+
+        int u,v;
+
+        sc("%d%d",&u,&v);
+
+        adj[u].insert(v);
+
+    }
+
+
+
+
+
+    S.push(p[n]);
+
+
+
+    int i = n-1;
+
+    int ans = 0;
+
+    queue<int>Q;
+
+    while(i > 0){
+
+        int now = p[i];
+
+
+
+        bool is = 0;
+
+        while(!S.empty()){
+
+            int nxt = S.top();
+
+            S.pop();
+
+            if(adj[now].find(nxt) != adj[now].end()){
+
+                Q.push(nxt);
+
+                if(nxt == p[n]){
+
+                    ans++;
+
+                    is = 1;
+
+                    break;
+
+                }
+
+            }
+
+            else{
+
+                S.push(nxt);
+
+                break;
+
+            }
+
+        }
+
+
+
+        if(is){
+
+            while(!Q.empty()){
+
+                int cur = Q.front();
+
+                Q.pop();
+
+                S.push(cur);
+
+            }
+
+        }
+
+        else{
+
+            S.push(now);
+
+            while(!Q.empty()){
+
+                int cur = Q.front();
+
+                Q.pop();
+
+                S.push(cur);
+
+            }
+
+        }
+
+
+
+        i--;
+
+    }
+
+
+
+    pc("%d\n",ans);
+
+
+
+
+
+    return 0;
+
+}
+
+
+
+
+
+
+
+
+

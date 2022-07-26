@@ -1,0 +1,91 @@
+#include <iostream>
+
+#include <vector>
+
+#include <algorithm>
+
+#include <utility>
+
+using namespace std;
+
+
+
+#define pii pair< int, int >
+
+
+
+int idx[300001];
+
+bool cmp(pii m, pii n) {
+
+    return (idx[m.first] > idx[n.first]);
+
+}
+
+
+
+int main(void)
+
+{
+
+    int n, m;
+
+    cin >> n >> m;
+
+    
+
+    int p[n] = {};
+
+    for (int i = 0; i < n; i++) cin >> p[i];
+
+    for (int i = 0; i < n; i++) idx[p[i]] = i + 1;
+
+
+
+    vector< pii > prs;
+
+    for (int i = 0; i < m; i++) {
+
+        pii toPush;
+
+        cin >> toPush.first >> toPush.second;
+
+        prs.push_back(toPush);
+
+    }
+
+    sort(prs.begin(), prs.end(), cmp);
+
+    
+
+    bool jumped[n + 1] = {};
+
+    int ans = 0, cnt[n + 1] = {};
+
+    for (int i = 0; i < m; i++) {
+
+        if (!jumped[prs[i].second] && idx[prs[i].first] < idx[prs[i].second]) {
+
+            cnt[prs[i].first]++;
+
+            if (cnt[prs[i].first] == n - idx[prs[i].first] - ans) {
+
+                jumped[prs[i].first] = true;
+
+                ans++;
+
+            }
+
+        }
+
+    }
+
+
+
+    cout << ans;
+
+
+
+    return 0;
+
+}

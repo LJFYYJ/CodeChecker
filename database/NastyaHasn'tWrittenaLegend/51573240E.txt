@@ -1,0 +1,128 @@
+//In The Name Of God
+#include <bits/stdc++.h>
+
+using namespace std;
+
+typedef long long ll;
+typedef unsigned long long ull;
+typedef vector<string> vs;
+typedef pair<int, int> ii;
+typedef pair<int, ii> iii;
+typedef pair<double, double> dd;
+typedef pair<dd, double> ddd;
+typedef vector<ll> vi;
+typedef vector<vi> vvi;
+typedef vector<dd> vdd;
+typedef vector<double> vd;
+typedef vector<vd> vvd;
+typedef vector<ii> vii;
+typedef vector<vii> vvii;
+
+mt19937 rng32(chrono::steady_clock::now().time_since_epoch().count());
+#define forn(i, n) for (ll i = 0; i < n; i++)
+#define forr(i, n) for (int i = n; i >= 0; i--)
+#define forne(i, x, n) for (ll i = x; i < n; i++)
+#define forre(i, x, n) for (int i = n; i >= x; i--)
+#define all(a) (a).begin(), (a).end()
+#define eps 1e-9
+
+ll inf = LONG_LONG_MAX;
+
+struct it {
+    ll mx, sm = 0;
+};
+
+const ll maxn = 1e5 + 100;
+ll a[maxn], k[maxn], b[maxn], t[maxn], lazy[5 * maxn];
+it seg[5 * maxn];
+
+void build(ll n, ll l, ll r) {
+    if (l > r) return;
+    if (l == r) seg[n].mx = b[l], seg[n].sm = b[l];
+    else {
+        build(2 * n, l, (l + r) / 2), build(2 * n + 1, (l + r) / 2 + 1, r);
+        seg[n].mx = max(seg[2 * n].mx, seg[2 * n + 1].mx);
+        seg[n].sm = seg[2 * n].sm + seg[2 * n + 1].sm;
+    }
+}
+
+void handleLazy(ll n, ll curl, ll curr) {
+    if (lazy[n] != inf) {
+        lazy[2 * n] = lazy[2 * n + 1] = lazy[n];
+        ll l1 = (curl + curr) / 2 - curl + 1;
+        ll l2 = curr - ((curl + curr) / 2 + 1) + 1;
+//        seg[n].mx = lazy[n];
+//        seg[n].sm = (curr - curl + 1) * lazy[n];
+        seg[n * 2].sm = l1 * lazy[n], seg[n * 2].mx = lazy[n];
+        seg[n * 2 + 1].sm = l2 * lazy[n], seg[n * 2 + 1].mx = lazy[n];
+        lazy[n] = inf;
+    }
+}
+
+void setRng(ll n, ll l, ll r, ll curl, ll curr, ll val) {
+    if (curl > curr || curl > r || curr < l) return;
+
+    if (curl >= l && curr <= r) {
+        seg[n].sm = (curr - curl + 1) * val;
+        seg[n].mx = val;
+        lazy[n] = val;
+//        lazy[2 * n] = lazy[2 * n + 1] = val;
+
+    } else {
+        handleLazy(n, curl, curr);
+        setRng(2 * n, l, r, curl, (curl + curr) / 2, val);
+        setRng(2 * n + 1, l, r, (curl + curr) / 2 + 1, curr, val);
+        seg[n].mx = max(seg[2 * n].mx, seg[2 * n + 1].mx);
+        seg[n].sm = seg[2 * n].sm + seg[2 * n + 1].sm;
+    }
+}
+
+ll getSum(ll n, ll l, ll r, ll curl, ll curr) {
+    if (curl > curr || curl > r || curr < l) return 0;
+
+    if (curr <= r && curl >= l) return seg[n].sm;
+    handleLazy(n, curl, curr);
+    return getSum(2 * n, l, r, curl, (curl + curr) / 2) + getSum(2 * n + 1, l, r, (curl + curr) / 2 + 1, curr);
+}
+
+int main() {
+    ios::sync_with_stdio(false);
+    ll n;
+    cin >> n;
+    forne (i, 1, n + 1) cin >> a[i];
+    forne (i, 1, n) cin >> k[i];
+    forne(i, 2, n + 1) t[i] += t[i - 1] + k[i - 1];
+    forne(i, 1, n + 1) b[i] = a[i] - t[i];
+    forne(i, 1, n + 1) t[i] += t[i - 1];
+    build(1, 1, n);
+    forn(i, 5 * maxn) lazy[i] = inf;
+    ll q;
+    cin >> q;
+    while (q--) {
+        char type;
+        cin >> type;
+        ll l, r;
+        cin >> l >> r;
+        if (type == '+') {
+            ll cur = getSum(1, l, l, 1, n) + r;
+            setRng(1, l, l, 1, n, cur);
+            ll bl = l, br = n;
+            while (bl <= br) {
+                ll m = (bl + br) / 2;
+                ll now = getSum(1, m, m, 1, n);
+                if (now <= cur) bl = m + 1;
+                else br = m - 1;
+            }
+            assert(getSum(1, bl - 1, bl - 1, 1, n) <= cur);
+            assert(bl - 1 == n || getSum(1, bl, bl, 1, n) >= cur);
+            assert(bl - 1 >= l);
+            setRng(1, l, bl - 1, 1, n, cur);
+
+        } else {
+            ll ans = getSum(1, l, r, 1, n) + t[r] - t[l - 1];
+            cout << ans << endl;
+        }
+    }
+
+    return 0;
+}

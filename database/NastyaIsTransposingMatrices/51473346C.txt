@@ -1,0 +1,127 @@
+#include<bits/stdc++.h>
+
+using namespace std;
+
+	int m1[505][505];
+
+	int m2[505][505];
+
+int main(void)
+
+{
+
+	int n,m;
+
+	cin>>n>>m;
+
+	for(int i=1;i<=n;i++)
+
+	for(int j=1;j<=m;j++)
+
+	cin>>m1[i][j];
+
+	for(int i=1;i<=n;i++)
+
+	for(int j=1;j<=m;j++)
+
+	cin>>m2[i][j];
+
+	for(int k=1;k<=m;k++)
+
+	{
+
+		vector<int>fir,sec;
+
+		int x=1;
+
+		int y=k;
+
+		
+
+		while(y>=1&&y<=m&&x>=1&&x<=n)
+
+		{
+
+			fir.push_back(m1[x][y]);
+
+			sec.push_back(m2[x][y]);
+
+			x++;
+
+			y--;
+
+		}
+
+		sort(fir.begin(),fir.end());
+
+		sort(sec.begin(),sec.end());
+
+		for(int i=0;i<sec.size();i++)
+
+		{
+
+			if(fir[i]!=sec[i])
+
+			{
+
+				cout<<"NO";
+
+				return 0;
+
+			}
+
+		}
+
+	}
+
+	for(int k=1;k<=m;k++)
+
+	{
+
+		vector<int>fir,sec;
+
+		int x=n;
+
+		int y=k;
+
+		
+
+		while(y>=1&&y<=m&&x>=1&&x<=n)
+
+		{
+
+			fir.push_back(m1[x][y]);
+
+			sec.push_back(m2[x][y]);
+
+			x--;
+
+			y++;
+
+		}
+
+		sort(fir.begin(),fir.end());
+
+		sort(sec.begin(),sec.end());
+
+		for(int i=0;i<sec.size();i++)
+
+		{
+
+			if(fir[i]!=sec[i])
+
+			{
+
+				cout<<"NO";
+
+				return 0;
+
+			}
+
+		}
+
+	}
+
+	cout<<"YES"
+
+}

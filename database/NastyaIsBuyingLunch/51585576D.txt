@@ -1,0 +1,139 @@
+#include<bits/stdc++.h>
+
+#include<ext/pb_ds/assoc_container.hpp>
+
+#include<ext/pb_ds/tree_policy.hpp>
+
+#define pb push_back
+
+#define mp make_pair
+
+#define lli long long int
+
+#define in(a, n) lli a[n]; for (lli i = 0; i < n; i++) cin >> a[i];
+
+#define mem(a, val, n) for (i = 0; i < n; i++) a[i] = val;
+
+#define print(a, n) for (lli i = 0; i < n; i++) cout << a[i] << ' ' ; br
+
+#define printv(v) for (vector <lli> :: iterator itv = v.begin(); itv != v.end(); itv++) cout << *itv << ' ' ; br
+
+#define prints(s) for (set <lli> :: iterator its = s.begin(); its != s.end(); its++) cout << *its << ' '; br
+
+#define printm(m) for (map <lli, lli> :: iterator itm = m.begin(); itm != m.end(); itm++) cout << (*itm).ff << ' ' << (*itm).ss << endl;
+
+#define printmm(m) for (multimap <lli, lli> :: iterator itm = m.begin(); itm != m.end(); itm++) cout << (*itm).ff << ' ' << (*itm).ss << endl;
+
+#define print2(a, b) cout << a << ' ' << b; br
+
+#define print3(a, b, c) cout << a << ' ' << b << ' ' << c; br
+
+#define print4(a, b, c, d) cout << a << ' ' << b << ' ' << c << ' ' << d; br
+
+#define sum(a, n) lli sum = 0; for (lli i = 0; i < n; i++) sum += a[i];
+
+#define br cout << endl;
+
+#define check cout << "x" << endl;
+
+#define lower(a) transform(a.begin(), a.end(), a.begin(), ::tolower);
+
+#define upper(a) transform(a.begin(), a.end(), a.begin(), ::toupper);
+
+#define ff first
+
+#define ss second
+
+#define mod 1000000007
+
+#define maxn 100005
+
+#define inf 1000000000
+
+#define fio ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL);
+
+#define file freopen("input.txt", "r", stdin); freopen("output.txt", "w", stdout);
+
+using namespace std;
+
+using namespace __gnu_pbds;
+
+typedef tree<lli, null_type, less_equal<lli>, rb_tree_tag, tree_order_statistics_node_update> ordered_set;
+
+int main(){
+
+    fio;
+
+   // file;
+
+    lli t, i, j, k, n, m, c, x, ans, u, v;
+
+    cin >> n >> m;
+
+    lli a[n + 1];
+
+    for (i = 1; i <= n; i++) {
+
+        cin >> a[i];
+
+    }
+
+    vector < lli > g[n + 1];
+
+    for (i = 0; i < m; i++) {
+
+        cin >> u >> v;
+
+        g[v].pb(u);
+
+    }
+
+    ans = 0;
+
+    set < lli > s, s_temp;
+
+    for (i = 0; i < g[ a[n] ].size(); i++) {
+
+        s.insert(g[ a[n] ][i]);
+
+    }
+
+    for (i = n - 1; i > 0; i--) {
+
+        // cout << i; br
+
+        if (s.size() == 0) {
+
+            break;
+
+        }
+
+        if (s.find(a[i]) != s.end()) {
+
+            ans++;
+
+            continue;
+
+        }
+
+        for (j = 0; j < g[ a[i] ].size(); j++) {
+
+            if (s.find(g[ a[i] ][j]) != s.end()) {
+
+                s_temp.insert(g[ a[i] ][j]);
+
+            }
+
+        }
+
+        s = s_temp;
+
+        s_temp.clear();
+
+    }
+
+    cout << ans;
+
+    return 0;
+
+}

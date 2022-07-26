@@ -1,0 +1,132 @@
+
+
+
+
+import java.util.ArrayList;
+
+import java.util.Collections;
+
+import java.util.Objects;
+
+import java.util.Scanner;
+
+
+
+
+
+public class Problem3 {
+
+    
+
+    public static boolean arrange (int arr[][], int arr2[][], int WIDTH, int HEIGHT){
+
+        
+
+           boolean flag = true;
+
+    
+
+           for( int k = 0 ; k <= WIDTH + HEIGHT - 2; k++ ) {
+
+         ArrayList<Integer> tmp = new ArrayList<>();
+
+         ArrayList<Integer> tmp2 = new ArrayList<>();
+
+        for( int j = 0 ; j <= k ; j++ ) {
+
+            int i = k - j;
+
+            if( i < HEIGHT && j < WIDTH ) {
+
+                tmp.add(arr[i][j]);
+
+                tmp2.add(arr2[i][j]);
+
+            }
+
+        }
+
+        Collections.sort(tmp);
+
+        Collections.sort(tmp2);
+
+               for (int i = 0; i <tmp.size() ; i++) {
+
+                   
+
+                   if(!Objects.equals(tmp.get(i), tmp2.get(i))) flag=false;
+
+                   
+
+               }
+
+        
+
+    }
+
+    return flag;
+
+    
+
+    }
+
+
+
+    public static void main(String[] args) {
+
+        
+
+        
+
+           Scanner s = new Scanner(System.in);
+
+          int HEIGHT = s.nextInt();
+
+          int WIDTH = s.nextInt();
+
+          int array [][] = new int[HEIGHT][WIDTH];
+
+          int array2 [][] = new int[HEIGHT][WIDTH];
+
+          for (int i = 0; i < HEIGHT; i++) {
+
+              for (int j = 0; j < WIDTH; j++) {
+
+                  array[i][j] = s.nextInt();
+
+                  
+
+              }
+
+            
+
+        }
+
+                 for (int i = 0; i < HEIGHT; i++) {
+
+              for (int j = 0; j < WIDTH; j++) {
+
+                  array2[i][j] = s.nextInt();
+
+                  
+
+              }
+
+            
+
+        }
+
+          
+
+          System.out.println(arrange(array,array2,HEIGHT,WIDTH));
+
+                  
+
+  
+
+    }
+
+    
+
+}
+

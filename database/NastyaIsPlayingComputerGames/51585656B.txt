@@ -1,0 +1,45 @@
+#include <iostream>
+
+#include <algorithm>
+
+
+
+using namespace std;
+
+
+
+int main() 
+
+{
+
+	int n, k;
+
+
+
+	scanf("%d %d", &n, &k);
+
+
+
+	int l = min(k, n - k + 1);
+
+
+
+	int totalPick = n;
+
+	int totalMove = (l - 1) * 2 + (n - l);
+
+	int totalThrow = (n - l) + (2 * l - 1) + (l == 1); // l == 1 special case
+
+
+
+	int result = totalPick + totalMove + totalThrow;
+
+
+
+	printf("%d\n", result);
+
+
+
+	return 0;
+
+}

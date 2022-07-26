@@ -1,0 +1,82 @@
+#include<bits/stdc++.h>
+
+#define rep(i,a,b) for(int i=a;i<=b;i++)
+
+using namespace std;
+
+const int maxn=300010;
+
+int a[maxn],num[maxn],vis[maxn],ans,N,cnt;
+
+int Next[maxn];
+
+map<int,int>s[maxn];
+
+void read(int &x){
+
+    x=0; char c=getchar();
+
+    while(c>'9'||c<'0') c=getchar();
+
+    while(c>='0'&&c<='9') x=x*10+c-'0',c=getchar();
+
+}
+
+bool check(int pos)
+
+{
+
+    if(num[a[pos]]<N-cnt-pos) return false;
+
+    for(int i=pos+1;i<=N;i=Next[i]){
+
+       if(vis[i]) continue;
+
+       if(s[a[pos]].find(a[i])==s[a[pos]].end())
+
+         return false;
+
+    }
+
+    vis[pos]=1; cnt++; Next[pos-1]=Next[pos];
+
+    return true;
+
+}
+
+int main()
+
+{
+
+    int M,u,v;
+
+    scanf("%d%d",&N,&M);
+
+    rep(i,1,N) read(a[i]);
+
+    rep(i,1,N) Next[i]=i+1;
+
+    rep(i,1,M){
+
+         read(u); read(v);
+
+         num[u]++;
+
+         s[u][v]=1;
+
+    }
+
+    for(int i=N-1;i>=1;i--) {
+
+        if(check(i)) ans++;
+
+    }
+
+    printf("%d\n",ans);
+
+    return 0;
+
+}
+
+
+

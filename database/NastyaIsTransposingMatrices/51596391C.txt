@@ -1,0 +1,33 @@
+#include <bits/stdc++.h>
+using namespace std;
+#define ll long long int
+#define pb push_back
+ll a[505][505];
+ll b[505][505];
+int main()
+{
+	ll n,i,j,k,x,y,t,m;
+	cin >> n >> m;
+
+	for(i=1;i<=n;i++)
+	{
+		for(j=1;j<=m;j++)
+		{
+			cin >> a[i][j];
+		}
+	}
+
+	for(i=1;i<=n;i++)
+	{
+		for(j=1;j<=m;j++)
+		{
+			cin >> b[i][j];
+		}
+	}
+
+	if(a[0][0]==b[0][0] && a[n][m]==b[n][m])
+		printf("YES\n");
+	else
+		printf("NO\n");
+
+}

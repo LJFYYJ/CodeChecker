@@ -1,0 +1,25 @@
+#include <bits/stdc++.h>
+
+#define f first
+#define s second
+
+using namespace std;
+
+typedef long long ll;
+typedef pair<ll, ll> pll;
+const ll N = 103;
+
+ll n, k;
+
+ll _abs(ll x) {
+	return x < 0 ? -x : x;
+}
+
+int main() {
+	ios_base::sync_with_stdio(false); cin.tie(0); cout.tie(0);
+	
+	cin >> n >> k;
+	cout << n * 3 + min(_abs(1 - k), _abs(n - k));
+	
+	return 0;
+}

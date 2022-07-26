@@ -1,0 +1,108 @@
+#include <iostream>
+
+
+
+using namespace std;
+
+
+
+int main()
+
+{
+
+    int n, m, B, i, j;
+
+    cin >> n >> m;
+
+    int A[n][m];
+
+    for (i = 0; i < n; i++){
+
+        for (j = 0; j < m; j++){
+
+            cin >> A[i][j];
+
+        }
+
+    }
+
+    for (i = 0; i < n; i++){
+
+        for (j = 0; j < m; j++){
+
+            cin >> B;
+
+            A[i][j] -= B;
+
+        }
+
+    }
+
+    int sum_side_diag;
+
+    bool is_ok = true;
+
+    for (i = 0; i < n; i++){
+
+        sum_side_diag = 0;
+
+        for (j = 0; j < min(m, i + 1); j++){
+
+            sum_side_diag += A[i - j][j];
+
+        }
+
+        cout << endl;
+
+        if (sum_side_diag){
+
+            is_ok = false;
+
+            break;
+
+        }
+
+    }
+
+    if (is_ok){
+
+        for (j = 1; j < m; j++){
+
+            sum_side_diag = 0;
+
+            for (i = n - 1; i >= n - (m - j); i--){
+
+                sum_side_diag += A[i][j - i + (n - 1)];
+
+            }
+
+            cout << sum_side_diag << " ";
+
+            if (sum_side_diag){
+
+                is_ok = false;
+
+                break;
+
+            }
+
+        }
+
+    }
+
+    if (is_ok){
+
+        cout << "YES";
+
+    }
+
+    else{
+
+        cout << "NO";
+
+    }
+
+    return 0;
+
+}
+

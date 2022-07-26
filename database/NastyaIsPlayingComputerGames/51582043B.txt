@@ -1,0 +1,55 @@
+var n,k,c,i:integer;
+
+    b:array[1..100] of integer;
+
+    
+
+begin
+
+read (n,k);
+
+for i:=1 to n do
+
+b[i]:=1;
+
+
+
+if (k-1<n-k) then begin
+
+inc(b[k+1]); b[k]:=0;  inc (c,3);
+
+for i:=k-1 downto 1 do begin
+
+inc (b[k],b[i]); b[i]:=0; inc (c,b[i]+2);      end;
+
+if (k>1) then inc (c,k);
+
+for i:=k+1 to n do begin
+
+inc (b[k],b[i]);inc (c,b[i]+1); b[i]:=0;
+
+if (i<n) then inc (c); end;
+
+end else
+
+if (k-1>n-k)  then begin
+
+inc(b[k-1]); b[k]:=0;  inc (c,3);
+
+for i:=k+1 to n do  begin
+
+inc (b[k],b[i]);inc (c,b[i]+2); b[i]:=0;    end;
+
+if (k<n) then inc (c,k);
+
+for i:=k-1 downto 2 do   begin
+
+inc (b[k],b[i]); inc (c,b[i]+1); b[i]:=0;
+
+if (i>1) then inc (c); end;
+
+end;
+
+write (c);
+
+end.

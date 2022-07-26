@@ -1,0 +1,55 @@
+#include <cstdio>
+
+#include <cctype>
+
+#include <cstring>
+
+#include <iostream>
+
+static const int MAXN=150;
+
+using namespace std;
+
+struct node{
+
+    int l,r;
+
+}a[MAXN];
+
+int n,k;
+
+inline int read(){
+
+    int x=0;
+
+    bool sign=false;
+
+    char alpha=0;
+
+    while(!isdigit(alpha)) sign|=alpha=='-',alpha=getchar();
+
+    while(isdigit(alpha)) x=(x<<1)+(x<<3)+(alpha^48),alpha=getchar();
+
+    return sign?-x:x;
+
+}
+
+int main(){
+
+    n=read();
+
+    for(int i=1;i<=n;i++) a[i].l=read(),a[i].r=read();
+
+    k=read();
+
+    for(int i=1;i<=n;i++){
+
+        if(k>=a[i].l&&k<=a[i].r) return 0&printf("%d\n",n-i+1);
+
+        //if(k==a[i].l||k==a[i].r) return 0&printf("%d\n",n-i+1);
+
+    }
+
+    return 0;
+
+}

@@ -1,0 +1,179 @@
+#include<bits/stdc++.h>
+
+#define ll long long
+
+using namespace std;
+
+const int maxn=1e5+10;
+
+ll sum[maxn*4],mn[maxn*4],tag[maxn*4],a[maxn],b[maxn],inf=1e18;
+
+void build(int o,int l,int r)
+
+{
+
+	tag[o]=inf;
+
+	if(l==r)
+
+	{
+
+		sum[o]=mn[o]=a[l]-b[l];
+
+		return;
+
+	}
+
+	int m=(l+r)/2,ls=o*2,rs=o*2+1;
+
+	build(ls,l,m);
+
+	build(rs,m+1,r);
+
+	sum[o]=sum[ls]+sum[rs];
+
+	mn[o]=min(mn[ls],mn[rs]);
+
+}
+
+void pushdown(int o,int ls,int rs,int l,int m,int r)
+
+{
+
+	if(tag[o]!=inf)
+
+	{
+
+		tag[ls]=tag[rs]=mn[ls]=mn[rs]=tag[o];
+
+		sum[ls]=1ll*(m-l+1)*tag[o];
+
+		sum[rs]=1ll*(r-m)*tag[o];
+
+		tag[o]=inf;
+
+	}
+
+}
+
+ll qu(int o,int l,int r,int ql,int qr)
+
+{
+
+	if(l>=ql&&r<=qr)
+
+	return sum[o];
+
+	int m=(l+r)/2,ls=o*2,rs=o*2+1;	
+
+	pushdown(o,ls,rs,l,m,r);
+
+	ll res=0;
+
+	if(ql<=m)res+=qu(ls,l,m,ql,qr);
+
+	if(qr>m)res+=qu(rs,m+1,r,ql,qr);
+
+	return res;
+
+}
+
+void up(int o,int l,int r,int ql,int qr,ll v)
+
+{
+
+	if(l>=ql&&r<=qr)
+
+	{
+
+		tag[o]=mn[o]=v;
+
+		sum[o]=1ll*v*(r-l+1);
+
+		return;
+
+	}
+
+	int m=(l+r)/2,ls=o*2,rs=o*2+1;
+
+	pushdown(o,ls,rs,l,m,r);
+
+	if(ql<=m)up(ls,l,m,ql,qr,v);
+
+	if(qr>m)up(rs,m+1,r,ql,qr,v);
+
+	sum[o]=sum[ls]+sum[rs];
+
+	mn[o]=min(mn[ls],mn[rs]);
+
+}
+
+int qu2(int o,int l,int r,ll x)
+
+{
+
+	if(l==r)
+
+	return l;
+
+	int m=(l+r)/2,ls=o*2,rs=o*2+1;
+
+	pushdown(o,ls,rs,l,m,r);
+
+	if(mn[rs]<=x)return qu2(rs,m+1,r,x);
+
+	return qu2(ls,l,m,x);	
+
+}
+
+int main()
+
+{
+
+	int n,l,r,q;
+
+	char s[2];
+
+	scanf("%d",&n);
+
+	for(int i=1;i<=n;i++)
+
+	scanf("%lld",&a[i]);
+
+	for(int i=2;i<=n;i++)
+
+	scanf("%lld",&b[i]),b[i]+=b[i-1];
+
+	build(1,1,n);
+
+	for(int i=2;i<=n;i++)
+
+	b[i]+=b[i-1];
+
+	scanf("%d",&q);
+
+	while(q--)
+
+	{
+
+		scanf("%s%d%d",s,&l,&r);
+
+		if(s[0]=='s') 
+
+		printf("%lld\n",qu(1,1,n,l,r)+b[r]-b[l-1]);
+
+		else
+
+		{
+
+			ll x=qu(1,1,n,l,l)+r;
+
+			int cur=qu2(1,1,n,x);
+
+			up(1,1,n,l,cur,x);
+
+		}
+
+	}
+
+}

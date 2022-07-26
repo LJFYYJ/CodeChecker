@@ -1,0 +1,110 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+/**************TEMPLATE****************************************/
+#define ll long long
+#define ld long double
+#define M_PI           3.14159265358979323846
+#define F first
+#define S second
+#define mod 1000000007
+#define ln length()
+#define pb push_back
+#define input(a,n)      for(long long int c=0;c<n;cin>>a[c++]);
+#define out(a,n)      for(long long int c=0;c<n;cout<<a[c++]<<" ");
+typedef vector <ll> vll;
+typedef pair<ll,ll> pll;
+// // #define output(vec,x)   for(long long int c=0;c<a.size();x<<a[c++]<<',');x<<endl;
+/**************************************************************/
+
+ll fact(ll num)
+{
+    ll x=1;
+    for (ll i = 1; i <= num; ++i)
+    {
+        x=x*i;
+    }
+    return x;
+}
+
+void swap(ll *a, ll *b)
+{
+    ll x=*b;
+    *b=*a;
+    *a=x;
+}
+
+int isPrime(ll num)
+{
+    if(num <= 1) return 0; 
+    for (ll i = 2; i * i <= num; i++)
+        if (num % i == 0) return 0;
+    return 1;
+}
+
+
+ll power(ll x, ll y, ll p)
+{
+    // cout<<"hi"<<endl;
+    ll res = 1; 
+
+    x = x % p;  
+
+    while (y > 0)
+    {
+        if (y & 1)
+            res = (res*x) % p;
+
+        y = y>>1;
+        x = (x*x) % p;
+    }
+    return res;
+}
+
+ll modFact(ll n, ll p) 
+{ 
+    if (n >= p) 
+        return 0; 
+  
+    ll result = 1; 
+    for (ll i = 1; i <= n; i++) 
+        result = (result * i) % p; 
+  
+    return result; 
+} 
+
+ll binarySearch(ll arr[], ll l, ll r, ll x) 
+{ 
+    if (r >= l) { 
+        ll mid = l + (r - l) / 2; 
+ 
+        if (arr[mid] == x) 
+            return mid; 
+
+        if (arr[mid] > x) 
+            return binarySearch(arr, l, mid - 1, x); 
+
+        return binarySearch(arr, mid + 1, r, x); 
+    } 
+    return -1; 
+} 
+
+
+int main() {
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    cout.tie(NULL);
+    ll maxm=0,ans=0,sum=0,count=0,minm=1000000000000;
+
+    ll n,m,k,t;
+    ll f=0;
+
+    cin>>n>>k;
+
+    ans+=n+1+n;
+    ans+=min((k-1),(n-k))*2+max((n-k),(k-1));    
+
+    cout<<ans<<endl;
+
+    return 0;
+}

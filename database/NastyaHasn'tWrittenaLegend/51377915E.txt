@@ -1,0 +1,218 @@
+#include<bits/stdc++.h>
+
+
+
+using namespace std;
+
+
+
+long long dat[400010];
+
+int k[100005];
+
+int b[100005];
+
+int c[100005];
+
+int t[100005];
+
+int a[100005];
+
+int add[100005];
+
+
+
+void build(int i,int k,int l,int r,int data){
+
+    if(r-l==1){
+
+        if(l==i) dat[k]=data;
+
+        return;
+
+    }
+
+    int mid=(l+r)/2;
+
+    if(i<mid)
+
+        build(i,2*k+1,l,mid,data);
+
+    else build(i,2*k+2,mid,r,data);
+
+    dat[k]=dat[2*k+1]+dat[2*k+2];
+
+}
+
+
+
+
+
+void pushdown(int k,int l,int r){
+
+    if(add[k]){
+
+        add[2*k+1]=add[k];
+
+        add[2*k+2]=add[k];
+
+        int mid=(l+r)/2;
+
+        dat[2*k+1]+=add[k]*(mid-l);
+
+        dat[2*k+2]+=add[k]*(r-mid);
+
+        add[k]=0;
+
+    }
+
+}
+
+
+
+void update(int ql,int qr,int ad,int k,int l,int r){
+
+    if(ql>=r||qr<=l) return;
+
+    if(ql<=l&&qr>=r) {
+
+        add[k]=ad;
+
+        dat[k]+=ad*(r-l);
+
+        return;
+
+    }
+
+    pushdown(k,l,r);
+
+    int mid=(l+r)/2;
+
+    update(ql,qr,ad,2*k+1,l,mid);
+
+    update(ql,qr,ad,2*k+2,mid,r);
+
+    dat[k]=dat[2*k+1]+dat[2*k+2];
+
+}
+
+
+
+long long query(int ql,int qr,int k,int l,int r){
+
+    if(ql>=r||qr<=l) return 0;
+
+    if(ql<=l&&qr>=r) return dat[k];
+
+    pushdown(k,l,r);
+
+    int mid=(l+r)/2;
+
+    if(ql>=mid)  return query(ql,qr,k*2+2,mid,r);
+
+    else if(qr<=mid)  return query(ql,qr,k*2+1,l,mid);
+
+    else return query(ql,qr,k*2+1,l,mid)+query(ql,qr,k*2+2,mid,r);
+
+}
+
+
+
+char read_char(){
+
+    char ch;
+
+    while((ch=getchar())!='s'&&ch!='+');
+
+    return ch;
+
+}
+
+
+
+int main(){
+
+    int n;
+
+    scanf("%d",&n);
+
+    for(int i=1;i<=n;i++){
+
+        scanf("%d",&a[i]);
+
+    }
+
+    b[1]=a[1];
+
+    for(int i=1;i<n;i++){
+
+        scanf("%d",&k[i]);
+
+        c[i+1]=c[i]+k[i];
+
+        t[i+1]=c[i+1]+t[i];
+
+        b[i+1]=a[i+1]-c[i+1];
+
+        build(i,0,1,n+1,b[i]);
+
+    }
+
+    build(n,0,1,n+1,b[n]);
+
+
+
+    int q;
+
+    scanf("%d",&q);
+
+    while(q--){
+
+        char ch=read_char();
+
+        int t1,t2;
+
+        scanf("%d %d",&t1,&t2);
+
+        if(ch=='+'){
+
+            int l=t1,r=n+1;
+
+            long long sum=query(l,l+1,0,1,n+1)+t2;
+
+            while(l<r){
+
+                int mid=(l+r)/2;
+
+                if(sum>query(mid,mid+1,0,1,n+1)){
+
+                    l=mid+1;
+
+                }else{
+
+                    r=mid;
+
+                }
+
+            }
+
+            update(t1,r,t2,0,1,n+1);
+
+        }else{
+
+
+
+            long long ans=query(t1,t2+1,0,1,n+1);
+
+
+
+            printf("%I64d\n",ans+t[t2]-t[t1-1]);
+
+        }
+
+    }
+
+    return 0;
+
+}
+

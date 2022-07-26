@@ -1,0 +1,92 @@
+#include <bits/stdc++.h>
+
+
+
+using namespace std;
+
+int main()
+
+{
+
+    int r,c;
+
+    cin>>r>>c;
+
+    int a[r][c],x,p1,p2,K;
+
+    for(int i=0;i<r;i++)
+
+    {
+
+        for(int j=0;j<c;j++)
+
+            cin>>a[i][j];
+
+    }
+
+    for(int i=0;i<r;i++)
+
+    {
+
+        for(int j=0;j<c;j++)
+
+        {
+
+            cin>>x;
+
+            if(i+j<r)
+
+            {
+
+                p1=i+j;
+
+                p2=0;
+
+            }
+
+            else 
+
+            {
+
+                p1=r-1;
+
+                p2=i+j-r+1;
+
+            }
+
+            if(i+j<c)
+
+            {
+
+                K=i+j+1;
+
+            }
+
+            else
+
+                K=c-(i+j-r+1);
+
+            for(int k=0;k<K;k++)
+
+                if(a[p1-k][p2+k]==x)
+
+                {a[p1-k][p2+k]=0;}
+
+        }
+
+    }
+
+    for(int i=0;i<r;i++)
+
+        for(int j=0;j<c;j++)
+
+            if(a[i][j])
+
+            {  cout<<"NO"; return 0;}
+
+    cout<<"YES";
+
+    return 0;
+
+}
+

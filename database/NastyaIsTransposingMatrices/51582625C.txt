@@ -1,0 +1,31 @@
+#include<cstdio>
+#include<cstring>
+#include<iostream>
+#include<algorithm>
+#define rep(i,l,r) for (int i=(l); i<=(r); i++)
+typedef long long ll;
+using namespace std;
+
+const int N=2010;
+int n,m,a[N][N],b[N][N],ta[N][N],tb[N][N],va[N],vb[N];
+
+int main(){
+	scanf("%d%d",&n,&m);
+	rep(i,1,n) rep(j,1,m) scanf("%d",&a[i][j]);
+	rep(i,1,n) rep(j,1,m) scanf("%d",&b[i][j]);
+	if (n<m){
+		rep(i,1,n) rep(j,1,m) ta[j][i]=a[i][j];
+		rep(i,1,n) rep(j,1,m) tb[j][i]=b[i][j];
+		swap(n,m);
+		rep(i,1,n) rep(j,1,m) a[i][j]=ta[i][j];
+		rep(i,1,n) rep(j,1,m) b[i][j]=tb[i][j];
+	}
+	rep(i,1,n){
+		int tot=0;
+		for (int x=i,y=1; x; x--,y++) va[++tot]=a[x][y],vb[tot]=b[x][y];
+		sort(va+1,va+tot+1); sort(vb+1,vb+tot+1);
+		rep(j,1,tot) if (va[j]!=vb[j]){ puts("NO"); return 0; }
+	}
+	puts("YES");
+	return 0;
+}

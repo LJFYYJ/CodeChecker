@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+{% load staticfiles %}
+<head>
+    <meta charset="utf-8" />
+    <title>查重结果</title>
+    <link href="{% static 'css/result.css' %}" rel="stylesheet" />
+    <script src="{% static 'js/jquery.js' %}"></script>
+</head>
+<body>
+    <div id="header">
+        <div class="container">
+            <div class="header_left left">
+                <div class="logo"><a href="main.html" id="main"><img id="img1" src="{% static 'images/magic.png' %}" /></a></div>
+                <div class="logo"><span id="text_" class="left" style="color:#333333;font-size:20px; font-weight:650;margin-left:20px">CodeChecker</span></div>
+            </div>
+            <div class="header_right right">
+                <ul>
+                    <li class="text"><a href="{% url 'login' %}" class="nav">登录</a></li>
+                    <li class="text"><a href="{% url 'register' %}" class="nav">注册</a></li>
+                    <li class="text"><a href="#" class="nav">帮助</a></li>
+                    <li class="text"><span id="identity">{{Username}}</span></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div id="show">
+        <div class="container" style="background-color:#FFFAFA">
+            <div id="head">
+                <div  style="display:inline-block;width:509px;height:58px;line-height:58px;font-size:18px;color:#333;margin-left:100px">
+                    <span id="left_file" style="text-align:center;margin:0px auto;width:509px;height:58px;display:inline-block;font-size:23px">{{ checkresult.filename1 }}</span>
+                </div>
+                <div  style="display:inline-block;width:140px;height:58px;line-height:58px;color:red;font-weight:650;font-size:18px;margin-left:1px">
+                    <span style="text-align:center;margin:0px auto;width:140px;height:58px;display:inline-block;font-size:21px">{{ checkresult.sim3 | floatformat:1  }}%</span>
+                </div>
+                <div  style="display:inline-block;width:406px;margin-left:20px;color:#333;font-size:18px;line-height:58px;height:58px">
+                    <span id="right_file" style="text-align:center;margin:0px auto;width:406px;height:58px;display:inline-block;font-size:23px">{{ checkresult.filename2 }}</span>
+                </div>
+            </div>
+
+            <input type="hidden" value="{{ s1 }}" id="s1">
+            <input type="hidden" value="{{ s2 }}" id="s2">
+
+            <div id="content_left" style="overflow:scroll">
+                <p style="color:#333;font-size:16px" id="s1_value">
+                </p>
+            </div>
+            <div id="content_right" style="overflow:scroll">
+                <p style="color:#333;font-size:16px" id="s2_value">
+                </p>
+            </div>
+
+            <script>
+                $(document).ready(function (){
+                    $("#s1_value").html($("#s1").attr("value"));
+                    $("#s2_value").html($("#s2").attr("value"));
+                });
+            </script>
+
+            <div id="bottom" style="position:relative;border-bottom:2px solid #333">
+                <button style="background-color:#c8f599;color:#333;width:100px;height:35px;border:2px solid #b0ca65;border-radius:5px;font-size:18px;font-weight:600;position:absolute;bottom:5px;right:15px"><a href="{% url 'checkinfo' checkresult.check_id %}">返回</a></button>
+
+            </div>
+        </div>
+    </div>
+</body>
+</html>

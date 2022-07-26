@@ -1,0 +1,102 @@
+#include <algorithm>
+#include <iostream>
+#include <iterator>
+#include <vector>
+#include <numeric>
+#include <list>
+#include <tuple>
+#include <chrono>
+#include <random>
+
+#define FORIT(x, y) for(auto (x) = (y).begin(); (x) != (y).end(); (x)++)
+#define RFORIT(x, y) for(auto (x) = (y).rbegin(); (x) != (y).rend(); (x)++)
+#define COUNT(x, y) for(auto (x) = 0ULL; (x) < (y); (x)++)
+#define SORT(x) sort((x).begin(), (x).end())
+#define RSORT(x) sort((x).begin(), (x).end(), [](auto x, auto y) {return y<x;})
+#define SRAND() unsigned seed = std::chrono::system_clock::now().time_since_epoch().count(); \
+std::mt19937 generator (seed);  // mt19937 is a standard mersenne_twister_engine
+#define RAND() generator()
+
+using namespace std;
+
+typedef long long int int64;
+typedef unsigned long long int uint64;
+
+typedef long long int number;
+typedef vector<number> V;
+typedef vector<number> L;
+
+template<class T>
+vector<T> get_n_numbers_slowly(size_t n)
+{
+	vector<T> result(n);
+	copy_n(istream_iterator<T>(cin), n, result.begin());
+	return result;
+}
+
+template<class T>
+vector<T> get_n_numbers(size_t n)
+{
+	vector<T> result(n);
+	number buf;
+	for(size_t i = 0; i < n; i++) {
+		scanf("%llu", &buf);
+		result[i] = buf;
+	}
+	return result;
+}
+
+template<class T>
+T get_number()
+{
+	vector<T> result = get_n_numbers<T>(1);
+	return result[0];
+}
+
+template<class T, template < typename, typename = std::allocator<T> > class Container>
+void printv(const Container<T> l)
+{
+	copy(l.begin(), l.end(), ostream_iterator<T>(cerr, " "));
+	cerr << endl;
+}
+
+typedef vector< vector< number > > VV;
+
+string solution(number n, number m)
+{
+	VV a;
+	VV b;
+	COUNT(i, n) {
+		a.push_back(get_n_numbers<number>(m));
+	}
+	COUNT(i, n) {
+		b.push_back(get_n_numbers<number>(m));
+	}
+	int starti = 0, startj = 0;
+	COUNT(c, n+m-1) {
+		size_t res = 0;
+		auto [i, j] = make_tuple(starti, startj);
+		while(i < n && j >= 0) {
+			res ^= a[i][j];
+			res ^= b[i][j];
+			i ++; j --;
+		}
+		if (res) {
+			return "NO";
+		}
+		startj ++;
+		if (startj == m) {
+			starti ++;
+			startj = m-1;
+		}
+	}
+	return "YES";
+}
+
+int main(int argc, char ** argv)
+{
+	number n = get_number<number>();
+	number m = get_number<number>();
+	cout << solution(n, m) << endl;
+	return 0;
+}

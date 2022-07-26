@@ -1,0 +1,27 @@
+a=[]
+
+x=int(int(input()))
+
+for i in range(x):
+
+    b,c=map(int,input().split())
+
+    a.append(c)
+
+b=int(input())
+
+k=1
+
+for i in range(x):
+
+    if b<a[i]:
+
+        print(x-i)
+
+        k=0
+
+        break
+
+if k==1:
+
+    print(x)

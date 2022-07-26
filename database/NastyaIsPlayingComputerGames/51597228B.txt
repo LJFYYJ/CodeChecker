@@ -1,0 +1,42 @@
+ #include<iostream>
+
+#include<stdio.h>
+
+#include<math.h>
+
+#include<algorithm>
+
+
+
+using namespace std;
+
+
+
+int main(){
+
+    int n,k,m;
+
+    scanf("%d%d",&n,&k);
+
+    int ans;
+
+    if(k <= n/2){
+
+        ans = ((k * 4) - 1) + ((n - k) * 3);
+
+    }
+
+    if(k > n/2){
+
+        ans = (((n - k) * 4)) + (k * 3);
+
+    }
+
+    printf("%d\n",ans);
+
+
+
+    return 0;
+
+}
+

@@ -1,0 +1,70 @@
+#include <bits/stdc++.h>
+
+
+
+using namespace std;
+
+
+
+int main()
+
+{
+
+    int u,v,n,m, ny, pos=0, j;
+
+    map<pair<int,int>, bool> mp;
+
+    vector<int> pass;
+
+    cin>>n>>m;
+
+    vector<int> p(n);
+
+    for(int i=0; i<n; i++)  cin>>p[i];
+
+    for(int i=0; i<m; i++)
+
+    {
+
+        cin>>u>>v;
+
+        mp[make_pair(u,v)] = 1;
+
+    }
+
+    reverse(p.begin(), p.end());
+
+    ny = p[0];
+
+    for(int i=1; i<n; i++)
+
+    {
+
+        if (mp[make_pair(p[i], ny)])
+
+        {
+
+            for(j=0; j<pass.size(); j++)
+
+                if (!mp[make_pair(p[i], pass[j])])
+
+                    break;
+
+            if (j==pass.size())
+
+                pos++;
+
+
+
+        }
+
+        else
+
+            pass.push_back(p[i]);
+
+    }
+
+    cout << pos;
+
+}
+

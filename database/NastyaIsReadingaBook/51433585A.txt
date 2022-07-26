@@ -1,0 +1,38 @@
+#include <bits/stdc++.h>
+
+
+
+using namespace std;
+
+
+
+int main() {
+
+	int n, l, r, x;
+
+	while(cin >> n) {
+
+		vector<int> A; A.clear();
+
+		for(int i = 0; i < n; i++) {
+
+			cin >> l >> r;
+
+			A.push_back(r);
+
+		}
+
+		A.push_back(r);
+
+		cin >> x;
+
+		int id = lower_bound(A.begin(), A.end(), x) - A.begin();
+
+		cout << (n - id) << "\n";
+
+	}
+
+	return 0;
+
+}
+

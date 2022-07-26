@@ -1,0 +1,48 @@
+#include <iostream>
+
+
+
+using namespace std;
+
+
+
+int main()
+
+{
+
+    int n, k, br=0, sredina;
+
+    cin >> n >> k;
+
+    br+=n*2;
+
+    if(k == 1){
+
+        br+=n;
+
+    }else if(n == k){
+
+        br+=n-k;
+
+        br+=n;
+
+    }else{
+
+        br+=n-k;
+
+        br+=n-1;
+
+    }
+
+
+
+
+
+
+
+    cout << br;
+
+    return 0;
+
+}
+

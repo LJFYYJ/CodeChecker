@@ -1,0 +1,35 @@
+#include<bits/stdc++.h>
+using namespace std;
+ 
+const int maxn=3e5+10;
+int a[maxn];
+map<pair<int,int>,int>mp;
+ 
+int main()
+{
+	int n,m;scanf("%d%d",&n,&m);
+	for(int i=0;i<n;++i)scanf("%d",&a[i]);
+	for(int i=0;i<m;++i)
+	{
+		int u,v;scanf("%d%d",&u,&v);
+		mp[make_pair(u,v)]=1;
+	}
+	int last=n-1;
+	for(int i=n-2;i>=0;--i)
+	{
+		if(mp[make_pair(a[i],a[last])])
+		{//前面的人和最后一个人直接相连才有可能进行交换
+			int j;
+			for(j=i;j<last;++j)
+			{
+				if(mp[make_pair(a[j],a[j+1])])
+					swap(a[j],a[j+1]);
+				else break;
+			}
+			if(j==last)//第i个人和最后一个人可以交换，最后一个人的位置往前移
+				--last;
+		}
+	}
+	printf("%d\n",n-1-last);//统计交换的个数
+	return 0;
+} 

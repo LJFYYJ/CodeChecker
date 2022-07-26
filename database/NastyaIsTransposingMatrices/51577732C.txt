@@ -1,0 +1,54 @@
+n, m = map(int, input().split())
+
+
+
+ma = [ [] for i in range(n + m)]
+
+
+
+mb = [[] for i in range(n + m)]
+
+
+
+
+
+w = []
+
+
+
+for i in range(n):
+
+	w = list(map(int, input().split()))
+
+	for j in range(m):
+
+		ma[i + j].append(w[j])
+
+
+
+w = []
+
+
+
+for i in range(n):
+
+	w = list(map(int, input().split()))
+
+	for j in range(m):
+
+		mb[i + j].append(w[j])
+
+
+
+for i in range(n + m):
+
+	if sorted(ma[i]) != sorted(mb[i]):
+
+		print("NO")
+
+		exit(0)
+
+
+
+print('YES')
+

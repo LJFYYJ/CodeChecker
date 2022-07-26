@@ -1,0 +1,332 @@
+import java.io.BufferedReader;
+
+import java.io.IOException;
+
+import java.io.InputStream;
+
+import java.io.InputStreamReader;
+
+import java.io.PrintWriter;
+
+import java.io.OutputStream;
+
+import java.io.OutputStreamWriter;
+
+import java.io.BufferedWriter;
+
+import java.util.ArrayList;
+
+import java.util.Collections;
+
+import java.util.List;
+
+import java.util.StringTokenizer;
+
+
+
+public class Main {
+
+    static Reader in;
+
+    static PrintWriter out;
+
+
+
+    static void solve() throws IOException {
+
+        int n = in.nextInt();
+
+        int m = in.nextInt();
+
+
+
+        int[] p = new int[n];
+
+        for(int i=0; i<n; i++) {
+
+            p[i] = in.nextInt();
+
+        }
+
+        List<Integer>[] list = new List[n+1];
+
+        for(int i=0; i<=n; i++) {
+
+            list[i] = new ArrayList<>();
+
+        }
+
+        for(int i=0; i<m; i++) {
+
+            int u = in.nextInt();
+
+            int v = in.nextInt();
+
+            list[v].add(u);
+
+        }
+
+
+
+        if(n == 1) {
+
+            out.println("0");
+
+            return;
+
+        }
+
+
+
+        for(int i=0; i<=n; i++) {
+
+            Collections.sort(list[i]);
+
+        }
+
+        List<Integer> set = list[p[n-1]];
+
+        int cnt = 0;
+
+        for(int i=n-2; i>=0; i--) {
+
+//            out.println("n: " + p[i]);
+
+//            out.println("set: " + set);
+
+            if(isOk(set, p[i])) {
+
+                cnt++;
+
+            }
+
+            else {
+
+                set = intersection(set, list[p[i]]);
+
+            }
+
+        }
+
+        out.println(cnt);
+
+    }
+
+
+
+    static boolean isOk(List<Integer> set, int n) {
+
+        int s = 0, e = set.size()-1;
+
+        while(s <= e) {
+
+            int m = (s+e) / 2;
+
+            int x = set.get(m);
+
+            if(x < n) {
+
+                s = m+1;
+
+            }
+
+            else if(x > n) {
+
+                e = m-1;
+
+            }
+
+            else return true;
+
+        }
+
+        return false;
+
+    }
+
+
+
+    static List intersection(List<Integer> a, List<Integer> b) {
+
+        int i=0, j=0;
+
+        int na = a.size(), nb = b.size();
+
+        List<Integer> set = new ArrayList<>();
+
+        while(i < na && j < nb) {
+
+            if(i < na && j < nb && a.get(i) < b.get(j)) i++;
+
+            if(i < na && j < nb && b.get(j) < a.get(i)) j++;
+
+            if(i < na && j < nb && a.get(i).equals(b.get(j))) {
+
+                set.add(a.get(i));
+
+                i++;
+
+                j++;
+
+            }
+
+        }
+
+        return set;
+
+    }
+
+
+
+    static int maxSubArraySum(int[] arr, int n) {
+
+        int max = arr[0], t = arr[0];
+
+        for(int i=1; i<n; i++) {
+
+            t = Math.max(arr[i], t + arr[i]);
+
+            max = Math.max(t, max);
+
+        }
+
+        return max;
+
+    }
+
+
+
+    static void test() throws IOException {
+
+        int n = in.nextInt();
+
+        int[] a = new int[n];
+
+        for(int i=0; i<n; i++) {
+
+            a[i] = in.nextInt();
+
+        }
+
+        int max = maxSubArraySum(a, a.length);
+
+        out.println(max);
+
+    }
+
+
+
+    public static void main(String[] args) {
+
+        try {
+
+            OutputStream os = System.out;
+
+            OutputStreamWriter osw = new OutputStreamWriter(os);
+
+            BufferedWriter bw = new BufferedWriter(osw, (1<<15));
+
+            out = new PrintWriter(bw, true);
+
+
+
+            in = new Reader(System.in);
+
+
+
+            solve();
+
+
+
+            in.close();
+
+
+
+            out.close();
+
+            bw.close();
+
+            osw.close();
+
+            os.close();
+
+        }
+
+        catch (IOException e) {
+
+            e.printStackTrace();
+
+        }
+
+    }
+
+
+
+    static class Reader {
+
+        InputStreamReader isr;
+
+        BufferedReader br;
+
+        StringTokenizer tk;
+
+        String s;
+
+
+
+        Reader(InputStream is) {
+
+            isr = new InputStreamReader(is);
+
+            br = new BufferedReader(isr, (1<<15));
+
+            tk = new StringTokenizer("");
+
+        }
+
+        String nextLine() throws IOException {
+
+            while((s = br.readLine()) != null && s.length() == 0);
+
+            return s;
+
+        }
+
+        String next() throws IOException {
+
+            if(!tk.hasMoreTokens()) tk = new StringTokenizer(nextLine());
+
+            return tk.nextToken();
+
+        }
+
+        int nextInt() throws IOException {
+
+            return Integer.parseInt(next());
+
+        }
+
+        Long nextLong() throws IOException {
+
+            return Long.parseLong(next());
+
+        }
+
+        double nextDouble() throws IOException {
+
+            return Double.parseDouble(next());
+
+        }
+
+        void close() throws IOException {
+
+            isr.close();
+
+            br.close();
+
+        }
+
+    }
+
+}
+

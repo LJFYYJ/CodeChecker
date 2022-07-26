@@ -1,0 +1,41 @@
+#include<bits/stdc++.h>
+
+using namespace std ;
+
+typedef long long ll;
+
+const ll N = ll(1e9 + 7);
+
+const ll ma = ll(1e6 + 7); 
+
+#define IOS {ios :: sync_with_stdio(false); cin.tie(0); }
+
+#define f first
+
+#define s second
+
+#define pb push_back
+
+#define mp make_pair
+
+
+
+
+
+
+
+int main(){ 
+
+	int n,k ;
+
+	cin >>n>>k ;
+
+		
+
+	cout<<3*n + min(n-k,k-1)<<endl ;
+
+	return 0;
+
+	
+
+}	

@@ -1,0 +1,53 @@
+#include <bits/stdc++.h>
+#define ll long long
+#define pl pair<long long, long long>
+#define pi pair<int, int>
+#define FOR(i,a,b) for(int i=a;i<b;i++)
+#define LLFOR(i,a,b) for(ll i=a;i<b;i++)
+#define IARR(arr, n) int* arr = new int[n]
+#define I0ARR(arr, n) int* arr = new int[n]()
+#define LLARR(arr, n) ll* arr = new ll[n]
+#define LL0ARR(arr, n) ll* arr = new ll[n]()
+#define MOD 1000000007
+#define ppi pair<pi, int>
+#define ppl pair<pl, ll>
+using namespace std;
+
+bool comp( pi p1, pi p2){
+    return p1.first<p2.first;
+}
+//ll arr[501][501];
+//ll brr[501][501];
+vector<vector<ll> > arr(1010);
+vector<vector<ll> > brr(1010);
+int main(){
+    ios_base::sync_with_stdio(0);
+    cin.tie(0);
+    cout.tie(0);
+    int n, m;
+    cin >> n >> m;
+    ll p;
+    FOR(i, 0, n){
+        FOR(j, 0, m){
+            cin >> p;
+            arr[i+j].push_back(p);
+        }
+    }
+    FOR(i, 0, n){
+        FOR(j, 0, m){
+            cin >> p;
+            brr[i+j].push_back(p);
+        }
+    }
+    FOR(i, 0, n+m-1){
+        sort(arr[i].begin(), arr[i].end());
+        sort(brr[i].begin(), brr[i].end());
+        if(arr[i]!=brr[i]){
+            cout << "NO" << endl;
+            return 0;
+        }
+    }
+    cout << "YES" << endl;
+    return 0;
+
+ }

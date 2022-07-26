@@ -1,0 +1,95 @@
+#include<bits/stdc++.h>
+
+using namespace std;
+
+
+
+int ct[300005];
+
+vector<int> uvp[300005];
+
+vector<int> uvprev[300005];
+
+int main() {
+
+	ios_base::sync_with_stdio(false); cin.tie(0); cout.tie(0);
+
+	int n, m;
+
+	cin >> n >> m;
+
+	vector<int>v(n);
+
+	int ans = 0;
+
+	map<int, int>rev;
+
+	for(int i=0;i<n;i++) {
+
+		cin >> v[i];
+
+		rev[v[i]] = i;
+
+	}
+
+	for(int i=0;i<m;i++) {
+
+		int u, v;
+
+		cin >> u >> v;
+
+		uvp[u].push_back(v);
+
+		uvprev[v].push_back(u);
+
+	}
+
+	int us = v[n-1];
+
+	set<int> usst;
+
+	for(int i=0;i<uvprev[us].size();i++) {
+
+		int nbr = uvprev[us][i];
+
+		usst.insert(nbr);
+
+		for(int j=0;j<uvp[nbr].size();j++) {
+
+			int ff = uvp[nbr][j];
+
+			if(ff == us) continue;
+
+			if(rev[ff] > rev[nbr]) {
+
+				ct[nbr]++;
+
+			}
+
+		}
+
+	}
+
+	int check = 0;
+
+	for(int i=n-2;i>=0;i--) {
+
+		if(usst.find(v[i]) != usst.end()) {
+
+			if(ct[v[i]] >= check) {
+
+				ans ++;
+
+			}
+
+		} else {
+
+			check++;
+
+		}
+
+	}
+
+	cout << ans << "\n";
+
+}

@@ -1,0 +1,17 @@
+#include <iostream>
+
+using namespace std;
+
+int main(){
+
+    int n, k;
+
+    cin>>n>>k;
+
+    if (k>n-k) k=n-k;
+
+    else k=k-1;
+
+    cout<<n*3+k<<endl;
+
+}

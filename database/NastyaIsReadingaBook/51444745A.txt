@@ -1,0 +1,46 @@
+#include<bits/stdc++.h>
+
+using namespace std;
+
+int main()
+
+{
+
+	ios_base::sync_with_stdio(false);
+
+	cin.tie(0);
+
+	int n,x,y,z;
+
+	cin>>n;
+
+	vector<pair<int,int>> vp;
+
+	for(int i=0;i<n;i++)
+
+	cin>>x>>y,vp.push_back(make_pair(x,y));
+
+	cin>>z;
+
+	vector<pair<int,int>>::iterator it;
+
+	int cnt=0;
+
+	for(it=vp.begin();it!=vp.end();it++)
+
+	{
+
+		++cnt;
+
+		if(z>=it->first and z<=it->second)
+
+		break;	
+
+	}
+
+	cout<<(n-cnt+1);
+
+	return 0;
+
+}
+

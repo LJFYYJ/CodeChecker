@@ -1,0 +1,33 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+int main()
+
+{
+
+    int n,m,i,k=0,j;
+
+    cin>>n>>m;
+
+    if(n==m || m==1)
+
+        cout<<3*n<<endl;
+
+    else
+
+    {
+
+        if(m>(n/2))
+
+            cout<<(3*n)+(n-m)<<endl;
+
+        else
+
+            cout<<(3*n)+(m-1)<<endl;
+
+    }
+
+    return 0;
+
+}

@@ -1,0 +1,106 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+int aage(set<pair<int,int> > m,int a[],int c[],int i,int g)
+
+{
+
+    int j=i-1;
+
+    if(i<=g || c[a[i]]==0) return i;
+
+    if(m.count(make_pair(a[i],a[j])))
+
+    {
+
+        int t=a[i];
+
+        a[i]=a[j];
+
+        a[j]=t;
+
+        c[t]--;
+
+        //cout<<"moving forward "<<a[j]<<" at "<<j<<endl;
+
+        t=aage(m,a,c,i-1,g);g=t;
+
+        return t;
+
+    }
+
+    else
+
+    {
+
+        while(i-1>g && !m.count(make_pair(a[i],a[j])))
+
+        {
+
+            //cout<<"sending "<<a[i-1]<<endl;
+
+            g=aage(m,a,c,i-1,g);
+
+            //cout<<g<<" g , new a[i-1]="<<a[i-1]<<endl;
+
+        }
+
+        if(m.count(make_pair(a[i],a[j])) )
+
+            {
+
+                //cout<<"retrying! testing "<<i<<" - "<<a[i]<<endl;
+
+                g=aage(m,a,c,i,g);
+
+                //cout<< "moved till "<<g<<endl;
+
+                return g;
+
+            }
+
+            return i;
+
+    }
+
+}
+
+int main()
+
+{
+
+    ios::sync_with_stdio(false);cin.tie(0);
+
+    int n,ma;
+
+    cin>>n>>ma;
+
+    int a[n+1]={0};
+
+    for(int i=0;i<n;i++) cin>>a[i+1];
+
+    set< pair<int,int> > m;
+
+    int c[n+1]={0};
+
+    for(int i=0;i<ma;i++)
+
+    {
+
+        int u,r;cin>>u>>r;
+
+        m.insert(make_pair(r,u));
+
+        c[r]++;
+
+    }
+
+    int i=aage(m,a,c,n,1);
+
+    cout<<n-i<<endl;
+
+    return 0;
+
+}
+

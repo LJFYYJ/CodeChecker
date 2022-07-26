@@ -1,0 +1,33 @@
+#include<bits/stdc++.h>
+
+using namespace std;
+
+set<int> lis;
+
+int main()
+
+{
+
+    int i,j,k,l;
+
+    cin>>i;
+
+    for(j=0;j<i;j++){
+
+        cin>>k>>l;
+
+        lis.insert(k);
+
+    }
+
+    cin>>k;
+
+    l = distance(lis.begin(), lis.lower_bound(k));
+
+    cout<<(i - l + 1);
+
+    return 0;
+
+    
+
+}

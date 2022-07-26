@@ -1,0 +1,64 @@
+#include<iostream>
+
+#include<map>
+
+#include<cstring>
+
+#include<utility>
+
+#include<cmath>
+
+#include<vector>
+
+#include<algorithm>
+
+//#include<bits/stdc++.h>
+
+using namespace std;
+
+
+
+#define MAX 500005
+
+#define mid ( (l + r) >> 1)
+
+#define lson (p << 1 )
+
+#define rson (p << 1 | 1)
+
+#define debug cout << "!!!" << endl;
+
+
+
+typedef pair<int, int> P;
+
+#define ll long long
+
+//#define int ll
+
+
+
+P arr[MAX];
+
+int main(void)
+
+{
+
+  int n, k;
+
+  cin >> n >> k;
+
+  int d = min(n - k,k - 1);
+
+  int c1 = 2 + 3 * d;
+
+  c1 += d;
+
+  c1 += 3 * (n - d - 1) + 1;
+
+  cout << c1  << endl;
+
+  return 0;
+
+}
+

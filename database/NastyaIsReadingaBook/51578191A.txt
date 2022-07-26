@@ -1,0 +1,30 @@
+nc = int(input())
+
+lista = []
+
+cont2 =0
+
+for i in range(nc):
+
+    ci, cf = input().split()
+
+    ci, cf = int(ci), int(cf)
+
+    lista.append(ci)
+
+    lista.append(cf)
+
+ca = int(input())
+
+for i in range(len(lista)):
+
+    if(i <len(lista) ):
+
+        if(ca > lista[i] and ca < lista[i+1]):
+
+            cont1 = i
+
+        cont2+=1
+
+print(int((cont2-cont1)/2))
+

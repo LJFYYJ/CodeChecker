@@ -1,0 +1,70 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+#define ll long long int
+
+#define pb push_back
+
+const ll M = 1000000007;
+
+
+
+int main()
+
+{
+
+	#ifdef JUDGE
+
+    freopen("input.txt", "rt", stdin);
+
+    freopen("output.txt", "wt", stdout);
+
+    #endif
+
+	ios_base::sync_with_stdio(false);
+
+	cin.tie(NULL);
+
+	cout.tie(NULL);
+
+	ll n,m,f=1; cin>>n>>m;
+
+	ll a[n][m], b[m][n];
+
+	vector<ll> aa[1000], bb[1000];
+
+	for(ll i=0;i<n;i++) for(ll j=0;j<m;j++){
+
+		cin>>a[i][j];
+
+		aa[i+j].pb(a[i][j]);
+
+	}
+
+	for(ll i=0;i<n;i++) for(ll j=0;j<m;j++){
+
+		cin>>b[i][j];
+
+		bb[i+j].pb(b[i][j]);
+
+	}
+
+	for(ll i=0;i<1000;i++){
+
+		sort(aa[i].begin(),aa[i].end());
+
+		sort(bb[i].begin(),bb[i].end());
+
+		if(aa[i]!=bb[i]) f=0;
+
+	}
+
+	if(f) cout<<"YES"<<endl;
+
+	else cout<<"NO"<<endl;
+
+	return 0;
+
+}
+

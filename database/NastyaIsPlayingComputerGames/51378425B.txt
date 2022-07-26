@@ -1,0 +1,19 @@
+#include <iostream>
+#include <stdio.h>
+#include <string.h>
+#include <vector>
+#define ll long long
+using namespace std;
+
+void solve() {
+    int n, k;
+    cin >> n >> k;
+    cout << n * 2 + 1 + min(k - 1, n - k) + (n - 1) << endl;
+}
+
+int main() {
+    //freopen("a.in", "r", stdin);
+    ios::sync_with_stdio(false);
+    solve();
+    return 0;
+}

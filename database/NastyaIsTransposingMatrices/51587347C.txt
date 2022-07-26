@@ -1,0 +1,88 @@
+#include <bits/stdc++.h>
+
+#include <iostream>
+
+using namespace std;
+
+vector <vector <int> > a1(1002);
+
+vector <vector <int> > a2(1002);
+
+int main () {
+
+	int n,m;
+
+	cin>>n>>m;
+
+	
+
+	for (int k=1;k<=n;k++){
+
+		for (int i=1;i<=m;i++){
+
+              int x;
+
+			   cin>>x;
+
+			a1[k+i].push_back(x);
+
+			
+
+		}
+
+	}
+
+	
+
+		for (int k=1;k<=n;k++){
+
+		for (int i=1;i<=m;i++){
+
+			int x; cin>>x;
+
+			a2[k+i].push_back(x);
+
+			
+
+		}
+
+	}
+
+	
+
+	
+
+	for (int k=2;k<=n+m;k++){
+
+		sort(a1[k].begin () ,a1[k].end () );
+
+		sort(a2[k].begin () ,a2[k].end () );
+
+		    
+
+		     for (int i=0;i<a1[k].size();i++){
+
+		     	if (a1[k][i]!=a2[k][i]){
+
+		     		cout<<"NO";
+
+					 return 0;
+
+				 }
+
+		
+
+		
+
+			}
+
+		}
+
+	
+
+	cout<<"YES";
+
+	return 0;
+
+}
+

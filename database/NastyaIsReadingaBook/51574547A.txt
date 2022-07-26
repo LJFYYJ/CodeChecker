@@ -1,0 +1,59 @@
+#include<bits/stdc++.h>
+
+using namespace std;
+
+struct Node
+
+{
+
+	int l,r;
+
+}node[100+10];
+
+bool cmp(Node a,Node b)
+
+{
+
+	return a.l <= b.l;
+
+}
+
+int main(void)
+
+{
+
+	int n;
+
+	cin>>n;
+
+	for(int i = 1; i <= n; i++)
+
+	{
+
+		cin>>node[i].l>>node[i].r; 
+
+	}
+
+	int k;
+
+	cin>>k;
+
+//	sort(node+1,node+1+n,cmp);
+
+	int ans = 0;
+
+	for(int i = 1; i <= n; i++)
+
+	{
+
+		if(k > node[i].r)
+
+			ans++;
+
+	}
+
+	cout<<n-ans<<endl;
+
+	return 0;
+
+}

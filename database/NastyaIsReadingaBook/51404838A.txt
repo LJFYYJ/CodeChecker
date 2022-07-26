@@ -1,0 +1,82 @@
+//Road to Newbie
+
+#include <bits/stdc++.h>
+
+#define ll long long int
+
+#define FASTIO std::ios::sync_with_stdio(false);
+
+#define pb push_back
+
+#define mp make_pair
+
+#define ld long double
+
+#define F first
+
+#define S second
+
+#define inf 1e18
+
+#define debug(x) cout<<x<<endl
+
+#define all(x) x.begin(),x.end()
+
+
+
+using namespace std;
+
+ll a[500000];
+
+int main()
+
+{
+
+    FASTIO
+
+    ll n;
+
+    cin>>n;
+
+    for(ll i=1;i<=n;i++)
+
+    {
+
+      ll l,r;cin>>l>>r;
+
+      a[i]=r;
+
+    }
+
+    sort(a,a+n);
+
+    ll k;
+
+    cin>>k;
+
+    ll i;
+
+    for(i=1;i<=n;i++)
+
+    {
+
+      if(k<=a[i])
+
+      break;
+
+    }
+
+    ll ans=n-i+1;
+
+    cout<<ans;
+
+
+
+
+
+
+
+return 0;
+
+}
+

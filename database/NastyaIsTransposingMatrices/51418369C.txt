@@ -1,0 +1,66 @@
+#include <bits/stdc++.h>
+#define ll long long
+#define inf 0x3f3f3f3f
+#define il inline
+
+namespace io {
+
+#define in(a) a = read()
+#define out(a) write(a)
+#define outn(a) out(a), putchar('\n')
+
+#define I_int ll
+inline I_int read() {
+    I_int x = 0, f = 1;
+    char c = getchar();
+    while (c < '0' || c > '9') {
+        if (c == '-') f = -1;
+        c = getchar();
+    }
+    while (c >= '0' && c <= '9') {
+        x = x * 10 + c - '0';
+        c = getchar();
+    }
+    return x * f;
+}
+char F[200];
+inline void write(I_int x) {
+    if (x == 0) return (void) (putchar('0'));
+    I_int tmp = x > 0 ? x : -x;
+    if (x < 0) putchar('-');
+    int cnt = 0;
+    while (tmp > 0) {
+        F[cnt++] = tmp % 10 + '0';
+        tmp /= 10;
+    }
+    while (cnt > 0) putchar(F[--cnt]);
+}
+#undef I_int
+
+}
+using namespace io;
+
+using namespace std;
+
+#define N 1010
+//multiset<int>s[N];
+#define Fur(i, a, b) for(int i = a; i <= b; ++i)
+int n = read(), m = read();
+int a[N][N], b[N][N];
+map<int,int>s[N];
+int main() { 
+	bool flag = 0;
+	Fur(i, 1, n) Fur(j, 1, m) in(a[i][j]);
+	Fur(i, 1, n) Fur(j, 1, m) in(b[i][j]);
+	Fur(i, 1, n) {
+		Fur(j, 1, m) s[i + j - 1][a[i][j]]++;
+	}
+	Fur(i, 1, n) {
+		Fur(j, 1, m) {
+			if(s[i + j - 1][b[i][j]] <= 0) flag = 1;
+			s[i + j - 1][b[i][j]]--;
+		}
+	}
+	if(!flag) puts("YES");
+	else puts("NO");
+}

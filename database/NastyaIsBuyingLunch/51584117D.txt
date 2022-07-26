@@ -1,0 +1,50 @@
+#include<bits/stdc++.h>
+#define ll long int
+#define mp make_pair
+#define pb push_back
+using namespace std;
+int main()
+{   
+     ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    ll n,q;
+    cin>>n>>q;
+    
+    ll a[n],i,a1,b1,j,cnt=0,cn1,flag=0,ans=0;
+    set<ll> st; set<ll>::iterator it;//cout<<st.size()<<endl;
+    
+    for(i=0;i<n;i++)
+        cin>>a[i];
+    
+    st.insert(a[n-1]); 
+    
+    vector<vector<ll> >vect(n+1); 
+    for(i=0;i<q;i++)
+    {
+        cin>>a1>>b1;
+        vect[a1].pb(b1);
+    }
+    for(i=n-2;i>=0;i--)
+    {   
+        flag=0;cnt=0;
+        for(j=0;j<vect[a[i]].size();j++)
+        {
+            if(st.find(vect[a[i]][j]) != st.end())
+            {
+                cnt++;
+            }
+        }
+
+        if(cnt==st.size())
+        {
+            ans++;
+        }
+        else
+        {
+            st.insert(a[i]);
+        }
+       // cout<<st.size()<<" ";
+    }
+    cout<<ans;
+
+}

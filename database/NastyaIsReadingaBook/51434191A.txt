@@ -1,0 +1,81 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+#define ll long long
+
+#define pb push_back
+
+#define ff first
+
+#define ss second
+
+#define vv vector<long long>
+
+
+
+int main() {
+
+    ll n;
+
+    cin>>n;
+
+    vv s[n];
+
+    ll i=0;
+
+    ll d=n;
+
+    while(n--)
+
+    {
+
+        ll x,y;
+
+        cin>>x>>y;
+
+        s[i].pb(x);
+
+        s[i].pb(y);
+
+        i++;
+
+    }
+
+    ll p;
+
+    cin>>p;
+
+    ll g=0;
+
+    for(ll i=0;i<d;i++)
+
+    {
+
+        //cout<<s[i][0]<<" "<<s[i][1];
+
+        if(s[i][1]<p)
+
+        {
+
+            g++;
+
+        }
+
+        else
+
+        {
+
+            break;
+
+        }
+
+    }
+
+    //cout<<g;
+
+    cout<<d-g;
+
+	return 0;
+
+}

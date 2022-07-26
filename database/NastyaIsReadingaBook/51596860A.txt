@@ -1,0 +1,42 @@
+#include <stdio.h>
+
+#include <stdlib.h>
+
+
+
+int main()
+
+{
+
+    int q[100][2]={0};
+
+    int a,s,d,i,j;
+
+    scanf("%d",&a);
+
+    j=a;
+
+    for(i=0;i<a;i++){
+
+        scanf("%d %d",&q[i][0],&q[i][1]);
+
+    }
+
+    scanf("%d",&s);
+
+    for(i=0;i<a;i++){
+
+        if(s>q[i][0]&&s>q[i][1]){
+
+            j--;
+
+        }
+
+    }
+
+    printf("%d",j);
+
+    return 0;
+
+}
+

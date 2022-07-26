@@ -1,0 +1,114 @@
+#include<iostream>
+#include<cstring>
+#include<algorithm>
+#include<set>
+#include<sstream>
+using namespace std;
+const int M = 999101;
+#define ll long long
+#define mem(a,x) memset(a,x,sizeof(a))
+using namespace std;
+const int MAXN = 1e5 + 5;
+
+int a[550][550];
+int b[550][550];
+int n, m;
+int main() {
+	cin >> n >> m;
+	for(int i=0;i<n;i++)
+		for (int j = 0; j < m; j++) {
+			cin >> a[i][j];
+		}
+	for (int i = 0; i<n; i++)
+		for (int j = 0; j < m; j++) {
+			cin >> b[i][j];
+		}
+	 set<int>s1[1000], s2[1000];
+	for (int i = 0; i<n; i++)
+		for (int j = 0; j < m; j++) {
+			s1[i + j].insert(a[i][j]);
+			s2[i + j].insert(b[i][j]);
+		}
+	for (int i = 0; i < m + n - 1; i++) {
+		if (s1[i] != s2[i]) {
+			cout << "NO" << endl;
+			return 0;
+		}
+	}
+  cout << "YES" << endl;
+	return 0;
+}
+
+
+
+
+
+
+
+
+
+//// n较大 1e9
+//ll qpow(ll a, ll b) {
+//	ll ans = 1;
+//	while (b) {
+//		if (b & 1)
+//			ans = ans * a % M;
+//		a = a * a % M;
+//		b >>= 1;
+//	}
+//	return ans;
+//}
+//ll C(ll n, ll m) {
+//	if (m > n)
+//		return 0;
+//	ll ans = 1;
+//	for (int i = 1; i <= m; i++)
+//		ans = ans * (n - i + 1) % M * qpow(i, M - 2) % M;
+//	return ans;
+//}
+//
+//
+//bool is_leapyear(int y) {
+//	return (y % 4 == 0 && y % 100 != 0) || (y % 400 == 0);
+//}
+////num变string
+void i2s(int num, string& str) {
+	stringstream ss;
+	ss << num;//将num插入
+	ss >> str;
+}
+////string变num
+//void s2i(string str, int& num) {
+//	stringstream ss;
+//	ss << str;
+//	ss >> num;
+//}
+//int main() {
+//	int n, m, k;
+////cin >> n >> m >> k;
+//	m = k = 5;
+//	n = 10000;
+//	while (n--)
+//	{
+//		ll ans = 0;
+//		for (int i = 0; i <= n; i++) {
+//			ans = (ans + C(n, i)*C(n, m) % M*qpow(i, k) % M) % M;
+//	}
+//		cout << ans << endl;
+//	}
+//	return 0;
+//}
+//#define ll long long
+//ll fun(ll n)//把n进行素数唯一分解
+//{
+//	ll sum =0;
+//	for (int i = 0; i<k&&prime[i] * prime[i] <= n; i++)
+//	{
+//		while (n%prime[i] == 0) {
+//			sum += prime[i];
+//			n /= prime[i];
+//		}
+//	}
+//	if (n > 1)sum +=n;//如果最后还是一个素数，再处理一遍
+//	return sum;
+//}

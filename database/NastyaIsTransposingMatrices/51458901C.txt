@@ -1,0 +1,16 @@
+n,m=map(int,input().split())
+count=0;s=[];t=[]
+for i in range(n):
+    x=list(map(int,input().split()))
+    s.append(x)
+for i in range(n):
+    x=list(map(int,input().split()))
+    t.append(x)
+for i in range(n):
+    if s[i][i]==t[i][i]:
+        count+=1
+    else:
+        print("NO")
+        break
+if(count==n):
+    print("YES")

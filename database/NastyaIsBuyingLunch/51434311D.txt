@@ -1,0 +1,67 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+const int maxn = 3e5 + 10;
+
+int pos[maxn],N,M,cnt[maxn];
+
+vector<int> G[maxn];
+
+int main(){
+
+	scanf("%d%d",&N,&M);
+
+	for(int i =  1 ;i <= N; ++i){
+
+		scanf("%d",&pos[i]);
+
+	}
+
+	for(int i = 0 ; i < M; ++i){
+
+		int x,y;
+
+		scanf("%d%d",&x,&y);
+
+		G[y].push_back(x);
+
+	}
+
+	{
+
+		int len = G[pos[N]].size();
+
+		for(int i = 0 ; i < len ; ++i){
+
+			++cnt[G[pos[N]][i]];
+
+		}
+
+	}
+
+	int ans = 0;
+
+	for(int i = N - 1 ; i>=1 ; --i){
+
+		if(cnt[pos[i]] == N - i){
+
+			++ans;
+
+		}
+
+		vector<int> &now = G[pos[i]];
+
+		for(int i = 0 ; i < now.size() ; ++i){
+
+			++cnt[now[i]];
+
+		}
+
+	}
+
+	cout<<ans<<endl;
+
+	return 0;
+
+}

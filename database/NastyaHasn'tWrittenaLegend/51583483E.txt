@@ -1,0 +1,442 @@
+#include<cstdio>
+
+#include<iostream>
+
+#include<string>
+
+#include<vector>
+
+using namespace std;
+
+
+
+long long int init(vector<long long int> &a, vector<long long int> &tree, vector < pair<bool, int> > &lazy, int node, int start, int end)
+
+{
+
+    if(start==end) {
+
+        tree[node]=a[start];
+
+    }
+
+    else tree[node]= init(a, tree, lazy, 2*node, start, (start+end)/2) + init(a, tree, lazy, 2*node+1, (start+end)/2+1, end);
+
+
+
+    return tree[node];
+
+}
+
+
+
+void update_lazy(vector<long long int> &tree, vector < pair<bool, int> > &lazy, int node, int start, int end)
+
+{
+
+    if(!lazy[node].first) return;
+
+
+
+    tree[node]=(end-start+1)*lazy[node].second;
+
+
+
+    if(start!=end)
+
+    {
+
+        lazy[node*2]=lazy[node];
+
+        lazy[node*2+1]=lazy[node];
+
+    }
+
+
+
+    lazy[node].first=false;
+
+}
+
+
+
+void update_range(vector<long long int> &tree, vector < pair<bool, int> > &lazy, int node, int start, int end, int left, int right, int n)
+
+{
+
+    update_lazy(tree, lazy, node, start, end);
+
+
+
+    if(start > right || end < left) return;
+
+
+
+    if(start >= left && end <= right )
+
+    {
+
+        tree[node]=(end-start+1)*n;
+
+
+
+        if(start!=end)
+
+        {
+
+            lazy[node*2].first=true;
+
+            lazy[node*2].second=n;
+
+            lazy[node*2+1].first=true;
+
+            lazy[node*2+1].second=n;
+
+        }
+
+
+
+        return;
+
+    }
+
+
+
+    update_range(tree, lazy, node*2, start, (start+end)/2, left, right, n);
+
+    update_range(tree, lazy, node*2+1, (start+end)/2+1, end, left, right, n);
+
+    tree[node]=tree[node*2]+tree[node*2+1];
+
+
+
+    return;
+
+}
+
+
+
+long long int sum(vector<long long int> &tree, vector < pair<bool, int> > &lazy, int node, int start, int end, int left, int right)
+
+{
+
+    update_lazy(tree, lazy, node, start, end);
+
+
+
+    if(start > right || end < left) return 0;
+
+    if(left <= start && right >= end) return tree[node];
+
+    return sum(tree, lazy, node*2, start, (start+end)/2, left, right) + sum(tree, lazy, node*2+1, (start+end)/2+1, end, left, right);
+
+}
+
+
+
+int binary(vector<long long int> &tree, vector < pair<bool, int> > &lazy, int left, int right, int n, int Find)
+
+{
+
+    if(left>n-1) return left;
+
+
+
+    int middle=(left+right)/2;
+
+
+
+    int v = sum(tree, lazy, 1, 0, n-1, middle, middle);
+
+
+
+    if(left==right)
+
+    {
+
+        if(v<Find) return right+1;
+
+        return left;
+
+    }
+
+
+
+    if(v<Find) return binary(tree, lazy, middle+1, right, n, Find);
+
+    else return binary(tree, lazy, left, middle, n, Find);
+
+}
+
+
+
+int main()
+
+{
+
+    int n;
+
+
+
+    scanf("%d", &n);
+
+
+
+    vector <long long int> a(n);
+
+    vector <long long int> k(n, 0);
+
+    vector <long long int> sum_k(n);
+
+    vector <long long int> tot_k(n);
+
+
+
+    int Size=1;
+
+    while(Size < 2*n) Size<<=1;
+
+    vector <long long int> tree(Size);
+
+    vector < pair<bool, int> > lazy(Size);
+
+
+
+    for(int i=0; i<n; i++)
+
+        scanf("%lld", &a[i]);
+
+
+
+    for(int i=2; i<=n; i++)
+
+        scanf("%lld", &k[i]);
+
+
+
+    sum_k[0]=0;
+
+    for(int i=1; i<=n; i++)
+
+        sum_k[i]=sum_k[i-1]+k[i];
+
+
+
+    tot_k[0]=0;
+
+    for(int i=1; i<=n; i++)
+
+        tot_k[i]=tot_k[i-1]+sum_k[i];
+
+
+
+    for(int i=0; i<n; i++)
+
+        a[i]-=sum_k[i+1];
+
+
+
+    init(a, tree, lazy, 1, 0, n-1);
+
+
+
+    int q;
+
+    scanf("%d", &q);
+
+    for(int i=0; i<q; i++)
+
+    {
+
+        string p;
+
+        int a, b;
+
+        cin>>p;
+
+        scanf("%d %d", &a, &b);
+
+
+
+        if(p[0]=='s')
+
+        {
+
+            printf("%lld\n", sum(tree, lazy, 1, 0, n-1, a-1, b-1)+tot_k[b]-tot_k[a-1]);
+
+        }
+
+        else
+
+        {
+
+            long long int New = sum(tree, lazy, 1, 0, n-1, a-1, a-1)+b;
+
+            int End = binary(tree, lazy, a, n-1, n, New);
+
+
+
+            update_range(tree, lazy, 1, 0, n-1, a-1, End-1, New);
+
+        }
+
+    }
+
+
+
+    return 0;
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*#include<bits/stdc++.h>
+
+using namespace std;
+
+
+
+typedef pair<int,int> p;
+
+
+
+int main()
+
+{
+
+    int n, m, ans=0, cnt=0;
+
+    scanf("%d%d", &n, &m);
+
+
+
+    vector<int> s(n+1);
+
+    vector<bool> chk(n+1);
+
+    vector<int> d(n+1, 0);
+
+    vector< vector<int> > v(n+1);
+
+
+
+    for(int i=1; i<=n; i++) {
+
+        int a;
+
+        scanf("%d", &a);
+
+        s[a]=i;
+
+    }
+
+
+
+    for(int i=0; i<m; i++)
+
+    {
+
+        int a, b;
+
+        scanf("%d %d", &a, &b);
+
+
+
+        a=s[a];
+
+        b=s[b];
+
+        if(a>=b) continue;
+
+
+
+        if(b==n)
+
+        {
+
+            chk[a]=true;
+
+        }
+
+        else
+
+        {
+
+            d[a]++;
+
+            v[b].push_back(a);
+
+        }
+
+    }
+
+
+
+    for(int i=n-1; i>0; i--)
+
+    {
+
+        if(chk[i] && d[i]==cnt)
+
+        {
+
+            ans++;
+
+            for(int j=0; j<v[i].size(); j++)
+
+            {
+
+                d[v[i][j]]--;
+
+            }
+
+        }
+
+        else cnt++;
+
+    }
+
+
+
+    printf("%d", ans);
+
+}*/
+

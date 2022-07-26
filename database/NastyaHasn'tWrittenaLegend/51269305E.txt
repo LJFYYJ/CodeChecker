@@ -1,0 +1,276 @@
+#pragma GCC optimize("O3")
+
+#pragma GCC target("sse4")
+
+#include <bits/stdc++.h>
+
+#define pb push_back
+
+#define all(a) a.begin(), a.end()
+
+#define sz(a) (int)a.size()
+
+#define x first
+
+#define y second
+
+#define debug(...) cout << "[" << #__VA_ARGS__ << ": " << __VA_ARGS__ << "]\n"
+
+#define rd() abs((int)rng())
+
+using namespace std;
+
+typedef long long ll;
+
+typedef long double ld;
+
+typedef pair<int, int>pii;
+
+const int maxn = 1e5 + 100;
+
+const int mod = 1e9 + 7;
+
+mt19937 rng(chrono::high_resolution_clock::now().time_since_epoch().count());
+
+inline int read()
+
+{
+
+    int x = 0, f = 1;
+
+    char ch = getchar();
+
+    while(ch < '0' || ch > '9') {f = -1; ch = getchar();};
+
+    while(ch >= '0' && ch <= '9') {x = x * 10 + (ch - '0'); ch = getchar();}
+
+    return x * f;
+
+}
+
+int n, q;
+
+ll a[maxn], b[maxn], k[maxn], pk[maxn], pkk[maxn];
+
+
+
+ll seg[maxn * 4], mn[maxn * 4], lazy[maxn * 4];
+
+void build(int id = 1, int l = 1, int r = n)
+
+{
+
+    lazy[id] = -1e18;
+
+    if(l == r)
+
+    {
+
+        seg[id] = mn[id] = b[l];
+
+        return;
+
+    }
+
+    int mid = (l + r) / 2;
+
+    build(id * 2, l, mid);
+
+    build(id * 2 + 1, mid + 1, r);
+
+    seg[id] = seg[id * 2] + seg[id * 2 + 1];
+
+    mn[id] = min(mn[id * 2], mn[id * 2 + 1]);
+
+}
+
+void upd(int id, int l, int r, ll val)
+
+{
+
+    seg[id] = (r - l + 1) * val;
+
+    mn[id] = val;
+
+    lazy[id] = val;
+
+}
+
+void shift(int id, int l, int r)
+
+{
+
+    if(lazy[id] == -1e18) return;
+
+    int mid = (l + r) / 2;
+
+    upd(id * 2, l, mid, lazy[id]);
+
+    upd(id * 2 + 1, mid + 1, r, lazy[id]);
+
+    lazy[id] = -1e18;
+
+}
+
+ll get_val(int pos, int id = 1, int l = 1, int r = n)
+
+{
+
+    if(l == r) return seg[id];
+
+    shift(id, l, r);
+
+    int mid = (l + r) / 2;
+
+    if(pos <= mid) return get_val(pos, id * 2, l, mid);
+
+    else return get_val(pos, id * 2 + 1, mid + 1, r);
+
+}
+
+int get_pos(ll val, int id = 1, int l = 1, int r = n)
+
+{
+
+    if(l == r) return l;
+
+    shift(id, l, r);
+
+    int mid = (l + r) / 2;
+
+    if(mn[id * 2 + 1] < val) return get_pos(val, id * 2 + 1, mid + 1, r);
+
+    else return get_pos(val, id * 2, l, mid);
+
+}
+
+void modify(int x, int y, ll val, int id = 1, int l = 1, int r = n)
+
+{
+
+    if(l > y || r < x) return;
+
+    if(l >= x && r <= y)
+
+    {
+
+        upd(id, l, r, val);
+
+        return;
+
+    }
+
+    shift(id, l, r);
+
+    int mid = (l + r) / 2;
+
+    modify(x, y, val, id * 2, l, mid);
+
+    modify(x, y, val, id * 2 + 1, mid + 1, r);
+
+    seg[id] = seg[id * 2] + seg[id * 2 + 1];
+
+    mn[id] = min(mn[id * 2], mn[id * 2 + 1]);
+
+}
+
+ll get(int x, int y, int id = 1, int l = 1, int r = n)
+
+{
+
+    if(l > y || r < x) return 0;
+
+    if(l >= x && r <= y) return seg[id];
+
+    shift(id, l, r);
+
+    int mid = (l + r) / 2;
+
+    return get(x, y, id * 2, l, mid) + get(x, y, id * 2 + 1, mid + 1, r);
+
+}
+
+int main()
+
+{
+
+    ios_base::sync_with_stdio(false), cin.tie(0);
+
+    n = read();
+
+    for(int i = 1; i <= n; i++)
+
+        a[i] = read();
+
+    for(int i = 1; i < n; i++)
+
+    {
+
+        k[i] = read();
+
+        pk[i + 1] = pk[i] + k[i];
+
+    }
+
+
+
+    for(int i = 1; i <= n; i++)
+
+        b[i] = a[i] - pk[i];
+
+    for(int i = 1; i <= n; i++)
+
+        pkk[i] = pkk[i - 1] + pk[i];
+
+
+
+    build();
+
+
+
+    q = read();
+
+    for(int i = 0; i < q; i++)
+
+    {
+
+        char type;
+
+        type = getchar();
+
+        getchar();
+
+        if(type == '+')
+
+        {
+
+            int pos; ll val;
+
+            pos = read(), val = read();
+
+            ll new_val = get_val(pos) + val;
+
+            int r = get_pos(new_val);
+
+            modify(pos, r, new_val);
+
+        }
+
+        else
+
+        {
+
+            int l, r;
+
+            l = read(), r = read();
+
+            cout << get(l, r) + pkk[r] - pkk[l - 1] << "\n";
+
+        }
+
+    }
+
+    return 0;
+
+}
+

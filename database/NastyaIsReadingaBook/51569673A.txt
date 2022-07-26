@@ -1,0 +1,31 @@
+#include<bits/stdc++.h>
+using namespace std;
+main()
+{
+int n;
+cin>>n;
+vector<pair<int,int> > v(n);
+for(int i=0;i<n;i++)
+{
+	cin>>v[i].first>>v[i].second;
+}
+int k;
+cin>>k;
+int t=0;
+for(int i=0;i<n;i++)
+{
+	if(k<v[i].second)
+	{
+		t=i;
+		break;
+	}
+	if(k==v[i].second)
+	{
+		t=i;
+		break;
+	}
+}
+cout<<n-t<<"\n";
+
+
+}

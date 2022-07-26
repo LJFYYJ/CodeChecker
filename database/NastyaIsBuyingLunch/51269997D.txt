@@ -1,0 +1,83 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+#define sfor(ii,x) for(set<int> ::iterator ii = x.begin();ii != x.end();ii++)
+
+#define For(i,x,y) for(int i=x; i<y; i++)
+
+#define Rep(i,x,y) for(int i=y-1; i>=x; i--)
+
+const int maxn = 5e5+7;
+
+int n, m, ans, a[maxn];
+
+
+
+set <int> s[maxn],res;
+
+
+
+int zip_oke(int  x)
+
+{
+
+    //bool oke = false;
+
+    sfor(i,res){
+
+        int p = s[x].count(*i);
+
+        if(p==0)
+
+            return 0;
+
+    }
+
+    return 1;
+
+}
+
+
+
+int main()
+
+{
+
+    cin >> n >> m;
+
+    For(i,0,n)   cin >> a[i];
+
+ 
+
+    For(i,0,m)
+
+    {
+
+        int u,v;
+
+        cin >> u >> v;
+
+        s[u].insert(v);
+
+    }
+
+    res.insert(a[n-1]);
+
+    Rep(i,0,n-1)
+
+    {
+
+        if(zip_oke(a[i])) ans++;
+
+        else
+
+            res.insert(a[i]);
+
+    }
+
+    cout << ans << "\n";
+
+    return 0;
+
+}

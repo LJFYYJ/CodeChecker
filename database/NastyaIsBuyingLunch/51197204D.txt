@@ -1,0 +1,77 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+using ll=long long;
+using vll=vector<ll>;
+using vvll=vector<vll>;
+using vi=vector<int>;
+using vvi=vector<vi>;
+using pii=pair<int,int>;
+using vpii=vector<pii>;
+using vseti=vector<set<int>>;
+
+
+struct PairFirstrev {
+    bool operator() (const pii& p1, const pii& p2) {
+        return p1.first > p2.first || (p1.first == p2.first && p1.second < p2.second);
+    }
+};
+
+int main() {
+    ios_base::sync_with_stdio(false);
+    cin.tie(nullptr);
+
+    int n, m;
+    cin >> n >> m;
+    vi ps(n);
+    vi invp(n);
+    for (int i=0; i<n; ++i) {
+        int pi;
+        cin >> pi;
+        --pi;
+        ps[i] = pi;
+        invp[pi] = i;
+    }
+
+    //vi nswapperpos(n, 0);
+    vi nswappers;
+    vpii swappers;
+    for (int i=0; i<m; ++i) {
+        int u, v;
+        cin >> u >> v;
+        --u; --v;
+        u = invp[u];
+        v = invp[v];
+        if (v == n-1) {
+            //nswapperpos[u] = 1;
+            nswappers.push_back(u);
+        }
+        else if (v > u) // dropping backswaps immediately
+            swappers.push_back({u,v});
+    }
+    sort(nswappers.begin(), nswappers.end());
+    sort(swappers.begin(), swappers.end(), PairFirstrev());
+    vi swappedpos(n, 0);
+    int cnt=0;
+    int spos=0;
+    for (int ni=nswappers.size()-1; ni>=0; --ni) {
+        int i = nswappers[ni];
+        bool works = true;
+        for (int j=i+1; j<n-1; ++j) {
+            if (swappedpos[j])
+                continue;
+            while (spos < swappers.size() && (swappers[spos].first > i  || (swappers[spos].first == i && swappers[spos].second < j)))
+                ++spos;
+            if (spos >= swappers.size() || swappers[spos].first < i || swappers[spos].second > j) {
+                works = false;
+                break;
+            }
+            ++spos;
+        }
+        if (works) {
+            ++cnt;
+            swappedpos[i] = 1;
+        }
+    }
+    cout << cnt << "\n";
+}

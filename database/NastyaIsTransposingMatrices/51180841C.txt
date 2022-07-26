@@ -1,0 +1,70 @@
+#include <bits/stdc++.h>
+
+using i8  = char;
+using u8  = unsigned char;
+using i16 = short int;
+using u16 = unsigned short int;
+using i32 = int;
+using u32 = unsigned int;
+using i64 = long long int;
+using u64 = unsigned long long int;
+
+using f32 = float;
+using f64 = double;
+using f80 = long double;
+
+const i64 MOD = 1000000007;
+const f64 EPS = 1e-9;
+
+inline i64 fast_pow(i64 a, i64 b) {
+  i64 ans=1,base=a;
+  while(b) {
+    if(b&1) {
+      ans = (ans * base) % MOD;
+    }
+		base = (base * base) % MOD;
+    b >>= 1;
+  }
+  return ans;
+}
+
+using namespace std;
+
+int main(void) {
+	ios_base::sync_with_stdio(0); cin.tie(0);
+
+  u64 n,m;
+  cin >> n >> m;
+
+  multiset<u64> a[1010];
+  multiset<u64> b[1010];
+
+  u64 s=0;
+  for(u64 i=0;i<n;++i) {
+    for(u64 j=0;j<m;++j) {
+      u64 tmp;
+      cin >> tmp;
+      a[s+j].insert(tmp);
+    }
+    s += 1;
+  }
+  s=0;
+  for(u64 i=0;i<n;++i) {
+    for(u64 j=0;j<m;++j) {
+      u64 tmp;
+      cin >> tmp;
+      b[s+j].insert(tmp);
+    }
+    s += 1;
+  }
+  u64 ma = (s-1)+(m-1);
+
+  for(u64 i=0;i<=ma;++i) {
+    if(a[i] != b[i]){
+      cout << "NO\n"; return 0;
+    }
+  }
+  cout << "YES\n";
+
+  return 0;
+}

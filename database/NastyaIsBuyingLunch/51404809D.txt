@@ -1,0 +1,133 @@
+#include <iostream>
+
+#include <vector>
+
+
+
+using namespace std;
+
+
+
+void fastscan(int &number) 
+
+{ 
+
+    //variable to indicate sign of input number 
+
+    bool negative = false; 
+
+    register int c; 
+
+  
+
+    number = 0; 
+
+  
+
+    // extract current character from buffer 
+
+    c = getchar(); 
+
+    if (c=='-') 
+
+    { 
+
+        // number is negative 
+
+        negative = true; 
+
+  
+
+        // extract the next character from the buffer 
+
+        c = getchar(); 
+
+    } 
+
+  
+
+    // Keep on extracting characters if they are integers 
+
+    // i.e ASCII Value lies from '0'(48) to '9' (57) 
+
+    for (; (c>47 && c<58); c=getchar()) 
+
+        number = number *10 + c - 48; 
+
+  
+
+    // if scanned input has a negative sign, negate the 
+
+    // value of the input number 
+
+    if (negative) 
+
+        number *= -1; 
+
+} 
+
+
+
+int N, M;
+
+int p[300005], rP[300005];
+
+vector<int> backEdge[300005];
+
+int degree[300005];
+
+
+
+int main() {
+
+	fastscan(N);
+
+	fastscan(M);
+
+
+
+	for(int i=0; i<N; i++) {
+
+		fastscan(p[i]);
+
+		rP[p[i]] = i+1;
+
+	}
+
+	for(int i=0; i<M; i++) {
+
+		int u, v;
+
+		fastscan(u);
+
+		fastscan(v);
+
+		if(rP[u] < rP[v]) {
+
+			backEdge[rP[v]].push_back(rP[u]);
+
+			degree[rP[u]]++;
+
+		}
+
+	}
+
+	int ans = 0;
+
+	for(int i=N-1; i>0; i--) {
+
+		if(degree[i] >= (N-i)-ans) {
+
+			ans++;
+
+			for(int to : backEdge[i])
+
+				degree[to]--;
+
+		}
+
+	}
+
+	cout << ans << endl;
+
+}

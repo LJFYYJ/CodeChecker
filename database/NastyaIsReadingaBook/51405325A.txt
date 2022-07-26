@@ -1,0 +1,47 @@
+using System;
+
+class Codeforces_1136A
+
+{
+
+    static void Main()
+
+    {
+
+        int n = int.Parse(Console.ReadLine());
+
+        int[,] a = new int[n, 2];
+
+        string[] s;
+
+        for (int i = 0; i < n; i++)
+
+        {
+
+            s = Console.ReadLine().Split(' ');
+
+            a[i, 0] = int.Parse(s[0]);
+
+            a[i, 1] = int.Parse(s[1]);
+
+        }
+
+        int page = int.Parse(Console.ReadLine());
+
+        for (int i = 0; i < n; i++)
+
+            if (page >= a[i, 0] && page <= a[i, 1])
+
+            {
+
+                Console.Write(n - i);
+
+                break;
+
+            }
+
+       Console.ReadLine();
+
+    }
+
+}

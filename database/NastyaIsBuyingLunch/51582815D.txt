@@ -1,0 +1,89 @@
+#include<bits/stdc++.h>
+
+using namespace std;
+
+typedef long long ll;
+
+typedef long double ld;
+
+#define X first
+
+#define Y second
+
+#define pb push_back
+
+#define sz(a) (int)a.size()
+
+
+
+void solve();
+
+
+
+int main() {
+
+    // freopen("schools.in", "r", stdin);
+
+    // freopen("schools.out", "w", stdout);
+
+    ios_base::sync_with_stdio(0), cin.tie(0);
+
+    // cout << fixed << setprecision(10);
+
+    int t = 1;
+
+    // cin >> t; 
+
+    while(t--) solve();
+
+    return 0;
+
+}
+
+
+
+ll n, m, ans, p[300005];
+
+vector<ll> g[300005];
+
+set<ll> Q;
+
+
+
+void solve() {
+
+	cin >> n >> m;
+
+	for (ll i = 1; i <= m; ++i) {
+
+		ll t1, t2;
+
+		cin >> t1 >> t2;
+
+		g[t1].pb(t2);
+
+	}
+
+	for (ll i = 1; i <= n; ++i) cin >> p[i];
+
+	Q.insert(p[n]);
+
+	for (ll i = n - 1; i >= 1; --i) {
+
+		ll c = 0;
+
+		for (auto d : g[p[i]]) {
+
+			c += Q.count(d);
+
+		}
+
+		if (c == sz(Q)) ++ans;
+
+		else Q.insert(p[i]);
+
+	}
+
+	cout << ans;
+
+}

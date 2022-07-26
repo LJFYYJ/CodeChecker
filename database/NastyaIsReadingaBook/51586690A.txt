@@ -1,0 +1,50 @@
+#include <bits/stdc++.h>
+
+#define ll long long
+
+using namespace std;
+
+int main() {
+
+   ll n;
+
+   cin>>n;
+
+   vector <pair<ll,ll >> v;
+
+   for(ll i =0;i<n;i++){
+
+       ll a,b;
+
+       cin>>a>>b;
+
+       v.push_back(make_pair(a,b));
+
+   }
+
+   sort(v.begin(),v.end());
+
+   ll f ;
+
+   cin>>f;
+
+   ll ans;
+
+   for(ll i =0;i<n;i++){
+
+       if(v[i].second >=f){
+
+           ans = i;
+
+           break;
+
+       }
+
+   }
+
+   cout<<n-ans<<"\n";
+
+
+
+}
+

@@ -1,0 +1,97 @@
+#include<stdio.h>
+
+#include<stdlib.h>
+
+#include<string.h>
+
+#include<iostream>
+
+#include<algorithm>
+
+#include<string>
+
+#include<queue>
+
+#include<math.h>
+
+#include<set>
+
+using namespace std;
+
+const int maxn = 1e5 + 10;
+
+const int mod = 1e9 + 7;
+
+const double pi = acos(-1);
+
+typedef long long ll;
+
+struct Node {
+
+	int L;
+
+	int R;
+
+}vis[1000];
+
+int n;
+
+int l,r;
+
+int k;
+
+bool cmp(Node x, Node y) {
+
+	return x.L < y.L;
+
+}
+
+int main()
+
+{
+
+	ios::sync_with_stdio(false);
+
+	cin >> n;
+
+	for (int i = 1; i <= n; i++) {
+
+		cin >> l >> r;
+
+		vis[i].L = l;
+
+		vis[i].R = r;
+
+	}
+
+	sort(vis + 1, vis + 1 + n,cmp);
+
+	cin >> k;
+
+	k--;//k-1页
+
+	int ans = 0;
+
+	for (int i = 1; i <= n; i++) {
+
+		if (k >= vis[i].L&&k<vis[i].R) {
+
+			cout << n-i+1 << endl;
+
+			return 0;
+
+		}
+
+		if (k == vis[i].R) {
+
+			cout << n - i << endl;
+
+			return 0;
+
+		}
+
+	}
+
+	return 0;
+
+}

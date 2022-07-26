@@ -1,0 +1,61 @@
+n=int(input())
+
+l=list(map(int,input().split()))
+
+k=list(map(int,input().split()))
+
+su=[0]*n
+
+for i in range(n):
+
+    if(i>=1):
+
+        su[i]=su[i-1]+l[i-1]
+
+try:
+
+    for _ in range(int(input())):
+
+        a,b,c=input().split()
+
+        b=int(b)
+
+        c=int(c)
+
+        if(a=='+'):
+
+            flag2=0
+
+            l[b-1]+=c
+
+            temp=b
+
+            while(temp<n):
+
+                su[temp]+=c
+
+                temp+=1
+
+            for i in range(b,n):
+
+                if(l[i]<l[i-1]+k[i-1]):
+
+                    if(i<n-1):
+
+                        su[i+1]+=l[i-1]+k[i-1]-l[i]
+
+                    l[i]=l[i-1]+k[i-1]
+
+                else:
+
+                    flag2=1
+
+                if(flag2):break
+
+        else:
+
+            print(su[c-1]+l[c-1]-su[b-1])
+
+except:
+
+    temp2=0

@@ -1,0 +1,59 @@
+#define _CRT_SECURE_NO_WARNINGS
+
+#include <iostream>
+
+#include <cstdio>
+
+#include <math.h>
+
+#include <string>
+
+#include <algorithm>
+
+#include <vector>
+
+
+
+using namespace std;
+
+
+
+int n;
+
+int temp1[105];
+
+int temp2[105];
+
+int k;
+
+int ans;
+
+
+
+int main() {
+
+	scanf("%d", &n);
+
+	for (int i = 1;i <= n;++i) {
+
+		scanf("%d %d", &temp1[i], &temp2[i]);
+
+	}
+
+	scanf("%d", &k);
+
+	for (int i = 1;i <= n;++i) {
+
+		if (k > temp2[i]) {
+
+			ans++;
+
+		}
+
+	}
+
+	printf("%d\n", n - ans);
+
+	return 0;
+
+}
